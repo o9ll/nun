@@ -9,7 +9,7 @@
     "type": "module",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Divulgate/Femcord.git",
+        "url": "git+https://github.com/o9ll/nun.git",
         "directory": "packages/discord-types"
     },
     "dependencies": {

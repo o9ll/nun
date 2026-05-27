@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Configuration
-INSTALLER_PATH="$HOME/.axolotl"
-GITHUB_URL="https://github.com/pastelrbx/Axolotl/releases/latest/download/AxolotlCli-Linux"
+INSTALLER_PATH="$HOME/.nunu"
+GITHUB_URL="https://github.com/o9ll/nunu/releases/latest/download/NunuCli-Linux"
 PRIVILEGE_CMDS=("sudo" "doas")
 DEBUG=false
 LOG_FILE="$(dirname "$(realpath "$0")")/equicordinstalldebug.log"

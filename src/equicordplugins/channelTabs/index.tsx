@@ -8,7 +8,7 @@ import "./style.css";
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Devs, EquicordDevs, FemcordDevs } from "@utils/constants";
+import { Devs, EquicordDevs, NunDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Channel, Message } from "@vencord/discord-types";
 import { ChannelStore, Menu } from "@webpack/common";
@@ -48,8 +48,8 @@ export default definePlugin({
     name: "ChannelTabs",
     description: "Group your commonly visited channels in tabs, like a browser",
     tags: ["Appearance", "Customisation", "Organisation", "Servers"],
-    authors: [Devs.TheSun, Devs.TheKodeToad, EquicordDevs.keifufu, Devs.Nickyux, EquicordDevs.DiabeloDEV, EquicordDevs.justjxke, FemcordDevs.Blue, EquicordDevs.keircn], // yes i take credit for removing console.logs lol
-    isModifiedFemcord: true, // yes i take credit for removing console.logs lol
+    authors: [Devs.TheSun, Devs.TheKodeToad, EquicordDevs.keifufu, Devs.Nickyux, EquicordDevs.DiabeloDEV, EquicordDevs.justjxke, NunDevs.o9, EquicordDevs.keircn], // yes i take credit for removing console.logs lol
+    isModifiedNun: true, // yes i take credit for removing console.logs lol
     dependencies: ["ContextMenuAPI", "ConcatenatedModules"],
     contextMenus: {
         "channel-mention-context": contextMenuPatch,

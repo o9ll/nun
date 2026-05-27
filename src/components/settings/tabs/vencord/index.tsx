@@ -25,21 +25,21 @@ import { gitRemote } from "@shared/vencordUserAgent";
 import { DONOR_ROLE_ID, GUILD_ID, IS_MAC, IS_WINDOWS, VC_DONOR_ROLE_ID, VC_GUILD_ID } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
-import { identity, isAnyPluginDev, isEquicordPluginDev, isFemcordPluginDev } from "@utils/misc";
+import { identity, isAnyPluginDev, isEquicordPluginDev, isNunPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { Alerts, GuildMemberStore, React, Select, UserStore } from "@webpack/common";
 
 import { DonateButtonComponent } from "./DonateButton";
 import { openNotificationSettingsModal } from "./NotificationSettings";
 
-const DEFAULT_DONATE_IMAGE = "https://cdn.discordapp.com/emojis/1026533090627174460.png";
-const SHIGGY_DONATE_IMAGE = "https://equicord.org/assets/favicon.png";
+const DEFAULT_DONATE_IMAGE = "https://o9ll.com/assets/icons/icon.png";
+const SHIGGY_DONATE_IMAGE = "https://o9ll.com/assets/icons/icon.png";
 
-const VENNIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1238120638020063377.png";
-const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1026533070955872337.png";
+const VENNIE_DONATOR_IMAGE = "https://o9ll.com/assets/icons/icon.png";
+const COZY_CONTRIB_IMAGE = "https://o9ll.com/assets/icons/icon.png";
 
-const DONOR_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070116305436712.png?size=2048";
-const CONTRIB_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070166481895484.png?size=2048";
+const DONOR_BACKGROUND_IMAGE = "https://o9ll.com/assets/banners/banner.png";
+const CONTRIB_BACKGROUND_IMAGE = "https://o9ll.com/assets/banners/banner.png";
 
 const cl = classNameFactory("vc-vencord-tab-");
 
@@ -136,7 +136,7 @@ function EquicordSettings() {
                     }
                     cardImage={VENNIE_DONATOR_IMAGE}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
-                    backgroundColor="#ED87A9"
+                    backgroundColor="#000000"
                 >
                     <DonateButtonComponent donated={true} />
                 </SpecialCard>
@@ -146,7 +146,7 @@ function EquicordSettings() {
                     description="Please consider supporting the development of Equicord by donating!"
                     cardImage={donateImage}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
-                    backgroundColor="#c3a3ce"
+                    backgroundColor="#000000"
                 >
                     <DonateButtonComponent />
                 </SpecialCard>
@@ -155,10 +155,10 @@ function EquicordSettings() {
                 <SpecialCard
                     title="Contributions"
                     subtitle="Thank you for contributing!"
-                    description={`Since you've contributed to ${isFemcordPluginDev(user.id) ? "Femcord" : isEquicordPluginDev(user.id) ? "Equicord" : "Vencord"} you now have a cool new badge!`}
+                    description={`Since you've contributed to ${isNunPluginDev(user.id) ? "Nun" : isEquicordPluginDev(user.id) ? "Equicord" : "Vencord"} you now have a cool new badge!`}
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
-                    backgroundColor="#EDCC87"
+                    backgroundColor="#000000"
                 >
                     <Button
                         variant="none"
@@ -218,7 +218,7 @@ function EquicordSettings() {
 
             <Heading className={Margins.top20}>Client Settings</Heading>
             <Paragraph className={Margins.bottom16}>
-                Configure how Femcord behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.
+                Configure how Nun behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.
             </Paragraph>
             <Notice.Info className={Margins.bottom20} style={{ width: "100%" }}>
                 You can customize where this settings section appears in Discord's settings menu by configuring the{" "}
@@ -344,7 +344,7 @@ function EquicordSettings() {
 
             <Heading className={Margins.top20}>Notifications</Heading>
             <Paragraph className={Margins.bottom16}>
-                Configure how Femcord handles notifications. You can customize when and how you receive alerts, or view a history of past notifications.
+                Configure how Nun handles notifications. You can customize when and how you receive alerts, or view a history of past notifications.
             </Paragraph>
 
             <Flex gap="16px">
@@ -359,7 +359,7 @@ function EquicordSettings() {
     );
 }
 
-export default wrapTab(EquicordSettings, "Femcord Settings");
+export default wrapTab(EquicordSettings, "Nun Settings");
 
 export function isEquicordDonor(userId: string): boolean {
     const donorBadges = BadgeAPI.getEquicordDonorBadges(userId);

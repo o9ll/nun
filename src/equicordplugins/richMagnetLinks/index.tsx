@@ -6,15 +6,15 @@
 
 import "./styles.css";
 
-import { Logger } from "@utils/Logger"
-import { EquicordDevs, FemcordDevs } from "@utils/constants";
+import { Logger } from "@utils/Logger";
+import { EquicordDevs, NunDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 const logger = new Logger("RichMagnetLinks");
 
 export default definePlugin({
-    authors: [EquicordDevs.cassie, EquicordDevs.mochienya, EquicordDevs.secp192k1, FemcordDevs.Blue], // yes i take credits for a logger
-    isModifiedFemcord: true, // yes i take credits for a logger
+    authors: [EquicordDevs.cassie, EquicordDevs.mochienya, EquicordDevs.secp192k1, NunDevs.o9], // yes i take credits for a logger
+    isModifiedNun: true, // yes i take credits for a logger
     name: "RichMagnetLinks",
     description: "Renders magnet links like message links",
     tags: ["Appearance", "Chat"],

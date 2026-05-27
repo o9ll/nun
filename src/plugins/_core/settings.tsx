@@ -98,7 +98,7 @@ interface SettingsLayoutBuilder {
 const settings = definePluginSettings({
     settingsLocation: {
         type: OptionType.SELECT,
-        description: "Where to put the Femcord settings section",
+        description: "Where to put the Nun settings section",
         options: [
             { label: "At the very top", value: "top" },
             { label: "Above the Nitro section", value: "aboveNitro", default: true },
@@ -192,8 +192,8 @@ export default definePlugin({
         const equicordEntries: SettingsLayoutNode[] = [
             buildEntry({
                 key: "equicord_main",
-                title: "Femcord",
-                panelTitle: "Femcord Settings",
+                title: "Nun",
+                panelTitle: "Nun Settings",
                 Component: VencordTab,
                 Icon: MainSettingsIcon
             }),
@@ -212,7 +212,7 @@ export default definePlugin({
             !IS_UPDATER_DISABLED && UpdaterTab && buildEntry({
                 key: "equicord_updater",
                 title: "Updater",
-                panelTitle: "Femcord Updater",
+                panelTitle: "Nun Updater",
                 Component: UpdaterTab,
                 Icon: UpdaterIcon
             }),
@@ -247,7 +247,7 @@ export default definePlugin({
         const equicordSection: SettingsLayoutNode = {
             key: "equicord_section",
             type: LayoutTypes.SECTION,
-            useTitle: () => "Femcord Settings",
+            useTitle: () => "Nun Settings",
             buildLayout: () => equicordEntries
         };
 
@@ -313,7 +313,7 @@ export default definePlugin({
     getInfoRows() {
         const { electronVersion, chromiumVersion, getVersionInfo } = this;
 
-        const rows = [`Femcord ${gitHashShort}${getVersionInfo()}`];
+        const rows = [`Nun ${gitHashShort}${getVersionInfo()}`];
 
         if (electronVersion) rows.push(`Electron ${electronVersion}`);
         if (chromiumVersion) rows.push(`Chromium ${chromiumVersion}`);

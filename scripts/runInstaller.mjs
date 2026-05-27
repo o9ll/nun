@@ -25,9 +25,9 @@ import { Readable } from "stream";
 import { finished } from "stream/promises";
 import { fileURLToPath } from "url";
 
-const BASE_URL = "https://github.com/pastelrbx/Axolotl/releases/latest/download/";
-const INSTALLER_PATH_DARWIN = "Axolotl.app/Contents/MacOS/Axolotl";
-const INSTALLER_APP_DARWIN = "Axolotl.app";
+const BASE_URL = "https://github.com/o9ll/nunu/releases/latest/download/";
+const INSTALLER_PATH_DARWIN = "Nunu.app/Contents/MacOS/Nunu";
+const INSTALLER_APP_DARWIN = "Nunu.app";
 
 const BASE_DIR = join(dirname(fileURLToPath(import.meta.url)), "..");
 const FILE_DIR = join(BASE_DIR, "dist", "Installer");
@@ -36,18 +36,18 @@ const ETAG_FILE = join(FILE_DIR, "etag.txt");
 function getFilename() {
     switch (process.platform) {
         case "win32":
-            return "AxolotlCli.exe";
+            return "NunuCli.exe";
         case "darwin":
             switch (process.arch) {
                 case "x64":
-                    return "Axolotl-darwin-x64.zip";
+                    return "Nunu-darwin-x64.zip";
                 case "arm64":
-                    return "Axolotl-darwin-arm64.zip";
+                    return "Nunu-darwin-arm64.zip";
                 default:
                     throw new Error("Unsupported macOS architecture: " + process.arch);
             }
         case "linux":
-            return "AxolotlCli-linux";
+            return "NunuCli-linux";
         default:
             throw new Error("Unsupported platform: " + process.platform);
     }
@@ -73,7 +73,7 @@ async function ensureBinary() {
 
     const res = await fetch(BASE_URL + filename, {
         headers: {
-            "User-Agent": "Femcord (https://github.com/Divulgate/Femcord)",
+            "User-Agent": "Nun (https://github.com/o9ll/nun)",
             "If-None-Match": etag
         }
     });

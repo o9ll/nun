@@ -12,7 +12,7 @@ permissions:
 
 jobs:
     Build:
-        name: Build Femcord
+        name: Build Nun
         runs-on: ubuntu-latest
 
         steps:
@@ -38,7 +38,7 @@ jobs:
             - name: Generate plugin lists
               run: |
                   pnpm generatePluginJson dist/plugins.json
-                  pnpm generateFemcordPluginJson dist/femcordplugins.json
+                  pnpm generateNunPluginJson dist/nun.json
                   pnpm generateEquicordPluginJson dist/equicordplugins.json
                   pnpm generateVencordPluginJson dist/vencordplugins.json
                   pnpm generateDevsList dist/devs.json
@@ -49,7 +49,7 @@ jobs:
                   mkdir -p release
 
                   cp browser/browser.* release
-                  cp Femcord.user.{js,js.LEGAL.txt} release
+                  cp Nun.user.{js,js.LEGAL.txt} release
 
                   # copy the plugin data jsons, the extension zips and the desktop/equibop asars
                   cp *.{json,zip,asar} release
@@ -69,7 +69,7 @@ jobs:
               id: date
               run: echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
 
-            - name: Upload Femcord Stable
+            - name: Upload Nun Stable
               run: |
                   TAG="${{ steps.date.outputs.date }}"
                   REPO="${GITHUB_REPOSITORY}"

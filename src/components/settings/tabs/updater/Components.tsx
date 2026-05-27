@@ -148,7 +148,7 @@ export function Updatable(props: CommonProps) {
                 </>
             ) : (
                 <Paragraph>
-                    You're running the latest version of Femcord.
+                    You're running the latest version of Nun.
                 </Paragraph>
             )}
         </>

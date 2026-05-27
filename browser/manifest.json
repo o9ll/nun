@@ -1,10 +1,10 @@
 {
     "manifest_version": 3,
     "minimum_chrome_version": "111",
-    "name": "Femcord Web",
+    "name": "Nun Web",
     "description": "The other cutest Discord mod now in your browser",
-    "author": "Divulgate",
-    "homepage_url": "https://github.com/Divulgate/Femcord",
+    "author": "o9",
+    "homepage_url": "https://github.com/o9ll/nun",
     "icons": {
         "128": "icon.png"
     },
@@ -38,7 +38,7 @@
                 "*://*.discord.com/*"
             ],
             "js": [
-                "dist/Femcord.js"
+                "dist/Nun.js"
             ],
             "all_frames": true,
             "world": "MAIN"

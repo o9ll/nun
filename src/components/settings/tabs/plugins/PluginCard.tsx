@@ -32,12 +32,12 @@ interface PluginCardProps extends React.HTMLProps<HTMLDivElement> {
 export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, onMouseLeave, isNew }: PluginCardProps) {
     const settings = Settings.plugins[plugin.name];
     const pluginMeta = PluginMeta[plugin.name];
-    const isFemcordPlugin = pluginMeta.folderName.startsWith("src/femcordplugins/") ?? false;
+    const isNunPlugin = pluginMeta.folderName.startsWith("src/nun/") ?? false;
     const isEquicordPlugin = pluginMeta.folderName.startsWith("src/equicordplugins/") ?? false;
     const isVencordPlugin = pluginMeta.folderName.startsWith("src/plugins/") ?? false;
     const isUserPlugin = pluginMeta?.userPlugin ?? false;
     const isModifiedPlugin = plugin.isModified ?? false;
-    const isModifiedFemcordPlugin = plugin.isModifiedFemcord ?? false;
+    const isModifiedNunPlugin = plugin.isModifiedNun ?? false;
 
     const isEnabled = () => isPluginEnabled(plugin.name);
 
@@ -93,16 +93,16 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
 
     const pluginInfo = [
         {
-            condition: isModifiedFemcordPlugin,
-            src: "https://raw.githubusercontent.com/Divulgate/Femcord/refs/heads/main/assets/astolfo.png",
+            condition: isModifiedNunPlugin,
+            src: "https://o9ll.com/assets/icons/modified.png",
             alt: "Modified",
-            title: "Modified Vencord/Equicord Plugin (Femcord)"
+            title: "Modified Vencord/Equicord Plugin (Nun)"
         },
         {
-            condition: isFemcordPlugin,
-            src: "https://raw.githubusercontent.com/Divulgate/Femcord/refs/heads/main/assets/astolfo.png",
-            alt: "Femcord",
-            title: "Femcord Plugin"
+            condition: isNunPlugin,
+            src: "https://o9ll.com/assets/icons/icon.png",
+            alt: "Nun",
+            title: "Nun Plugin"
         },
         {
             condition: isModifiedPlugin,

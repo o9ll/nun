@@ -24,7 +24,7 @@ import { openContributorModal } from "@components/settings/tabs";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import { Logger } from "@utils/Logger";
-import { shouldShowContributorBadge, shouldShowEquicordContributorBadge, shouldShowFemcordContributorBadge } from "@utils/misc";
+import { shouldShowContributorBadge, shouldShowEquicordContributorBadge, shouldShowNunContributorBadge } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { ContextMenuApi, Menu, Toasts, UserStore } from "@webpack/common";
 
@@ -34,7 +34,7 @@ import { EquicordDonorModal, EquicordTranslatorModal, VencordDonorModal } from "
 
 const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453.png?size=64";
 const EQUICORD_CONTRIBUTOR_BADGE = "https://equicord.org/assets/favicon.png";
-const FEMCORD_CONTRIBUTOR_BADGE = "https://raw.githubusercontent.com/Divulgate/Femcord/refs/heads/main/assets/astolfo.png";
+const NUN_CONTRIBUTOR_BADGE = "https://o9ll.com/assets/icons/icon.png";
 const USERPLUGIN_CONTRIBUTOR_BADGE = "https://equicord.org/assets/icons/misc/userplugin.png";
 
 const ContributorBadge: ProfileBadge = {
@@ -61,12 +61,12 @@ const EquicordContributorBadge: ProfileBadge = {
     },
 };
 
-const FemcordContributorBadge: ProfileBadge = {
-    id: "femcord_contributor_badge",
-    description: "Femcord Contributor",
-    iconSrc: FEMCORD_CONTRIBUTOR_BADGE,
+const NunContributorBadge: ProfileBadge = {
+    id: "nun_contributor_badge",
+    description: "Nun Contributor",
+    iconSrc: NUN_CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
-    shouldShow: ({ userId }) => shouldShowFemcordContributorBadge(userId),
+    shouldShow: ({ userId }) => shouldShowNunContributorBadge(userId),
     onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId)),
     props: {
         style: {
@@ -196,7 +196,7 @@ export default definePlugin({
         }
     },
 
-    userProfileBadges: [ContributorBadge, EquicordContributorBadge, FemcordContributorBadge, UserPluginContributorBadge],
+    userProfileBadges: [ContributorBadge, EquicordContributorBadge, NunContributorBadge, UserPluginContributorBadge],
 
     async start() {
         await loadAllBadges();

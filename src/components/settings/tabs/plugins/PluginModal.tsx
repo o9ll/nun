@@ -174,7 +174,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 
     const pluginMeta = PluginMeta[plugin.name];
     const isEquicordPlugin = pluginMeta.folderName.startsWith("src/equicordplugins/") ?? false;
-    const isFemcordPlugin = pluginMeta.folderName.startsWith("src/femcordplugins/") ?? false;
+    const isNunPlugin = pluginMeta.folderName.startsWith("src/nun/") ?? false;
 
     return (
         <ModalRoot transitionState={transitionState} size={ModalSize.MEDIUM}>
@@ -253,7 +253,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                             <div className={cl("links")}>
                                 <WebsiteButton
                                     text="Website"
-                                    href={isFemcordPlugin? `https://github.com/${gitRemote}/tree/main/${pluginMeta.folderName}` : isEquicordPlugin ? `https://equicord.org/plugins/${plugin.name}` : `https://vencord.dev/plugins/${plugin.name}`}
+                                    href={isNunPlugin ? `https://github.com/${gitRemote}/tree/main/${pluginMeta.folderName}` : isEquicordPlugin ? `https://equicord.org/plugins/${plugin.name}` : `https://vencord.dev/plugins/${plugin.name}`}
                                 />
                                 <GithubButton
                                     text="Source Code"

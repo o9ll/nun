@@ -19,6 +19,6 @@ app.on("before-quit", () => {
         const stale = findStaleSibling(dirname(process.execPath));
         if (stale) patchResourcesDir(stale, join(__dirname, "patcher.js"));
     } catch (err) {
-        console.error("[Femcord] Failed to repatch latest host update", err);
+        console.error("[Nun] Failed to repatch latest host update", err);
     }
 });

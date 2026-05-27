@@ -62,8 +62,8 @@
             "@equicordplugins/*": [
                 "./src/equicordplugins/*"
             ],
-            "@femcordplugins/*": [
-                "./src/femcordplugins/*"
+            "@nun/*": [
+                "./src/nun/*"
             ]
         },
         "plugins": [

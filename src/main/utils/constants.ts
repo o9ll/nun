@@ -25,7 +25,7 @@ const suffix = IS_DEV ? "dev" : "";
 export const DATA_DIR = process.env.EQUICORD_USER_DATA_DIR ?? (
     process.env.DISCORD_USER_DATA_DIR
         ? join(process.env.DISCORD_USER_DATA_DIR, "..", "EquicordData", suffix)
-        : join(app.getPath("userData"), "..", "Femcord", suffix)
+        : join(app.getPath("userData"), "..", "Nun", suffix)
 );
 
 export const SETTINGS_DIR = join(DATA_DIR, "settings");
@@ -67,7 +67,7 @@ if (IS_DEV) {
                 app.relaunch();
                 app.exit(0);
             } catch (err) {
-                console.error("[Femcord] Failed to copy prod data:", err);
+                console.error("[Nun] Failed to copy prod data:", err);
             }
         }, 5000);
     }

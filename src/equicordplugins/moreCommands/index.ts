@@ -19,7 +19,7 @@
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, OptionalMessageOption, RequiredMessageOption, sendBotMessage } from "@api/Commands";
 import { addMessagePreEditListener, addMessagePreSendListener, MessageObject, removeMessagePreEditListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { migratePluginSettings } from "@api/Settings";
-import { Devs, EquicordDevs, FemcordDevs } from "@utils/constants";
+import { Devs, EquicordDevs, NunDevs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { DraftType, UploadHandler, UploadManager, UserAffinitiesStore, UserStore, IconUtils } from "@webpack/common";
@@ -67,10 +67,10 @@ export default definePlugin({
         EquicordDevs.Fafa,
         Devs.JacobTm,
         EquicordDevs.voidbbg,
-        FemcordDevs.Blue
+        NunDevs.o9
     ],
     settings,
-    isModifiedFemcord: true,
+    isModifiedNun: true,
     commands: [
         {
             name: "systeminfo",

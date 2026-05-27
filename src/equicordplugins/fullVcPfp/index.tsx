@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { EquicordDevs, FemcordDevs } from "@utils/constants";
+import { EquicordDevs, NunDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { ChannelRTCStore, ChannelStore, UserStore, VoiceStateStore } from "@webpack/common";
 
@@ -14,8 +14,8 @@ export default definePlugin({
     name: "FullVCPFP",
     description: "Makes avatars take up the entire vc tile",
     tags: ["Appearance", "Voice"],
-    authors: [EquicordDevs.mochienya, FemcordDevs.Blue],
-    isModifiedFemcord: true,
+    authors: [EquicordDevs.mochienya, NunDevs.o9],
+    isModifiedNun: true,
     managedStyle,
     patches: [
         {
