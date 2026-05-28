@@ -10,7 +10,7 @@ import { Heading } from "@components/Heading";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { IS_WINDOWS } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Select } from "@webpack/common";
 
 export function WindowsMaterialSettings() {

@@ -6,7 +6,7 @@
 
 import { isPluginEnabled, plugins } from "@api/PluginManager";
 import { toggleEnabled } from "@equicordplugins/equicordHelper/utils";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { openViewScheduledModal } from "@equicordplugins/scheduledMessages/components/ViewScheduledModal";
 import { Toasts } from "@webpack/common";
 

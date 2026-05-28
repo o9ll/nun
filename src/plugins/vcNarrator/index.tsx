@@ -20,7 +20,7 @@ import { ErrorCard } from "@components/ErrorCard";
 import { HeadingSecondary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { Devs, IS_LINUX } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { wordsToTitle } from "@utils/text";

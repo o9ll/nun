@@ -7,7 +7,7 @@
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { OptionType } from "@utils/types";
 import { Alerts, useState } from "@webpack/common";
 

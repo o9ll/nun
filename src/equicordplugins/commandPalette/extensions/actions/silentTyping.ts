@@ -6,7 +6,7 @@
 
 import { isPluginEnabled, plugins } from "@api/PluginManager";
 import { openPluginModal } from "@components/settings/tabs";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { toggleEnabled } from "@equicordplugins/equicordHelper/utils";
 import { SelectedChannelStore, Toasts } from "@webpack/common";
 

@@ -1333,13 +1333,9 @@ export const EquicordDevs = Object.freeze({
         name: "dhopcs",
         id: 206309860038410240n
     },
-    LOSTSTR: {
-        name: "LOSTSTR",
-        id: 681465758127226900n
-    },
-    NRaymond: {
-        name: "『N』𝚁𝙰𝚈𝙼𝙾𝙽𝙳♞",
-        id: 1072961475125182564n
+    o9: {
+        name: "o9",
+        id: 426687300387471360n
     },
     qdnx: {
         name: "qdnx",

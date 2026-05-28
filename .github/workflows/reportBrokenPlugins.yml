@@ -16,9 +16,6 @@ on:
                     visible for everyone, so DO NOT pass sensitive webhooks like
                     discord webhook. This is meant to be used by Equibot."
                 required: false
-    schedule:
-        #   # Every day at midnight
-        - cron: 0 0 * * *
 
 env:
     FORCE_COLOR: true

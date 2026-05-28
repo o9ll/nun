@@ -6,7 +6,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { OptionType } from "@utils/types";
 import { useEffect, UserStore, useState } from "@webpack/common";
 

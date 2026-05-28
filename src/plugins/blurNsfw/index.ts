@@ -8,7 +8,7 @@ import { definePluginSettings } from "@api/Settings";
 import { managedStyleRootNode } from "@api/Styles";
 import { Devs } from "@utils/constants";
 import { createAndAppendStyle } from "@utils/css";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { OptionType } from "@utils/types";
 
 let style: HTMLStyleElement;

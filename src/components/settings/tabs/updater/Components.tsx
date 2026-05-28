@@ -11,7 +11,7 @@ import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { Span } from "@components/Span";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Margins } from "@utils/margins";
 import { relaunch } from "@utils/native";
 import { changes, checkForUpdates, update, updateError } from "@utils/updater";
@@ -161,7 +161,7 @@ export function Updatable(props: CommonProps) {
                 </>
             ) : (
                 <Paragraph>
-                    {t("أنت تستخدم أحدث إصدار من Esharq", "You are running the latest version of Esharq")}
+                    {t("أنت تستخدم أحدث إصدار من Nun", "You are running the latest version of Nun")}
                 </Paragraph>
             )}
         </>

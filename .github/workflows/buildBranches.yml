@@ -18,8 +18,8 @@ on:
 
 env:
     FORCE_COLOR: true
-    GITHUB_TOKEN: ${{ secrets.ETOKEN }}
-    REPO: Equicord/Equibuilds
+    GITHUB_TOKEN: ${{ github.token }}
+    REPO: o9ll/Equibuilds
     USERNAME: GitHub-Actions
 
 permissions:

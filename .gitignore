@@ -3,8 +3,7 @@ node_modules
 .claude
 installer/*.exe
 installer/*.ico
-# الملف المُولَّد تلقائياً من القالب أثناء البناء — لا يُتتبَّع
-installer/EquicordArabic-Installer.ps1
+installer/NunInstaller.ps1
 .VSCodeCounter
 .vars
 .secrets
@@ -47,7 +46,7 @@ lerna-debug.log*
 *.tsbuildinfo
 
 .modules/
-# src/userplugins is included intentionally for Esharq
+# src/userplugins is included intentionally for Nun
 
 ExtensionCache/
 /settings

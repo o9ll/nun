@@ -17,7 +17,7 @@ import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { HashLink } from "@components/settings/tabs/updater/Components";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
 import { getRepo, UpdateLogger } from "@utils/updater";
@@ -227,7 +227,7 @@ function UpdateLogCard({
 }
 
 function ChangelogContent() {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
 
     const [repo, repoErr, repoPending] = useAwaiter(getRepo, {
         fallbackValue: "Loading...",
@@ -571,7 +571,7 @@ function ChangelogContent() {
 
             <Heading className={Margins.top20}>{t("المستودع", "Repository")}</Heading>
             <Paragraph className={Margins.bottom8}>
-                {t("مستودع GitHub الذي يجلب منه Esharq التحديثات.", "The GitHub repository Esharq fetches updates from.")}
+                {t("مستودع GitHub الذي يجلب منه Nun التحديثات.", "The GitHub repository Nun fetches updates from.")}
             </Paragraph>
             <Paragraph color="text-subtle">
                 {repoPending ? (

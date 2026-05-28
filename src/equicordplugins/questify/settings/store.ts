@@ -6,7 +6,7 @@
 
 import { definePluginSettings, PlainSettings, SettingsStore } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { OptionType } from "@utils/types";
 
 import { QuestButtonSetting } from "../components/questButtonSettings";

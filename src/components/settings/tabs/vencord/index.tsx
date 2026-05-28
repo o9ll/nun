@@ -23,7 +23,7 @@ import BadgeAPI from "@plugins/_api/badges";
 import { gitRemote } from "@shared/vencordUserAgent";
 import { DONOR_ROLE_ID, GUILD_ID, IS_WINDOWS, VC_DONOR_ROLE_ID, VC_GUILD_ID } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Margins } from "@utils/margins";
 import { isAnyPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
@@ -34,8 +34,8 @@ import { MacOSVibrancySettings } from "./MacVibrancySettings";
 import { NotificationSection } from "./NotificationSettings";
 import { WindowsMaterialSettings } from "./WindowsMaterialSettings";
 
-const DEFAULT_DONATE_IMAGE = "https://raw.githubusercontent.com/LOSTSTR/Esharq/main/browser/icon.png";
-const SHIGGY_DONATE_IMAGE = "https://raw.githubusercontent.com/LOSTSTR/Esharq/main/browser/icon.png";
+const DEFAULT_DONATE_IMAGE = "https://raw.githubusercontent.com/o9ll/nun/main/browser/icon.png";
+const SHIGGY_DONATE_IMAGE = "https://raw.githubusercontent.com/o9ll/nun/main/browser/icon.png";
 
 const VENNIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1238120638020063377.png";
 const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1026533070955872337.png";
@@ -51,9 +51,9 @@ type KeysOfType<Object, Type> = {
 
 function EquicordSettings() {
     const settings = useSettings();
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
 
-    const arabicMode: boolean = (Settings.plugins as any)?.Settings?.arabicMode ?? false;
+    const nunM: boolean = (Settings.plugins as any)?.Settings?.nunM ?? false;
 
     const donateImage = useMemo(() =>
         Math.random() > 0.5 ? DEFAULT_DONATE_IMAGE : SHIGGY_DONATE_IMAGE,
@@ -165,8 +165,8 @@ function EquicordSettings() {
                     description={
                         isEquicordDonor(user?.id) && isVencordDonor(user?.id)
                             ? t(
-                                "يرى جميع مستخدمي Vencord شارة متبرع Vencord، ويرى مستخدمو Esharq شارة متبرع Esharq. لتغيير شارتك في Vencord تواصل مع @vending.machine، ولشارة Esharq افتح تذكرة في سيرفر Esharq.",
-                                "All Vencord users see a Vencord donor badge, and Esharq users see an Esharq donor badge. To change your Vencord badge contact @vending.machine, and for the Esharq badge open a ticket in the Esharq server."
+                                "يرى جميع مستخدمي Vencord شارة متبرع Vencord، ويرى مستخدمو Nun شارة متبرع Nun. لتغيير شارتك في Vencord تواصل مع @vending.machine، ولشارة Nun افتح تذكرة في سيرفر Nun.",
+                                "All Vencord users see a Vencord donor badge, and Nun users see an Nun donor badge. To change your Vencord badge contact @vending.machine, and for the Nun badge open a ticket in the Nun server."
                             )
                             : isVencordDonor(user?.id)
                                 ? t(
@@ -174,8 +174,8 @@ function EquicordSettings() {
                                     "All Vencord users can see your badge! You can manage your perks by messaging @vending.machine."
                                 )
                                 : t(
-                                    "يرى جميع مستخدمي Esharq شارتك! يمكنك إدارة مزاياك عبر فتح تذكرة في سيرفر Esharq.",
-                                    "All Esharq users can see your badge! You can manage your perks by opening a ticket in the Esharq server."
+                                    "يرى جميع مستخدمي Nun شارتك! يمكنك إدارة مزاياك عبر فتح تذكرة في سيرفر Nun.",
+                                    "All Nun users can see your badge! You can manage your perks by opening a ticket in the Nun server."
                                 )
                     }
                     cardImage={VENNIE_DONATOR_IMAGE}
@@ -188,8 +188,8 @@ function EquicordSettings() {
                 <SpecialCard
                     title={t("ادعم المشروع", "Support the Project")}
                     description={t(
-                        "يسعدنا دعمك لتطوير Esharq من خلال التبرع!",
-                        "Support Esharq development by donating!"
+                        "يسعدنا دعمك لتطوير Nun من خلال التبرع!",
+                        "Support Nun development by donating!"
                     )}
                     cardImage={donateImage}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
@@ -203,8 +203,8 @@ function EquicordSettings() {
                     title={t("المساهمات", "Contributions")}
                     subtitle={t("شكراً لمساهمتك!", "Thank you for contributing!")}
                     description={t(
-                        "بفضل مساهمتك في Esharq، حصلت على شارة مميزة!",
-                        "As a contributor to Esharq, you earned a special badge!"
+                        "بفضل مساهمتك في Nun، حصلت على شارة مميزة!",
+                        "As a contributor to Nun, you earned a special badge!"
                     )}
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
@@ -272,8 +272,8 @@ function EquicordSettings() {
             <Heading className={Margins.top20}>{t("إعدادات العميل", "Client Settings")}</Heading>
             <Paragraph className={Margins.bottom16}>
                 {t(
-                    "اضبط كيفية عمل Esharq مع ديسكورد. تؤثر هذه الإعدادات على مظهر وسلوك تطبيق ديسكورد.",
-                    "Configure how Esharq works with Discord. These settings affect the appearance and behavior of the Discord app."
+                    "اضبط كيفية عمل Nun مع ديسكورد. تؤثر هذه الإعدادات على مظهر وسلوك تطبيق ديسكورد.",
+                    "Configure how Nun works with Discord. These settings affect the appearance and behavior of the Discord app."
                 )}
             </Paragraph>
             <Notice.Info className={Margins.bottom20} style={{ width: "100%" }}>
@@ -291,14 +291,14 @@ function EquicordSettings() {
             </Notice.Info>
 
             <FormSwitch
-                value={arabicMode}
+                value={nunM}
                 onChange={v => {
-                    (Settings.plugins as any).Settings.arabicMode = v;
+                    (Settings.plugins as any).Settings.nunM = v;
                 }}
-                title="وضع اللغة العربية / Arabic Mode"
+                title="Nun Mode"
                 description={t(
-                    "تفعيل أسماء ووصف الإضافات وإعدادات Esharq باللغة العربية.",
-                    "Enable Arabic names, descriptions, and settings for plugins and the Esharq panel."
+                    "تفعيل أسماء ووصف الإضافات وإعدادات Nun باللغة العربية.",
+                    "Enable Nun Mode names, descriptions, and settings for plugins and the Nun panel."
                 )}
                 hideBorder
             />

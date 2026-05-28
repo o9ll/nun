@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { findByPropsLazy } from "@webpack";
 import { ChannelStore, GuildStore, Modal, React, useEffect, useState } from "@webpack/common";
 

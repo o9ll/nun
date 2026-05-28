@@ -8,7 +8,7 @@ import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, 
 import { definePluginSettings } from "@api/Settings";
 import { Devs, EquicordDevs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { OptionType, PluginNative } from "@utils/types";
 import { useEffect, useState } from "@webpack/common";
 

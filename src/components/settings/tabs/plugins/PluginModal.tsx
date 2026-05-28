@@ -29,11 +29,11 @@ import { Paragraph } from "@components/Paragraph";
 import { debounce } from "@shared/debounce";
 import { gitRemote } from "@shared/vencordUserAgent";
 import { classNameFactory } from "@utils/css";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { proxyLazy } from "@utils/lazy";
 import { Margins } from "@utils/margins";
 import { classes, isObjectEmpty } from "@utils/misc";
-import { PLUGIN_TRANSLATIONS } from "@utils/pluginTranslations";
+import { NUNT } from "@utils/nunT";
 import { OptionType, Plugin, PluginTag } from "@utils/types";
 import { RenderModalProps, User } from "@vencord/discord-types";
 import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
@@ -87,10 +87,10 @@ function PluginTags({ tags }: { tags: PluginTag[]; }) {
 }
 
 export default function PluginModal({ plugin, onRestartNeeded, onClose, transitionState }: PluginModalProps) {
-    const pluginSettings = useSettings([`plugins.${plugin.name}.*`, "plugins.Settings.arabicMode"]).plugins[plugin.name];
-    const arabicMode = (Settings.plugins as any)?.Settings?.arabicMode ?? false;
+    const pluginSettings = useSettings([`plugins.${plugin.name}.*`, "plugins.Settings.nunM"]).plugins[plugin.name];
+    const nunM = (Settings.plugins as any)?.Settings?.nunM ?? false;
     const hasSettings = hasAnyVisibleSettings(plugin);
-    const displayDescription = (!arabicMode && PLUGIN_TRANSLATIONS[plugin.name]?.description) || plugin.description;
+    const displayDescription = (!nunM && NUNT[plugin.name]?.description) || plugin.description;
 
     // avoid layout shift by showing dummy users while loading users
     const fallbackAuthors = useMemo(() => [makeDummyUser({ username: "Loading...", id: "-1465912127305809920" })], []);
@@ -137,7 +137,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
             }
 
             const Component = OptionComponentMap[setting.type];
-            const enOptionDesc = !arabicMode && PLUGIN_TRANSLATIONS[plugin.name]?.options?.[key];
+            const enOptionDesc = !nunM && NUNT[plugin.name]?.options?.[key];
             const resolvedSetting = enOptionDesc ? { ...setting, description: enOptionDesc } : setting;
             return (
                 <ErrorBoundary noop key={key}>

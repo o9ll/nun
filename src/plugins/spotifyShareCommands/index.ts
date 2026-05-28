@@ -19,7 +19,7 @@
 import { ApplicationCommandInputType, findOption, OptionalMessageOption, sendBotMessage } from "@api/Commands";
 import { Devs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { Command } from "@vencord/discord-types";
 import { findByPropsLazy } from "@webpack";

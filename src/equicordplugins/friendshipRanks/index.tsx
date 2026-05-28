@@ -13,10 +13,10 @@ import { Flex } from "@components/Flex";
 import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { RenderModalProps } from "@vencord/discord-types";
-import { Forms, Modal,openModal, RelationshipStore } from "@webpack/common";
+import { Forms, Modal, openModal, RelationshipStore } from "@webpack/common";
 
 interface rankInfo {
     title: string;

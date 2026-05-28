@@ -53,7 +53,7 @@ const commonOptions = {
         IS_VESKTOP: false,
         IS_EQUIBOP: false,
         IS_UPDATER_DISABLED: true,
-        IS_EQUICORD_ARABIC: true,
+        IS_NUNAR: true,
         VERSION,
         BUILD_TIMESTAMP
     })

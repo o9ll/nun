@@ -9,7 +9,7 @@ import { getUserSettingLazy } from "@api/UserSettings";
 import { ImageIcon } from "@components/Icons";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { getCurrentChannel, getCurrentGuild, openImageModal } from "@utils/discord";
 import { isTruthy } from "@utils/guards";
 import { classes } from "@utils/misc";

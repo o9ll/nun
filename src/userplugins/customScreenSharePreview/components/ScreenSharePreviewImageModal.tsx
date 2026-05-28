@@ -7,14 +7,14 @@
 import { useSettings } from "@api/Settings";
 import { Flex } from "@components/Flex";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Button, Forms, React, Text, useCallback, useEffect, useMemo, useState } from "@webpack/common";
 
 import { CustomStreamPreviewState } from "../state";
 import { imageFileToStreamPreview, sendCustomPreview, stopSendingScreenSharePreview } from "../utilities";
 
 export function ScreenSharePreviewImageModal({ modalProps, close }: { modalProps: ModalProps; close: () => void; }) {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [isStreamPreviewSending, setIsStreamPreviewSending] = useState(() => {
         return CustomStreamPreviewState

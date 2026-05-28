@@ -7,7 +7,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { OptionType } from "@utils/types";
 import { UserStore } from "@webpack/common";
 

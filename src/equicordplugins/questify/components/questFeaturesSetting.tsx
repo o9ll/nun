@@ -5,7 +5,7 @@
  */
 
 import { useSettings } from "@api/Settings";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { QuestTaskType } from "@vencord/discord-types/enums";
 import type { JSX } from "react";
 
@@ -90,7 +90,7 @@ function SettingsAllowDangerousButton({
 }
 
 export function QuestFeaturesSetting(): JSX.Element {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
 
     const questFeatures = useQuestifySettings([
         "disableQuestsEverything",
@@ -245,19 +245,19 @@ export function QuestFeaturesSetting(): JSX.Element {
                     position: "top",
                     text: t(
                         "البانر الممول هو بانر مهام مدفوع يظهر في أعلى صفحة المهام."
-                            + "\n\nإشعارات نقل المهام هي مؤشرات في صفحة الاستكشاف تشير إلى نقل المهام إلى الرسائل المباشرة."
-                            + "\n\nعروض قائمة الأصدقاء هي بطاقة تظهر في قسم \"نشط الآن\" بينما يلعب أحد أصدقائك لعبة بها مهمة نشطة."
-                            + "\n\nعروض قائمة الأعضاء هي أيقونة تظهر على الأعضاء في قائمة الخادم بينما يلعبون لعبة بها مهمة نشطة."
-                            + "\n\nعرض لوحة الحساب هو ترويج مدفوع للمهام يظهر فوق لوحة حسابك."
-                            + "\n\nتقدّم لوحة الحساب هو عرض تقدّم المهمة النشطة أو المكتملة فوق لوحة حسابك."
-                            + "\n\nشارات المهام والكرات هي شارات على ملفات المستخدمين لمن أتمّ مهمة واحدة على الأقل أو اشترى شارة الكرات.",
+                        + "\n\nإشعارات نقل المهام هي مؤشرات في صفحة الاستكشاف تشير إلى نقل المهام إلى الرسائل المباشرة."
+                        + "\n\nعروض قائمة الأصدقاء هي بطاقة تظهر في قسم \"نشط الآن\" بينما يلعب أحد أصدقائك لعبة بها مهمة نشطة."
+                        + "\n\nعروض قائمة الأعضاء هي أيقونة تظهر على الأعضاء في قائمة الخادم بينما يلعبون لعبة بها مهمة نشطة."
+                        + "\n\nعرض لوحة الحساب هو ترويج مدفوع للمهام يظهر فوق لوحة حسابك."
+                        + "\n\nتقدّم لوحة الحساب هو عرض تقدّم المهمة النشطة أو المكتملة فوق لوحة حسابك."
+                        + "\n\nشارات المهام والكرات هي شارات على ملفات المستخدمين لمن أتمّ مهمة واحدة على الأقل أو اشترى شارة الكرات.",
                         "Sponsored Banner is a paid quest banner shown at the top of the quests page."
-                            + "\n\nQuest Relocation Notices are indicators in the explore page pointing to quests being moved to direct messages."
-                            + "\n\nFriends List Promotions is a card shown in the \"Active Now\" section while a friend plays a game with an active quest."
-                            + "\n\nMembers List Promotions is an icon shown on members in the server list while they play a game with an active quest."
-                            + "\n\nAccount Panel Promo is a paid quest promotion shown above your account panel."
-                            + "\n\nAccount Panel Quest Progress is the display of active or completed quest progress above your account panel."
-                            + "\n\nQuest and Coin Badges are badges on user profiles for those who completed at least one quest or bought a coin badge."
+                        + "\n\nQuest Relocation Notices are indicators in the explore page pointing to quests being moved to direct messages."
+                        + "\n\nFriends List Promotions is a card shown in the \"Active Now\" section while a friend plays a game with an active quest."
+                        + "\n\nMembers List Promotions is an icon shown on members in the server list while they play a game with an active quest."
+                        + "\n\nAccount Panel Promo is a paid quest promotion shown above your account panel."
+                        + "\n\nAccount Panel Quest Progress is the display of active or completed quest progress above your account panel."
+                        + "\n\nQuest and Coin Badges are badges on user profiles for those who completed at least one quest or bought a coin badge."
                     )
                 }}
             />
@@ -307,11 +307,11 @@ export function QuestFeaturesSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "يسمح Discord بإكمال مهام الفيديو بعد مرور 24 ثانية أقل من مدة الفيديو منذ تسجيلك في المهمة."
-                                    + "\n\nهذا يعني أنه إذا كانت مهمة الفيديو 24 ثانية أو أقل، أو إذا سجّلت في مهمة فيديو وعدت لاحقاً لإكمالها، يمكن إكمالها فوراً."
-                                    + "\n\nينطبق هذا الإعداد فقط على الإكمال التلقائي لمهام الفيديو ويعتمد على إعداد الإكمال التلقائي أدناه. إكمال مهام الفيديو يدوياً سيظل يتطلب الانتظار المدة الكاملة.",
+                                + "\n\nهذا يعني أنه إذا كانت مهمة الفيديو 24 ثانية أو أقل، أو إذا سجّلت في مهمة فيديو وعدت لاحقاً لإكمالها، يمكن إكمالها فوراً."
+                                + "\n\nينطبق هذا الإعداد فقط على الإكمال التلقائي لمهام الفيديو ويعتمد على إعداد الإكمال التلقائي أدناه. إكمال مهام الفيديو يدوياً سيظل يتطلب الانتظار المدة الكاملة.",
                                 "Discord allows completing video quests 24 seconds before the video duration has elapsed since you enrolled in the quest."
-                                    + "\n\nThis means that if a video quest is 24 seconds or shorter, or if you enrolled in a video quest and return later to complete it, it can be completed instantly."
-                                    + "\n\nThis setting only applies to auto-completing video quests and depends on the auto-complete setting below. Manually completing video quests will still require waiting the full duration."
+                                + "\n\nThis means that if a video quest is 24 seconds or shorter, or if you enrolled in a video quest and return later to complete it, it can be completed instantly."
+                                + "\n\nThis setting only applies to auto-completing video quests and depends on the auto-complete setting below. Manually completing video quests will still require waiting the full duration."
                             )
                         }}
                     />
@@ -325,11 +325,11 @@ export function QuestFeaturesSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "بعض مهام الفيديو للجوال يمكن التسجيل فيها على سطح المكتب، لكن يجب إكمالها على الجوال. سيتيح هذا الإعداد إكمالها على سطح المكتب."
-                                    + "\n\nبعض مهام الفيديو للجوال تقتصر على التسجيل عبر الجوال. للتأثير عليها بهذا الإعداد، يجب التسجيل فيها أولاً على جهازك المحمول."
-                                    + "\n\nعند تمكينه بشكل مستقل، ينطبق هذا الإعداد فقط على إكمال مهام الفيديو يدوياً.",
+                                + "\n\nبعض مهام الفيديو للجوال تقتصر على التسجيل عبر الجوال. للتأثير عليها بهذا الإعداد، يجب التسجيل فيها أولاً على جهازك المحمول."
+                                + "\n\nعند تمكينه بشكل مستقل، ينطبق هذا الإعداد فقط على إكمال مهام الفيديو يدوياً.",
                                 "Some mobile video quests can be enrolled in on desktop, but must be completed on mobile. This setting will allow completing them on desktop."
-                                    + "\n\nSome mobile video quests are restricted to enrolling via mobile. To affect them with this setting, you must first enroll in them on your mobile device."
-                                    + "\n\nWhen enabled independently, this setting only applies to manually completing video quests."
+                                + "\n\nSome mobile video quests are restricted to enrolling via mobile. To affect them with this setting, you must first enroll in them on your mobile device."
+                                + "\n\nWhen enabled independently, this setting only applies to manually completing video quests."
                             )
                         }}
                     />
@@ -343,11 +343,11 @@ export function QuestFeaturesSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "افتراضياً، محاولة الإكمال التلقائي لعدة مهام ستضعها في طابور للإكمال بالترتيب."
-                                    + "\n\nسيتيح هذا الإعداد تشغيل جميع مهام الإكمال التلقائي في نفس الوقت."
-                                    + "\n\nينطبق هذا الإعداد فقط على الإكمال التلقائي للمهام.",
+                                + "\n\nسيتيح هذا الإعداد تشغيل جميع مهام الإكمال التلقائي في نفس الوقت."
+                                + "\n\nينطبق هذا الإعداد فقط على الإكمال التلقائي للمهام.",
                                 "By default, attempting to auto-complete multiple quests will queue them for completion sequentially."
-                                    + "\n\nThis setting will allow all auto-complete quests to run at the same time."
-                                    + "\n\nThis setting only applies to auto-completing quests."
+                                + "\n\nThis setting will allow all auto-complete quests to run at the same time."
+                                + "\n\nThis setting only applies to auto-completing quests."
                             )
                         }}
                     />
@@ -381,17 +381,17 @@ export function QuestFeaturesSetting(): JSX.Element {
                             wider: true,
                             text: t(
                                 "مهام مشاهدة الفيديو على الجوال تعمل فقط مع المهام القابلة للتسجيل على سطح المكتب. إذا كانت المهمة مقيدة بالتسجيل عبر الجوال، يجب التسجيل فيها أولاً على جهازك المحمول."
-                                    + "\n\nجميع مهام الفيديو ترسل عادةً stack trace مع تقارير التقدم. تمحو Questify هذا الـ stack trace، لكن غيابه سيكون دليلاً مثل وجوده."
-                                    + "\n\nمهام اللعب على سطح المكتب وPlayStation وXbox والأنشطة متاحة فقط على العملاء الرسميين. العملاء الخارجيون كـ Vesktop وEquibop لا يدعمون الإكمال التلقائي لهذه الأنواع."
-                                    + "\n\nمهام الإنجاز في النشاط يمكن إكمالها تلقائياً فوراً فقط. قد تُعطَّل هذه الطريقة في أي وقت."
-                                    + "\n\nالإكمال التلقائي يتم بالنقر على أزرار المهام في صفحة المهام. ستُكمَل بالترتيب ما لم يُفعَّل إعداد الإكمال المتزامن."
-                                    + "\n\nالإكمال التلقائي للمهام هو الإعداد الخطر الأكثر خطورة. فعّله على مسؤوليتك الخاصة.",
+                                + "\n\nجميع مهام الفيديو ترسل عادةً stack trace مع تقارير التقدم. تمحو Questify هذا الـ stack trace، لكن غيابه سيكون دليلاً مثل وجوده."
+                                + "\n\nمهام اللعب على سطح المكتب وPlayStation وXbox والأنشطة متاحة فقط على العملاء الرسميين. العملاء الخارجيون كـ Vesktop وEquibop لا يدعمون الإكمال التلقائي لهذه الأنواع."
+                                + "\n\nمهام الإنجاز في النشاط يمكن إكمالها تلقائياً فوراً فقط. قد تُعطَّل هذه الطريقة في أي وقت."
+                                + "\n\nالإكمال التلقائي يتم بالنقر على أزرار المهام في صفحة المهام. ستُكمَل بالترتيب ما لم يُفعَّل إعداد الإكمال المتزامن."
+                                + "\n\nالإكمال التلقائي للمهام هو الإعداد الخطر الأكثر خطورة. فعّله على مسؤوليتك الخاصة.",
                                 "Watch Video on Mobile quests only work with quests that can be enrolled in on desktop. If the quest is restricted to enrolling via mobile, you must first enroll in it on your mobile device."
-                                    + "\n\nAll video quests normally send a stack trace with progress reports. Questify removes this stack trace, but its absence will be as much evidence as its presence."
-                                    + "\n\nPlay on Desktop, PlayStation, Xbox, and activity quests are only available on official clients. Third-party clients like Vesktop and Equibop do not support auto-completing these types."
-                                    + "\n\nAchievement in Activity quests can only be auto-completed instantly. This method may be disabled at any time."
-                                    + "\n\nAuto-completion works by clicking quest buttons on the quests page. They will be completed sequentially unless the simultaneous completion setting is enabled."
-                                    + "\n\nAuto-completing quests is the most dangerous dangerous setting. Enable it at your own risk."
+                                + "\n\nAll video quests normally send a stack trace with progress reports. Questify removes this stack trace, but its absence will be as much evidence as its presence."
+                                + "\n\nPlay on Desktop, PlayStation, Xbox, and activity quests are only available on official clients. Third-party clients like Vesktop and Equibop do not support auto-completing these types."
+                                + "\n\nAchievement in Activity quests can only be auto-completed instantly. This method may be disabled at any time."
+                                + "\n\nAuto-completion works by clicking quest buttons on the quests page. They will be completed sequentially unless the simultaneous completion setting is enabled."
+                                + "\n\nAuto-completing quests is the most dangerous dangerous setting. Enable it at your own risk."
                             )
                         }}
                     />

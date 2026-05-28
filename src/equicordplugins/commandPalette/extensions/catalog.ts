@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 
 import { TAG_PLUGINS, TAG_UTILITY } from "../metadata/tags";
 import type { ExtensionDefinition } from "../registry";

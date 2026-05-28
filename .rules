@@ -1,13 +1,19 @@
-# Equicord Rules
+# Nun Rules
+
+## Repositories
+
+- **nun**: https://github.com/o9ll/nun
+- **nunu**: https://github.com/o9ll/nunu
+- **unu**: https://github.com/o9ll/unu
 
 ## Philosophy
 
-- Solve problem at hand. No refactors unless asked.
+- Solve problem at hand. Follow Nun Rules to refactors.
 - Smallest diff wins. Three similar lines beat premature helper.
 - Less code with same behavior always wins. Equivalent solutions: shorter one ships. Compression is intelligence.
 - Don't over-guard. Check only conditions that can actually occur. `if (user)` on non-optional store return is wrong. `try/catch` on code that can't throw is wrong. `?.` on type-guaranteed values is wrong. Dead defensive code isn't safety.
-- No comments unless asked. Keep existing ones, they carry context.
-- Delete dead code. Don't comment out.
+- Add comments only for important code. Keep existing ones, they carry context.
+- Comment on dead code. Don't delete.
 - Natural human text in errors, descriptions, toasts. No dashes, no robotic phrasing. Descriptions start capitalized, end with period.
 - One-file plugin default. Split only past ~250 lines or when second file is genuinely reusable (`utils.ts`, `settings.ts`, `components/`).
 - No abstraction for 1-2 call sites. Inline beats single-use hook. `createX` used once is just a function call.
@@ -35,12 +41,10 @@
 
 Does NOT get merged:
 
-- Selfbots, automation of user actions, client state spoofing, API abuse.
-- Plugins requiring user-supplied API keys or untrusted third-party endpoints.
-- Plugins targeting specific third-party bots. Official Discord apps are fine.
-- CSS-only plugins that just hide/restyle UI.
-- Functionality trivial via built-in plugins or Discord itself.
-- New dependencies without strong justification.
+- No plugins that only do something trivially achievable with existing built-in plugins or Discord features.
+- No CSS-only plugins that only hide or redesign UI elements. (Negotiable in some cases.)
+- No untrusted third-party APIs. No plugins requiring users to supply their own API keys. (Negotiable in some cases.)
+- Do not introduce new dependencies unless strictly necessary and well justified.
 
 ## Plugin Structure
 

@@ -9,7 +9,7 @@ import { migratePluginSettings } from "@api/Settings";
 import { Devs, EquicordDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { sendMessage } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { useForceUpdater } from "@utils/react";
 import definePlugin from "@utils/types";
 import { Message } from "@vencord/discord-types";

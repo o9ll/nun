@@ -7,9 +7,9 @@
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { OptionType } from "@utils/types";
-import { closeAllModals,SettingsRouter, useState } from "@webpack/common";
+import { closeAllModals, SettingsRouter, useState } from "@webpack/common";
 
 import { registerAction } from "./commands";
 import { openCommandPalette } from "./components/CommandPalette";

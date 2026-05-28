@@ -22,7 +22,7 @@ import { MicrophonePatcher } from "@plugins/betterMicrophone.desktop/patchers";
 import { initMicrophoneStore } from "@plugins/betterMicrophone.desktop/stores";
 import { addSettingsPanelButton, Emitter, MicrophoneSettingsIcon, removeSettingsPanelButton } from "@plugins/philsPluginLibrary";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { PluginNative } from "@utils/types";
 
 export const Native = VencordNative.pluginHelpers.BetterMicrophone as PluginNative<typeof import("./native")>;

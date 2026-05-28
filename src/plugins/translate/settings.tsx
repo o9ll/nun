@@ -18,7 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { OptionType } from "@utils/types";
 
 import { openTranslateModal } from "./TranslateModal";

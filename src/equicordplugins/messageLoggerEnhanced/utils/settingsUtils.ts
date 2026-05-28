@@ -17,12 +17,12 @@
 */
 
 import JSONParser from "@streamparser/json/jsonparser.js";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { chooseFile as chooseFileWeb } from "@utils/web";
 import { Toasts } from "@webpack/common";
 import { showSaveFilePicker } from "native-file-system-adapter";
 
-import { clearLogs,Native } from "..";
+import { clearLogs, Native } from "..";
 import { addMessagesBulkIDB, iterateAllMessagesIDB } from "../db";
 import { LoggedMessageJSON } from "../types";
 

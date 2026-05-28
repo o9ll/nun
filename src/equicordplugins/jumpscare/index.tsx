@@ -9,7 +9,7 @@ import "./styles.css";
 import { createAudioPlayer } from "@api/AudioPlayer";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { OptionType } from "@utils/types";
 import { createRoot, FluxDispatcher, useCallback, useEffect, useState } from "@webpack/common";
 import { Root } from "react-dom/client";

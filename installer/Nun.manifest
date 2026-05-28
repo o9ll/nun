@@ -4,10 +4,10 @@
   <assemblyIdentity
     version="1.14.13.0"
     processorArchitecture="*"
-    name="Esharq.Installer"
+    name="Nun.Installer"
     type="win32"/>
 
-  <description>Esharq Client Installer</description>
+  <description>Nun Client Installer</description>
 
   <!-- Require full administrator elevation -->
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">

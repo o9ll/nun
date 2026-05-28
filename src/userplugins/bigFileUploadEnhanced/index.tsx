@@ -6,7 +6,7 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings, useSettings } from "@api/Settings";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
 import { OpenExternalIcon } from "@components/Icons";
@@ -709,7 +709,7 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
 };
 
 function SettingsComponent() {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
     const uploader = settings.store.uploader as Uploader;
     const dest = useMemo(() => getDestination(uploader), [uploader, settings.store.customRequestUrl]);
 

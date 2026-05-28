@@ -28,7 +28,7 @@ export function DonateButton({
     className,
     ...props
 }: Partial<ButtonProps> & { equicord?: boolean; }) {
-    const link = equicord ? "https://ko-fi.com/loststr" : "https://github.com/sponsors/Vendicated";
+    const link = equicord ? "https://ko-fi.com/o99" : "https://github.com/sponsors/Vendicated";
     return (
         <Button
             {...props}

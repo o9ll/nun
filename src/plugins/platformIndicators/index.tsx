@@ -20,7 +20,7 @@ import "./style.css";
 
 import { definePluginSettings, migratePluginSetting } from "@api/Settings";
 import { Devs, EquicordDevs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { DiscordPlatform, User } from "@vencord/discord-types";

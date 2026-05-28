@@ -9,7 +9,7 @@ import "./styles.css";
 import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/MessagePopover";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { EquicordDevs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { Message } from "@vencord/discord-types";
 import { ChannelStore, MessageStore, openModal, React } from "@webpack/common";
@@ -94,7 +94,7 @@ export default definePlugin({
             "Advanced message tools: edit diff, reply tree, and channel brief"
         );
     },
-    authors: [EquicordDevs.LOSTSTR],
+    authors: [EquicordDevs.o9],
     tags: ["Chat", "Utility"],
     settings,
     dependencies: ["MessagePopoverAPI"],

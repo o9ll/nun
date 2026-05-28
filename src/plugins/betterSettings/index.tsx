@@ -11,7 +11,7 @@ import { buildPluginMenuEntries, buildThemeMenuEntries } from "@equicordplugins/
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { getIntlMessage } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { Icon } from "@vencord/discord-types";

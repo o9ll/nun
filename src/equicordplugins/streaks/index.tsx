@@ -10,7 +10,7 @@ import { DecoratorProps } from "@api/MemberListDecorators";
 import { iconsModule } from "@equicordplugins/_core/concatenatedModules";
 import { Devs, EquicordDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { Message } from "@vencord/discord-types";
 import { ChannelStore, moment, Tooltip, UserStore } from "@webpack/common";

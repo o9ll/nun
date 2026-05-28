@@ -6,7 +6,7 @@
 
 import { Devs, EquicordDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { ReporterTestable } from "@utils/types";
 
 import { migrateOldSettings } from "./migration";

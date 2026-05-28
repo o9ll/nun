@@ -5,7 +5,7 @@
  */
 
 import { useSettings } from "@api/Settings";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { QuestRewardType, QuestTaskType } from "@vencord/discord-types/enums";
 import type { JSX } from "react";
 
@@ -83,7 +83,7 @@ function toManaOptions<T extends string | number>(options: readonly { label: str
 }
 
 export function QuestButtonSetting(): JSX.Element {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
 
     const questButton = useQuestifySettings([
         "disableQuestsEverything",
@@ -225,8 +225,8 @@ export function QuestButtonSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "دائماً يُظهر زر المهام متى كانت هذه الميزة مُفعَّلة."
-                                    + "\n\nغير مطالَب يُظهره فقط عند وجود مكافآت مهام غير مطالَب بها."
-                                    + "\n\nأبداً يُخفي زر المهام.",
+                                + "\n\nغير مطالَب يُظهره فقط عند وجود مكافآت مهام غير مطالَب بها."
+                                + "\n\nأبداً يُخفي زر المهام.",
                                 "Always shows the quest button whenever this feature is enabled.\n\nUnclaimed shows it only when there are unclaimed quest rewards.\n\nNever hides the quest button."
                             )
                         }}
@@ -245,9 +245,9 @@ export function QuestButtonSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "الشريط يُظهر علامة Discord لغير المقروء بجانب زر المهام."
-                                    + "\n\nالشارة تُظهر عدد مكافآت المهام غير المطالَب بها."
-                                    + "\n\nكلاهما يُظهر الشريط والشارة معاً."
-                                    + "\n\nلا شيء يُخفي المؤشرات.",
+                                + "\n\nالشارة تُظهر عدد مكافآت المهام غير المطالَب بها."
+                                + "\n\nكلاهما يُظهر الشريط والشارة معاً."
+                                + "\n\nلا شيء يُخفي المؤشرات.",
                                 "Pill shows Discord's unread indicator next to the quest button.\n\nBadge shows the count of unclaimed quest rewards.\n\nBoth shows the pill and badge together.\n\nNothing hides the indicators."
                             )
                         }}

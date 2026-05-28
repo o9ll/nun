@@ -7,7 +7,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { addSettingsPanelButton, DeafenIcon, removeSettingsPanelButton } from "@plugins/philsPluginLibrary";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { OptionType } from "@utils/types";
 
 export let fakeD = false;
@@ -124,7 +124,7 @@ function toggleFakeDeafen() {
 
 let keydownListener: ((e: KeyboardEvent) => void) | null = null;
 
-function parseKeybind(keybind: string): { ctrl: boolean; shift: boolean; alt: boolean; key: string } {
+function parseKeybind(keybind: string): { ctrl: boolean; shift: boolean; alt: boolean; key: string; } {
     const parts = keybind.toLowerCase().split("+");
     return {
         ctrl: parts.includes("ctrl") || parts.includes("control"),
@@ -165,7 +165,7 @@ export default definePlugin({
     name: "FakeDeafen",
     get description() { return t("تظهر كأنك صامّ للصوت لكنك في الحقيقة لست كذلك.", "Appear as deafened to others while still being able to hear."); },
     dependencies: ["PhilsPluginLibrary"],
-    authors: [Devs.desu,Devs.viciouscal],
+    authors: [Devs.desu, Devs.viciouscal],
 
     patches: [
         {

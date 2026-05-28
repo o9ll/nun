@@ -44,7 +44,7 @@ import { initPluginManager, PMLogger, startAllPlugins } from "./api/PluginManage
 import { PlainSettings, Settings, SettingsStore } from "./api/Settings";
 import { areLocalSettingsDirty, getCloudSettings, getCloudSyncDirection, markLocalSettingsDirty, putCloudSettings, shouldCloudSync } from "./api/SettingsSync/cloudSync";
 import { relaunch } from "./utils/native";
-import { t } from "./utils/esharqI18n";
+import { t } from "./utils/nunM";
 import { checkForUpdates, isOutdated as getIsOutdated, update, UpdateLogger } from "./utils/updater";
 import { onceReady } from "./webpack";
 import { patches } from "./webpack/patchWebpack";
@@ -148,7 +148,7 @@ async function runUpdateCheck() {
                 notifiedForUpdatesThisSession = true;
 
                 showNotice(
-                    t("تم تحديث Esharq!", "Esharq has been updated!"),
+                    t("تم تحديث Nun!", "Nun has been updated!"),
                     t("إعادة تشغيل", "Restart"),
                     relaunch
                 );
@@ -160,7 +160,7 @@ async function runUpdateCheck() {
         notifiedForUpdatesThisSession = true;
 
         showNotice(
-            t("يتوفر إصدار جديد من Esharq!", "A new version of Esharq is available!"),
+            t("يتوفر إصدار جديد من Nun!", "A new version of Nun is available!"),
             t("عرض التحديث", "View Update"),
             () => openSettingsTabModal(UpdaterTab!)
         );

@@ -20,7 +20,7 @@ import { useSettings } from "@api/Settings";
 import { Card } from "@components/Card";
 import { Flex } from "@components/Flex";
 import { Switch } from "@components/Switch";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { MicrophoneProfile, MicrophoneStore } from "@plugins/betterMicrophone.desktop/stores";
 import {
     ProfilableStore,
@@ -52,7 +52,7 @@ export interface MicrophoneSettingsModalProps extends React.ComponentProps<typeo
 }
 
 export const MicrophoneSettingsModal = (props: MicrophoneSettingsModalProps) => {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
     const { microphoneStore, showInfo } = props;
 
     const {

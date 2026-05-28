@@ -1,0 +1,257 @@
+<div align="center">
+
+<kbd>**العربية**</kbd> &nbsp;|&nbsp; <kbd>[English](README.en.md)</kbd>
+
+---
+
+[![GitHub Release](https://img.shields.io/github/v/release/o9ll/nun?style=flat&color=5865F2&label=إصدار)](https://github.com/o9ll/nun/releases/latest)
+[![Tests](https://github.com/o9ll/nun/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/o9ll/nun/actions/workflows/test.yml)
+[![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/QamdqDNEDa)
+[![License](https://img.shields.io/github/license/o9ll/nun?color=green&label=رخصة)](LICENSE)
+[![Security Verified](https://img.shields.io/badge/security-verified-brightgreen?style=flat&logo=shield&logoColor=white)](https://github.com/o9ll/nun)
+
+</div>
+
+---
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="100%">
+
+<br>
+
+### ☕ هل أعجبك المشروع؟ ادعمني للاستمرار
+
+<br>
+
+**إذا أردتَ مني الاستمرار في التطوير وإضافة المزيد من الميزات،**
+**فلا تنسَ دعمي بأي مبلغ تراه مناسباً — حتى أصغر مساهمة تُحدث فرقاً كبيراً** 🙏
+
+<br>
+
+[![Ko-fi](https://img.shields.io/badge/☕%20ادعم%20عبر%20Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white&labelColor=1a1a1a)](https://ko-fi.com/o99)
+
+<br>
+
+> 💡 دعمكم هو الوقود الذي يُبقي هذا المشروع حياً ويدفعني نحو التحسين المستمر
+
+<br>
+
+</td>
+</tr>
+</table>
+
+</div>
+
+---
+
+### 🌟 أبرز الإضافات المدمجة والمطوّرة (Featured Plugins)
+
+* **NitroSniper**
+  * *صيد النيترو التلقائي:* أداة فائقة السرعة تقوم بفحص الرسائل في جميع القنوات فوراً والمطالبة بأي كود هدايا (Nitro) يتم مشاركته قبل أي شخص آخر.
+* **fakeDeafen**
+  * *التزييف الذكي:* تتيح لك إظهار أنك قمت بكتم الصوت والمايكروفون (Deafen) داخل الروم الصوتي لأعضاء السيرفر، بينما يمكنك في الحقيقة الاستماع لكل ما يقال بوضوح.
+* **messageBookmarks**
+  * *حفظ الرسائل المفضلة:* نظام إشارات مرجعية محلي يتيح لك حفظ رسائلك المهمة أو الأكواد البرمجية للرجوع إليها لاحقاً بضغطة زر دون الحاجة لعمل Pin في السيرفر.
+* **betterAudioPlayer**
+  * *مشغّل صوتي متطور:* تحسين هندسة الصوت داخل الكلاينت لتفعيل جودة الـ Stereo الحقيقية، مع لوحة تحكم مدمجة ومعالجة متطورة لترددات الصوت أثناء الاستماع.
+* **messageLoggerEnhanced**
+  * *سجل الرسائل المطور:* تتبّع الرسائل والمرفقات المحذوفة والمعدلة داخل الرومات مع إدارة ذكية جداً للذاكرة تمنع بطء التطبيق أثناء الجلسات الطويلة.
+* **BigFileUploadEnhanced**
+  * *الرفع الخارجي غير المحدود:* تتيح لك رفع الملفات الكبيرة لتتجاوز قيود ديسكورد الرسمية عبر خيارات متعددة ومعرّبة بالكامل (مثل Catbox و Litterbox) وتعمل بكفاءة على المتصفح وتطبيق سطح المكتب.
+* **MessageInsight**
+  * *تحليل الرسائل المتقدم:* مجموعة أدوات ثلاثية — مقارنة التعديلات بالكلمات (EditDiff) تُظهر ما تغيّر في الرسالة بعد تعديلها، وشجرة الردود (ReplyTree) تعرض جميع الردود على رسالة معينة مع إمكانية الانتقال إليها، وملخص القناة (ChannelBrief) يُعلمك بعدد الرسائل الجديدة عند عودتك بعد غياب.
+* **MessageBookmarks**
+  * *الإشارات المرجعية الخاصة:* احفظ أي رسالة كإشارة مرجعية خاصة (بخلاف Pin التي تظهر للجميع)، وصنّفها إلى عام أو مهم أو لاحقاً، وابحث فيها، وانتقل إليها بنقرة واحدة — كل شيء محفوظ محلياً.
+
+---
+
+## 📖 عن المشروع
+
+**Nun** هي النسخة العربية المطورة من [Equicord](https://github.com/Equicord/Equicord)، وهو بدوره مشتق من [Vencord](https://github.com/Vendicated/Vencord).
+
+تتميز هذه النسخة بـ:
+
+- ⚡ **أداء فائق وسلاسة تامة** — تحسينات مخصصة لتجربة أسرع وأخف
+- 🌐 **تعريب شامل** — جميع أوصاف الإضافات (300+) مترجمة للعربية
+- 🔧 **تخصيصات حصرية** — إضافات وتعديلات من تطوير الفريق لا تجدها في غيرها
+- 🧩 **أكثر من 300 إضافة** — جميع إضافات Equicord الأصلية مع إضافات عربية حصرية
+- 🔒 **أمان مُحقَّق** — فحص أمني شامل وصفر ثغرات في التبعيات
+- 🔄 **تحديثات مستمرة** — مزامنة دورية مع المصدر الأصلي مع تطبيق التحسينات
+
+للتواصل والدعم، انضم إلى سيرفر الديسكورد: **[discord.gg/QamdqDNEDa](https://discord.gg/QamdqDNEDa)**
+
+---
+
+## 📥 التثبيت
+
+### المنصات المدعومة
+
+| المنصة | الطريقة | التحميل |
+|--------|---------|---------|
+| 🪟 **Windows** | واجهة رسومية (GUI) | [![Windows Setup](https://img.shields.io/badge/Windows-NunSetup.exe-0078D4?style=flat&logo=windows&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/NunSetup.exe) |
+| 🍎 **macOS** | Apple Silicon & Intel | [![macOS Script](https://img.shields.io/badge/macOS-Shell_Script-000000?style=flat&logo=apple&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/install-macos.sh) |
+| 🐧 **Linux** | سكريبت تلقائي (CLI) | [![Linux Script](https://img.shields.io/badge/Linux-Shell_Script-FCC624?style=flat&logo=linux&logoColor=black)](https://github.com/o9ll/nun/releases/latest/download/install-linux.sh) |
+
+> تجد جميع الإصدارات في صفحة [**Releases**](https://github.com/o9ll/nun/releases).
+
+---
+
+### 🪟 Windows
+
+حمّل **NunSetup.exe** وشغّله — يكتشف Discord تلقائياً ويثبّت التعديل.
+
+### 🍎 macOS — Apple Silicon & Intel
+
+```bash
+curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-macos.sh | bash
+```
+
+يكتشف السكريبت نوع المعالج (ARM64 / Intel) تلقائياً ويدعم جميع إصدارات Discord (Stable، PTB، Canary).
+
+### 🐧 Linux
+
+```bash
+curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-linux.sh | bash
+```
+
+---
+
+## 🛠️ البناء من المصدر (Devbuild)
+
+### المتطلبات
+
+- [Git](https://git-scm.com/download)
+- [Node.JS LTS](https://nodejs.dev/en/)
+
+### الخطوات
+
+**1. تثبيت pnpm**
+
+> قد يحتاج هذا الأمر صلاحيات المدير (admin/root). أغلق الطرفية وأعد فتحها بعد التثبيت.
+
+```shell
+npm i -g pnpm
+```
+
+> ⚠️ **مهم:** لا تستخدم طرفية المدير في الخطوات التالية، فقد يؤدي ذلك إلى تلف تثبيت Discord.
+
+**2. استنساخ المستودع**
+
+```shell
+git clone https://github.com/o9ll/nun
+cd Nun
+```
+
+**3. تثبيت التبعيات**
+
+```shell
+pnpm install --frozen-lockfile
+```
+
+**4. بناء المشروع**
+
+```shell
+pnpm build
+```
+
+**5. حقن Nun في Discord**
+
+```shell
+pnpm inject
+```
+
+**6. بناء نسخة الويب (اختياري)**
+
+```shell
+pnpm buildWeb
+```
+
+بعد البناء، ابحث عن ملف ZIP في مجلد `dist` وثبّت الامتداد في متصفحك.
+
+> ملاحظة: امتداد Firefox يتطلب [Firefox for Developers](https://www.mozilla.org/en-US/firefox/developer/).
+
+---
+
+## ❤️ دعم المشروع
+
+<div align="center">
+
+[![Ko-fi](https://img.shields.io/badge/☕%20ادعم%20عبر%20Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white&labelColor=1a1a1a)](https://ko-fi.com/o99)
+
+</div>
+
+إذا أعجبك المشروع وأفادك، يمكنك دعمنا بـ:
+
+- ☕ **التبرع بأي مبلغ** عبر [Ko-fi](https://ko-fi.com/o99) — يساعدني على الاستمرار في التطوير
+- ⭐ **Star** للمستودع على GitHub
+- 📢 مشاركة المشروع مع أصدقائك
+- 💬 الانضمام لسيرفر الديسكورد والمساهمة في التطوير: **[discord.gg/QamdqDNEDa](https://discord.gg/QamdqDNEDa)**
+- 🐛 الإبلاغ عن أي مشكلة أو اقتراح عبر [Issues](https://github.com/o9ll/nun/issues)
+
+دعمكم هو ما يجعلنا نستمر في تطوير وتحسين هذا المشروع! 💪
+
+---
+
+## 🙏 شكر وتقدير
+
+- [Vendicated](https://github.com/Vendicated) — لإنشاء [Vencord](https://github.com/Vendicated/Vencord)
+- [Equicord Team](https://github.com/Equicord) — لبناء [Equicord](https://github.com/Equicord/Equicord) فوق Vencord
+- [verticalsync](https://github.com/verticalsync) — لإنشاء [Suncord](https://github.com/verticalsync/Suncord)
+
+---
+
+## 📊 Star History
+
+<a href="https://star-history.com/#o9ll/nun&Timeline">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline" />
+  </picture>
+</a>
+
+---
+
+## ⚠️ إخلاء المسؤولية
+
+Discord هي علامة تجارية مسجلة لشركة Discord Inc.، ولا يُعدّ هذا المشروع تابعاً لها أو معتمداً منها.
+
+<details>
+<summary>استخدام Nun ينتهك شروط خدمة Discord</summary>
+
+تعديلات العميل (Client modifications) تتعارض مع شروط خدمة Discord.
+
+غير أن Discord لا تتخذ إجراءات صارمة ضد مستخدمي تعديلات العميل في الغالب، ولا توجد حالات موثقة لحظر حسابات بسبب ذلك طالما لا تُستخدم إضافات ذات سلوك مسيء.
+
+إذا كان حسابك بالغ الأهمية بالنسبة لك، فالأفضل تجنب جميع تعديلات العميل احتياطاً.
+
+</details>
+
+---
+
+## 📜 Credits & License
+
+> [!IMPORTANT]
+> **English:** This project is a fork of the original [Equicord](https://github.com/Equicord/Equicord) project. All credits for the core engine and framework belong to the original creators. This version is a specialized distribution managed by o9 under the name **Nun**.
+
+### Key Enhancements in this Version | التحسينات في هذه النسخة
+
+- 🌍 **Full Localization** | تعريب كامل وشامل للواجهة
+- 🎨 **Modern UI/UX Redesign** | إعادة تصميم الواجهة بشكل عصري واحترافي
+- 🛡️ **Security & Metadata Optimizations** | تحسينات أمنية وإضافة البيانات الوصفية الرسمية
+
+**Maintained by:** [o9](https://github.com/o9ll)  
+**Original Project:** [Equicord](https://github.com/Equicord/Equicord)
+
+---
+
+<div align="center">
+
+**Nun** • Made with ❤️ by o9 • [GPL-3.0 License](LICENSE)
+
+[⬆ العودة للأعلى](#)
+
+</div>

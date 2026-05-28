@@ -25,17 +25,17 @@ import { Heading } from "@components/Heading";
 import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Margins } from "@utils/margins";
 
 function BackupAndRestoreTab() {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
 
     return (
         <SettingsTab>
             <Heading className={Margins.top16}>{t("النسخ الاحتياطي والاستعادة", "Backup & Restore")}</Heading>
             <Paragraph className={Margins.bottom20}>
-                {t("استيراد وتصدير إعدادات Esharq كملف JSON.", "Import and export your Esharq settings as a JSON file.")}
+                {t("استيراد وتصدير إعدادات Nun كملف JSON.", "Import and export your Nun settings as a JSON file.")}
             </Paragraph>
 
             <Notice.Warning className={Margins.bottom20}>

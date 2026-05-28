@@ -14,7 +14,7 @@ import { Switch } from "@components/Switch";
 import { debounce } from "@shared/debounce";
 import { Devs, EquicordDevs, IS_MAC } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import type { Channel, VoiceState } from "@vencord/discord-types";
 import { findByCodeLazy, findByPropsLazy } from "@webpack";

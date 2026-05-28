@@ -20,7 +20,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import betterGifPicker from "@plugins/betterGifPicker";
 import { Devs } from "@utils/constants";
 import { insertTextIntoChatInputBox } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { ExpressionPickerStore } from "@webpack/common";
 

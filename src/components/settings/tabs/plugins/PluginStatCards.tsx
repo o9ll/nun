@@ -7,7 +7,7 @@
 import "./styles.css";
 
 import { BaseText } from "@components/BaseText";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Tooltip } from "@webpack/common";
 
 export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins }) {

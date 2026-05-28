@@ -19,7 +19,7 @@
 import { ClockIcon } from "@components/Icons";
 import SettingsPlugin from "@plugins/_core/settings";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { removeFromArray } from "@utils/misc";
 import definePlugin from "@utils/types";
 

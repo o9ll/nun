@@ -18,7 +18,7 @@
 
 import { Devs } from "@utils/constants";
 import { insertTextIntoChatInputBox } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { ChannelStore, PermissionsBits, PermissionStore } from "@webpack/common";
 

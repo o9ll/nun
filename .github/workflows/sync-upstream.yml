@@ -2,8 +2,8 @@ name: Sync Upstream Equicord
 
 on:
     schedule:
-        - cron: "0 4 * * *"   # يومياً الساعة 4:00 UTC
-    workflow_dispatch:
+        - cron: "0 4 * * *"   # Runs every day at 04:00 UTC
+    workflow_dispatch: # Allows manual triggering of the workflow
 
 permissions:
     contents: write
@@ -11,14 +11,14 @@ permissions:
 
 jobs:
     sync:
-        name: Sync from Equicord/Equicord
+        name: Sync
         runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v4
               with:
                   fetch-depth: 0
-                  token: ${{ secrets.ETOKEN }}
+                  token: ${{ github.token }}
 
             - name: Configure git identity
               run: |
@@ -40,7 +40,7 @@ jobs:
             - name: Create sync branch and open PR
               if: steps.check.outputs.new_commits != '0'
               env:
-                  GITHUB_TOKEN: ${{ secrets.ETOKEN }}
+                  GITHUB_TOKEN: ${{ github.token }}
               run: |
                   BRANCH="sync/upstream-$(date +%Y%m%d-%H%M)"
                   git checkout -b "$BRANCH"
@@ -72,7 +72,7 @@ jobs:
                           git checkout --ours -- "$f" 2>/dev/null || true
                       done
                       git add -A
-                      git commit -m "sync: resolve merge conflicts — preserve Arabic localization and custom infrastructure"
+                      git commit -m "sync: resolve merge conflicts — preserve localization and custom infrastructure"
                   fi
 
                   git push origin "$BRANCH"
@@ -83,7 +83,7 @@ jobs:
 
                   # Write body to file — avoids YAML/markdown conflicts in run: blocks
                   BODY_FILE=$(mktemp --suffix=.md)
-                  printf 'Upstream Sync: %s\n\nCommits merged: %s\nFiles changed: %s\nNew or updated plugins: %s\n\nReview checklist:\n  New plugins require Arabic description translations\n  Verify no breaking changes to custom workflows\n  Confirm translation coverage remains at 100%%\n\nAutomated sync from Equicord/Equicord upstream.\n' \
+                  printf 'Upstream Sync: %s\n\nCommits merged: %s\nFiles changed: %s\nNew or updated plugins: %s\n\nReview checklist:\n  New plugins require description translations\n  Verify no breaking changes to custom workflows\n  Confirm translation coverage remains at 100%%\n\nAutomated sync from Equicord/Equicord upstream.\n' \
                       "$(date +%Y-%m-%d)" \
                       "${{ steps.check.outputs.new_commits }}" \
                       "$CHANGED" \
@@ -105,4 +105,4 @@ jobs:
 
             - name: Already up to date
               if: steps.check.outputs.new_commits == '0'
-              run: echo "✅ Esharq is already aligned with upstream."
+              run: echo "✅ Nun is already aligned with upstream."

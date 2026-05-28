@@ -1,6 +1,6 @@
 ﻿#!/usr/bin/env node
 /**
- * Discord webhook notifier — Esharq
+ * Discord webhook notifier — Nun
  *
  * Security model:
  *   - Webhook URLs come ONLY from GitHub Actions secrets (env vars).
@@ -58,7 +58,7 @@ function postWebhook(url, payload) {
                 headers: {
                     "Content-Type": "application/json",
                     "Content-Length": Buffer.byteLength(body),
-                    "User-Agent": "Esharq-Notifier/1.0",
+                    "User-Agent": "NunNotifier/1.0",
                 },
             },
             res => {
@@ -92,21 +92,21 @@ function run(cmd) {
     return execSync(cmd, { encoding: "utf8" }).trim();
 }
 
-const REPO_URL = "https://github.com/LOSTSTR/Esharq";
-const ICON_URL  =
-    "https://raw.githubusercontent.com/LOSTSTR/Esharq/main/browser/icon.png";
+const REPO_URL = "https://github.com/o9ll/nun";
+const ICON_URL =
+    "https://raw.githubusercontent.com/o9ll/nun/main/browser/icon.png";
 
-const commitHash   = run("git log -1 --pretty=%H").slice(0, 7);
-const commitTime   = run("git log -1 --pretty=%aI");
-const commitUrl    = `${REPO_URL}/commit/${commitHash}`;
+const commitHash = run("git log -1 --pretty=%H").slice(0, 7);
+const commitTime = run("git log -1 --pretty=%aI");
+const commitUrl = `${REPO_URL}/commit/${commitHash}`;
 
 // Sanitise all user-controlled fields
 const commitAuthor = sanitise(run("git log -1 --pretty=%an"), 80);
-const commitMsg    = sanitise(run("git log -1 --pretty=%B"), 2000);
+const commitMsg = sanitise(run("git log -1 --pretty=%B"), 2000);
 
 const msgLines = commitMsg.split("\n").filter(Boolean);
 const msgTitle = sanitise(msgLines[0] ?? "", 256);
-const msgBody  = sanitise(msgLines.slice(1).join("\n").trim(), 500);
+const msgBody = sanitise(msgLines.slice(1).join("\n").trim(), 500);
 
 // ─── Detect new plugin files ──────────────────────────────────────────────────
 
@@ -124,10 +124,10 @@ const newPluginFiles = addedFiles.filter(f => NEW_PLUGIN_RE.test(f));
 
 // ─── Detect commit type ───────────────────────────────────────────────────────
 
-const isFix    = /^fix(\(|:)/i.test(msgTitle);
-const isSync   = /^sync(\(|:)/i.test(msgTitle) || /merge upstream/i.test(msgTitle);
-const isChore  = /^(chore|perf|refactor|style|ci|build)(\(|:)/i.test(msgTitle);
-const isFeat   = /^feat(\(|:)/i.test(msgTitle);
+const isFix = /^fix(\(|:)/i.test(msgTitle);
+const isSync = /^sync(\(|:)/i.test(msgTitle) || /merge upstream/i.test(msgTitle);
+const isChore = /^(chore|perf|refactor|style|ci|build)(\(|:)/i.test(msgTitle);
+const isFeat = /^feat(\(|:)/i.test(msgTitle);
 const isUpdate = isFix || isSync || isChore || (isFeat && newPluginFiles.length === 0);
 
 // ─── Extract plugin metadata from source ─────────────────────────────────────
@@ -143,22 +143,22 @@ function extractPluginInfo(filePath) {
 
 // ─── Embed builders ───────────────────────────────────────────────────────────
 
-const FOOTER = { text: "Esharq • نسخة عربية مخصصة من Equicord" };
+const FOOTER = { text: "Nun • نسخة عربية مخصصة من Equicord" };
 
 function pluginEmbed(info) {
     return {
         title: "🆕 إضافة جديدة",
         description:
-            "تم إضافة إضافة جديدة إلى **Esharq**!\n" +
+            "تم إضافة إضافة جديدة إلى **Nun**!\n" +
             "قم بتحديث النسخة للحصول عليها.",
         color: 5763719,
         thumbnail: { url: ICON_URL },
         fields: [
-            { name: "📦 اسم الإضافة",  value: `\`${info.name}\``,        inline: true  },
-            { name: "🔗 المستودع",      value: `[GitHub](${REPO_URL})`,   inline: true  },
-            { name: "📝 الوصف",         value: info.description,          inline: false },
-            { name: "🔑 Commit",        value: `[\`${commitHash}\`](${commitUrl})`, inline: true },
-            { name: "👤 بواسطة",        value: commitAuthor,              inline: true  },
+            { name: "📦 اسم الإضافة", value: `\`${info.name}\``, inline: true },
+            { name: "🔗 المستودع", value: `[GitHub](${REPO_URL})`, inline: true },
+            { name: "📝 الوصف", value: info.description, inline: false },
+            { name: "🔑 Commit", value: `[\`${commitHash}\`](${commitUrl})`, inline: true },
+            { name: "👤 بواسطة", value: commitAuthor, inline: true },
         ],
         footer: FOOTER,
         timestamp: commitTime,
@@ -170,18 +170,18 @@ function updateEmbed() {
     return {
         title: isFixType ? "🔧 إصلاح / تحديث" : "✨ تحديث جديد",
         description:
-            `تم نشر **${isFixType ? "إصلاح" : "تحديث"}** على **Esharq**\n` +
+            `تم نشر **${isFixType ? "إصلاح" : "تحديث"}** على **Nun**\n` +
             "قم بتحديث النسخة للحصول على آخر التغييرات.",
         color: isFixType ? 16705372 : 3447003,
         thumbnail: { url: ICON_URL },
         fields: [
-            { name: "📋 وصف التغيير",  value: msgTitle,                  inline: false },
+            { name: "📋 وصف التغيير", value: msgTitle, inline: false },
             ...(msgBody
                 ? [{ name: "📄 التفاصيل", value: msgBody, inline: false }]
                 : []),
-            { name: "🔑 Commit",       value: `[\`${commitHash}\`](${commitUrl})`, inline: true },
-            { name: "👤 بواسطة",       value: commitAuthor,              inline: true  },
-            { name: "🔗 المستودع",     value: `[GitHub](${REPO_URL})`,   inline: true  },
+            { name: "🔑 Commit", value: `[\`${commitHash}\`](${commitUrl})`, inline: true },
+            { name: "👤 بواسطة", value: commitAuthor, inline: true },
+            { name: "🔗 المستودع", value: `[GitHub](${REPO_URL})`, inline: true },
         ],
         footer: FOOTER,
         timestamp: commitTime,
@@ -214,7 +214,7 @@ async function main() {
 
         try {
             await postWebhook(WEBHOOK_PLUGINS, {
-                username: "Esharq",
+                username: "Nun",
                 avatar_url: ICON_URL,
                 embeds: [pluginEmbed(info)],
             });
@@ -229,7 +229,7 @@ async function main() {
         console.log(`🔧 Update commit: ${msgTitle}`);
         try {
             await postWebhook(WEBHOOK_UPDATES, {
-                username: "Esharq",
+                username: "Nun",
                 avatar_url: ICON_URL,
                 embeds: [updateEmbed()],
             });

@@ -1,5 +1,5 @@
-// Esharq Client Installer  v1.14.13.0
-// Copyright (c) 2026 LoSTSR / NRaymond. All rights reserved.
+// Nun Client Installer  v1.14.13.0
+// Copyright (c) 2026 o9. All rights reserved.
 // Build: see build.ps1
 
 using System;
@@ -15,14 +15,14 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
-[assembly: AssemblyTitle("Esharq Client Installer")]
-[assembly: AssemblyDescription("Official installer for Esharq — the community Discord client mod")]
-[assembly: AssemblyCompany("Esharq Digital Branding")]
-[assembly: AssemblyProduct("Esharq")]
-[assembly: AssemblyCopyright("© 2026 LoSTSR / NRaymond. All rights reserved.")]
+[assembly: AssemblyTitle("Nun Client Installer")]
+[assembly: AssemblyDescription("Official installer for Nun — the community Discord client mod")]
+[assembly: AssemblyCompany("Nun")]
+[assembly: AssemblyProduct("Nun")]
+[assembly: AssemblyCopyright("© 2026 o9. All rights reserved.")]
 [assembly: AssemblyVersion("1.14.13.0")]
 [assembly: AssemblyFileVersion("1.14.13.0")]
-[assembly: AssemblyTrademark("Esharq")]
+[assembly: AssemblyTrademark("Nun")]
 
 // ─────────────────────────────────────────────────────────────────────
 // Data model
@@ -42,8 +42,8 @@ sealed class DiscordInstall
 
 static class Logic
 {
-    const string RELEASE_API  = "https://api.github.com/repos/LOSTSTR/Esharq/releases/latest";
-    const string UA           = "Esharq-Installer/1.14.13.0 (+https://github.com/LOSTSTR/Esharq)";
+    const string RELEASE_API  = "https://api.github.com/repos/o9ll/nun/releases/latest";
+    const string UA           = "NunInstaller/1.14.13.0 (+https://github.com/o9ll/nun)";
     const string ASAR         = "desktop.asar";
     const string CHECKSUMS    = "checksums.txt";
     const string OPENASAR_URL = "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar";
@@ -71,7 +71,7 @@ static class Logic
                 appData = Path.Combine(
                     Environment.GetEnvironmentVariable("USERPROFILE") ?? @"C:\Users\Default",
                     "AppData", "Roaming");
-            return Path.Combine(appData, "Esharq");
+            return Path.Combine(appData, "Nun");
         }
     }
 
@@ -274,7 +274,7 @@ static class Logic
         progress(10);
         Directory.CreateDirectory(DataDir);
         var tmp = Path.Combine(Path.GetTempPath(),
-            "esharq_" + Guid.NewGuid().ToString("N") + ".asar");
+            "nun_" + Guid.NewGuid().ToString("N") + ".asar");
         Download(url, tmp, (pct, dl, tot) =>
         {
             status(string.Format("تحميل: {0:F1}/{1:F1} MB  ({2}%)",
@@ -302,12 +302,12 @@ static class Logic
         File.Copy(tmp, AsarTarget, true);
         try { File.Delete(tmp); } catch { }
         progress(100);
-        status("✓ تم التثبيت — أعد تشغيل Discord لتفعيل Esharq");
+        status("✓ تم التثبيت — أعد تشغيل Discord لتفعيل Nun");
     }
 
     public static void Uninstall(string res, Action<string> status, Action<int> progress)
     {
-        status("جارٍ إزالة Esharq...");
+        status("جارٍ إزالة Nun...");
         progress(20);
         KillDiscord(res);
         progress(50);
@@ -386,13 +386,12 @@ sealed class InstallerForm : Form
     static readonly Color WARN_TTL   = Color.FromArgb(255, 190,  40);
     static readonly Color WARN_BODY  = Color.FromArgb(230, 210, 180);
 
-    const string DISCORD_URL = "https://discord.gg/kDJYqWX3S3";
-    const string GITHUB_URL  = "https://github.com/LOSTSTR/Esharq";
+    const string GITHUB_URL  = "https://github.com/o9ll/nun";
     const string VER         = "1.14.13.0";
 
     // ── Language ──────────────────────────────────────────────────────
-    static bool _arabic = true;
-    static string T(string ar, string en) { return _arabic ? ar : en; }
+    static bool _nunar = true;
+    static string T(string ar, string en) { return _nunar ? ar : en; }
 
     // Borderless-window drag
     [DllImport("user32.dll")] static extern int  SendMessage(IntPtr h, int m, int w, int l);
@@ -443,7 +442,7 @@ sealed class InstallerForm : Form
 
     void SetupWindow()
     {
-        Text            = "Esharq";
+        Text            = "Nun";
         ClientSize      = new Size(1050, 650);
         BackColor       = BG;
         StartPosition   = FormStartPosition.CenterScreen;
@@ -477,7 +476,7 @@ sealed class InstallerForm : Form
         sb.MouseDown += OnDrag;
 
         // Logo
-        sb.Controls.Add(MakeLabel("Esharq", 22, 30, TEXT_PRI, 20f, FontStyle.Bold, sb));
+        sb.Controls.Add(MakeLabel("Nun", 22, 30, TEXT_PRI, 20f, FontStyle.Bold, sb));
 
         // Version badge
         var ver = new Label
@@ -512,8 +511,8 @@ sealed class InstallerForm : Form
         secInner.Controls.Add(MakeLabel(T("أمان وموثوقية", "Security & Trust"),
             10, 40, TEXT_PRI, 10f, FontStyle.Bold, secInner, 178, 22, ContentAlignment.MiddleCenter));
         secInner.Controls.Add(MakeLabel(
-            T("تم تصميم Esharq بأعلى معايير الأمان\nوالخصوصية لضمان تجربة آمنة ومستقرة.",
-              "Esharq is built with the highest security\nand privacy standards for a safe experience."),
+            T("تم تصميم Nun بأعلى معايير الأمان\nوالخصوصية لضمان تجربة آمنة ومستقرة.",
+              "Nun is built with the highest security\nand privacy standards for a safe experience."),
             10, 66, TEXT_SEC, 8f, FontStyle.Regular, secInner, 178, 36, ContentAlignment.MiddleCenter));
 
         var badge = new Label
@@ -532,7 +531,6 @@ sealed class InstallerForm : Form
         sb.Controls.Add(MakePanel(20, 600, 200, 1, Color.FromArgb(35, 40, 55)));
         sb.Controls.Add(MakeLink("GitHub", 60, 615, 8.5f, sb, GITHUB_URL));
         sb.Controls.Add(MakeLabel("•", 108, 616, TEXT_MUTED, 8.5f, FontStyle.Regular, sb));
-        sb.Controls.Add(MakeLink("Discord", 120, 615, 8.5f, sb, DISCORD_URL));
     }
 
     Button MakeSidebarBtn(string text, int y, Panel parent)
@@ -578,8 +576,8 @@ sealed class InstallerForm : Form
         main.MouseDown += OnDrag;
 
         // ── Language toggle buttons ───────────────────────
-        _btnLangAR = MakeFlatBtn("ع", 686, 10, 32, 28, _arabic ? ACCENT : SLATE, TEXT_PRI);
-        _btnLangEN = MakeFlatBtn("EN", 720, 10, 42, 28, _arabic ? SLATE : ACCENT, TEXT_PRI);
+        _btnLangAR = MakeFlatBtn("ع", 686, 10, 32, 28, _nunar ? ACCENT : SLATE, TEXT_PRI);
+        _btnLangEN = MakeFlatBtn("EN", 720, 10, 42, 28, _nunar ? SLATE : ACCENT, TEXT_PRI);
         _btnLangAR.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
         _btnLangEN.Font = new Font("Segoe UI", 8.5f, FontStyle.Bold);
         _btnLangAR.FlatAppearance.BorderSize = 1;
@@ -605,14 +603,14 @@ sealed class InstallerForm : Form
         _aboutCanvas.Visible = false;
     }
 
-    void SwitchLanguage(bool arabic)
+    void SwitchLanguage(bool nunar)
     {
-        if (_arabic == arabic) return;
-        _arabic = arabic;
+        if (_nunar == nunar) return;
+        _nunar = nunar;
 
         // Update toggle button colors
-        if (_btnLangAR != null) _btnLangAR.BackColor = arabic ? ACCENT : SLATE;
-        if (_btnLangEN != null) _btnLangEN.BackColor = arabic ? SLATE : ACCENT;
+        if (_btnLangAR != null) _btnLangAR.BackColor = nunar ? ACCENT : SLATE;
+        if (_btnLangEN != null) _btnLangEN.BackColor = nunar ? SLATE : ACCENT;
 
         bool wasHome = _homeCanvas != null && _homeCanvas.Visible;
 
@@ -651,9 +649,9 @@ sealed class InstallerForm : Form
         c.MouseDown += OnDrag;
 
         // Title + subtitle
-        c.Controls.Add(MakeLabel("Esharq", 40, 14, TEXT_PRI, 26f, FontStyle.Bold, c));
-        c.Controls.Add(MakeLabel(T("أداة تثبيت متقدمة وسهلة لمشروع LOSTSTR/Esharq",
-                                   "Advanced and easy installer for LOSTSTR/Esharq"),
+        c.Controls.Add(MakeLabel("Nun", 40, 14, TEXT_PRI, 26f, FontStyle.Bold, c));
+        c.Controls.Add(MakeLabel(T("أداة تثبيت متقدمة وسهلة لمشروع o9ll/nun",
+                                   "Advanced and easy installer for o9ll/nun"),
             46, 60, TEXT_SEC, 11f, FontStyle.Regular, c));
 
         // ── Path card (y=95) ──────────────────────────
@@ -687,10 +685,10 @@ sealed class InstallerForm : Form
         warnInner.Controls.Add(MakeLabel("⚠", 14, 10, WARN_TTL, 14f, FontStyle.Regular, warnInner));
         warnInner.Controls.Add(MakeLabel(T("هام جداً", "Important"), 622, 12, WARN_TTL, 11f, FontStyle.Bold, warnInner));
         warnInner.Controls.Add(MakeLabel(
-            T("مستودع LOSTSTR/Esharq على GitHub هو المصدر الرسمي الوحيد للحصول على حزمة Esharq بشكل آمن.\n" +
+            T("مستودع o9ll/nun على GitHub هو المصدر الرسمي الوحيد للحصول على حزمة Nun بشكل آمن.\n" +
               "أي مصدر آخر يُعدّ ضاراً. إذا قمت بتنزيله من مكان آخر، قم بإزالة التثبيت فوراً لحماية حسابك\n" +
               "وكلمة مرور Discord.",
-              "The LOSTSTR/Esharq GitHub repository is the only official source for Esharq.\n" +
+              "The o9ll/nun GitHub repository is the only official source for Nun.\n" +
               "Any other source is considered harmful. If you downloaded it from elsewhere,\n" +
               "uninstall immediately to protect your Discord account and password."),
             20, 40, WARN_BODY, 9.5f, FontStyle.Regular, warnInner, 696, 66));
@@ -781,8 +779,8 @@ sealed class InstallerForm : Form
         var ft = MakePanel(0, 578, 810, 22, SIDEBAR);
         c.Controls.Add(ft);
 
-        ft.Controls.Add(MakeLink(T("LOSTSTR/Esharq على GitHub  ↗", "LOSTSTR/Esharq on GitHub  ↗"), 14, 3, 8.5f, ft, GITHUB_URL));
-        ft.Controls.Add(MakeLabel("© 2026 Esharq. مرخص بموجب GPL-3.0", 545, 3, TEXT_MUTED, 8.5f, FontStyle.Regular, ft));
+        ft.Controls.Add(MakeLink(T("o9ll/nun على GitHub  ↗", "o9ll/nun on GitHub  ↗"), 14, 3, 8.5f, ft, GITHUB_URL));
+        ft.Controls.Add(MakeLabel("© 2026 Nun. مرخص بموجب GPL-3.0", 545, 3, TEXT_MUTED, 8.5f, FontStyle.Regular, ft));
 
         return c;
     }
@@ -814,7 +812,7 @@ sealed class InstallerForm : Form
             c0Inner.Controls.Add(MakeLabel(dp, 10, 34, TEXT_MUTED, 8.5f, FontStyle.Regular, c0Inner, 335, 18));
             var sc = detected.IsPatched ? SUCCESS : Color.FromArgb(100, 200, 130);
             var st = detected.IsPatched
-                ? T("✔ Esharq مُثبَّت", "✔ Esharq Installed")
+                ? T("✔ Nun مُثبَّت", "✔ Nun Installed")
                 : T("✔ الأكثر استقراراً وأماناً", "✔ Most stable and secure");
             c0Inner.Controls.Add(MakeLabel(st, 210, 56, sc, 8.5f, FontStyle.Bold, c0Inner));
         }
@@ -929,16 +927,15 @@ sealed class InstallerForm : Form
             rowY += 22;
         };
 
-        addMember("LOSTSTR",     T("مطور رئيسي — بناء المشروع وإدارته",        "Lead developer — project build & management"), ACCENT,  "★");
-        addMember("krym511",     T("داعم رئيسي — دعم ومساهمة في التطوير",      "Main supporter — support & development"),      SUCCESS, "◆");
-        addMember("iosiph",      T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
-        addMember("RAYMOND",     T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
-        addMember("Abo Ahmed",   T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
-        addMember("S99",         T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
-        addMember(".fmo",        T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
+        addMember("o9",     T("مطور رئيسي — بناء المشروع وإدارته",         "Lead developer — project build & management"), ACCENT,   "★");
+        addMember("01",     T("داعم رئيسي — دعم ومساهمة في التطوير",       "Main supporter — support & development"),      SUCCESS,  "◆");
+        addMember("02",     T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
+        addMember("03",     T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
+        addMember("04",     T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
+        addMember("05",     T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
+        addMember("06",     T("مساهم في التطوير",                           "Contributor"),                                  BLUE,    "●");
 
         teamI.Controls.Add(MakeLink("GitHub  ↗", 580, 200, 9f, teamI, GITHUB_URL));
-        teamI.Controls.Add(MakeLink("Discord  ↗", 496, 200, 9f, teamI, DISCORD_URL));
 
         // License card
         var licO = MakePanel(40, 480, 730, 50, CARD_B);
@@ -946,8 +943,8 @@ sealed class InstallerForm : Form
         var licI = MakePanel(1, 1, 728, 48, CARD);
         licO.Controls.Add(licI);
         licI.Controls.Add(MakeLabel(
-            T("الرخصة: GPL-3.0  ·  المصدر الرسمي فقط: github.com/LOSTSTR/Esharq",
-              "License: GPL-3.0  ·  Official source only: github.com/LOSTSTR/Esharq"),
+            T("الرخصة: GPL-3.0  ·  المصدر الرسمي فقط: github.com/o9ll/nun",
+              "License: GPL-3.0  ·  Official source only: github.com/o9ll/nun"),
             30, 14, TEXT_MUTED, 9f, FontStyle.Regular, licI));
 
         return c;
@@ -984,7 +981,7 @@ sealed class InstallerForm : Form
         if (_btnInstall == null) return;
         if (Logic.IsInstalled)
         {
-            _btnInstall.Text      = T("تحديث Esharq  ↑", "Update Esharq  ↑");
+            _btnInstall.Text      = T("تحديث Nun  ↑", "Update Nun  ↑");
             _btnInstall.BackColor = BLUE;
             _btnInstall.FlatAppearance.MouseOverBackColor = Color.FromArgb(110, 120, 250);
         }
@@ -1055,7 +1052,7 @@ sealed class InstallerForm : Form
     {
         string t; if (!TryGetTarget(out t)) return;
         if (MessageBox.Show(this,
-                T("هل تريد إزالة Esharq بالكامل؟", "Are you sure you want to completely uninstall Esharq?"),
+                T("هل تريد إزالة Nun بالكامل؟", "Are you sure you want to completely uninstall Nun?"),
                 T("تأكيد", "Confirm"),
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
         if (!ConfirmKill(t)) return;
@@ -1234,7 +1231,7 @@ static class Program
             try
             {
                 File.WriteAllText(
-                    Path.Combine(Path.GetTempPath(), "esharq_crash.txt"),
+                    Path.Combine(Path.GetTempPath(), "nun_crash.txt"),
                     string.Format("[{0}] {1}: {2}",
                         DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                         ex.Exception.GetType().Name,
@@ -1242,7 +1239,7 @@ static class Program
             }
             catch { }
             MessageBox.Show("خطأ:\n" + ex.Exception.Message,
-                "Esharq", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                "Nun", MessageBoxButtons.OK, MessageBoxIcon.Error);
         };
 
         try { SetProcessDPIAware(); } catch { }

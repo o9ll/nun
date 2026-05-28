@@ -18,7 +18,7 @@
 
 import { MessageObject } from "@api/MessageEvents";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 
 export default definePlugin({

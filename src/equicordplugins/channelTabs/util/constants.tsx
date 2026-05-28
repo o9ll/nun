@@ -9,7 +9,7 @@ import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { ChannelTabsPreview } from "@equicordplugins/channelTabs/components/ChannelTabsContainer";
 import { KeybindSettings } from "@equicordplugins/channelTabs/components/KeybindSettings";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Logger } from "@utils/Logger";
 import { makeRange, OptionType } from "@utils/types";
 import { SearchableSelect, useState } from "@webpack/common";
@@ -22,7 +22,7 @@ interface DynamicDropdownSettingOption {
 }
 
 function AnimationSettings(): JSX.Element {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
     const animationOptions: DynamicDropdownSettingOption[] = [
         { label: t("تأثيرات التمرير فوق التبويب (رفع + تكبير)", "Tab hover effects (lift + scale)"), value: "hover", selected: settings.store.animationHover },
         { label: t("حركة رفع التبويب المحدد", "Selected tab lift animation"), value: "selection", selected: settings.store.animationSelection },

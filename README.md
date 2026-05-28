@@ -1,23 +1,20 @@
 <div align="center">
 
-<kbd>**العربية**</kbd> &nbsp;|&nbsp; <kbd>[English](README.en.md)</kbd>
+<kbd>[العربية](README.md)</kbd> &nbsp;|&nbsp; <kbd>**English**</kbd>
 
 ---
 
-# [<img src="./browser/icon.png" width="45" align="center" alt="Esharq">](https://github.com/LOSTSTR/Esharq) Esharq
+# [<img src="./browser/icon.png" width="45" align="center" alt="Nun">](https://github.com/o9ll/nun) Nun
 
-### النسخة العربية المطورة من Equicord
-
-**تجربة ديسكورد فائقة الأداء، بتخصيصات حصرية من تطوير**
-**LOSTSTR و krym511 و 𝚁𝙰𝚈𝙼𝙾𝙽𝙳♞ و Abo Ahmed و S99 و iosiph و .fmo**
+### The Enhanced Discord Client Mod
 
 ---
 
-[![GitHub Release](https://img.shields.io/github/v/release/LOSTSTR/Esharq?style=flat&color=5865F2&label=إصدار)](https://github.com/LOSTSTR/Esharq/releases/latest)
-[![Tests](https://github.com/LOSTSTR/Esharq/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/LOSTSTR/Esharq/actions/workflows/test.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/o9ll/nun?style=flat&color=5865F2&label=Release)](https://github.com/o9ll/nun/releases/latest)
+[![Tests](https://github.com/o9ll/nun/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/o9ll/nun/actions/workflows/test.yml)
 [![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/QamdqDNEDa)
-[![License](https://img.shields.io/github/license/LOSTSTR/Esharq?color=green&label=رخصة)](LICENSE)
-[![Security Verified](https://img.shields.io/badge/security-verified-brightgreen?style=flat&logo=shield&logoColor=white)](https://github.com/LOSTSTR/Esharq)
+[![License](https://img.shields.io/github/license/o9ll/nun?color=green&label=License)](LICENSE)
+[![Security Verified](https://img.shields.io/badge/security-verified-brightgreen?style=flat&logo=shield&logoColor=white)](https://github.com/o9ll/nun)
 
 </div>
 
@@ -31,20 +28,20 @@
 
 <br>
 
-### ☕ هل أعجبك المشروع؟ ادعمني للاستمرار
+### ☕ Like the project? Support its development
 
 <br>
 
-**إذا أردتَ مني الاستمرار في التطوير وإضافة المزيد من الميزات،**
-**فلا تنسَ دعمي بأي مبلغ تراه مناسباً — حتى أصغر مساهمة تُحدث فرقاً كبيراً** 🙏
+**If you'd like to keep the development going and see more features added,**  
+**consider supporting me with any amount — even the smallest contribution makes a big difference** 🙏
 
 <br>
 
-[![Ko-fi](https://img.shields.io/badge/☕%20ادعم%20عبر%20Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white&labelColor=1a1a1a)](https://ko-fi.com/loststr)
+[![Ko-fi](https://img.shields.io/badge/☕%20Support%20on%20Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white&labelColor=1a1a1a)](https://ko-fi.com/o99)
 
 <br>
 
-> 💡 دعمكم هو الوقود الذي يُبقي هذا المشروع حياً ويدفعني نحو التحسين المستمر
+> 💡 Your support is the fuel that keeps this project alive and drives continuous improvement
 
 <br>
 
@@ -56,242 +53,218 @@
 
 ---
 
-### 🌟 أبرز الإضافات المدمجة والمطوّرة (Featured Plugins)
+## ✨ Featured Plugins
 
-* **NitroSniper**
-  * *صيد النيترو التلقائي:* أداة فائقة السرعة تقوم بفحص الرسائل في جميع القنوات فوراً والمطالبة بأي كود هدايا (Nitro) يتم مشاركته قبل أي شخص آخر.
-* **fakeDeafen**
-  * *التزييف الذكي:* تتيح لك إظهار أنك قمت بكتم الصوت والمايكروفون (Deafen) داخل الروم الصوتي لأعضاء السيرفر، بينما يمكنك في الحقيقة الاستماع لكل ما يقال بوضوح.
-* **messageBookmarks**
-  * *حفظ الرسائل المفضلة:* نظام إشارات مرجعية محلي يتيح لك حفظ رسائلك المهمة أو الأكواد البرمجية للرجوع إليها لاحقاً بضغطة زر دون الحاجة لعمل Pin في السيرفر.
-* **betterAudioPlayer**
-  * *مشغّل صوتي متطور:* تحسين هندسة الصوت داخل الكلاينت لتفعيل جودة الـ Stereo الحقيقية، مع لوحة تحكم مدمجة ومعالجة متطورة لترددات الصوت أثناء الاستماع.
-* **messageLoggerEnhanced**
-  * *سجل الرسائل المطور:* تتبّع الرسائل والمرفقات المحذوفة والمعدلة داخل الرومات مع إدارة ذكية جداً للذاكرة تمنع بطء التطبيق أثناء الجلسات الطويلة.
-* **BigFileUploadEnhanced**
-  * *الرفع الخارجي غير المحدود:* تتيح لك رفع الملفات الكبيرة لتتجاوز قيود ديسكورد الرسمية عبر خيارات متعددة ومعرّبة بالكامل (مثل Catbox و Litterbox) وتعمل بكفاءة على المتصفح وتطبيق سطح المكتب.
-* **MessageInsight**
-  * *تحليل الرسائل المتقدم:* مجموعة أدوات ثلاثية — مقارنة التعديلات بالكلمات (EditDiff) تُظهر ما تغيّر في الرسالة بعد تعديلها، وشجرة الردود (ReplyTree) تعرض جميع الردود على رسالة معينة مع إمكانية الانتقال إليها، وملخص القناة (ChannelBrief) يُعلمك بعدد الرسائل الجديدة عند عودتك بعد غياب.
-* **MessageBookmarks**
-  * *الإشارات المرجعية الخاصة:* احفظ أي رسالة كإشارة مرجعية خاصة (بخلاف Pin التي تظهر للجميع)، وصنّفها إلى عام أو مهم أو لاحقاً، وابحث فيها، وانتقل إليها بنقرة واحدة — كل شيء محفوظ محلياً.
+| Plugin | Description |
+|--------|-------------|
+| **NitroSniper** | Ultra-fast Nitro gift code claimer — scans every channel in real time and redeems codes before anyone else. |
+| **FakeDeafen** | Smart spoofing — appear deafened to other server members while still hearing everything perfectly. |
+| **MessageBookmarks** | Local bookmark system — save important messages or code snippets and jump back to them with a single click, no server pins needed. |
+| **BetterAudioPlayer** | Enhanced audio engine — enables true stereo quality with a built-in control panel and advanced frequency processing. |
+| **MessageLoggerEnhanced** | Advanced message logger — tracks deleted and edited messages and attachments with smart memory management to prevent slowdowns during long sessions. |
+| **BigFileUploadEnhanced** | Unlimited external upload — bypass Discord's upload limit via multiple hosting options (Catbox, Litterbox, and more), fully localized, works on both browser and desktop. |
+| **MessageInsight** | Three-in-one message analysis toolkit: **EditDiff** shows a word-level diff of every edit a message went through; **ReplyTree** lists all loaded replies to any message with one-click jump navigation; **ChannelBrief** notifies you how many new messages arrived while you were away from a channel. |
+| **MessageBookmarks** | Private message bookmarks — save any message to a personal list (unlike server Pins, only you can see these), categorize them as General / Important / Later, search across all saved messages, and jump back with one click. Stored locally. |
 
 ---
 
-## 📖 عن المشروع
+## 📖 About
 
-**Esharq** هي النسخة العربية المطورة من [Equicord](https://github.com/Equicord/Equicord)، وهو بدوره مشتق من [Vencord](https://github.com/Vendicated/Vencord).
+**Nun** is the Enhanced distribution of [Equicord](https://github.com/Equicord/Equicord), which is itself a fork of [Vencord](https://github.com/Vendicated/Vencord).
 
-تتميز هذه النسخة بـ:
+### What sets Nun apart
 
-- ⚡ **أداء فائق وسلاسة تامة** — تحسينات مخصصة لتجربة أسرع وأخف
-- 🌐 **تعريب شامل** — جميع أوصاف الإضافات (300+) مترجمة للعربية
-- 🔧 **تخصيصات حصرية** — إضافات وتعديلات من تطوير الفريق لا تجدها في غيرها
-- 🧩 **أكثر من 300 إضافة** — جميع إضافات Equicord الأصلية مع إضافات عربية حصرية
-- 🔒 **أمان مُحقَّق** — فحص أمني شامل وصفر ثغرات في التبعيات
-- 🔄 **تحديثات مستمرة** — مزامنة دورية مع المصدر الأصلي مع تطبيق التحسينات
-
-للتواصل والدعم، انضم إلى سيرفر الديسكورد: **[discord.gg/QamdqDNEDa](https://discord.gg/QamdqDNEDa)**
+- ⚡ **Superior performance** — custom optimizations for a faster, lighter experience
+- 🌐 **Full localization** — all 300+ plugin descriptions translated; switch languages instantly in settings
+- 🔧 **Customizations** — plugins and tweaks from our team you won't find anywhere else
+- 🧩 **300+ plugins** — all original Equicord plugins plus exclusive additions
+- 🔒 **Security verified** — comprehensive security audit with zero dependency vulnerabilities
+- 🔄 **Continuously updated** — daily upstream sync with Equicord, always staying current
 
 ---
 
-## 👥 فريق المشروع
+## 📥 Installation
 
-| العضو | الدور |
-|-------|-------|
-| **LOSTSTR** | مطور رئيسي — بناء المشروع وإدارته |
-| **krym511** | داعم رئيسي — دعم ومساهمة في التطوير |
-| **iosiph** | مساهم في التطوير |
-| **𝚁𝙰𝚈𝙼𝙾𝙽𝙳♞** | مساهم في التطوير |
-| **Abo Ahmed** | مساهم في التطوير |
-| **S99** | مساهم في التطوير |
-| **.fmo** | مساهم في التطوير |
+### Supported Platforms
 
----
+| Platform | Method | Download |
+|----------|--------|----------|
+| 🪟 **Windows** | GUI Installer | [![Windows Setup](https://img.shields.io/badge/Windows-NunSetup.exe-0078D4?style=flat&logo=windows&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/NunSetup.exe) |
+| 🍎 **macOS** | Apple Silicon & Intel | [![macOS Script](https://img.shields.io/badge/macOS-Shell_Script-000000?style=flat&logo=apple&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/install-macos.sh) |
+| 🐧 **Linux** | Automated CLI script | [![Linux Script](https://img.shields.io/badge/Linux-Shell_Script-FCC624?style=flat&logo=linux&logoColor=black)](https://github.com/o9ll/nun/releases/latest/download/install-linux.sh) |
 
-## 📥 التثبيت
-
-### المنصات المدعومة
-
-| المنصة | الطريقة | التحميل |
-|--------|---------|---------|
-| 🪟 **Windows** | واجهة رسومية (GUI) | [![Windows Setup](https://img.shields.io/badge/Windows-EsharqSetup.exe-0078D4?style=flat&logo=windows&logoColor=white)](https://github.com/LOSTSTR/Esharq/releases/latest/download/EsharqSetup.exe) |
-| 🍎 **macOS** | Apple Silicon & Intel | [![macOS Script](https://img.shields.io/badge/macOS-Shell_Script-000000?style=flat&logo=apple&logoColor=white)](https://github.com/LOSTSTR/Esharq/releases/latest/download/install-macos.sh) |
-| 🐧 **Linux** | سكريبت تلقائي (CLI) | [![Linux Script](https://img.shields.io/badge/Linux-Shell_Script-FCC624?style=flat&logo=linux&logoColor=black)](https://github.com/LOSTSTR/Esharq/releases/latest/download/install-linux.sh) |
-
-> تجد جميع الإصدارات في صفحة [**Releases**](https://github.com/LOSTSTR/Esharq/releases).
+> All releases are available on the [**Releases**](https://github.com/o9ll/nun/releases) page.
 
 ---
 
 ### 🪟 Windows
 
-حمّل **EsharqSetup.exe** وشغّله — يكتشف Discord تلقائياً ويثبّت التعديل.
+Download **NunSetup.exe** and run it — it automatically detects Discord and applies the patch.
 
 ### 🍎 macOS — Apple Silicon & Intel
 
 ```bash
-curl -fsSL https://github.com/LOSTSTR/Esharq/releases/latest/download/install-macos.sh | bash
+curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-macos.sh | bash
 ```
 
-يكتشف السكريبت نوع المعالج (ARM64 / Intel) تلقائياً ويدعم جميع إصدارات Discord (Stable، PTB، Canary).
+The script auto-detects your processor (ARM64 / Intel) and supports all Discord variants (Stable, PTB, Canary).
 
 ### 🐧 Linux
 
 ```bash
-curl -fsSL https://github.com/LOSTSTR/Esharq/releases/latest/download/install-linux.sh | bash
+curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-linux.sh | bash
 ```
+
+Supports Ubuntu/Debian, Fedora/RHEL, Arch Linux, Flatpak, and Snap installations.
 
 ---
 
-## 🛠️ البناء من المصدر (Devbuild)
+## 🌐 Language Toggle
 
-### المتطلبات
+Nun ships with a built-in **language switch**.
+
+1. Open Discord **Settings → Nun**
+2. Toggle **"Mode"** on or off
+3. Plugin names and descriptions in the plugin list update instantly — no restart needed
+
+> When Mode is **off**, all plugin descriptions revert to English.  
+> Plugin option labels inside individual plugin modals follow the same setting.
+
+---
+
+## 🛠️ Building from Source (Devbuild)
+
+### Requirements
 
 - [Git](https://git-scm.com/download)
 - [Node.JS LTS](https://nodejs.dev/en/)
 
-### الخطوات
+### Steps
 
-**1. تثبيت pnpm**
+**1. Install pnpm**
 
-> قد يحتاج هذا الأمر صلاحيات المدير (admin/root). أغلق الطرفية وأعد فتحها بعد التثبيت.
+> This step may require admin/root privileges. Close and reopen your terminal after installing.
 
 ```shell
 npm i -g pnpm
 ```
 
-> ⚠️ **مهم:** لا تستخدم طرفية المدير في الخطوات التالية، فقد يؤدي ذلك إلى تلف تثبيت Discord.
+> ⚠️ **Important:** Do **not** use an elevated terminal for the following steps — it can corrupt your Discord installation.
 
-**2. استنساخ المستودع**
+**2. Clone the repository**
 
 ```shell
-git clone https://github.com/LOSTSTR/Esharq
-cd Esharq
+git clone https://github.com/o9ll/nun
+cd Nun
 ```
 
-**3. تثبيت التبعيات**
+**3. Install dependencies**
 
 ```shell
 pnpm install --frozen-lockfile
 ```
 
-**4. بناء المشروع**
+**4. Build**
 
 ```shell
 pnpm build
 ```
 
-**5. حقن Esharq في Discord**
+**5. Inject Nun into Discord**
 
 ```shell
 pnpm inject
 ```
 
-**6. بناء نسخة الويب (اختياري)**
+**6. Build the web extension (optional)**
 
 ```shell
 pnpm buildWeb
 ```
 
-بعد البناء، ابحث عن ملف ZIP في مجلد `dist` وثبّت الامتداد في متصفحك.
+After building, find the ZIP file in the `dist` folder and load it as an extension in your browser.
 
-> ملاحظة: امتداد Firefox يتطلب [Firefox for Developers](https://www.mozilla.org/en-US/firefox/developer/).
+> Note: The Firefox extension requires [Firefox for Developers](https://www.mozilla.org/en-US/firefox/developer/).
 
 ---
 
-## 💝 شكر خاص
+## Support
 
 <div align="center">
 
-### شكر خاص لـ krym511
-
-شكراً جزيلاً لـ **krym511** على دعمه المتواصل لهذا المشروع منذ البداية.
-دعمه وإيمانه بهذا المشروع كان له دور كبير في استمراره وتطوره.
-هذا المشروع لم يكن ليصل لما وصل إليه بدونك، شكراً يا صديق. 🙌
+[![Ko-fi](https://img.shields.io/badge/☕%20Support%20on%20Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white&labelColor=1a1a1a)](https://ko-fi.com/o99)
 
 </div>
 
----
+If Nun has been useful to you, you can support us by:
 
-## ❤️ دعم المشروع
+- ☕ **Donating** via [Ko-fi](https://ko-fi.com/o99) — helps fund continued development
+- ⭐ **Starring** the repository on GitHub
+- 📢 **Sharing** the project with friends
+- 💬 **Joining** the Discord server and contributing: **[discord.gg/QamdqDNEDa](https://discord.gg/QamdqDNEDa)**
+- 🐛 **Reporting** bugs or suggestions via [Issues](https://github.com/o9ll/nun/issues)
 
-<div align="center">
-
-[![Ko-fi](https://img.shields.io/badge/☕%20ادعم%20عبر%20Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white&labelColor=1a1a1a)](https://ko-fi.com/loststr)
-
-</div>
-
-إذا أعجبك المشروع وأفادك، يمكنك دعمنا بـ:
-
-- ☕ **التبرع بأي مبلغ** عبر [Ko-fi](https://ko-fi.com/loststr) — يساعدني على الاستمرار في التطوير
-- ⭐ **Star** للمستودع على GitHub
-- 📢 مشاركة المشروع مع أصدقائك
-- 💬 الانضمام لسيرفر الديسكورد والمساهمة في التطوير: **[discord.gg/QamdqDNEDa](https://discord.gg/QamdqDNEDa)**
-- 🐛 الإبلاغ عن أي مشكلة أو اقتراح عبر [Issues](https://github.com/LOSTSTR/Esharq/issues)
-
-دعمكم هو ما يجعلنا نستمر في تطوير وتحسين هذا المشروع! 💪
+Your support is what keeps this project alive and improving! 💪
 
 ---
 
-## 🙏 شكر وتقدير
+## 🙏 Acknowledgements
 
-- [Vendicated](https://github.com/Vendicated) — لإنشاء [Vencord](https://github.com/Vendicated/Vencord)
-- [Equicord Team](https://github.com/Equicord) — لبناء [Equicord](https://github.com/Equicord/Equicord) فوق Vencord
-- [verticalsync](https://github.com/verticalsync) — لإنشاء [Suncord](https://github.com/verticalsync/Suncord)
+- [Vendicated](https://github.com/Vendicated) — for creating [Vencord](https://github.com/Vendicated/Vencord)
+- [Equicord Team](https://github.com/Equicord) — for building [Equicord](https://github.com/Equicord/Equicord) on top of Vencord
+- [verticalsync](https://github.com/verticalsync) — for creating [Suncord](https://github.com/verticalsync/Suncord)
 
 ---
 
 ## 📊 Star History
 
-<a href="https://star-history.com/#LOSTSTR/Esharq&Timeline">
+<a href="https://star-history.com/#o9ll/nun&Timeline">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=LOSTSTR/Esharq&type=Timeline&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=LOSTSTR/Esharq&type=Timeline" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=LOSTSTR/Esharq&type=Timeline" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline" />
   </picture>
 </a>
 
 ---
 
-## ⚠️ إخلاء المسؤولية
+## ⚠️ Disclaimer
 
-Discord هي علامة تجارية مسجلة لشركة Discord Inc.، ولا يُعدّ هذا المشروع تابعاً لها أو معتمداً منها.
+Discord is a registered trademark of Discord Inc. This project is not affiliated with or endorsed by Discord Inc.
 
 <details>
-<summary>استخدام Esharq ينتهك شروط خدمة Discord</summary>
+<summary>Using Nun violates Discord's Terms of Service</summary>
 
-تعديلات العميل (Client modifications) تتعارض مع شروط خدمة Discord.
+Client modifications conflict with Discord's Terms of Service.
 
-غير أن Discord لا تتخذ إجراءات صارمة ضد مستخدمي تعديلات العميل في الغالب، ولا توجد حالات موثقة لحظر حسابات بسبب ذلك طالما لا تُستخدم إضافات ذات سلوك مسيء.
+However, Discord does not typically take strict action against users of client modifications, and there are no documented cases of account bans for this reason alone — as long as abusive plugins are not used.
 
-إذا كان حسابك بالغ الأهمية بالنسبة لك، فالأفضل تجنب جميع تعديلات العميل احتياطاً.
+If your account is critically important to you, it's safest to avoid all client modifications as a precaution.
 
 </details>
 
 ---
 
-## 📜 Credits & License | الحقوق والترخيص
+## 📜 Credits & License
 
 > [!IMPORTANT]
-> **English:** This project is a fork of the original [Equicord](https://github.com/Equicord/Equicord) project. All credits for the core engine and framework belong to the original creators. This version is a specialized Arabic distribution managed by LOSTSTR under the name **Esharq**.
->
-> **العربية:** هذا المشروع هو اشتقاق (Fork) من مشروع [Equicord](https://github.com/Equicord/Equicord) الأصلي. كل الحقوق والتقدير للمحرك الأساسي تعود للمطورين الأصليين. هذه النسخة هي توزيعة عربية مخصصة تحت إدارة LOSTSTR بمشاركة الفريق: **krym511** و **𝚁𝙰𝚈𝙼𝙾𝙽𝙳♞** و **Abo Ahmed** و **S99** و **iosiph**.
+> This project is a fork of the original [Equicord](https://github.com/Equicord/Equicord) project. All credits for the core engine and framework belong to the original creators. This version is a specialized distribution managed by o9 under the name **Nun**.
 
-### Key Enhancements in this Version | التحسينات في هذه النسخة
+### Key enhancements in this version
 
-- 🌍 **Full Arabic Localization** | تعريب كامل وشامل للواجهة
-- 🎨 **Modern UI/UX Redesign** | إعادة تصميم الواجهة بشكل عصري واحترافي
-- 🛡️ **Security & Metadata Optimizations** | تحسينات أمنية وإضافة البيانات الوصفية الرسمية
-- 🤝 **Dedicated Arabic Support** | دعم فني مخصص للمجتمع العربي
+- 🌍 **Full localization** — instant language switching in settings
+- 🎨 **Modern UI/UX** — clean, professional redesign
+- 🛡️ **Security & metadata optimizations** — hardened dependency chain
 
-**Maintained by:** [LOSTSTR](https://github.com/LOSTSTR)  
-**Original Project:** [Equicord](https://github.com/Equicord/Equicord)
+**Maintained by:** [o9](https://github.com/o9ll)  
+**Original project:** [Equicord](https://github.com/Equicord/Equicord)
 
 ---
 
 <div align="center">
 
-**Esharq** • Made with ❤️ by LOSTSTR & Team • [GPL-3.0 License](LICENSE)
+**Nun** • Made with ❤️ by o9 • [GPL-3.0 License](LICENSE)
 
-[⬆ العودة للأعلى](#)
+[⬆ Back to top](#)
 
 </div>

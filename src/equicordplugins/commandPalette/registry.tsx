@@ -12,7 +12,7 @@ import { HeadphonesIcon } from "@components/Icons";
 import { openPluginModal } from "@components/settings/tabs";
 import { toggleEnabled } from "@equicordplugins/equicordHelper/utils";
 import { copyWithToast } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Logger } from "@utils/Logger";
 import type { Plugin } from "@utils/types";
 import { changes, checkForUpdates } from "@utils/updater";

@@ -36,7 +36,7 @@ const defines = stringifyValues({
     IS_WEB: false,
     IS_EXTENSION: false,
     IS_USERSCRIPT: false,
-    IS_EQUICORD_ARABIC: true,
+    IS_NUNAR: true,
     VERSION,
     BUILD_TIMESTAMP
 });

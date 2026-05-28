@@ -2,17 +2,17 @@
     "name": "equicord",
     "private": "true",
     "version": "1.14.13.1",
-    "description": "Esharq — The Arabic Discord client mod",
-    "homepage": "https://github.com/LOSTSTR/Esharq#readme",
+    "description": "Nun — The Discord client mod",
+    "homepage": "https://github.com/o9ll/nun#readme",
     "bugs": {
-        "url": "https://github.com/LOSTSTR/Esharq/issues"
+        "url": "https://github.com/o9ll/nun/issues"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/LOSTSTR/Esharq.git"
+        "url": "git+https://github.com/o9ll/nun.git"
     },
     "license": "GPL-3.0-or-later",
-    "author": "LOSTSTR <noreply@github.com>",
+    "author": "o9 <noreply@github.com>",
     "scripts": {
         "build": "pnpm depCheck && node --require=./scripts/suppressExperimentalWarnings.js scripts/build/build.mjs",
         "buildStandalone": "pnpm build --standalone",

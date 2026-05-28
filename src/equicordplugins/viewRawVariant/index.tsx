@@ -11,11 +11,11 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Margins } from "@utils/margins";
 import definePlugin from "@utils/types";
 import { Message } from "@vencord/discord-types";
-import { Menu, Modal,openModal } from "@webpack/common";
+import { Menu, Modal, openModal } from "@webpack/common";
 
 type CustomMessage = Message & {
     editHistory?: any;

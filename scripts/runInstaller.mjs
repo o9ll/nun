@@ -25,9 +25,9 @@ import { Readable } from "stream";
 import { finished } from "stream/promises";
 import { fileURLToPath } from "url";
 
-// Esharq: download the dev-install CLI from our own fork's releases.
+// Nun: download the dev-install CLI from our own fork's releases.
 // Falls back to the upstream Equilotl release if no asset is found on our repo.
-const BASE_URL = "https://github.com/LOSTSTR/Esharq/releases/latest/download/";
+const BASE_URL = "https://github.com/o9ll/nun/releases/latest/download/";
 const FALLBACK_URL = "https://github.com/Equicord/Equilotl/releases/latest/download/";
 const INSTALLER_PATH_DARWIN = "Equilotl.app/Contents/MacOS/Equilotl";
 const INSTALLER_APP_DARWIN = "Equilotl.app";
@@ -77,7 +77,7 @@ async function ensureBinary() {
     // Try our fork's releases first, then fall back to upstream Equilotl
     let res = await fetch(BASE_URL + filename, {
         headers: {
-            "User-Agent": "Esharq (https://github.com/LOSTSTR/Esharq)",
+            "User-Agent": "Nun (https://github.com/o9ll/nun)",
             "If-None-Match": etag
         }
     });
@@ -85,7 +85,7 @@ async function ensureBinary() {
     if (!res.ok && res.status === 404) {
         res = await fetch(FALLBACK_URL + filename, {
             headers: {
-                "User-Agent": "Esharq (https://github.com/LOSTSTR/Esharq)",
+                "User-Agent": "Nun (https://github.com/o9ll/nun)",
                 "If-None-Match": etag
             }
         });

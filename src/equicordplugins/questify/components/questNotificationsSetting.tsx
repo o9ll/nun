@@ -6,7 +6,7 @@
 
 import { type AudioPlayerInterface, createAudioPlayer, defaultAudioNames } from "@api/AudioPlayer";
 import { useSettings } from "@api/Settings";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { useEffect, useMemo, useRef, useState } from "@webpack/common";
 import type { JSX, MouseEvent } from "react";
 
@@ -141,7 +141,7 @@ function QuestNotificationSoundSelect({
 }
 
 export function QuestNotificationsSetting(): JSX.Element {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
 
     const questNotifications = useQuestifySettings([
         "newExcludedQuestAlertSound",
@@ -283,9 +283,9 @@ export function QuestNotificationsSetting(): JSX.Element {
                     position: "top",
                     text: t(
                         "بعض المهام مستبعدة من قائمتك بسبب قيود المنطقة أو المنصة."
-                            + "\n\nعند التمكين، ستجلب Questify إعداداتها، وتطبق فلاتر المهام والمكافآت، وتطبع البيانات في وحدة التحكم، وتعرض إشعاراً منفصلاً للمهام المستبعدة المطابقة.",
+                        + "\n\nعند التمكين، ستجلب Questify إعداداتها، وتطبق فلاتر المهام والمكافآت، وتطبع البيانات في وحدة التحكم، وتعرض إشعاراً منفصلاً للمهام المستبعدة المطابقة.",
                         "Some quests are excluded from your list due to region or platform restrictions."
-                            + "\n\nWhen enabled, Questify will fetch their settings, apply quest and reward filters, print data to the console, and show a separate notification for matching excluded quests."
+                        + "\n\nWhen enabled, Questify will fetch their settings, apply quest and reward filters, print data to the console, and show a separate notification for matching excluded quests."
                     )
                 }}
             />
@@ -306,9 +306,9 @@ export function QuestNotificationsSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "بعض المهام مستبعدة من قائمتك بسبب قيود المنطقة أو المنصة."
-                                    + "\n\nعند اختيار صوت، ستجلب Questify إعداداتها وتشغّل هذا الصوت للمهام المستبعدة المطابقة.",
+                                + "\n\nعند اختيار صوت، ستجلب Questify إعداداتها وتشغّل هذا الصوت للمهام المستبعدة المطابقة.",
                                 "Some quests are excluded from your list due to region or platform restrictions."
-                                    + "\n\nWhen a sound is selected, Questify will fetch their settings and play this sound for matching excluded quests."
+                                + "\n\nWhen a sound is selected, Questify will fetch their settings and play this sound for matching excluded quests."
                             )
                         }}
                     />
@@ -341,11 +341,11 @@ export function QuestNotificationsSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "يجلب Discord المهام عند التحميل وعند زيارة صفحة المهام فقط."
-                                    + "\n\nتجلب هذه الفترة المهام بشكل دوري بينما يظل العميل مفتوحاً، لتبقى مؤشرات زر المهام وتنبيهات المهام الجديدة محدَّثة طوال اليوم."
-                                    + "\n\nلا تعمل إلا إذا كانت إعدادات زر المهام أو إشعاراتها تستوجب الجلب الدوري.",
+                                + "\n\nتجلب هذه الفترة المهام بشكل دوري بينما يظل العميل مفتوحاً، لتبقى مؤشرات زر المهام وتنبيهات المهام الجديدة محدَّثة طوال اليوم."
+                                + "\n\nلا تعمل إلا إذا كانت إعدادات زر المهام أو إشعاراتها تستوجب الجلب الدوري.",
                                 "Discord only fetches quests on load and when visiting the quests page."
-                                    + "\n\nThis interval fetches quests periodically while the client is open, keeping quest button indicators and new quest alerts up to date throughout the day."
-                                    + "\n\nOnly works if quest button or notification settings require periodic fetching."
+                                + "\n\nThis interval fetches quests periodically while the client is open, keeping quest button indicators and new quest alerts up to date throughout the day."
+                                + "\n\nOnly works if quest button or notification settings require periodic fetching."
                             )
                         }}
                     />

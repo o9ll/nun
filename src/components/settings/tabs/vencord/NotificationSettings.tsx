@@ -12,21 +12,21 @@ import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
 import { Modal, openModal, Select, Slider } from "@webpack/common";
 
 export function NotificationSection() {
-    const { plugins: { Settings: { arabicMode } } } = useSettings(["plugins.Settings.arabicMode"]);
-    void arabicMode;
+    const { plugins: { Settings: { nunM } } } = useSettings(["plugins.Settings.nunM"]);
+    void nunM;
     return (
         <section className={Margins.top16}>
             <Heading>{t("الإشعارات", "Notifications")}</Heading>
             <Paragraph className={Margins.bottom8}>
                 {t(
-                    "إعدادات الإشعارات الصادرة من Esharq. لا تشمل إشعارات Discord العادية (الرسائل وغيرها)",
-                    "Settings for Esharq notifications. This does not include regular Discord notifications (messages, etc.)"
+                    "إعدادات الإشعارات الصادرة من Nun. لا تشمل إشعارات Discord العادية (الرسائل وغيرها)",
+                    "Settings for Nun notifications. This does not include regular Discord notifications (messages, etc.)"
                 )}
             </Paragraph>
             <Flex>
@@ -54,7 +54,7 @@ export function openNotificationSettingsModal() {
 }
 
 function NotificationSettings() {
-    const settings = useSettings(["notifications.*", "plugins.Settings.arabicMode"]).notifications;
+    const settings = useSettings(["notifications.*", "plugins.Settings.nunM"]).notifications;
 
     return (
         <>
@@ -71,7 +71,7 @@ function NotificationSettings() {
                     "Some plugins may show notifications. These come in two types:"
                 )}
                 <ul>
-                    <li><strong>{t("إشعارات Esharq", "Esharq Notifications")}</strong>: {t("إشعارات داخل التطبيق", "in-app notifications")}</li>
+                    <li><strong>{t("إشعارات Nun", "Nun Notifications")}</strong>: {t("إشعارات داخل التطبيق", "in-app notifications")}</li>
                     <li><strong>{t("إشعارات سطح المكتب", "Desktop Notifications")}</strong>: {t("إشعارات سطح المكتب الأصلية (مثل إشعارات الإشارات)", "native desktop notifications (e.g. mention pings)")}</li>
                 </ul>
             </Paragraph>
@@ -80,7 +80,7 @@ function NotificationSettings() {
                 options={[
                     { label: t("استخدام إشعارات سطح المكتب فقط عند عدم التركيز على Discord", "Only use desktop notifications when not focused"), value: "not-focused", default: true },
                     { label: t("استخدام إشعارات سطح المكتب دائماً", "Always use desktop notifications"), value: "always" },
-                    { label: t("استخدام إشعارات Esharq دائماً", "Always use Esharq notifications"), value: "never" },
+                    { label: t("استخدام إشعارات Nun دائماً", "Always use Nun notifications"), value: "never" },
                 ] satisfies Array<{ value: typeof settings["useNative"]; } & Record<string, any>>}
                 closeOnSelect={true}
                 select={v => settings.useNative = v}

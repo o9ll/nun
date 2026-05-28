@@ -9,7 +9,7 @@ import "./style.css";
 import { InfoIcon } from "@components/Icons";
 import { Devs, EquicordDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { classes } from "@utils/misc";
 import definePlugin, { StartAt } from "@utils/types";
 import { Guild } from "@vencord/discord-types";

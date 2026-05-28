@@ -5,7 +5,7 @@
  */
 
 import { useSettings } from "@api/Settings";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import type { Quest } from "@vencord/discord-types";
 import { findComponentByCodeLazy } from "@webpack";
 import { QuestStore, useEffect, useMemo, useRef, useState, useStateFromStores } from "@webpack/common";
@@ -180,7 +180,7 @@ function DummyQuestPreview({
 }
 
 export function QuestTilesSetting(): JSX.Element {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
 
     const questTiles = useQuestifySettings([
         "disableQuestsEverything",
@@ -261,11 +261,11 @@ export function QuestTilesSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "المكثف والافتراضي يستخدمان لون البلاطة المختار في تدرج الصورة."
-                                    + "\n\nالأسود الخفيف يحافظ على تدرج محايد أغمق للتباين."
-                                    + "\n\nبدون تدرج يزيل التدرج، مما قد يجعل بعض صور المهام أصعب قراءةً.",
+                                + "\n\nالأسود الخفيف يحافظ على تدرج محايد أغمق للتباين."
+                                + "\n\nبدون تدرج يزيل التدرج، مما قد يجعل بعض صور المهام أصعب قراءةً.",
                                 "Intense and Default use the selected tile color in the image gradient."
-                                    + "\n\nSubtle black maintains a neutral darker gradient for contrast."
-                                    + "\n\nNo gradient removes the gradient, which may make some quest images harder to read."
+                                + "\n\nSubtle black maintains a neutral darker gradient for contrast."
+                                + "\n\nNo gradient removes the gradient, which may make some quest images harder to read."
                             )
                         }}
                     />
@@ -284,9 +284,9 @@ export function QuestTilesSetting(): JSX.Element {
                             position: "top",
                             text: t(
                                 "تحميل جميع الأصول عند فتح الصفحة يقلل من الاهتزاز أثناء التمرير."
-                                    + "\n\nالتحميل أثناء التمرير أقرب لسلوك Discord الافتراضي وقد يستهلك موارد أقل.",
+                                + "\n\nالتحميل أثناء التمرير أقرب لسلوك Discord الافتراضي وقد يستهلك موارد أقل.",
                                 "Preloading all assets when the page opens reduces jank while scrolling."
-                                    + "\n\nLoading assets while scrolling is closer to Discord's default behavior and may use fewer resources."
+                                + "\n\nLoading assets while scrolling is closer to Discord's default behavior and may use fewer resources."
                             )
                         }}
                     />

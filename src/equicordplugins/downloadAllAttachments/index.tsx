@@ -6,7 +6,7 @@
 
 import { CloudDownloadIcon } from "@components/Icons";
 import { EquicordDevs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Logger } from "@utils/Logger";
 import { pluralise } from "@utils/misc";
 import definePlugin from "@utils/types";

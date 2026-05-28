@@ -6,7 +6,7 @@
 
 import { Devs, EquicordDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { Embed } from "@vencord/discord-types";
 import { proxyLazyWebpack } from "@webpack";

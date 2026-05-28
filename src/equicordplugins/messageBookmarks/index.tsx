@@ -12,7 +12,7 @@ import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/Messag
 import { useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { EquicordDevs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { ChannelStore, Menu, openModal, React, showToast, Toasts } from "@webpack/common";
 
@@ -20,7 +20,7 @@ import { BookmarksModal } from "./BookmarksModal";
 import { bookmarksCache, clearCache, getBookmarks, saveBookmarks } from "./store";
 import type { Bookmark } from "./types";
 
-function BookmarkIcon({ width = 20, height = 20, ...props }: { width?: number | string; height?: number | string; className?: string; [key: string]: any; }) {
+function BookmarkIcon({ width = 20, height = 20, ...props }: { width?: number | string; height?: number | string; className?: string;[key: string]: any; }) {
     return (
         <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
@@ -29,7 +29,7 @@ function BookmarkIcon({ width = 20, height = 20, ...props }: { width?: number | 
 }
 
 function HeaderBarBookmarkButton() {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
     return (
         <HeaderBarButton
             icon={BookmarkIcon}
@@ -39,7 +39,7 @@ function HeaderBarBookmarkButton() {
     );
 }
 
-function BookmarkFilledIcon({ width = 20, height = 20, ...props }: { width?: number | string; height?: number | string; className?: string; [key: string]: any; }) {
+function BookmarkFilledIcon({ width = 20, height = 20, ...props }: { width?: number | string; height?: number | string; className?: string;[key: string]: any; }) {
     return (
         <svg width={width} height={height} viewBox="0 0 24 24" fill="currentColor" {...props}>
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
@@ -141,7 +141,7 @@ export default definePlugin({
         );
     },
     tags: ["Chat", "Utility"],
-    authors: [EquicordDevs.LOSTSTR, EquicordDevs.NRaymond],
+    authors: [EquicordDevs.o9],
     dependencies: ["MessagePopoverAPI", "HeaderBarAPI"],
     headerBarButton: {
         icon: BookmarkIcon,

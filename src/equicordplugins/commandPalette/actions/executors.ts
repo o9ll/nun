@@ -9,7 +9,7 @@ import { NotesIcon } from "@components/Icons";
 import { toggleEnabled } from "@equicordplugins/equicordHelper/utils";
 import type { ScheduledMessage } from "@equicordplugins/scheduledMessages/types";
 import { addScheduledMessage, getChannelDisplayInfo, getScheduledMessages, removeScheduledMessage, sendScheduledMessageNow, updateScheduledMessageTime } from "@equicordplugins/scheduledMessages/utils";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { sleep } from "@utils/misc";
 import { ChannelActionCreators, ChannelStore, NavigationRouter, SelectedChannelStore, Toasts, UserStore } from "@webpack/common";
 

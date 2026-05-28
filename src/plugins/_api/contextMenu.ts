@@ -17,7 +17,7 @@
 */
 
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { canonicalizeMatch } from "@utils/patches";
 import definePlugin from "@utils/types";
 import { Menu } from "@webpack/common";

@@ -12,7 +12,7 @@ import { InfoIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel, getCurrentGuild } from "@utils/discord";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { GuildMember } from "@vencord/discord-types";
 import { GuildMemberStore, GuildRoleStore, Menu, Parser } from "@webpack/common";

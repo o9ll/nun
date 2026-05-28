@@ -35,7 +35,7 @@ import { OnlineThemeCard } from "@components/settings/OnlineThemeCard";
 import { CspBlockedUrls, useCspErrors } from "@utils/cspViolations";
 import { classNameFactory } from "@utils/css";
 import { copyWithToast, openInviteModal } from "@utils/discord";
-import { isArabicMode, t } from "@utils/esharqI18n";
+import { isNunMode, t } from "@utils/nunM";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { relaunch, showItemInFolder } from "@utils/native";
@@ -45,7 +45,7 @@ import { getThemeInfo, stripBOM, type UserThemeHeader } from "@utils/themes/bd";
 import { usercssParse } from "@utils/themes/usercss";
 import { getStylusWebStoreUrl } from "@utils/web";
 import { findComponentByCodeLazy, findLazy } from "@webpack";
-import { Alerts, Menu, openModal,React, Select, showToast, TextInput, Toasts, Tooltip, useEffect, useMemo, useState } from "@webpack/common";
+import { Alerts, Menu, openModal, React, Select, showToast, TextInput, Toasts, Tooltip, useEffect, useMemo, useState } from "@webpack/common";
 import { ContextMenuApi } from "@webpack/common/menu";
 import type { ComponentType, Ref, SyntheticEvent } from "react";
 import type { UserstyleHeader } from "usercss-meta";
@@ -478,7 +478,7 @@ interface UnifiedTheme {
 }
 
 function ThemesTab() {
-    const settings = useSettings(["themeLinks", "enabledThemeLinks", "enabledThemes", "enableOnlineThemes", "pinnedThemes", "themeActivationModes.*", "plugins.Settings.arabicMode"]);
+    const settings = useSettings(["themeLinks", "enabledThemeLinks", "enabledThemes", "enableOnlineThemes", "pinnedThemes", "themeActivationModes.*", "plugins.Settings.nunM"]);
 
     const filterOptions = [
         { label: t("عرض الكل", "Show All"), value: ThemeFilter.All },
@@ -876,7 +876,7 @@ function ThemesTab() {
             />
 
             <Notice.Info className={Margins.bottom16} style={{ width: "100%" }}>
-                {isArabicMode()
+                {isNunMode()
                     ? <>تبحث عن قوالب؟ تفقد <Link href="https://betterdiscord.app/themes">قوالب BetterDiscord</Link> أو ابحث على <Link href="https://github.com/search?q=discord+theme">GitHub</Link>.</>
                     : <>Looking for themes? Check out <Link href="https://betterdiscord.app/themes">BetterDiscord Themes</Link> or search on <Link href="https://github.com/search?q=discord+theme">GitHub</Link>.</>
                 }

@@ -10,7 +10,7 @@ import { get, set } from "@api/DataStore";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { EquicordDevs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { useTimer } from "@utils/react";
 import definePlugin from "@utils/types";
 import { VoiceState } from "@vencord/discord-types";

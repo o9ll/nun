@@ -9,7 +9,7 @@ import * as DataStore from "@api/DataStore";
 import type { Bookmark } from "./types";
 
 // Same key as the previous userplugins version to preserve existing bookmarks
-const STORE_KEY = "LoststrHeart_bookmarks";
+const STORE_KEY = "NunHeart_bookmarks";
 export let bookmarksCache: Bookmark[] | null = null;
 
 export async function getBookmarks(): Promise<Bookmark[]> {

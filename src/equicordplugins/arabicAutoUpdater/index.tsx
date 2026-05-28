@@ -6,18 +6,18 @@
 
 import * as DataStore from "@api/DataStore";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
 import { Alerts } from "@webpack/common";
 
 import gitHash from "~git-hash";
 
-const logger = new Logger("ArabicAutoUpdater");
-const REPO = "LOSTSTR/Esharq";
+const logger = new Logger("NunAutoUpdater");
+const REPO = "o9ll/nun";
 const RELEASES_PAGE = `https://github.com/${REPO}/releases/latest`;
 const API_URL = `https://api.github.com/repos/${REPO}/releases/latest`;
-const SEEN_KEY = "esharq-last-seen-update";
+const SEEN_KEY = "nun-last-seen-update";
 
 let checked = false;
 
@@ -52,7 +52,7 @@ async function checkForUpdate() {
             title: t("تحديث جديد متاح!", "New update available!"),
             body: (
                 <>
-                    <p>{t("يتوفر إصدار جديد من", "A new version of")} <strong>Esharq</strong>{t(" متاح.", " is available.")}</p>
+                    <p>{t("يتوفر إصدار جديد من", "A new version of")} <strong>Nun</strong>{t(" متاح.", " is available.")}</p>
                     <p>{t("الإصدار الحالي:", "Current version:")} <code>{gitHash.slice(0, 7)}</code></p>
                     <p>{t("الإصدار الجديد:", "New version:")} <code>{remoteHash}</code></p>
                     <p>{t("هل تريد التحديث الآن؟", "Do you want to update now?")}</p>
@@ -70,8 +70,8 @@ async function checkForUpdate() {
 }
 
 export default definePlugin({
-    name: "ArabicAutoUpdater",
-    get description() { return t("يتحقق تلقائياً من توفر تحديثات لـ Esharq ويُعلمك عند توفر إصدار جديد", "Automatically checks for Esharq updates and notifies you when a new version is available"); },
+    name: "NunAutoUpdater",
+    get description() { return t("يتحقق تلقائياً من توفر تحديثات لـ Nun ويُعلمك عند توفر إصدار جديد", "Automatically checks for Nun updates and notifies you when a new version is available"); },
     authors: [Devs.thororen],
     tags: ["Utility"],
 

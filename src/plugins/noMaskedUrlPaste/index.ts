@@ -5,7 +5,7 @@
  */
 
 import { Devs } from "@utils/constants.js";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 
 export default definePlugin({

@@ -24,5 +24,5 @@ function scanDir(dir) {
 }
 
 scanDir('src');
-writeFileSync('scripts/arabic_descriptions.json', JSON.stringify(results, null, 2));
-console.log(`Saved ${Object.keys(results).length} Arabic descriptions`);
+writeFileSync('scripts/nunInfo.json', JSON.stringify(results, null, 2));
+console.log(`Saved ${Object.keys(results).length} Nun Info`);

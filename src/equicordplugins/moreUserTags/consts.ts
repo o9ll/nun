@@ -7,7 +7,7 @@
 import { Channel, Guild, Message, RC, User } from "@vencord/discord-types";
 import { findByCodeLazy, findLazy } from "@webpack";
 import { GuildStore } from "@webpack/common";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 
 import { settings } from "./settings";
 import type { ITag } from "./types";

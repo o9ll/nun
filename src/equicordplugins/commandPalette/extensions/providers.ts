@@ -5,7 +5,7 @@
  */
 
 import { SettingsStore } from "@api/Settings";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Toasts } from "@webpack/common";
 
 import { TAG_DEVELOPER, TAG_NAVIGATION, TAG_PLUGINS, TAG_UTILITY } from "../metadata/tags";

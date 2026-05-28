@@ -30,7 +30,7 @@ import { Link } from "@components/Link";
 import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
-import { isArabicMode, t } from "@utils/esharqI18n";
+import { isNunMode, t } from "@utils/nunM";
 import { localStorage } from "@utils/localStorage";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
@@ -66,7 +66,7 @@ const cloudBackendOptions = [
 ];
 
 function CloudTab() {
-    const settings = useSettings(["cloud.authenticated", "cloud.url", "cloud.settingsSync", "plugins.Settings.arabicMode"]);
+    const settings = useSettings(["cloud.authenticated", "cloud.url", "cloud.settingsSync", "plugins.Settings.nunM"]);
     const [inputKey, setInputKey] = useState(0);
     const forceUpdate = useForceUpdater();
 
@@ -99,7 +99,7 @@ function CloudTab() {
             </Paragraph>
 
             <Notice.Info className={Margins.bottom16}>
-                {isArabicMode()
+                {isNunMode()
                     ? <>نستخدم خادمنا الخاص <Link href="https://github.com/Equicord/Equicloud">Equicloud</Link> بمزايا محسّنة. اطلع على <Link href="https://equicord.org/cloud/policy">سياسة الخصوصية</Link> لمعرفة ما نخزّنه وكيف نستخدم بياناتك. Equicloud مرخص بترخيص BSD 3.0، يمكنك استضافته بنفسك إن أردت.</>
                     : <>We use our own <Link href="https://github.com/Equicord/Equicloud">Equicloud</Link> server with enhanced features. See our <Link href="https://equicord.org/cloud/policy">Privacy Policy</Link> to learn what we store and how we use your data. Equicloud is licensed under BSD 3.0 — you can self-host it if you wish.</>
                 }

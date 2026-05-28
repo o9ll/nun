@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-export interface PluginI18n {
+export interface NunPT {
     description: string;
     options?: Record<string, string>;
 }
 
-export const PLUGIN_TRANSLATIONS: Record<string, PluginI18n> = {
+export const NUNT: Record<string, NunPT> = {
     // ── equicordplugins ──────────────────────────────────────────────────────
 
     AltKrispSwitch: {
@@ -29,8 +29,8 @@ export const PLUGIN_TRANSLATIONS: Record<string, PluginI18n> = {
             soundQuality: "Sound quality used.",
         },
     },
-    ArabicAutoUpdater: {
-        description: "Automatically checks for Esharq updates and notifies you when a new version is available.",
+    NunAutoUpdater: {
+        description: "Automatically checks for Nun updates and notifies you when a new version is available.",
     },
     AtSomeone: {
         description: "Mentions a random person in the channel.",
@@ -393,8 +393,8 @@ export const PLUGIN_TRANSLATIONS: Record<string, PluginI18n> = {
             showDisplay: "Show the display type with flex or grid properties.",
         },
     },
-    EqArabicBrand: {
-        description: "Internal plugin for Esharq Arabic brand customization.",
+    NunBrand: {
+        description: "Internal plugin for Nun brand customization.",
     },
     EquibopStreamFixes: {
         description: "Attempts to fix streaming quality on Equibop by tweaking Discord's encoder and quality limits.",
@@ -2529,7 +2529,7 @@ export const PLUGIN_TRANSLATIONS: Record<string, PluginI18n> = {
     Settings: {
         description: "Adds a settings UI and diagnostic information.",
         options: {
-            arabicMode: "Arabic Mode — Show plugin names and descriptions in Arabic. Disable to switch to English.",
+            nunM: "Nun Mode — Disable to switch to English.",
             settingsLocation: "Where to display the Equicord settings section.",
             includeVencordInfoWhenCopying: "Also copy Vencord info (Vencord, Electron, Chromium) when clicking the version info in the bottom-left corner of the settings page.",
         },

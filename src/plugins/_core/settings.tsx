@@ -18,7 +18,7 @@ import {
 } from "@components/settings";
 import { gitHashShort } from "@shared/vencordUserAgent";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { isTruthy } from "@utils/guards";
 import definePlugin, { IconProps, OptionType } from "@utils/types";
 import { waitFor } from "@webpack";
@@ -97,9 +97,9 @@ interface SettingsLayoutBuilder {
 }
 
 const settings = definePluginSettings({
-    arabicMode: {
+    nunM: {
         type: OptionType.BOOLEAN,
-        description: "Arabic Mode / وضع اللغة العربية — Show plugin names and descriptions in Arabic. Disable to switch to English.",
+        description: "Nun Mode — Disable to switch to English.",
         default: false,
         restartNeeded: false,
     },
@@ -199,8 +199,8 @@ export default definePlugin({
         const equicordEntries: SettingsLayoutNode[] = [
             buildEntry({
                 key: "equicord_main",
-                title: "Esharq",
-                panelTitle: "Esharq",
+                title: "Nun",
+                panelTitle: "Nun",
                 Component: VencordTab,
                 Icon: MainSettingsIcon
             }),
@@ -219,7 +219,7 @@ export default definePlugin({
             !IS_UPDATER_DISABLED && UpdaterTab && buildEntry({
                 key: "equicord_updater",
                 title: "Updater",
-                panelTitle: "Esharq Updater",
+                panelTitle: "Nun Updater",
                 Component: UpdaterTab,
                 Icon: UpdaterIcon
             }),
@@ -232,7 +232,7 @@ export default definePlugin({
             buildEntry({
                 key: "equicord_cloud",
                 title: "Cloud",
-                panelTitle: "Esharq Cloud",
+                panelTitle: "Nun Cloud",
                 Component: CloudTab,
                 Icon: CloudIcon
             }),
@@ -254,7 +254,7 @@ export default definePlugin({
         const equicordSection: SettingsLayoutNode = {
             key: "equicord_section",
             type: LayoutTypes.SECTION,
-            useTitle: () => "Esharq",
+            useTitle: () => "Nun",
             buildLayout: () => equicordEntries
         };
 

@@ -16,7 +16,7 @@ import {
     SelectedGuildStore,
     Constants,
 } from "@webpack/common";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { OptionType } from "@utils/types";
 import { User, VoiceState } from "@vencord/discord-types";
 

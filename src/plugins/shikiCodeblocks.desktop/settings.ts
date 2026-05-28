@@ -18,7 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { parseUrl } from "@utils/misc";
 import { wordsFromPascal, wordsToTitle } from "@utils/text";
 import { OptionType } from "@utils/types";

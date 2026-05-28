@@ -5,7 +5,7 @@
  */
 
 import { useSettings } from "@api/Settings";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import type { JSX } from "react";
 
 import { getQuestifySettings, useQuestifySettings } from "../settings/access";
@@ -107,7 +107,7 @@ function sanitizeQuestOrder(order: unknown): QuestOrderStatus[] {
 }
 
 export function ReorderQuestsSetting(): JSX.Element {
-    useSettings(["plugins.Settings.arabicMode"]);
+    useSettings(["plugins.Settings.nunM"]);
 
     const reorderQuests = useQuestifySettings([
         "disableQuestsEverything",

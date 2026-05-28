@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────
-#  Esharq — Linux Installer
-#  https://github.com/LOSTSTR/Esharq
-#  للدعم الفني: discord.gg/kDJYqWX3S3
+#  Nun — macOS Installer
+#  https://github.com/o9ll/nun
 # ─────────────────────────────────────────────────────────────────────
 set -euo pipefail
 
-REPO="LOSTSTR/Esharq"
+REPO="o9ll/nun"
 ASAR="desktop.asar"
 RELEASE_API="https://api.github.com/repos/${REPO}/releases/latest"
-DISCORD_URL="https://discord.gg/kDJYqWX3S3"
-DATA_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/Esharq"
+DATA_DIR="${HOME}/Library/Application Support/Nun"
 
 # ── Colors ────────────────────────────────────────────────────────────
 if [ -t 1 ]; then
@@ -24,8 +22,7 @@ fi
 banner() {
   echo ""
   echo -e "${CA}${B}  ╔══════════════════════════════════════════════╗${R}"
-  echo -e "${CA}${B}  ║        ✦  Esharq  •  Linux Installer        ║${R}"
-  echo -e "${CA}${B}  ║     للدعم: discord.gg/kDJYqWX3S3            ║${R}"
+  echo -e "${CA}${B}  ║          ✦  Nun  •  macOS Installer          ║${R}"
   echo -e "${CA}${B}  ╚══════════════════════════════════════════════╝${R}"
   echo ""
 }
@@ -36,50 +33,29 @@ err()  { echo -e "  ${CR}✖${R} $*" >&2; }
 die()  { err "$*"; exit 1; }
 hdr()  { echo -e "  ${CW}${B}$*${R}"; }
 
-# ── Verify Linux ──────────────────────────────────────────────────────
-[ "$(uname -s)" = "Linux" ] || die "هذا السكريبت مخصص لـ Linux فقط — لـ macOS استخدم install-macos.sh"
+# ── Verify macOS ──────────────────────────────────────────────────────
+[ "$(uname -s)" = "Darwin" ] || die "هذا السكريبت مخصص لـ macOS فقط — للينكس استخدم install-linux.sh"
 
 # ── Discord detection ─────────────────────────────────────────────────
 find_discord() {
-  # Standard package manager installs
-  local std_paths=(
-    "/usr/lib/discord/resources"
-    "/usr/share/discord/resources"
-    "/usr/lib64/discord/resources"
-    "/opt/discord/resources"
-    "/opt/Discord/resources"
-    "${HOME}/.local/lib/discord/resources"
-    "${HOME}/.local/share/discord/resources"
-  )
-  for p in "${std_paths[@]}"; do
-    [ -d "$p" ] && { echo "$p"; return 0; }
-  done
-
-  # Flatpak (~/.var/app/com.discordapp.Discord)
-  local fp_base="${HOME}/.var/app/com.discordapp.Discord/config/discord"
-  if [ -d "$fp_base" ]; then
-    local fp_app
-    fp_app=$(find "$fp_base" -maxdepth 1 -name "app-*" -type d 2>/dev/null | sort | tail -1)
-    if [ -n "$fp_app" ] && [ -d "${fp_app}/resources" ]; then
-      echo "${fp_app}/resources"
+  local variants=("Discord" "Discord PTB" "Discord Canary" "Discord Development")
+  for v in "${variants[@]}"; do
+    local res="/Applications/${v}.app/Contents/Resources"
+    if [ -d "$res" ]; then
+      echo "$res"
       return 0
     fi
-  fi
-
-  # Snap
-  local snap_path="/snap/discord/current/usr/share/discord/resources"
-  [ -d "$snap_path" ] && { echo "$snap_path"; return 0; }
-
+  done
   return 1
 }
 
 # ── GitHub helpers ────────────────────────────────────────────────────
 require_curl() {
-  command -v curl >/dev/null 2>&1 || die "curl غير مثبَّت — قم بتثبيته أولاً:\n  sudo apt install curl  أو  sudo dnf install curl"
+  command -v curl >/dev/null 2>&1 || die "curl غير مثبَّت — قم بتثبيته أولاً"
 }
 
 fetch_json() {
-  curl -fsSL -H "User-Agent: Esharq-Installer/1.14 (Linux)" "$RELEASE_API" \
+  curl -fsSL -H "User-Agent: NunInstaller/1.14 (macOS)" "$RELEASE_API" \
     || die "تعذّر الوصول إلى GitHub API — تحقق من اتصال الإنترنت"
 }
 
@@ -93,7 +69,7 @@ download_file() {
     *) die "مصدر التنزيل غير موثوق: ${host}" ;;
   esac
   curl -fSL --progress-bar \
-    -H "User-Agent: Esharq-Installer/1.14 (Linux)" \
+    -H "User-Agent: NunInstaller/1.14 (macOS)" \
     -o "$dest" "$url"
 }
 
@@ -104,7 +80,7 @@ verify_sha256() {
     return 0
   fi
   local actual
-  actual=$(sha256sum "$file" | awk '{print $1}')
+  actual=$(shasum -a 256 "$file" | awk '{print $1}')
   if [ "$expected" != "$actual" ]; then
     die "فشل التحقق من SHA-256 — الملف تالف أو تم التلاعب به\n  متوقع: ${expected}\n  فعلي:  ${actual}"
   fi
@@ -112,8 +88,9 @@ verify_sha256() {
 }
 
 kill_discord() {
-  /usr/bin/pkill -x discord 2>/dev/null || true
-  /usr/bin/pkill -x Discord 2>/dev/null || true
+  /usr/bin/pkill -x "Discord"          2>/dev/null || true
+  /usr/bin/pkill -x "Discord PTB"      2>/dev/null || true
+  /usr/bin/pkill -x "Discord Canary"   2>/dev/null || true
   sleep 1
 }
 
@@ -123,9 +100,9 @@ cmd_install() {
   local res_dir="${1:-}"
 
   if [ -z "$res_dir" ]; then
-    log "جارٍ البحث عن Discord (حزمة عادية / Flatpak / Snap)..."
+    log "جارٍ البحث عن Discord في /Applications..."
     res_dir=$(find_discord) \
-      || die "لم يُعثر على Discord — تأكد من تثبيته أو مرِّر المسار يدوياً:\n  $0 install /path/to/discord/resources"
+      || die "لم يُعثر على Discord — تأكد من تثبيته أو مرِّر المسار يدوياً:\n  $0 install /path/to/Discord.app/Contents/Resources"
     ok "عُثر على Discord في: ${CW}${res_dir}${R}"
   else
     [ -d "$res_dir" ] || die "المسار غير موجود: $res_dir"
@@ -145,7 +122,7 @@ cmd_install() {
 
   mkdir -p "$DATA_DIR"
   local tmp
-  tmp=$(mktemp "${DATA_DIR}/esharq_XXXXXX.asar")
+  tmp=$(mktemp "${DATA_DIR}/nun_XXXXXX.asar")
   chmod 600 "$tmp"
   trap 'rm -f "$tmp"' EXIT
 
@@ -160,8 +137,8 @@ cmd_install() {
     case "$ck_host" in
       github.com|*.github.com|objects.githubusercontent.com|*.githubusercontent.com)
         local ck_tmp
-        ck_tmp=$(mktemp "${DATA_DIR}/esharq_ck_XXXXXX.txt")
-        if curl -fsSL -H "User-Agent: Esharq-Installer/1.14 (Linux)" -o "$ck_tmp" "$checksums_url" 2>/dev/null; then
+        ck_tmp=$(mktemp "${DATA_DIR}/nun_ck_XXXXXX.txt")
+        if curl -fsSL -H "User-Agent: NunInstaller/1.14 (macOS)" -o "$ck_tmp" "$checksums_url" 2>/dev/null; then
           expected_hash=$(grep "desktop\.asar" "$ck_tmp" | awk '{print $1}' || true)
         fi
         rm -f "$ck_tmp"
@@ -178,11 +155,7 @@ cmd_install() {
   cp "$tmp" "${DATA_DIR}/equicord.asar"
 
   echo ""
-  ok "تم التثبيت — أعد تشغيل Discord لتفعيل Esharq"
-  echo ""
-  echo -e "  ${CM}للدعم الفني انضم للخادم الرسمي:${R}"
-  echo -e "  ${CA}${DISCORD_URL}${R}"
-  echo ""
+  ok "تم التثبيت — أعد تشغيل Discord لتفعيل Nun"
 }
 
 cmd_uninstall() {
@@ -212,10 +185,10 @@ cmd_status() {
 
   if [ -f "$asar" ]; then
     local mtime
-    mtime=$(stat -c "%y" "$asar" 2>/dev/null | cut -d' ' -f1 || echo "مجهول")
-    ok "Esharq مثبَّت  (${mtime})"
+    mtime=$(date -r "$asar" "+%Y-%m-%d" 2>/dev/null || echo "مجهول")
+    ok "Nun مثبَّت  (${mtime})"
   else
-    log "Esharq غير مثبَّت"
+    log "Nun غير مثبَّت"
   fi
 
   local res_dir
@@ -225,21 +198,19 @@ cmd_status() {
       && ok "${ASAR} مطبَّق على هذا التثبيت" \
       || log "${ASAR} غير مطبَّق على هذا التثبيت"
   else
-    log "لم يُعثر على Discord"
+    log "لم يُعثر على Discord في /Applications"
   fi
   echo ""
 }
 
 usage() {
   echo ""
-  hdr "الاستخدام  (Linux):"
-  echo "  $0 install   [مسار-resources]   — تثبيت Esharq"
-  echo "  $0 uninstall [مسار-resources]   — إزالة Esharq"
+  hdr "الاستخدام  (macOS):"
+  echo "  $0 install   [مسار-Resources]   — تثبيت Nun"
+  echo "  $0 uninstall [مسار-Resources]   — إزالة Nun"
   echo "  $0 status                       — فحص حالة التثبيت"
   echo ""
   echo -e "  ${CM}مثال:  sudo bash $0 install${R}"
-  echo -e "  ${CM}يدعم: حزمة عادية / Flatpak / Snap${R}"
-  echo -e "  ${CM}للدعم: ${DISCORD_URL}${R}"
   echo ""
 }
 

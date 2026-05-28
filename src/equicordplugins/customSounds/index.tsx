@@ -13,7 +13,7 @@ import { Heading } from "@components/Heading";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { Button, React, showToast, TextInput } from "@webpack/common";
 

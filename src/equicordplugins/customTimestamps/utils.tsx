@@ -8,7 +8,7 @@ import "./style.css";
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Paragraph } from "@components/Paragraph";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { findByCodeLazy, findComponentByCodeLazy } from "@webpack";
 import { moment, useRef, UserStore, useState } from "@webpack/common";
 

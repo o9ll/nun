@@ -6,7 +6,7 @@
 
 import { isPluginEnabled, plugins } from "@api/PluginManager";
 import { toggleEnabled } from "@equicordplugins/equicordHelper/utils";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { SettingsRouter, Toasts } from "@webpack/common";
 
 import { DEFAULT_CATEGORY_ID } from "../../metadata/categories";

@@ -5,7 +5,7 @@
  */
 
 import { classNameFactory } from "@utils/css";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { Message, RenderModalProps } from "@vencord/discord-types";
 import { findByPropsLazy } from "@webpack";
 import { Modal, React } from "@webpack/common";

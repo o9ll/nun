@@ -60,7 +60,7 @@ function openDashboard(): void {
 export default definePlugin({
     name: "PersonalAnalytics",
     description: "Tracks your personal Discord activity and shows a beautiful stats dashboard.",
-    authors: [EquicordDevs.LOSTSTR],
+    authors: [EquicordDevs.o9],
     tags: ["Utility", "Activity"],
 
     toolboxActions: {

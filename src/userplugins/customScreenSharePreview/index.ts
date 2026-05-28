@@ -5,7 +5,7 @@
  */
 
 import { UserAreaRenderProps } from "@api/UserArea";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { UserStore } from "@webpack/common";
 

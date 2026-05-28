@@ -20,7 +20,7 @@ import "./shiki.css";
 
 import { enableStyle } from "@api/Styles";
 import { Devs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { ReporterTestable } from "@utils/types";
 import previewExampleText from "file://previewExample.tsx";
 
