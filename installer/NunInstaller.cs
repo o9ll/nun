@@ -15,8 +15,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
-[assembly: AssemblyTitle("Nun Client Installer")]
-[assembly: AssemblyDescription("Official installer for Nun — the community Discord client mod")]
+[assembly: AssemblyTitle("Nun Installer")]
+[assembly: AssemblyDescription("Installer for Nun — Discord client mod")]
 [assembly: AssemblyCompany("Nun")]
 [assembly: AssemblyProduct("Nun")]
 [assembly: AssemblyCopyright("© 2026 o9. All rights reserved.")]
@@ -262,7 +262,7 @@ static class Logic
 
     public static void Install(string res, Action<string> status, Action<int> progress)
     {
-        status("جارٍ جلب معلومات آخر إصدار...");
+        status("جارٍ جلب معلومات آخر إصدار.");
         progress(5);
         string tag, checksumUrl; long sz;
         var url = GetAsarUrl(out tag, out sz, out checksumUrl);
@@ -495,8 +495,8 @@ sealed class InstallerForm : Form
         sb.Controls.Add(MakePanel(20, 80, 200, 1, Color.FromArgb(35, 40, 55)));
 
         // Nav buttons
-        _btnNavHome  = MakeSidebarBtn(T("🏠  الواجهة الرئيسية", "🏠  Home"), 100, sb);
-        _btnNavAbout = MakeSidebarBtn(T("ℹ  حول التطبيق", "ℹ  About"), 150, sb);
+        _btnNavHome  = MakeSidebarBtn(T("🏠  الرئيسية", "🏠  Home"), 100, sb);
+        _btnNavAbout = MakeSidebarBtn(T("ℹ  حول", "ℹ  About"), 150, sb);
         _btnNavHome.Click  += (s, e) => SwitchTab(true);
         _btnNavAbout.Click += (s, e) => SwitchTab(false);
         SetNavActive(_btnNavHome);
@@ -508,7 +508,7 @@ sealed class InstallerForm : Form
         secOuter.Controls.Add(secInner);
 
         secInner.Controls.Add(MakeLabel("🛡", 82, 10, ACCENT, 16f, FontStyle.Regular, secInner));
-        secInner.Controls.Add(MakeLabel(T("أمان وموثوقية", "Security & Trust"),
+        secInner.Controls.Add(MakeLabel(T("أمان", "Security"),
             10, 40, TEXT_PRI, 10f, FontStyle.Bold, secInner, 178, 22, ContentAlignment.MiddleCenter));
         secInner.Controls.Add(MakeLabel(
             T("تم تصميم Nun بأعلى معايير الأمان\nوالخصوصية لضمان تجربة آمنة ومستقرة.",
@@ -517,7 +517,7 @@ sealed class InstallerForm : Form
 
         var badge = new Label
         {
-            Text      = T("✔ التطبيق موثوق", "✔ App Verified"),
+            Text      = T("✔ موثوق", "✔ Verified"),
             Location  = new Point(10, 106),
             Size      = new Size(178, 20),
             ForeColor = SUCCESS,

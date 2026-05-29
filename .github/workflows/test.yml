@@ -2,10 +2,12 @@ name: Test
 on:
     push:
         branches:
+            - nunar
             - main
             - dev
     pull_request:
         branches:
+            - nunar
             - main
             - dev
 

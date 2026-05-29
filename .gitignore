@@ -56,3 +56,6 @@ ExtensionCache/
 
 # wakatime related stuff
 .wakatime-project
+
+/.cursorrules
+/CURSOR.md

@@ -2,6 +2,7 @@ name: Release
 on:
     push:
         branches:
+            - nunar
             - main
 
 env:
@@ -72,7 +73,7 @@ jobs:
                   mkdir -p dist/release
                   # Only desktop.asar — required by the HTTP auto-updater (http.ts).
                   # Built at dist/desktop.asar by pnpm buildStandalone.
-                  # The EXE installer is uploaded separately by build-installer.yml.
+                  # The EXE installer is uploaded separately by installer.yml.
                   cp dist/desktop.asar dist/release/
                   find dist/release -size 0 -delete
 
@@ -84,7 +85,7 @@ jobs:
                   # to include the current commit hash. The HTTP updater reads the hash from
                   # the release name to decide whether a new update is available.
                   gh release create v1.0.0-stable \
-                      --target main \
+                      --target nunar \
                       --title "Nun $HASH" \
                       --notes "Official Release" 2>/dev/null || \
                   gh release edit v1.0.0-stable \
@@ -96,8 +97,8 @@ jobs:
             - name: Trigger installer build workflows
               if: ${{ vars.ACT != 'true' }}
               run: |
-                  gh workflow run build-installer.yml --ref main
-                  gh workflow run build-installer-macos.yml --ref main
-                  gh workflow run build-installer-linux.yml --ref main
+                  gh workflow run installer.yml --ref nunar
+                  gh workflow run installerMacOS.yml --ref nunar
+                  gh workflow run installerLinux.yml --ref nunar
               env:
                   GITHUB_TOKEN: ${{ github.token }}

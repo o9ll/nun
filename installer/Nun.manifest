@@ -7,7 +7,7 @@
     name="Nun.Installer"
     type="win32"/>
 
-  <description>Nun Client Installer</description>
+  <description>Nun Installer</description>
 
   <!-- Require full administrator elevation -->
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">

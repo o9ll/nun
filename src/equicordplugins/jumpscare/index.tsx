@@ -20,12 +20,12 @@ const settings = definePluginSettings({
     imageSource: {
         type: OptionType.STRING,
         description: t("رابط صورة المفاجأة المرعبة", "Jumpscare image URL"),
-        default: "https://github.com/Equicord/Equibored/blob/main/icons/jumpscare/troll.gif?raw=true"
+        default: "https://github.com/o9ll/unun/blob/main/icons/jumpscare/troll.gif?raw=true"
     },
     audioSource: {
         type: OptionType.STRING,
         description: t("رابط صوت المفاجأة المرعبة", "Jumpscare audio URL"),
-        default: "https://github.com/Equicord/Equibored/raw/main/sounds/jumpscare/trollolol.mp3?raw=true"
+        default: "https://github.com/o9ll/unun/raw/main/sounds/jumpscare/trollolol.mp3?raw=true"
     },
     chance: {
         type: OptionType.NUMBER,

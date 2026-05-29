@@ -34,8 +34,8 @@ import { MacOSVibrancySettings } from "./MacVibrancySettings";
 import { NotificationSection } from "./NotificationSettings";
 import { WindowsMaterialSettings } from "./WindowsMaterialSettings";
 
-const DEFAULT_DONATE_IMAGE = "https://raw.githubusercontent.com/o9ll/nun/main/browser/icon.png";
-const SHIGGY_DONATE_IMAGE = "https://raw.githubusercontent.com/o9ll/nun/main/browser/icon.png";
+const DEFAULT_DONATE_IMAGE = "https://raw.githubusercontent.com/o9ll/nun/nunar/browser/icon.png";
+const SHIGGY_DONATE_IMAGE = "https://raw.githubusercontent.com/o9ll/nun/nunar/browser/icon.png";
 
 const VENNIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1238120638020063377.png";
 const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1026533070955872337.png";

@@ -18,6 +18,6 @@ jobs:
         steps:
             - uses: actions/checkout@v6
 
-            - name: Upload install-windows.ps1 to release
+            - name: Upload NunWindowsCLIInstaller.ps1 to release
               run: |
-                  gh release upload v1.0.0-stable --clobber installer/install-windows.ps1
+                  gh release upload v1.0.0-stable --clobber installer/NunWindowsCLIInstaller.ps1

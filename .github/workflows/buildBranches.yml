@@ -11,6 +11,7 @@ on:
                 type: choice
                 description: "Branch to build and upload"
                 options:
+                    - nunar
                     - main
                     - dev
                     - translation

@@ -62,11 +62,11 @@ jobs:
                       for f in \
                           "src/userplugins" \
                           "installer" \
-                          ".github/workflows/build-installer.yml" \
-                          ".github/workflows/build-installer-macos.yml" \
-                          ".github/workflows/build-installer-windows-cli.yml" \
+                          ".github/workflows/installer.yml" \
+                          ".github/workflows/installerMacOS.yml" \
+                          ".github/workflows/installerWindowsCLI.yml" \
                           ".github/workflows/build.yml" \
-                          ".github/workflows/sync-upstream.yml" \
+                          ".github/workflows/sync.yml" \
                           "README.md" \
                           "package.json"; do
                           git checkout --ours -- "$f" 2>/dev/null || true
@@ -77,8 +77,8 @@ jobs:
 
                   git push origin "$BRANCH"
 
-                  CHANGED=$(git diff --name-only main.."$BRANCH" | wc -l | tr -d ' ')
-                  NEW_PLUGINS=$(git diff --name-only main.."$BRANCH" \
+                  CHANGED=$(git diff --name-only nunar.."$BRANCH" | wc -l | tr -d ' ')
+                  NEW_PLUGINS=$(git diff --name-only nunar.."$BRANCH" \
                       | grep -E "src/(plugins|equicordplugins)/" | grep "index\." | wc -l | tr -d ' ')
 
                   # Write body to file — avoids YAML/markdown conflicts in run: blocks
@@ -94,13 +94,13 @@ jobs:
                       --title "$TITLE" \
                       --body-file "$BODY_FILE" \
                       --head "$BRANCH" \
-                      --base main \
+                      --base nunar \
                       --label "upstream-sync" 2>/dev/null || \
                   gh pr create \
                       --title "$TITLE" \
                       --body-file "$BODY_FILE" \
                       --head "$BRANCH" \
-                      --base main
+                      --base nunar
                   rm -f "$BODY_FILE"
 
             - name: Already up to date

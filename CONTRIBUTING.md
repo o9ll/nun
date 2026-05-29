@@ -11,7 +11,7 @@ We have development documentation for new contributors, which can be found at <h
 
 Contributions are submitted through pull requests. If you are new to Git or GitHub, we recommend reading [this guide](https://opensource.com/article/19/7/create-pull-request-github).
 
-Pull requests can target either the `main` or `dev` branch.  
+Pull requests can target either the `main` or `dev` branch.
 Unless you are experienced and know what you are doing, **always target `main`**. The `dev` branch may contain unstable changes and can be force-pushed frequently, which may break your pull request.
 
 ## Writing a Plugin

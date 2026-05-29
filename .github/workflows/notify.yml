@@ -2,7 +2,7 @@ name: Discord Notifications
 
 on:
   push:
-    branches: [main]
+    branches: [nunar]
     paths-ignore:
       - "**.md"
       - ".github/ISSUE_TEMPLATE/**"
@@ -18,8 +18,8 @@ jobs:
     name: Send Discord notification
     runs-on: ubuntu-latest
     continue-on-error: true
-    # Extra guard: only run on the real main branch, never on forks or PRs
-    if: github.repository == 'o9ll/nun' && github.ref == 'refs/heads/main'
+    # Extra guard: only run on the nunar branch, never on forks or PRs
+    if: github.repository == 'o9ll/nun' && github.ref == 'refs/heads/nunar'
 
     steps:
       - name: Checkout (with parent commit for diff)
@@ -42,4 +42,4 @@ jobs:
             echo "Webhook secrets not configured — skipping"
             exit 0
           fi
-          node .github/scripts/discord-notify.mjs
+          node .github/scripts/notify.mjs

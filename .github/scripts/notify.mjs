@@ -29,7 +29,7 @@ const DISCORD_WEBHOOK_RE =
 function assertWebhookUrl(url, label) {
     if (!DISCORD_WEBHOOK_RE.test(url)) {
         // Do NOT print the URL — it may contain the secret token
-        console.error(`[discord-notify] ${label} is not a valid Discord webhook URL. Aborting.`);
+        console.error(`[notify] ${label} is not a valid Discord webhook URL. Aborting.`);
         process.exit(1);
     }
 }
@@ -94,7 +94,7 @@ function run(cmd) {
 
 const REPO_URL = "https://github.com/o9ll/nun";
 const ICON_URL =
-    "https://raw.githubusercontent.com/o9ll/nun/main/browser/icon.png";
+    "https://raw.githubusercontent.com/o9ll/nun/nunar/browser/icon.png";
 
 const commitHash = run("git log -1 --pretty=%H").slice(0, 7);
 const commitTime = run("git log -1 --pretty=%aI");
@@ -195,7 +195,7 @@ const WEBHOOK_UPDATES = process.env.WEBHOOK_UPDATES ?? "";
 
 // Graceful skip — secrets not yet configured
 if (!WEBHOOK_PLUGINS || !WEBHOOK_UPDATES) {
-    console.log("[discord-notify] Secrets not configured — skipping.");
+    console.log("[notify] Secrets not configured — skipping.");
     process.exit(0);
 }
 
@@ -246,6 +246,6 @@ async function main() {
 
 main().catch(err => {
     // Log the error type/message but NOT any URL or secret
-    console.error(`[discord-notify] Fatal: ${err.message}`);
+    console.error(`[notify] Fatal: ${err.message}`);
     process.exit(1);
 });

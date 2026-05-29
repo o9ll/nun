@@ -1,4 +1,4 @@
-name: Release Linux Installer
+name: Release MacOS Installer
 
 on:
     workflow_dispatch:
@@ -12,12 +12,12 @@ permissions:
 
 jobs:
     Upload:
-        name: Upload Linux Installer Script
+        name: Upload MacOS Installer Script
         runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v6
 
-            - name: Upload install-linux.sh to release
+            - name: Upload NunMacOSInstaller.sh to release
               run: |
-                  gh release upload v1.0.0-stable --clobber installer/install-linux.sh
+                  gh release upload v1.0.0-stable --clobber installer/NunMacOSInstaller.sh
