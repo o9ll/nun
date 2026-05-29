@@ -14,39 +14,6 @@
 
 ---
 
-<div align="center">
-
-<table>
-<tr>
-<td align="center" width="100%">
-
-<br>
-
-### ☕ هل أعجبك المشروع؟ ادعمني للاستمرار
-
-<br>
-
-**إذا أردتَ مني الاستمرار في التطوير وإضافة المزيد من الميزات،**
-**فلا تنسَ دعمي بأي مبلغ تراه مناسباً — حتى أصغر مساهمة تُحدث فرقاً كبيراً** 🙏
-
-<br>
-
-[![Ko-fi](https://img.shields.io/badge/☕%20ادعم%20عبر%20Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white&labelColor=1a1a1a)](https://ko-fi.com/o99)
-
-<br>
-
-> 💡 دعمكم هو الوقود الذي يُبقي هذا المشروع حياً ويدفعني نحو التحسين المستمر
-
-<br>
-
-</td>
-</tr>
-</table>
-
-</div>
-
----
-
 ### 🌟 أبرز الإضافات المدمجة والمطوّرة (Featured Plugins)
 
 * **NitroSniper**
@@ -92,8 +59,8 @@
 | المنصة | الطريقة | التحميل |
 |--------|---------|---------|
 | 🪟 **Windows** | واجهة رسومية (GUI) | [![Windows Setup](https://img.shields.io/badge/Windows-NunSetup.exe-0078D4?style=flat&logo=windows&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/NunSetup.exe) |
-| 🍎 **macOS** | Apple Silicon & Intel | [![macOS Script](https://img.shields.io/badge/macOS-Shell_Script-000000?style=flat&logo=apple&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/install-macos.sh) |
-| 🐧 **Linux** | سكريبت تلقائي (CLI) | [![Linux Script](https://img.shields.io/badge/Linux-Shell_Script-FCC624?style=flat&logo=linux&logoColor=black)](https://github.com/o9ll/nun/releases/latest/download/install-linux.sh) |
+| 🍎 **macOS** | Apple Silicon & Intel | [![macOS Script](https://img.shields.io/badge/macOS-Shell_Script-000000?style=flat&logo=apple&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/NunMacOSInstaller.sh) |
+| 🐧 **Linux** | سكريبت تلقائي (CLI) | [![Linux Script](https://img.shields.io/badge/Linux-Shell_Script-FCC624?style=flat&logo=linux&logoColor=black)](https://github.com/o9ll/nun/releases/latest/download/NunLinuxInstaller.sh) |
 
 > تجد جميع الإصدارات في صفحة [**Releases**](https://github.com/o9ll/nun/releases).
 
@@ -106,7 +73,7 @@
 ### 🍎 macOS — Apple Silicon & Intel
 
 ```bash
-curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-macos.sh | bash
+curl -fsSL https://github.com/o9ll/nun/releases/latest/download/NunMacOSInstaller.sh | bash
 ```
 
 يكتشف السكريبت نوع المعالج (ARM64 / Intel) تلقائياً ويدعم جميع إصدارات Discord (Stable، PTB، Canary).
@@ -114,7 +81,7 @@ curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-macos.sh
 ### 🐧 Linux
 
 ```bash
-curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-linux.sh | bash
+curl -fsSL https://github.com/o9ll/nun/releases/latest/download/NunLinuxInstaller.sh | bash
 ```
 
 ---
@@ -175,26 +142,6 @@ pnpm buildWeb
 
 ---
 
-## ❤️ دعم المشروع
-
-<div align="center">
-
-[![Ko-fi](https://img.shields.io/badge/☕%20ادعم%20عبر%20Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white&labelColor=1a1a1a)](https://ko-fi.com/o99)
-
-</div>
-
-إذا أعجبك المشروع وأفادك، يمكنك دعمنا بـ:
-
-- ☕ **التبرع بأي مبلغ** عبر [Ko-fi](https://ko-fi.com/o99) — يساعدني على الاستمرار في التطوير
-- ⭐ **Star** للمستودع على GitHub
-- 📢 مشاركة المشروع مع أصدقائك
-- 💬 الانضمام لسيرفر الديسكورد والمساهمة في التطوير: **[discord.gg/QamdqDNEDa](https://discord.gg/QamdqDNEDa)**
-- 🐛 الإبلاغ عن أي مشكلة أو اقتراح عبر [Issues](https://github.com/o9ll/nun/issues)
-
-دعمكم هو ما يجعلنا نستمر في تطوير وتحسين هذا المشروع! 💪
-
----
-
 ## 🙏 شكر وتقدير
 
 - [Vendicated](https://github.com/Vendicated) — لإنشاء [Vencord](https://github.com/Vendicated/Vencord)
@@ -243,7 +190,7 @@ Discord هي علامة تجارية مسجلة لشركة Discord Inc.، ولا
 - 🎨 **Modern UI/UX Redesign** | إعادة تصميم الواجهة بشكل عصري واحترافي
 - 🛡️ **Security & Metadata Optimizations** | تحسينات أمنية وإضافة البيانات الوصفية الرسمية
 
-**Maintained by:** [o9](https://github.com/o9ll)  
+**Maintained by:** [o9](https://github.com/o9ll)
 **Original Project:** [Equicord](https://github.com/Equicord/Equicord)
 
 ---

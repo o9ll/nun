@@ -32,7 +32,7 @@
 
 <br>
 
-**If you'd like to keep the development going and see more features added,**  
+**If you'd like to keep the development going and see more features added,**
 **consider supporting me with any amount — even the smallest contribution makes a big difference** 🙏
 
 <br>
@@ -90,8 +90,8 @@
 | Platform | Method | Download |
 |----------|--------|----------|
 | 🪟 **Windows** | GUI Installer | [![Windows Setup](https://img.shields.io/badge/Windows-NunSetup.exe-0078D4?style=flat&logo=windows&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/NunSetup.exe) |
-| 🍎 **macOS** | Apple Silicon & Intel | [![macOS Script](https://img.shields.io/badge/macOS-Shell_Script-000000?style=flat&logo=apple&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/install-macos.sh) |
-| 🐧 **Linux** | Automated CLI script | [![Linux Script](https://img.shields.io/badge/Linux-Shell_Script-FCC624?style=flat&logo=linux&logoColor=black)](https://github.com/o9ll/nun/releases/latest/download/install-linux.sh) |
+| 🍎 **macOS** | Apple Silicon & Intel | [![macOS Script](https://img.shields.io/badge/macOS-Shell_Script-000000?style=flat&logo=apple&logoColor=white)](https://github.com/o9ll/nun/releases/latest/download/NunMacOSInstaller.sh) |
+| 🐧 **Linux** | Automated CLI script | [![Linux Script](https://img.shields.io/badge/Linux-Shell_Script-FCC624?style=flat&logo=linux&logoColor=black)](https://github.com/o9ll/nun/releases/latest/download/NunLinuxInstaller.sh) |
 
 > All releases are available on the [**Releases**](https://github.com/o9ll/nun/releases) page.
 
@@ -104,7 +104,7 @@ Download **NunSetup.exe** and run it — it automatically detects Discord and ap
 ### 🍎 macOS — Apple Silicon & Intel
 
 ```bash
-curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-macos.sh | bash
+curl -fsSL https://github.com/o9ll/nun/releases/latest/download/NunMacOSInstaller.sh | bash
 ```
 
 The script auto-detects your processor (ARM64 / Intel) and supports all Discord variants (Stable, PTB, Canary).
@@ -112,7 +112,7 @@ The script auto-detects your processor (ARM64 / Intel) and supports all Discord 
 ### 🐧 Linux
 
 ```bash
-curl -fsSL https://github.com/o9ll/nun/releases/latest/download/install-linux.sh | bash
+curl -fsSL https://github.com/o9ll/nun/releases/latest/download/NunLinuxInstaller.sh | bash
 ```
 
 Supports Ubuntu/Debian, Fedora/RHEL, Arch Linux, Flatpak, and Snap installations.
@@ -127,7 +127,7 @@ Nun ships with a built-in **language switch**.
 2. Toggle **"Mode"** on or off
 3. Plugin names and descriptions in the plugin list update instantly — no restart needed
 
-> When Mode is **off**, all plugin descriptions revert to English.  
+> When Mode is **off**, all plugin descriptions revert to English.
 > Plugin option labels inside individual plugin modals follow the same setting.
 
 ---
@@ -256,7 +256,7 @@ If your account is critically important to you, it's safest to avoid all client 
 - 🎨 **Modern UI/UX** — clean, professional redesign
 - 🛡️ **Security & metadata optimizations** — hardened dependency chain
 
-**Maintained by:** [o9](https://github.com/o9ll)  
+**Maintained by:** [o9](https://github.com/o9ll)
 **Original project:** [Equicord](https://github.com/Equicord/Equicord)
 
 ---

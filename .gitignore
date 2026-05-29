@@ -1,7 +1,6 @@
 dist
 node_modules
 .claude
-installer/*.exe
 installer/*.ico
 installer/NunInstaller.ps1
 .VSCodeCounter
@@ -15,9 +14,6 @@ installer/NunInstaller.ps1
 # Environment & secrets — never commit these
 .env
 .env.*
-.env.local
-.env.production
-.env.development
 *.pem
 *.key
 *.p12
@@ -46,7 +42,7 @@ lerna-debug.log*
 *.tsbuildinfo
 
 .modules/
-# src/userplugins is included intentionally for Nun
+# src/userplugins
 
 ExtensionCache/
 /settings
@@ -56,6 +52,3 @@ ExtensionCache/
 
 # wakatime related stuff
 .wakatime-project
-
-/.cursorrules
-/CURSOR.md

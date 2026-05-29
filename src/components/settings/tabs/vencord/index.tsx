@@ -180,7 +180,7 @@ function EquicordSettings() {
                     }
                     cardImage={VENNIE_DONATOR_IMAGE}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
-                    backgroundColor="#ED87A9"
+                    backgroundColor="#323339"
                 >
                     <DonateButtonComponent donated={true} />
                 </SpecialCard>
@@ -193,7 +193,7 @@ function EquicordSettings() {
                     )}
                     cardImage={donateImage}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
-                    backgroundColor="#c3a3ce"
+                    backgroundColor="#323339"
                 >
                     <DonateButtonComponent />
                 </SpecialCard>
@@ -208,7 +208,7 @@ function EquicordSettings() {
                     )}
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
-                    backgroundColor="#EDCC87"
+                    backgroundColor="#323339"
                 >
                     <Button
                         variant="none"
