@@ -1,6 +1,6 @@
 <div align="center">
 
-<kbd>[العربية](README.md)</kbd> &nbsp;|&nbsp; <kbd>**English**</kbd>
+<kbd>[العربية](README.ar.md)</kbd> &nbsp;|&nbsp; <kbd>**English**</kbd>
 
 ---
 
