@@ -2,7 +2,7 @@
 
 <kbd>**العربية**</kbd> &nbsp;|&nbsp; <kbd>[English](README.md)</kbd>
 
----
+# [<img src="./browser/icon.png" width="45" align="center" alt="Nun">](https://github.com/o9ll/nun) Nun
 
 [![GitHub Release](https://img.shields.io/github/v/release/o9ll/nun?style=flat&color=5865F2&label=إصدار)](https://github.com/o9ll/nun/releases/latest)
 [![Tests](https://github.com/o9ll/nun/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/o9ll/nun/actions/workflows/test.yml)
