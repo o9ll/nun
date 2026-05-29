@@ -34,7 +34,7 @@ die()  { err "$*"; exit 1; }
 hdr()  { echo -e "  ${CW}${B}$*${R}"; }
 
 # ── Verify macOS ──────────────────────────────────────────────────────
-[ "$(uname -s)" = "Darwin" ] || die "هذا السكريبت مخصص لـ macOS فقط — للينكس استخدم install-linux.sh"
+[ "$(uname -s)" = "Darwin" ] || die "هذا السكريبت مخصص لـ macOS فقط — للينكس استخدم NunLinuxInstaller.sh"
 
 # ── Discord detection ─────────────────────────────────────────────────
 find_discord() {
