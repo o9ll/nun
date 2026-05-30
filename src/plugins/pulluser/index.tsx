@@ -18,8 +18,8 @@ interface VoiceState {
 }
 
 interface VoiceStateStore {
-    getAllVoiceStates(): { [guildId: string]: { [userId: string]: VoiceState } };
-    getVoiceStatesForChannel(channelId: string): { [userId: string]: VoiceState };
+    getAllVoiceStates(): { [guildId: string]: { [userId: string]: VoiceState; }; };
+    getVoiceStatesForChannel(channelId: string): { [userId: string]: VoiceState; };
 }
 
 const VoiceStateStore: VoiceStateStore = findStoreLazy("VoiceStateStore");
@@ -69,7 +69,7 @@ function getMyChannelId(): string | null {
                 return users[myId].channelId;
             }
         }
-    } catch {}
+    } catch { }
     return null;
 }
 
@@ -88,7 +88,7 @@ function pullUserInstant(guildId: string, userId: string, targetChannelId: strin
     RestAPI.patch({
         url: `/guilds/${guildId}/members/${userId}`,
         body: { channel_id: targetChannelId }
-    }).catch(() => {});
+    }).catch(() => { });
 }
 
 function monitorAndPull() {
@@ -127,7 +127,7 @@ function monitorAndPull() {
                 console.log("[PullUser] Monitor pulled:", userId);
             }
         }
-    } catch {}
+    } catch { }
 }
 
 function startMonitoring() {
@@ -240,7 +240,7 @@ const ChannelContext: NavContextMenuPatchCallback = (children, { channel }) => {
 export default definePlugin({
     name: "PullUser",
     description: "Drag users with you across voice channels. Right-click users to add them to your pull list - they'll automatically follow you whenever you switch voice channels. Like having your own personal entourage.",
-    authors: [Devs.viciouscal],
+    authors: [Devs.o9],
     settings,
 
     start() {
@@ -263,7 +263,7 @@ export default definePlugin({
     },
 
     flux: {
-        VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[] }) {
+        VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
             if (!voiceStates || voiceStates.length === 0) return;
 
             const myId = UserStore.getCurrentUser()?.id;

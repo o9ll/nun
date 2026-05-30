@@ -178,7 +178,7 @@ function toggleFakeDeafen() {
 
 let keydownListener: ((e: KeyboardEvent) => void) | null = null;
 
-function parseKeybind(keybind: string): { ctrl: boolean; shift: boolean; alt: boolean; key: string } {
+function parseKeybind(keybind: string): { ctrl: boolean; shift: boolean; alt: boolean; key: string; } {
     const parts = keybind.toLowerCase().split("+");
     return {
         ctrl: parts.includes("ctrl") || parts.includes("control"),
@@ -219,7 +219,7 @@ export default definePlugin({
     name: "FakeDeafen",
     description: "You're deafened but you're not.",
     dependencies: ["PhilsPluginLibrary"],
-    authors: [Devs.desu, Devs.viciouscal],
+    authors: [Devs.desu, Devs.o9],
 
     patches: [
         {

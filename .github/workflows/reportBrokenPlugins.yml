@@ -20,7 +20,7 @@ on:
 
 jobs:
     TestPlugins:
-        if: github.repository == 'viciouscal/Vencord'
+        if: github.repository == 'o9ll/nun'
         runs-on: ubuntu-latest
 
         steps:

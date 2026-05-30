@@ -18,8 +18,8 @@ interface VoiceState {
 }
 
 interface VoiceStateStore {
-    getAllVoiceStates(): { [guildId: string]: { [userId: string]: VoiceState } };
-    getVoiceStatesForChannel(channelId: string): { [userId: string]: VoiceState };
+    getAllVoiceStates(): { [guildId: string]: { [userId: string]: VoiceState; }; };
+    getVoiceStatesForChannel(channelId: string): { [userId: string]: VoiceState; };
 }
 
 const VoiceStateStore: VoiceStateStore = findStoreLazy("VoiceStateStore");
@@ -95,7 +95,7 @@ function kickUserWithSettings(guildId: string, userId: string, channelId: string
             RestAPI.patch({
                 url: `/guilds/${guildId}/members/${userId}`,
                 body: body
-            }).catch(() => {})
+            }).catch(() => { })
         );
     }
 
@@ -104,7 +104,7 @@ function kickUserWithSettings(guildId: string, userId: string, channelId: string
             RestAPI.patch({
                 url: `/guilds/${guildId}/members/${userId}`,
                 body: { channel_id: null }
-            }).catch(() => {});
+            }).catch(() => { });
         }, 100);
     }
 
@@ -143,7 +143,7 @@ function getUserChannelId(userId: string): string | null {
                 return users[userId].channelId ?? null;
             }
         }
-    } catch {}
+    } catch { }
     return null;
 }
 
@@ -172,7 +172,7 @@ function monitorBlacklist() {
                 }
             }
         }
-    } catch {}
+    } catch { }
 }
 
 function startMonitoring() {
@@ -294,7 +294,7 @@ const ChannelContext: NavContextMenuPatchCallback = (children, { channel }) => {
 export default definePlugin({
     name: "VoiceChannelBlacklist",
     description: "Block users from voice channels with customizable actions",
-    authors: [Devs.viciouscal],
+    authors: [Devs.o9],
     settings,
 
     start() {
@@ -315,7 +315,7 @@ export default definePlugin({
     },
 
     flux: {
-        VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[] }) {
+        VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
             if (!voiceStates) return;
 
             for (const { userId, channelId } of voiceStates) {
@@ -330,7 +330,7 @@ export default definePlugin({
             }
         },
 
-        CHANNEL_DELETE({ channel }: { channel: { id: string; type: number } }) {
+        CHANNEL_DELETE({ channel }: { channel: { id: string; type: number; }; }) {
             if (channel?.type === 2 && channel?.id) {
                 blacklist = blacklist.filter(e => e.channelId !== channel.id);
                 console.log("[VCBlacklist] Channel deleted, cleaned blacklist");

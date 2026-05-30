@@ -498,7 +498,7 @@ function updateNotifications() {
 
     Array.from(notificationContainer.children).forEach((child: any) => {
         const shouldRemove = !newIds.has(child.dataset.userId) ||
-                           child.dataset.channelId === selectedChannelId;
+            child.dataset.channelId === selectedChannelId;
         if (shouldRemove) {
             child.style.opacity = "0";
             child.style.transition = "opacity 0.2s";
@@ -533,7 +533,7 @@ function removeContainer() {
 export default definePlugin({
     name: "HomeTyping",
     description: "Changes the home button to a typing indicator if someone in your dms is typing, and shows typing notifications",
-    authors: [Devs.Samwich, Devs.viciouscal],
+    authors: [Devs.Samwich, Devs.o9],
     settings,
 
     TypingIcon() {
