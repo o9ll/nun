@@ -143,6 +143,18 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false
     },
+    enableSoundboardBypass: {
+        description: "Allow the use of soundboard everywhere (others can't hear them)",
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    enableSoundboardGuildLimitBypass: {
+        description: "Allow the use of all sounds in the guild's soundboard no matter what the guild boost level is",
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    }
 });
 
 function hasPermission(channelId: string, permission: bigint) {
@@ -415,6 +427,30 @@ export default definePlugin({
                 replace: "true"
             }
         },
+        {
+            find: "canUseSoundboardEverywhere:function",
+            predicate: () => settings.store.enableSoundboardBypass,
+            replacement: {
+                match: /canUseSoundboardEverywhere:function\(\i\){/,
+                replace: "$&return true;"
+            },
+        },
+        {
+            find: "unavailableTooltip:\"unavailableTooltip-CuQXIg\"",
+            predicate: () => settings.store.enableSoundboardGuildLimitBypass,
+            replacement: {
+                match: /unavailableTooltip-CuQXIg/,
+                replace: ""
+            }
+        },
+        {
+            find: "premiumDisabled:\"premiumDisabled-20lb_D\"",
+            predicate: () => settings.store.enableSoundboardGuildLimitBypass,
+            replacement: {
+                match: /premiumDisabled-20lb_D/,
+                replace: ""
+            }
+        }
     ],
 
     get guildId() {

@@ -181,6 +181,33 @@ static class Logic
         catch { return "Installed"; }
     }
 
+    static string ExeDirectory()
+    {
+        var loc = Assembly.GetExecutingAssembly().Location;
+        if (!string.IsNullOrEmpty(loc)) return Path.GetDirectoryName(loc);
+        return AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\', '/');
+    }
+
+    static string BundledDesktopAsarPath()
+    {
+        try
+        {
+            var path = Path.GetFullPath(Path.Combine(ExeDirectory(), "..", "dist", ASAR));
+            return File.Exists(path) ? path : null;
+        }
+        catch { return null; }
+    }
+
+    static string BundledOpenAsarPath()
+    {
+        try
+        {
+            var path = Path.GetFullPath(Path.Combine(ExeDirectory(), "app.asar"));
+            return File.Exists(path) ? path : null;
+        }
+        catch { return null; }
+    }
+
     static string GetAsarUrl(out string tag, out long size, out string checksumUrl)
     {
         tag = ""; size = 0; checksumUrl = "";
@@ -212,6 +239,28 @@ static class Logic
             }
             return asarUrl;
         }
+    }
+
+    static bool TryDownloadRemoteAsar(string dest, Action<string> status, Action<int> progress,
+        out string tag, out long size, out string checksumUrl)
+    {
+        tag = ""; size = 0; checksumUrl = "";
+        try
+        {
+            var url = GetAsarUrl(out tag, out size, out checksumUrl);
+            if (string.IsNullOrEmpty(url)) return false;
+            ValidateDownloadUrl(url);
+            status(string.Format("Downloading {0}  ({1:F1} MB)...", tag, size / 1048576.0));
+            progress(10);
+            Download(url, dest, (pct, dl, tot) =>
+            {
+                status(string.Format("Downloading: {0:F1}/{1:F1} MB  ({2}%)",
+                    dl / 1048576.0, tot / 1048576.0, pct));
+                progress(10 + (int)(pct * 0.60));
+            });
+            return true;
+        }
+        catch { return false; }
     }
 
     static void Download(string url, string dest, Action<int, long, long> onProgress)
@@ -303,35 +352,38 @@ static class Logic
     {
         status("Fetching latest release info...");
         progress(5);
-        string tag, checksumUrl; long sz;
-        var url = GetAsarUrl(out tag, out sz, out checksumUrl);
-        if (string.IsNullOrEmpty(url))
-            throw new Exception("Could not find " + ASAR + " in the latest release");
-        ValidateDownloadUrl(url);
-
-        status(string.Format("Downloading {0}  ({1:F1} MB)...", tag, sz / 1048576.0));
-        progress(10);
         Directory.CreateDirectory(DataDir);
         var tmp = Path.Combine(Path.GetTempPath(),
             "nun_" + Guid.NewGuid().ToString("N") + ".asar");
-        Download(url, tmp, (pct, dl, tot) =>
-        {
-            status(string.Format("Downloading: {0:F1}/{1:F1} MB  ({2}%)",
-                dl / 1048576.0, tot / 1048576.0, pct));
-            progress(10 + (int)(pct * 0.60));
-        });
 
-        status("Verifying file integrity...");
-        progress(75);
-        var expectedHash = FetchExpectedHash(checksumUrl, ASAR);
-        if (!string.IsNullOrEmpty(expectedHash))
+        string tag, checksumUrl;
+        long sz;
+        var useRemote = TryDownloadRemoteAsar(tmp, status, progress, out tag, out sz, out checksumUrl);
+
+        if (useRemote)
         {
-            var actualHash = ComputeSha256(tmp);
-            if (!string.Equals(expectedHash, actualHash, StringComparison.OrdinalIgnoreCase))
+            status("Verifying file integrity...");
+            progress(75);
+            var expectedHash = FetchExpectedHash(checksumUrl, ASAR);
+            if (!string.IsNullOrEmpty(expectedHash))
             {
-                try { File.Delete(tmp); } catch { }
-                throw new Exception("SHA-256 verification failed — file is corrupt or tampered");
+                var actualHash = ComputeSha256(tmp);
+                if (!string.Equals(expectedHash, actualHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    try { File.Delete(tmp); } catch { }
+                    useRemote = false;
+                }
             }
+        }
+
+        if (!useRemote)
+        {
+            var bundled = BundledDesktopAsarPath();
+            if (string.IsNullOrEmpty(bundled))
+                throw new Exception("Could not find " + ASAR + " online or at dist/" + ASAR);
+            status("Using bundled " + ASAR + "...");
+            progress(70);
+            File.Copy(bundled, tmp, true);
         }
 
         status("Patching Discord...");
@@ -363,12 +415,29 @@ static class Logic
         status("Closing Discord...");
         progress(5);
         KillDiscord(res);
-        status("Downloading OpenAsar...");
-        progress(10);
-        ValidateDownloadUrl(OPENASAR_URL);
         var tmp = Path.Combine(Path.GetTempPath(),
             "openasar_" + Guid.NewGuid().ToString("N") + ".asar");
-        Download(OPENASAR_URL, tmp, (p, dl, tot) => progress(10 + (int)(p * 0.85)));
+        var useRemote = false;
+        try
+        {
+            status("Downloading OpenAsar...");
+            progress(10);
+            ValidateDownloadUrl(OPENASAR_URL);
+            Download(OPENASAR_URL, tmp, (p, dl, tot) => progress(10 + (int)(p * 0.85)));
+            useRemote = true;
+        }
+        catch { useRemote = false; }
+
+        if (!useRemote)
+        {
+            var bundled = BundledOpenAsarPath();
+            if (string.IsNullOrEmpty(bundled))
+                throw new Exception("Could not download OpenAsar and no bundled app.asar found");
+            status("Using bundled OpenAsar...");
+            progress(85);
+            File.Copy(bundled, tmp, true);
+        }
+
         status("Applying OpenAsar...");
         progress(97);
         File.Copy(tmp, Path.Combine(res, "app.asar"), true);
