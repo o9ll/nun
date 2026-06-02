@@ -5,14 +5,14 @@
  */
 
 import { BaseText } from "@components/index";
-import { Native } from "@mallcordplugins/songSpotlight.desktop/service";
+import { Native } from "@nun/songSpotlight.desktop/service";
 import {
     ContainerClasses,
     DMSideBarClasses,
     OverlayClasses,
     ProfileCardClasses,
     Spinner,
-} from "@mallcordplugins/songSpotlight.desktop/ui/common";
+} from "@nun/songSpotlight.desktop/ui/common";
 import { RenderSongInfo } from "@song-spotlight/api/handlers";
 import { UserData } from "@song-spotlight/api/structs";
 import { sid } from "@song-spotlight/api/util";

@@ -1,10 +1,10 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 unfamiliardev
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 const VIBES = [
@@ -23,7 +23,7 @@ const VIBES = [
 export default definePlugin({
     name: "VibeCheck",
     description: "Adds /vibe to drop a random vaporwave mood into chat.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     dependencies: ["CommandsAPI"],
     commands: [
         {

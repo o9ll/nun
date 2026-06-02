@@ -9,7 +9,7 @@ export const Native = getNative();
 import "./styles.css";
 
 import { LogsIcon } from "@components/Icons";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
@@ -257,7 +257,7 @@ async function processMessageFetch(response: FetchMessagesResponse) {
 
 export default definePlugin({
     name: "MessageLoggerEnhanced",
-    authors: [Devs.Aria, MallCordDevs.keircn],
+    authors: [Devs.Aria, NDev.keircn],
     description: "Improves MessageLogger with edited message history, ghost ping detection and more",
     tags: ["Chat", "Servers"],
     dependencies: ["MessageLogger", "HeaderBarAPI"],

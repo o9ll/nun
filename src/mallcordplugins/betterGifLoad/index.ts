@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const Quality = {
@@ -52,7 +52,7 @@ export default definePlugin({
     name: "BetterGifLoad",
     description: "Allows you to change the quality of GIFs in the GIF picker",
     tags: ["Media", "Utility"],
-    authors: [MallCordDevs.Leon135, MallCordDevs.nexpid],
+    authors: [NDev.Leon135, NDev.nexpid],
     settings,
     patches: [
         {

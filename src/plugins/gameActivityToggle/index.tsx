@@ -20,7 +20,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { UserAreaButton, UserAreaRenderProps } from "@api/UserArea";
 import { getUserSettingLazy } from "@api/UserSettings";
-import mallcordToolbox from "@mallcordplugins/mallcordToolbox";
+import nunToolbox from "@nun/nunToolbox";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { Menu } from "@webpack/common";
@@ -38,10 +38,10 @@ const settings = definePluginSettings({
         description: "Where to show the game activity toggle button",
         options: [
             { label: "Next to Mute/Deafen", value: "PANEL", default: true },
-            { label: "MallCord Toolbox", value: "TOOLBOX" }
+            { label: "Nun Toolbox", value: "TOOLBOX" }
         ],
         get hidden() {
-            return !isPluginEnabled(mallcordToolbox.name);
+            return !isPluginEnabled(nunToolbox.name);
         }
     }
 });
@@ -80,7 +80,7 @@ function GameActivityToggleButton({ iconForeground, hideTooltips, nameplate }: U
     const { location } = settings.use(["location"]);
     const showCurrentGame = ShowCurrentGame.useSetting();
 
-    if (location !== "PANEL" && isPluginEnabled(mallcordToolbox.name)) return null;
+    if (location !== "PANEL" && isPluginEnabled(nunToolbox.name)) return null;
 
     return (
         <UserAreaButton

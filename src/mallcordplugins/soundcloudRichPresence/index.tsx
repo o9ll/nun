@@ -9,7 +9,7 @@ import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import type { Activity, ActivityButton } from "@vencord/discord-types";
@@ -167,7 +167,7 @@ export default definePlugin({
     name: "SoundCloudRichPresence",
     description: "Show your currently playing SoundCloud track as Discord rich presence.",
     tags: ["Activity", "Media"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     settingsAboutComponent() {

@@ -5,8 +5,8 @@
  */
 
 import { DataStore } from "@api/index";
-import { settings } from "@mallcordplugins/musicControls/settings";
-import { Track } from "@mallcordplugins/musicControls/spotify/SpotifyStore";
+import { settings } from "@nun/musicControls/settings";
+import { Track } from "@nun/musicControls/spotify/SpotifyStore";
 
 import { getLyricsLrclib } from "./providers/lrclibAPI";
 import { getLyricsSpotify } from "./providers/SpotifyAPI";

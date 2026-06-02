@@ -1,11 +1,11 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 unfamiliardev
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { disableStyle, enableStyle } from "@api/Styles";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 import style from "./style.css?managed";
@@ -30,7 +30,7 @@ function burst(e: MouseEvent) {
 export default definePlugin({
     name: "ClickSparkles",
     description: "Sprinkles little neon sparkles wherever you click.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     start() {
         enableStyle(style);
         document.addEventListener("click", burst);

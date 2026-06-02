@@ -7,12 +7,12 @@
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
-import { listData } from "@mallcordplugins/songSpotlight.desktop/lib/api";
-import { useAuthorizationStore } from "@mallcordplugins/songSpotlight.desktop/lib/stores/AuthorizationStore";
-import { useSongStore } from "@mallcordplugins/songSpotlight.desktop/lib/stores/SongStore";
-import { cl } from "@mallcordplugins/songSpotlight.desktop/lib/utils";
-import { Spinner, WidgetClasses } from "@mallcordplugins/songSpotlight.desktop/ui/common";
-import { openSettingsModal } from "@mallcordplugins/songSpotlight.desktop/ui/settings";
+import { listData } from "@nun/songSpotlight.desktop/lib/api";
+import { useAuthorizationStore } from "@nun/songSpotlight.desktop/lib/stores/AuthorizationStore";
+import { useSongStore } from "@nun/songSpotlight.desktop/lib/stores/SongStore";
+import { cl } from "@nun/songSpotlight.desktop/lib/utils";
+import { Spinner, WidgetClasses } from "@nun/songSpotlight.desktop/ui/common";
+import { openSettingsModal } from "@nun/songSpotlight.desktop/ui/settings";
 import { sid } from "@song-spotlight/api/util";
 import { classes } from "@utils/misc";
 import { User } from "@vencord/discord-types";

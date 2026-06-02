@@ -1,5 +1,5 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 unfamiliardev
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -7,7 +7,7 @@
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
 import * as DataStore from "@api/DataStore";
 import { showNotification } from "@api/Notifications";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 interface Reminder {
@@ -16,7 +16,7 @@ interface Reminder {
     channelId: string;
 }
 
-const KEY = "MallCord_reminders";
+const KEY = "Nun_reminders";
 const UNITS: Record<string, number> = {
     m: 60_000,
     h: 3_600_000,
@@ -48,7 +48,7 @@ async function schedule(r: Reminder) {
 export default definePlugin({
     name: "RemindMe",
     description: "/remindme <amount> <m|h|d> <text> pings you with a desktop notification later. Survives restarts.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     dependencies: ["CommandsAPI"],
 
     async start() {

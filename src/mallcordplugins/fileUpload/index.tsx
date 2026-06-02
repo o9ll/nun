@@ -9,7 +9,7 @@ import "./styles.css";
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { OpenExternalIcon } from "@components/Icons";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
@@ -251,7 +251,7 @@ export default definePlugin({
     name: "FileUpload",
     description: "Upload images and videos to file hosting services like Zipline and Nest",
     tags: ["Media"],
-    authors: [MallCordDevs.creations, MallCordDevs.keircn, Devs.ScattrdBlade],
+    authors: [NDev.creations, NDev.keircn, Devs.ScattrdBlade],
     settings,
     patches: [
         {

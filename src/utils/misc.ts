@@ -19,7 +19,7 @@
 import { User } from "@vencord/discord-types";
 import { ChannelStore, GuildMemberStore, IconUtils } from "@webpack/common";
 
-import { MALLCORD_HELPERS, MallCordDevsById, GUILD_ID, SUPPORT_CHANNEL_ID, VencordDevsById } from "./constants";
+import { NUN_HELPERS, NDevById, GUILD_ID, SUPPORT_CHANNEL_ID, VencordDevsById } from "./constants";
 
 /**
  * Calls .join(" ") on the arguments
@@ -81,10 +81,10 @@ export function identity<T>(value: T): T {
 export const isPluginDev = (id: string) => Object.hasOwn(VencordDevsById, id);
 export const shouldShowContributorBadge = (id: string) => isPluginDev(id) && VencordDevsById[id].badge !== false;
 
-export const isMallCordPluginDev = (id: string) => Object.hasOwn(MallCordDevsById, id);
-export const shouldShowMallCordContributorBadge = (id: string) => isMallCordPluginDev(id) && MallCordDevsById[id].badge !== false;
+export const isNunPluginDev = (id: string) => Object.hasOwn(NDevById, id);
+export const shouldShowNunContributorBadge = (id: string) => isNunPluginDev(id) && NDevById[id].badge !== false;
 
-export const isAnyPluginDev = (id: string) => Object.hasOwn(VencordDevsById, id) || Object.hasOwn(MallCordDevsById, id);
+export const isAnyPluginDev = (id: string) => Object.hasOwn(VencordDevsById, id) || Object.hasOwn(NDevById, id);
 
 export function pluralise(amount: number, singular: string, plural = singular + "s") {
     return amount === 1 ? `${amount} ${singular}` : `${amount} ${plural}`;
@@ -106,7 +106,7 @@ export function tryOrElse<T>(func: () => T, fallback: T): T {
     }
 }
 
-export function isMallCordGuild(id: string | null | undefined, isGuildId: boolean = false): boolean {
+export function isNunGuild(id: string | null | undefined, isGuildId: boolean = false): boolean {
     if (!id) return false;
     if (isGuildId) return id === GUILD_ID;
     const channel = ChannelStore.getChannel(id);
@@ -119,12 +119,12 @@ export function isSupportChannel(channelId: string | null | undefined): boolean 
     return channelId === SUPPORT_CHANNEL_ID;
 }
 
-export function isMallCordSupport(userId: string | null | undefined): boolean {
+export function isNunSupport(userId: string | null | undefined): boolean {
     if (!userId) return false;
 
     const member = GuildMemberStore.getMember(GUILD_ID, userId);
     if (!member) return false;
-    return member.roles.includes(MALLCORD_HELPERS) || false;
+    return member.roles.includes(NUN_HELPERS) || false;
 }
 
 export function removeFromArray<T>(arr: T[], predicate: (e: T) => boolean) {

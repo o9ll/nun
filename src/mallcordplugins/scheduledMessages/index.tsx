@@ -8,7 +8,7 @@ import "./styles.css";
 
 import { MessageOptions } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 import { isScheduleModeEnabled, ScheduledMessagesButton, setScheduleModeEnabled } from "./components/ChatBarButton";
@@ -88,7 +88,7 @@ export default definePlugin({
     description: "Schedule messages to be sent at a specific time or after a delay.",
     tags: ["Chat", "Utility"],
     dependencies: ["ChatInputButtonAPI", "MessageAccessoriesAPI", "MessageEventsAPI"],
-    authors: [MallCordDevs.mmeta, Devs.prism],
+    authors: [NDev.mmeta, Devs.prism],
     settings,
 
     flux: {

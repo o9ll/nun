@@ -10,7 +10,7 @@ import { Settings, SettingsStore } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { HeadphonesIcon } from "@components/Icons";
 import { openPluginModal } from "@components/settings/tabs";
-import { toggleEnabled } from "@mallcordplugins/mallcordHelper/utils";
+import { toggleEnabled } from "@nun/nunHelper/utils";
 import { copyWithToast } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import type { Plugin } from "@utils/types";
@@ -1508,12 +1508,12 @@ async function prunePinned() {
 
 const BUILT_IN_COMMANDS: CommandEntry[] = [
     {
-        id: "open-mallcord-settings",
-        label: "Open MallCord Settings",
-        keywords: ["settings", "mallcord"],
+        id: "open-nun-settings",
+        label: "Open Nun Settings",
+        keywords: ["settings", "nun"],
         categoryId: DEFAULT_CATEGORY_ID,
         tags: [TAG_NAVIGATION, TAG_CORE],
-        handler: () => SettingsRouter.openUserSettings("mallcord_main_panel")
+        handler: () => SettingsRouter.openUserSettings("nun_main_panel")
     },
     {
         id: "reload-windows",
@@ -2333,7 +2333,7 @@ function registerUpdateCommands() {
     registerCommand({
         id: "check-for-updates",
         label: "Check for Updates",
-        description: "Checks for MallCord updates",
+        description: "Checks for Nun updates",
         keywords: ["updates", "check", "updater"],
         categoryId: "updates",
         tags: [TAG_DEVELOPER, TAG_UTILITY],
@@ -2355,11 +2355,11 @@ function registerUpdateCommands() {
     registerCommand({
         id: "open-changelog",
         label: "View Changelog",
-        description: "Opens the MallCord changelog",
+        description: "Opens the Nun changelog",
         keywords: ["updates", "changelog"],
         categoryId: "updates",
         tags: [TAG_DEVELOPER, TAG_NAVIGATION],
-        handler: () => SettingsRouter.openUserSettings("mallcord_changelog_panel")
+        handler: () => SettingsRouter.openUserSettings("nun_changelog_panel")
     });
 }
 
@@ -3647,8 +3647,8 @@ function registerPluginChangeCommands() {
     });
 
     registerCommand({
-        id: "restart-mallcord",
-        label: "Restart MallCord",
+        id: "restart-nun",
+        label: "Restart Nun",
         description: "Reloads the Discord client window",
         keywords: ["restart", "reload"],
         categoryId: "plugins-settings",
@@ -3785,7 +3785,7 @@ function registerCustomizationCommands() {
         keywords: ["theme", "themes", "library"],
         categoryId: DEFAULT_CATEGORY_ID,
         tags: [TAG_CUSTOMIZATION, TAG_NAVIGATION],
-        handler: () => SettingsRouter.openUserSettings("mallcord_themes_panel")
+        handler: () => SettingsRouter.openUserSettings("nun_themes_panel")
     });
 }
 

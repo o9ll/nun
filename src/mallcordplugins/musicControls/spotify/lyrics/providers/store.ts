@@ -5,9 +5,9 @@
  */
 
 import { showNotification } from "@api/Notifications";
-import { settings } from "@mallcordplugins/musicControls/settings";
-import { getLyrics, lyricFetchers, providers, updateLyrics } from "@mallcordplugins/musicControls/spotify/lyrics/api";
-import { SpotifyStore, type Track } from "@mallcordplugins/musicControls/spotify/SpotifyStore";
+import { settings } from "@nun/musicControls/settings";
+import { getLyrics, lyricFetchers, providers, updateLyrics } from "@nun/musicControls/spotify/lyrics/api";
+import { SpotifyStore, type Track } from "@nun/musicControls/spotify/SpotifyStore";
 import { proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher } from "@webpack/common";
 

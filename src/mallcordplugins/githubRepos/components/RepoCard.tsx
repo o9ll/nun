@@ -5,8 +5,8 @@
  */
 
 import { BaseText } from "@components/BaseText";
-import { getLanguageColor } from "@mallcordplugins/githubRepos/colors";
-import { RepoCardProps } from "@mallcordplugins/githubRepos/types";
+import { getLanguageColor } from "@nun/githubRepos/colors";
+import { RepoCardProps } from "@nun/githubRepos/types";
 import { React, Tooltip } from "@webpack/common";
 
 import { cl } from "..";

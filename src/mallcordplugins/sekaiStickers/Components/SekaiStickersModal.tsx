@@ -7,7 +7,7 @@
 import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
-import { characters } from "@mallcordplugins/sekaiStickers/characters.json";
+import { characters } from "@nun/sekaiStickers/characters.json";
 import { RenderModalProps } from "@vencord/discord-types";
 import { ChannelStore, Modal, openModal, React, SelectedChannelStore, Slider, TextArea, UploadHandler } from "@webpack/common";
 

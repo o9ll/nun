@@ -1,11 +1,11 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 Dann
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { ApplicationCommandOptionType, findOption } from "@api/Commands";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 const UNITS: Record<string, number> = {
@@ -17,7 +17,7 @@ const UNITS: Record<string, number> = {
 export default definePlugin({
     name: "TimestampMaker",
     description: "/timestamp builds a Discord <t:> timestamp that shows in everyone's local time.",
-    authors: [MallCordDevs.Dann],
+    authors: [NDev.Dann],
     dependencies: ["CommandsAPI"],
     commands: [
         {

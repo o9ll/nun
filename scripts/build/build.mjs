@@ -77,7 +77,7 @@ const globNativesPlugin = {
         });
 
         build.onLoad({ filter, namespace: "import-natives" }, async () => {
-            const pluginDirs = ["plugins", "mallcordplugins", "userplugins"];
+            const pluginDirs = ["plugins", "nun", "userplugins"];
             let code = "";
             let natives = "\n";
             let i = 0;
@@ -177,7 +177,7 @@ const buildConfigs = ([
 await buildOrWatchAll(buildConfigs);
 
 await writeFile("dist/desktop/package.json", JSON.stringify({
-    name: "mallcord",
+    name: "nun",
     main: "patcher.js"
 }));
 

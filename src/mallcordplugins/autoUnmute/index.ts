@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-// Ported to MallCord from Nightcord (original author: Bash); see https://git.nightcord.su/nightcord/nightcord
+// Ported to Nun from Nightcord (original author: Bash); see https://git.nightcord.su/nightcord/nightcord
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { ChannelStore, Constants, PermissionsBits, PermissionStore, RestAPI, UserStore } from "@webpack/common";
@@ -33,7 +33,7 @@ async function patchMember(userId: string, guildId: string, body: object) {
 export default definePlugin({
     name: "AutoUnmute",
     description: "Automatically unmutes/undeafens you when you're server muted or deafened, if you have permission.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
 
     flux: {
         VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {

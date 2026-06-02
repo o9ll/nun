@@ -64,7 +64,7 @@ function VencordPopoutButton() {
                     ref={buttonRef}
                     className="vc-toolbox-btn"
                     onClick={() => setShow(v => !v)}
-                    tooltip={isShown ? null : "MallCord Toolbox"}
+                    tooltip={isShown ? null : "Nun Toolbox"}
                     icon={Icon}
                     selected={isShown}
                 />
@@ -73,10 +73,10 @@ function VencordPopoutButton() {
     );
 }
 
-migratePluginSettings("MallCordToolbox", "VencordToolbox");
+migratePluginSettings("NunToolbox", "VencordToolbox");
 export default definePlugin({
-    name: "MallCordToolbox",
-    description: "Adds a button next to the inbox button in the channel header that houses MallCord quick actions",
+    name: "NunToolbox",
+    description: "Adds a button next to the inbox button in the channel header that houses Nun quick actions",
     tags: ["Voice", "Accessibility"],
     authors: [Devs.Ven, Devs.AutumnVN],
     dependencies: ["HeaderBarAPI"],

@@ -7,7 +7,7 @@
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { React } from "@webpack/common";
 
@@ -148,7 +148,7 @@ export default definePlugin({
     description: "Suffixes 'ington' to a random word in your message",
     dependencies: ["ChatInputButtonAPI"],
     tags: ["Fun"],
-    authors: [MallCordDevs.zyqunix, MallCordDevs.BioTomateDE],
+    authors: [NDev.zyqunix, NDev.BioTomateDE],
     settings,
     chatBarButton: {
         icon: disabledIcon,

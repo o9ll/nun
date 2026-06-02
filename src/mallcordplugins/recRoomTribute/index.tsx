@@ -5,7 +5,7 @@
  */
 
 import { get as dsGet, set as dsSet } from "@api/DataStore";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { React, showToast, Toasts } from "@webpack/common";
 
@@ -15,7 +15,7 @@ export default definePlugin({
     name: "RecRoomTribute",
     description: "A memorial to Rec Room (2016–2026), the VR social platform that brought millions together before closing on June 1, 2026.",
     tags: ["Fun"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
 
     settingsAboutComponent() {
         return (

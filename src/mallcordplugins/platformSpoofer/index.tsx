@@ -6,7 +6,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Notice } from "@components/Notice";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { UserStore } from "@webpack/common";
 
@@ -53,7 +53,7 @@ export default definePlugin({
     name: "PlatformSpoofer",
     description: "Spoof what platform or device you're on",
     tags: ["Utility"],
-    authors: [MallCordDevs.Drag, MallCordDevs.neoarz],
+    authors: [NDev.Drag, NDev.neoarz],
     settingsAboutComponent: () => (
         <Notice.Warning>
             We can't guarantee this plugin won't get you warned or banned.
@@ -79,7 +79,7 @@ export default definePlugin({
             replacement: [
                 {
                     match: /(?<=\}\),)(\i)/g,
-                    replace: "$1=e=>({enabled:true}),_mallcord_$1"
+                    replace: "$1=e=>({enabled:true}),_nun_$1"
                 }
             ]
         },

@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { providers } from "@mallcordplugins/musicControls/spotify/lyrics/api";
-import { lyricsAlternative } from "@mallcordplugins/musicControls/spotify/lyrics/providers/store";
+import { providers } from "@nun/musicControls/spotify/lyrics/api";
+import { lyricsAlternative } from "@nun/musicControls/spotify/lyrics/providers/store";
 import { copyWithToast } from "@utils/discord";
 import { findComponentByCodeLazy } from "@webpack";
 import { FluxDispatcher, Menu } from "@webpack/common";

@@ -18,7 +18,7 @@ const preprocessors: { [preprocessor: string]: (text: string, vars: Record<strin
             .map(([name, value]) => `--${name}: ${value}`)
             .join("; ");
 
-        return `/* ==MallCord== */\n:root{${variables}}\n/* ==/MallCord== */${text}`;
+        return `/* ==Nun== */\n:root{${variables}}\n/* ==/Nun== */${text}`;
     },
 
     async uso(text: string, vars: Record<string, string>) {
@@ -68,7 +68,7 @@ export async function compileUsercss(fileName: string) {
     const preprocessorFn = preprocessors[preprocessor];
 
     if (!preprocessorFn) {
-        UserCSSLogger.error("File", fileName, "requires preprocessor", preprocessor, "which isn't known to MallCord");
+        UserCSSLogger.error("File", fileName, "requires preprocessor", preprocessor, "which isn't known to Nun");
         return null;
     }
 

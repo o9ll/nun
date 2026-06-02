@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { settings } from "@mallcordplugins/musicControls/settings";
-import { TidalLrcStore } from "@mallcordplugins/musicControls/tidal/lyrics/providers/store";
-import { EnhancedLyric } from "@mallcordplugins/musicControls/tidal/lyrics/types";
-import { TidalStore } from "@mallcordplugins/musicControls/tidal/TidalStore";
+import { settings } from "@nun/musicControls/settings";
+import { TidalLrcStore } from "@nun/musicControls/tidal/lyrics/providers/store";
+import { EnhancedLyric } from "@nun/musicControls/tidal/lyrics/types";
+import { TidalStore } from "@nun/musicControls/tidal/TidalStore";
 import { classNameFactory } from "@utils/css";
 import { findCssClassesLazy } from "@webpack";
 import { React, useEffect, useState, useStateFromStores } from "@webpack/common";

@@ -5,10 +5,10 @@
  */
 
 import { BaseText } from "@components/BaseText";
-import { SpotifyStore, Track } from "@mallcordplugins/musicControls/spotify/SpotifyStore";
+import { SpotifyStore, Track } from "@nun/musicControls/spotify/SpotifyStore";
 import { openImageModal } from "@utils/discord";
 import { RenderModalProps } from "@vencord/discord-types";
-import { Modal,React } from "@webpack/common";
+import { Modal, React } from "@webpack/common";
 
 import { cl, NoteSvg, scrollClasses, useLyrics } from "./util";
 

@@ -7,10 +7,10 @@
 import { AudioPlayerInterface, createAudioPlayer } from "@api/AudioPlayer";
 import { HeaderBarButton } from "@api/HeaderBar";
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { RenderModalProps } from "@vencord/discord-types";
-import { Modal,openModal, React } from "@webpack/common";
+import { Modal, openModal, React } from "@webpack/common";
 let boopSound: AudioPlayerInterface;
 let song: AudioPlayerInterface;
 
@@ -118,7 +118,7 @@ const settings = definePluginSettings({
     songLink: {
         description: "URL for the song to play",
         type: OptionType.STRING,
-        default: "https://github.com/MallCord/Equibored/raw/main/sounds/soggy/song.mp3?raw=true",
+        default: "https://github.com/o9ll/unun/raw/main/sounds/soggy/song.mp3?raw=true",
         onChange(newValue) {
             assignSong(newValue, settings.store.songVolume * 100);
         },
@@ -126,7 +126,7 @@ const settings = definePluginSettings({
     boopLink: {
         description: "URL for the boop sound",
         type: OptionType.STRING,
-        default: "https://github.com/MallCord/Equibored/raw/main/sounds/soggy/honk.wav?raw=true",
+        default: "https://github.com/o9ll/unun/raw/main/sounds/soggy/honk.wav?raw=true",
         onChange(newValue) {
             assignBoop(newValue, settings.store.boopVolume * 100);
         }
@@ -137,7 +137,7 @@ export default definePlugin({
     name: "Soggy",
     description: "Adds a soggy button to the toolbox",
     tags: ["Fun"],
-    authors: [MallCordDevs.sliwka],
+    authors: [NDev.sliwka],
     settings,
     dependencies: ["AudioPlayerAPI", "HeaderBarAPI"],
 

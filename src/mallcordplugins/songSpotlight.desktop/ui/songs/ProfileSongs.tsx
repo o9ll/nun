@@ -8,18 +8,18 @@ import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { LinkIcon, PencilIcon } from "@components/Icons";
 import { Link } from "@components/Link";
-import { listData } from "@mallcordplugins/songSpotlight.desktop/lib/api";
-import { useAuthorizationStore } from "@mallcordplugins/songSpotlight.desktop/lib/stores/AuthorizationStore";
-import { useSongStore } from "@mallcordplugins/songSpotlight.desktop/lib/stores/SongStore";
-import { cl } from "@mallcordplugins/songSpotlight.desktop/lib/utils";
-import settings from "@mallcordplugins/songSpotlight.desktop/settings";
+import { listData } from "@nun/songSpotlight.desktop/lib/api";
+import { useAuthorizationStore } from "@nun/songSpotlight.desktop/lib/stores/AuthorizationStore";
+import { useSongStore } from "@nun/songSpotlight.desktop/lib/stores/SongStore";
+import { cl } from "@nun/songSpotlight.desktop/lib/utils";
+import settings from "@nun/songSpotlight.desktop/settings";
 import {
     CardClasses,
     MoreHorizontalIcon,
     OverlayClasses,
     Spinner,
-} from "@mallcordplugins/songSpotlight.desktop/ui/common";
-import { openSettingsModal } from "@mallcordplugins/songSpotlight.desktop/ui/settings";
+} from "@nun/songSpotlight.desktop/ui/common";
+import { openSettingsModal } from "@nun/songSpotlight.desktop/ui/settings";
 import { sid } from "@song-spotlight/api/util";
 import { copyWithToast } from "@utils/discord";
 import { classes } from "@utils/index";

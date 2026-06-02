@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-// Ported to MallCord from Nightcord; see https://git.nightcord.su/nightcord/nightcord
+// Ported to Nun from Nightcord; see https://git.nightcord.su/nightcord/nightcord
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { moment, useEffect, useReducer } from "@webpack/common";
 
@@ -90,7 +90,7 @@ export default definePlugin({
     name: "RealtimeTimestamps",
     description: "Replaces Discord timestamps (e.g. 15:31) with live seconds (e.g. 15:34:21), updated every second.",
     tags: ["Appearance", "Chat", "Utility"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     renderTimestamp,

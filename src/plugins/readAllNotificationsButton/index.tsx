@@ -21,7 +21,7 @@ import "./style.css";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { TextButton } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { ActiveJoinedThreadsStore, FluxDispatcher, GuildChannelStore, GuildStore, React, ReadStateStore } from "@webpack/common";
 
@@ -67,7 +67,7 @@ export default definePlugin({
     name: "ReadAllNotificationsButton",
     description: "Read all server notifications with a single button click!",
     tags: ["Notifications", "Shortcuts"],
-    authors: [Devs.kemo, MallCordDevs.KrystalSkull],
+    authors: [Devs.kemo, NDev.KrystalSkull],
     dependencies: ["ServerListAPI"],
 
     renderReadAllButton: ErrorBoundary.wrap(ReadAllButton, { noop: true }),

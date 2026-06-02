@@ -8,7 +8,7 @@ import { ApplicationCommandInputType } from "@api/Commands";
 import { showNotification } from "@api/Notifications";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
-import mallcordToolbox from "@mallcordplugins/mallcordToolbox";
+import nunToolbox from "@nun/nunToolbox";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { saveFile } from "@utils/web";
@@ -102,12 +102,12 @@ async function saveWorkingGifs() {
 
 const settings = definePluginSettings({
     showToolboxButton: {
-        description: "Show 'Save Favorite GIFs' button in MallCord Toolbox (Requires Reload)",
+        description: "Show 'Save Favorite GIFs' button in Nun Toolbox (Requires Reload)",
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
         get hidden() {
-            return !isPluginEnabled(mallcordToolbox.name);
+            return !isPluginEnabled(nunToolbox.name);
         }
     }
 });

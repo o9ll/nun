@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-// Ported to MallCord from Nightcord; see https://git.nightcord.su/nightcord/nightcord
+// Ported to Nun from Nightcord; see https://git.nightcord.su/nightcord/nightcord
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 let clickListener: (e: MouseEvent) => void;
@@ -14,7 +14,7 @@ let clickListener: (e: MouseEvent) => void;
 export default definePlugin({
     name: "DoubleEmoji",
     description: "Keeps the emoji picker open on click and highlights the emoji you picked.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
 
     start() {
         clickListener = (e: MouseEvent) => {

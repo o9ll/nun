@@ -7,9 +7,9 @@
 import * as DataStore from "@api/DataStore";
 import { Button } from "@components/Button";
 import { Margins } from "@components/margins";
-import type { Theme, ThemeLikeProps } from "@mallcordplugins/themeLibrary/types";
-import { isAuthorized } from "@mallcordplugins/themeLibrary/utils/auth";
-import { LikeIcon } from "@mallcordplugins/themeLibrary/utils/Icons";
+import type { Theme, ThemeLikeProps } from "@nun/themeLibrary/types";
+import { isAuthorized } from "@nun/themeLibrary/utils/auth";
+import { LikeIcon } from "@nun/themeLibrary/utils/Icons";
 import { useEffect, useRef, useState } from "@webpack/common";
 
 import { logger, themeRequest } from "./ThemeTab";

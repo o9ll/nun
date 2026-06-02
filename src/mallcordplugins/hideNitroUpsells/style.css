@@ -1,4 +1,4 @@
-/* MallCord HideNitroUpsells — strip Nitro/boost nag UI */
+/* Nun HideNitroUpsells — strip Nitro/boost nag UI */
 
 /* Nitro tab in user settings sidebar */
 [class*="side"] [aria-label*="Nitro" i],

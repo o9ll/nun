@@ -6,7 +6,7 @@
 
 import { AudioPlayerInterface, createAudioPlayer } from "@api/AudioPlayer";
 import { definePluginSettings } from "@api/Settings";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 let clickCount = 0;
@@ -34,11 +34,11 @@ export default definePlugin({
     name: "Equissant",
     description: "Crossant every specified amount of clicks :trolley:",
     tags: ["Fun"],
-    authors: [MallCordDevs.SomeAspy, Devs.thororen],
+    authors: [NDev.SomeAspy, Devs.thororen],
     dependencies: ["AudioPlayerAPI"],
     settings,
     start() {
-        croissant = createAudioPlayer("https://github.com/MallCord/Equibored/raw/main/sounds/equissant/croissant.mp3", { persistent: true });
+        croissant = createAudioPlayer("https://github.com/o9ll/unun/raw/main/sounds/equissant/croissant.mp3", { persistent: true });
         document.addEventListener("click", play);
     },
     stop() {

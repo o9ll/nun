@@ -7,8 +7,8 @@
 import { BaseText } from "@components/BaseText";
 import { QrCodeIcon } from "@components/Icons";
 import { wrapTab } from "@components/settings";
-import loginWithQR from "@mallcordplugins/loginWithQR";
-import { images } from "@mallcordplugins/loginWithQR/images";
+import loginWithQR from "@nun/loginWithQR";
+import { images } from "@nun/loginWithQR/images";
 import { findByPropsLazy } from "@webpack";
 import {
     RestAPI,

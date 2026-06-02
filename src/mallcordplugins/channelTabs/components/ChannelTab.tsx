@@ -5,9 +5,9 @@
  */
 
 import { BaseText } from "@components/BaseText";
-import { ChannelTabsProps, closeTab, ensureUnreadFallbackCountsLoaded, getNotificationDotState, getUnreadFallbackCounts, isTabSelected, moveDraggedTabs, moveToTab, openedTabs, settings, updateUnreadFallbackCounts } from "@mallcordplugins/channelTabs/util";
-import { ActivityIcon, CircleQuestionIcon, DiscoveryIcon, EnvelopeIcon, FriendsIcon, ICYMIIcon, NitroIcon, QuestIcon, ShopIcon } from "@mallcordplugins/channelTabs/util/icons";
-import { getActiveAutoCompletes } from "@mallcordplugins/questify/utils/completion";
+import { ChannelTabsProps, closeTab, ensureUnreadFallbackCountsLoaded, getNotificationDotState, getUnreadFallbackCounts, isTabSelected, moveDraggedTabs, moveToTab, openedTabs, settings, updateUnreadFallbackCounts } from "@nun/channelTabs/util";
+import { ActivityIcon, CircleQuestionIcon, DiscoveryIcon, EnvelopeIcon, FriendsIcon, ICYMIIcon, NitroIcon, QuestIcon, ShopIcon } from "@nun/channelTabs/util/icons";
+import { getActiveAutoCompletes } from "@nun/questify/utils/completion";
 import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, getIntlMessage, getUniqueUsername } from "@utils/discord";
 import { classes } from "@utils/misc";

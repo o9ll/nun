@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { ReporterTestable } from "@utils/types";
 
@@ -75,15 +75,15 @@ export default definePlugin({
     description: "Unified rich presence hub for AudioBookShelf, osu!, stats.fm, Jellyfin, ListenBrainz, and Gensokyo Radio.",
     tags: ["Activity"],
     authors: [
-        MallCordDevs.vmohammad,
+        NDev.vmohammad,
         Devs.AutumnVN,
-        MallCordDevs.Crxa,
+        NDev.Crxa,
         Devs.SerStars,
-        MallCordDevs.ZcraftElite,
-        MallCordDevs.qouesm,
+        NDev.ZcraftElite,
+        NDev.qouesm,
         Devs.RyanCaoDev,
-        MallCordDevs.Prince527,
-        MallCordDevs.creations,
+        NDev.Prince527,
+        NDev.creations,
     ],
     reporterTestable: ReporterTestable.None,
 

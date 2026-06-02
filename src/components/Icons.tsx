@@ -1092,7 +1092,7 @@ export function HammerAndChiselIcon(props: IconProps) {
     );
 }
 
-export function MallCordIcon(props: IconProps) {
+export function NunIcon(props: IconProps) {
     return (
         <Icon
             {...props}

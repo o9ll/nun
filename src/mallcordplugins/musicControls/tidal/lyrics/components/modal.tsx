@@ -5,9 +5,9 @@
  */
 
 import { BaseText } from "@components/BaseText";
-import { TidalStore, Track } from "@mallcordplugins/musicControls/tidal/TidalStore";
+import { TidalStore, Track } from "@nun/musicControls/tidal/TidalStore";
 import { RenderModalProps } from "@vencord/discord-types";
-import { Modal,React } from "@webpack/common";
+import { Modal, React } from "@webpack/common";
 
 import { cl, NoteSvg, scrollClasses, useLyrics } from "./util";
 

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { iconsModule } from "@mallcordplugins/_core/concatenatedModules";
+import { iconsModule } from "@nun/_core/concatenatedModules";
 import { Icon } from "@vencord/discord-types";
 
 let iconNames: string[] | undefined;

@@ -1,15 +1,15 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: MallCord installer — clones, builds, and injects from source.
+:: Nun installer — clones, builds, and injects from source.
 :: Run as a normal user (NOT as Administrator).
 
-set REPO_URL=https://github.com/MallCord/MallCord
-set INSTALL_DIR=%USERPROFILE%\MallCord
+set REPO_URL=https://github.com/o9ll/nun
+set INSTALL_DIR=%USERPROFILE%\Nun
 
 echo.
 echo   +---------------------------------+
-echo   ^|       MallCord Installer        ^|
+echo   ^|       Nun Installer        ^|
 echo   +---------------------------------+
 echo.
 
@@ -78,7 +78,7 @@ for /f "tokens=*" %%v in ('pnpm --version 2^>nul') do echo   [OK] pnpm %%v
 :: ── Clone / update ────────────────────────────────────────────────────────────
 echo.
 if exist "%INSTALL_DIR%\.git" (
-    echo   MallCord already found at %INSTALL_DIR%
+    echo   Nun already found at %INSTALL_DIR%
     choice /C YN /M "   Update to the latest version"
     set UPDATE_CHOICE=!errorlevel!
     echo.
@@ -99,7 +99,7 @@ if exist "%INSTALL_DIR%\.git" (
     echo          Delete it and re-run.
     goto :fail
 ) else (
-    echo   Cloning MallCord into %INSTALL_DIR%...
+    echo   Cloning Nun into %INSTALL_DIR%...
     git clone "%REPO_URL%" "%INSTALL_DIR%"
     if %errorlevel% neq 0 (
         echo   ERROR: Clone failed. Check your internet connection.
@@ -122,7 +122,7 @@ echo   [OK] Dependencies installed.
 
 :: ── Build ─────────────────────────────────────────────────────────────────────
 echo.
-echo   Building MallCord...
+echo   Building Nun...
 call pnpm build
 if %errorlevel% neq 0 (
     echo   ERROR: Build failed. See output above.
@@ -141,7 +141,7 @@ if %errorlevel% neq 0 (
 
 echo.
 echo   ============================================
-echo     MallCord installed! Start Discord to load it.
+echo     Nun installed! Start Discord to load it.
 echo   ============================================
 echo.
 goto :end

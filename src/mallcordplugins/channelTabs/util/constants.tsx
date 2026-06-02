@@ -7,8 +7,8 @@
 import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { ChannelTabsPreview } from "@mallcordplugins/channelTabs/components/ChannelTabsContainer";
-import { KeybindSettings } from "@mallcordplugins/channelTabs/components/KeybindSettings";
+import { ChannelTabsPreview } from "@nun/channelTabs/components/ChannelTabsContainer";
+import { KeybindSettings } from "@nun/channelTabs/components/KeybindSettings";
 import { Logger } from "@utils/Logger";
 import { makeRange, OptionType } from "@utils/types";
 import { SearchableSelect, useState } from "@webpack/common";

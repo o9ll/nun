@@ -6,8 +6,8 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
-import { AchievementsIcon, AppsIcon, CreditCardIcon, MallCordIcon, GameControllerIcon, HammerAndChiselIcon, MainSettingsIcon, PencilSparkleIcon, UserIcon } from "@components/Icons";
-import { buildPluginMenuEntries, buildThemeMenuEntries } from "@mallcordplugins/mallcordToolbox/menu";
+import { AchievementsIcon, AppsIcon, CreditCardIcon, NunIcon, GameControllerIcon, HammerAndChiselIcon, MainSettingsIcon, PencilSparkleIcon, UserIcon } from "@components/Icons";
+import { buildPluginMenuEntries, buildThemeMenuEntries } from "@nun/nunToolbox/menu";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { getIntlMessage } from "@utils/discord";
@@ -26,7 +26,7 @@ const Classes = findCssClassesLazy("animating", "baseLayer", "bg", "layer", "lay
 const SECTION_ICONS: Record<string, Icon> = {
     profile_section: PencilSparkleIcon,
     user_section: UserIcon,
-    mallcord_section: MallCordIcon,
+    nun_section: NunIcon,
     billing_section: CreditCardIcon,
     app_section: AppsIcon,
     activity_section: GameControllerIcon,
@@ -206,8 +206,8 @@ export default definePlugin({
             if (!item?.props) continue;
             const { key, props } = item;
 
-            if (key === "mallcord_plugins" || key === "mallcord_themes") {
-                const children = key === "mallcord_plugins"
+            if (key === "nun_plugins" || key === "nun_themes") {
+                const children = key === "nun_plugins"
                     ? buildPluginMenuEntries()
                     : buildThemeMenuEntries();
 

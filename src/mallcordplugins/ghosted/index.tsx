@@ -10,11 +10,11 @@ import { findGroupChildrenByChildId } from "@api/ContextMenu";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { Channel } from "@vencord/discord-types";
-import { Menu, openModal,Tooltip, useEffect, useState } from "@webpack/common";
+import { Menu, openModal, Tooltip, useEffect, useState } from "@webpack/common";
 
 import { Boo, clearChannelFromGhost, getBooCount, getGhostedChannels, onBooCountChange } from "./Boo";
 import { getChannelDisplayName, GhostedUsersModal } from "./GhostedUsersModal";
@@ -146,7 +146,7 @@ export default definePlugin({
     name: "Ghosted",
     description: "A cute ghost will appear if you don't answer their DMs",
     tags: ["Chat", "Utility"],
-    authors: [MallCordDevs.vei, Devs.sadan, MallCordDevs.justjxke, MallCordDevs.iamme],
+    authors: [NDev.vei, Devs.sadan, NDev.justjxke, NDev.iamme],
     settings,
     dependencies: ["AudioPlayerAPI", "ServerListAPI"],
     contextMenus: {

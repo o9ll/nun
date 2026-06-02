@@ -5,7 +5,7 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { ChannelType } from "@vencord/discord-types/enums";
 import { findByPropsLazy } from "@webpack";
@@ -55,7 +55,7 @@ export default definePlugin({
     name: "VoiceChannelLog",
     description: "Logs voice channel activity including joins, leaves, soundboard, mute, camera, screenshare, and more.",
     tags: ["Servers", "Utility", "Voice"],
-    authors: [Devs.Sqaaakoi, Devs.thororen, MallCordDevs.nyx, Devs.Moxxie, MallCordDevs.Fres, Devs.amy],
+    authors: [Devs.Sqaaakoi, Devs.thororen, NDev.nyx, Devs.Moxxie, NDev.Fres, Devs.amy],
     dependencies: ["AudioPlayerAPI", "HeaderBarAPI"],
     settings,
     contextMenus: {

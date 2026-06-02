@@ -6,7 +6,7 @@
 
 import { Notifications } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { MessageJSON } from "@vencord/discord-types";
@@ -35,7 +35,7 @@ const settings = definePluginSettings({
 });
 
 export default definePlugin({
-    authors: [MallCordDevs.cassie, MallCordDevs.mochienya],
+    authors: [NDev.cassie, NDev.mochienya],
     name: "MessageNotifier",
     description: "Get toasts for when chosen users send a message",
     tags: ["Chat", "Notifications"],

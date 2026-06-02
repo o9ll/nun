@@ -7,7 +7,7 @@
 import "./style.css";
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { getGuildAcronym, insertTextIntoChatInputBox } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
@@ -150,7 +150,7 @@ export default definePlugin({
     name: "Dragify",
     description: "Drop users, channels, or servers into chat to insert mentions or invites.",
     tags: ["Chat", "Servers", "Utility", "Voice"],
-    authors: [MallCordDevs.justjxke],
+    authors: [NDev.justjxke],
     settings,
 
     patches: [

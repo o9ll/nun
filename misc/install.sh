@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# MallCord installer — clones, builds, and injects from source.
+# Nun installer — clones, builds, and injects from source.
 # Usage: bash install.sh
 set -euo pipefail
 
-REPO_URL="https://github.com/MallCord/MallCord"
-INSTALL_DIR="$HOME/MallCord"
+REPO_URL="https://github.com/o9ll/nun"
+INSTALL_DIR="$HOME/Nun"
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
 CYAN='\033[0;36m'; BOLD='\033[1m'; NC='\033[0m'
@@ -57,7 +57,7 @@ ok "pnpm $(pnpm --version)"
 
 echo ""
 if [[ -d "$INSTALL_DIR/.git" ]]; then
-    warn "MallCord already found at $INSTALL_DIR."
+    warn "Nun already found at $INSTALL_DIR."
     ask "Update to the latest version? [y/N] "
     read -r answer
     if [[ "$answer" =~ ^[Yy]$ ]]; then
@@ -71,7 +71,7 @@ if [[ -d "$INSTALL_DIR/.git" ]]; then
 elif [[ -e "$INSTALL_DIR" ]]; then
     die "$INSTALL_DIR exists but is not a git repo.\n  Remove it and re-run."
 else
-    step "Cloning MallCord into $INSTALL_DIR..."
+    step "Cloning Nun into $INSTALL_DIR..."
     git clone "$REPO_URL" "$INSTALL_DIR" \
         || die "Clone failed. Check your internet connection."
     ok "Cloned."
@@ -90,7 +90,7 @@ ok "Dependencies installed."
 # ── Build ─────────────────────────────────────────────────────────────────────
 
 echo ""
-step "Building MallCord..."
+step "Building Nun..."
 pnpm build \
     || die "Build failed. See output above."
 ok "Build complete."
@@ -103,5 +103,5 @@ pnpm inject \
     || die "Injection failed.\n  Make sure Discord is installed and you are not running as root."
 
 echo ""
-echo -e "${GREEN}${BOLD}  MallCord installed! Start Discord to load it.${NC}"
+echo -e "${GREEN}${BOLD}  Nun installed! Start Discord to load it.${NC}"
 echo ""

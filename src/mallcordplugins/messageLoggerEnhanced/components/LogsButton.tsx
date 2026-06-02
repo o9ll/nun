@@ -18,7 +18,7 @@
 
 import { HeaderBarButton } from "@api/HeaderBar";
 import { LogsIcon } from "@components/Icons";
-import { cl } from "@mallcordplugins/messageLoggerEnhanced/index";
+import { cl } from "@nun/messageLoggerEnhanced/index";
 
 import { openLogModal } from "./LogsModal";
 

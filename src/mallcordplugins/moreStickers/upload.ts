@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { getMimeFromExtension } from "@mallcordplugins/fileUpload/utils/getMediaUrl";
+import { getMimeFromExtension } from "@nun/fileUpload/utils/getMediaUrl";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { insertTextIntoChatInputBox, MessageOptions } from "@utils/discord";
 import { CloudUploadPlatform } from "@vencord/discord-types/enums";

@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByProps } from "@webpack";
@@ -38,7 +38,7 @@ let originalPlaySound: any = null;
 export default definePlugin({
     name: "QuietHours",
     description: "Silences notification sounds during a time window you set (e.g. 23:00–08:00). Visual notifications still show.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     start() {

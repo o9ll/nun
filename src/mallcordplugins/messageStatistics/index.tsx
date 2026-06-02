@@ -1,5 +1,5 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 Dann
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -8,11 +8,11 @@ import { sendBotMessage } from "@api/Commands";
 import * as DataStore from "@api/DataStore";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { React, useEffect, useState } from "@webpack/common";
 
-const KEY = "MallCord_MessageStats";
+const KEY = "Nun_MessageStats";
 const DAY = 24 * 60 * 60 * 1000;
 
 async function record() {
@@ -126,7 +126,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "MessageStatistics",
     description: "Tracks how many messages you send per day, week, month and year, with a daily goal and streaks.",
-    authors: [MallCordDevs.Dann],
+    authors: [NDev.Dann],
     dependencies: ["CommandsAPI"],
     settings,
 

@@ -6,7 +6,7 @@
 
 import "./styles.css";
 
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 import { makeDevBanner, settings } from "./components";
@@ -15,7 +15,7 @@ export default definePlugin({
     name: "DiscordDevBanner",
     description: "Enables the Discord developer banner, in which displays the build-ID",
     tags: ["Appearance", "Console", "Developers"],
-    authors: [MallCordDevs.KrystalSkull, Devs.thororen],
+    authors: [NDev.KrystalSkull, Devs.thororen],
     settings,
     patches: [
         {

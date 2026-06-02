@@ -71,7 +71,7 @@ export function VencordDonorModal() {
     ));
 }
 
-export function MallCordDonorModal() {
+export function NunDonorModal() {
     openModal(props => (
         <ErrorBoundary noop onError={() => {
             props.onClose();
@@ -90,7 +90,7 @@ export function MallCordDonorModal() {
                     >
                         <Flex justifyContent="center" alignItems="center" gap="0.5em">
                             <Heart />
-                            MallCord Donor
+                            Nun Donor
                         </Flex>
                     </Heading>
                 }
@@ -112,16 +112,16 @@ export function MallCordDonorModal() {
                     </Flex>
                     <div style={{ padding: "1em" }}>
                         <Paragraph>
-                            This Badge is a special perk for MallCord (Not Vencord) Donors
+                            This Badge is a special perk for Nun (Not Vencord) Donors
                         </Paragraph>
                         <Paragraph className={Margins.top20}>
-                            Please consider supporting the development of MallCord by becoming a donor. It would mean a lot! :3
+                            Please consider supporting the development of Nun by becoming a donor. It would mean a lot! :3
                         </Paragraph>
                     </div>
                 </div>
                 <div>
                     <Flex justifyContent="center" style={{ width: "100%" }}>
-                        <DonateButton mallcord={true} />
+                        <DonateButton nun={true} />
                     </Flex>
                 </div>
             </Modal>
@@ -129,7 +129,7 @@ export function MallCordDonorModal() {
     ));
 }
 
-export function MallCordTranslatorModal() {
+export function NunTranslatorModal() {
     openModal(props => (
         <ErrorBoundary noop onError={() => {
             props.onClose();
@@ -146,7 +146,7 @@ export function MallCordTranslatorModal() {
                         }}
                     >
                         <Flex justifyContent="center" alignItems="center" gap="0.5em">
-                            MallCord Translator
+                            Nun Translator
                         </Flex>
                     </Heading>
                 }
@@ -162,7 +162,7 @@ export function MallCordTranslatorModal() {
                     </Flex>
                     <div className="vc-translate-modal-paragraph">
                         <Paragraph>
-                            Awarded to contributors who expand MallCord’s language support by translating content for the community.
+                            Awarded to contributors who expand Nun’s language support by translating content for the community.
                         </Paragraph>
                     </div>
                 </div>

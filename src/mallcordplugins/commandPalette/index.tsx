@@ -7,7 +7,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
-import { MallCordDevs, IS_MAC } from "@utils/constants";
+import { NDev, IS_MAC } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { useEffect, useState } from "@webpack/common";
@@ -198,7 +198,7 @@ export default definePlugin({
     name: "CommandPalette",
     description: "Quickly run actions through a searchable command palette",
     tags: ["Appearance", "Customisation", "Commands", "Shortcuts"],
-    authors: [MallCordDevs.justjxke],
+    authors: [NDev.justjxke],
     dependencies: ["ChatInputButtonAPI"],
     settings,
     start() {

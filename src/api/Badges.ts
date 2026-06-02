@@ -17,7 +17,7 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import globalBadges from "@mallcordplugins/globalBadges";
+import globalBadges from "@nun/globalBadges";
 import BadgeAPIPlugin from "@plugins/_api/badges";
 import { ComponentType, HTMLProps } from "react";
 
@@ -105,7 +105,7 @@ export function _getBadges(args: BadgeUserArgs) {
         }
     }
 
-    const mallcordDonorBadges = BadgeAPIPlugin.getMallCordDonorBadges(args.userId);
+    const nunDonorBadges = BadgeAPIPlugin.getNunDonorBadges(args.userId);
     const GlobalBadges = isPluginEnabled(globalBadges.name) ? globalBadges.getGlobalBadges(args.userId) : false;
 
     // do globalbadges first so it shows before the contrib badges but after donor badges
@@ -118,9 +118,9 @@ export function _getBadges(args: BadgeUserArgs) {
         );
     }
 
-    if (mallcordDonorBadges) {
+    if (nunDonorBadges) {
         badges.unshift(
-            ...mallcordDonorBadges.map(badge => ({
+            ...nunDonorBadges.map(badge => ({
                 ...args,
                 ...badge,
             }))

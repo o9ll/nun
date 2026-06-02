@@ -7,7 +7,7 @@
 import { isPluginEnabled, plugins } from "@api/PluginManager";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Logger } from "@utils/Logger";
-import { isMallCordGuild, isMallCordSupport } from "@utils/misc";
+import { isNunGuild, isNunSupport } from "@utils/misc";
 import { Message } from "@vencord/discord-types";
 import { Button, showToast, Toasts } from "@webpack/common";
 import { JSX } from "react";
@@ -23,11 +23,11 @@ export const PluginButtons = ErrorBoundary.wrap(function PluginCards({ message }
     const matchedPlugin = matchedPlugins.sort((a, b) => b.length - a.length)[0];
     const pluginData = matchedPlugin ? plugins[matchedPlugin] : null;
 
-    const isMallCord = isMallCordGuild(message.channel_id) && isMallCordSupport(message.author.id);
+    const isNun = isNunGuild(message.channel_id) && isNunSupport(message.author.id);
     const startsWithEnabled = msg.startsWith("enable");
     const startsWithDisabled = msg.startsWith("disable");
 
-    const shouldAddPluginButtons = pluginData && isMallCord && (startsWithEnabled || startsWithDisabled);
+    const shouldAddPluginButtons = pluginData && isNun && (startsWithEnabled || startsWithDisabled);
 
     if (shouldAddPluginButtons) {
         if (pluginData.required || pluginData.name.endsWith("API")) return;
@@ -52,7 +52,7 @@ export const PluginButtons = ErrorBoundary.wrap(function PluginCards({ message }
                         const success = await toggleEnabled(matchedPlugin);
                         if (success) showToast(`${label}`, Toasts.Type.SUCCESS);
                     } catch (e) {
-                        new Logger("MallCordHelper").error("Error while toggling:", e);
+                        new Logger("NunHelper").error("Error while toggling:", e);
                         showToast(`Failed to ${label.toLowerCase()}`, Toasts.Type.FAILURE);
                     }
                 }}

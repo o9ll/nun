@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { settings } from "@mallcordplugins/musicControls/settings";
-import { SpotifyLrcStore } from "@mallcordplugins/musicControls/spotify/lyrics/providers/store";
-import { SyncedLyric } from "@mallcordplugins/musicControls/spotify/lyrics/providers/types";
-import { SpotifyStore } from "@mallcordplugins/musicControls/spotify/SpotifyStore";
+import { settings } from "@nun/musicControls/settings";
+import { SpotifyLrcStore } from "@nun/musicControls/spotify/lyrics/providers/store";
+import { SyncedLyric } from "@nun/musicControls/spotify/lyrics/providers/types";
+import { SpotifyStore } from "@nun/musicControls/spotify/SpotifyStore";
 import { classNameFactory } from "@utils/css";
 import { findCssClassesLazy } from "@webpack";
 import { React, useEffect, useState, useStateFromStores } from "@webpack/common";

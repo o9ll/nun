@@ -1,5 +1,5 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 unfamiliardev
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -233,8 +233,8 @@ async function main() {
 
     console.log(
         action === "uninstall"
-            ? "MallCord removed. Start Discord normally for vanilla."
-            : "Done! Start Discord to load MallCord."
+            ? "Nun removed. Start Discord normally for vanilla."
+            : "Done! Start Discord to load Nun."
     );
 }
 

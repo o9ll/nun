@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { cl } from "@mallcordplugins/translatePlus/misc/types";
+import { cl } from "@nun/translatePlus/misc/types";
 
 export function Icon() {
     return (

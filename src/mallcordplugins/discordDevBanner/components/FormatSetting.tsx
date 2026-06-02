@@ -11,7 +11,7 @@ import { makeDevBanner, settings, settingVariables } from ".";
 
 export function FormatSetting(setValue) {
     const { format } = settings.store;
-    const [state, setState] = useState(format ?? "{buildChannel} {buildNumber} ({buildHash}) | {mallcordName} {mallcordVersion} ({mallcordHash})");
+    const [state, setState] = useState(format ?? "{buildChannel} {buildNumber} ({buildHash}) | {nunName} {nunVersion} ({nunHash})");
     const [error, setError] = useState<string | null>(null);
 
     function handleChange(newValue) {
@@ -40,7 +40,7 @@ export function FormatSetting(setValue) {
                 className="vc-discord-dev-banner-input"
                 value={state}
                 onChange={e => handleChange(e.target.value)}
-                placeholder="{buildChannel} {buildNumber} ({buildHash}) | {mallcordName} {mallcordVersion} ({mallcordHash})"
+                placeholder="{buildChannel} {buildNumber} ({buildHash}) | {nunName} {nunVersion} ({nunHash})"
                 rows={1}
                 ref={el => {
                     if (el) {

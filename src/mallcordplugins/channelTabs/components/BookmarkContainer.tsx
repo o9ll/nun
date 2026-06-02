@@ -5,13 +5,13 @@
  */
 
 import { BaseText } from "@components/BaseText";
-import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, getDiscordFolderIcon, isBookmarkFolder, isTabSelected, navigateToBookmark, openedTabs, settings, switchChannel, UseBookmarkMethods, useBookmarks } from "@mallcordplugins/channelTabs/util";
-import { CircleQuestionIcon, DiscoveryIcon, EnvelopeIcon, FriendsIcon, NitroIcon, QuestIcon, ShopIcon } from "@mallcordplugins/channelTabs/util/icons";
+import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, getDiscordFolderIcon, isBookmarkFolder, isTabSelected, navigateToBookmark, openedTabs, settings, switchChannel, UseBookmarkMethods, useBookmarks } from "@nun/channelTabs/util";
+import { CircleQuestionIcon, DiscoveryIcon, EnvelopeIcon, FriendsIcon, NitroIcon, QuestIcon, ShopIcon } from "@nun/channelTabs/util/icons";
 import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { findComponentByCodeLazy } from "@webpack";
-import { Avatar, ChannelStore, closeModal, ContextMenuApi, FluxDispatcher, GuildStore, Menu, openModal,React, ReadStateStore, ReadStateUtils, SelectedChannelStore, SelectedGuildStore, TextInput, Tooltip, useDrag, useDrop, useEffect, useRef, UserStore, useState } from "@webpack/common";
+import { Avatar, ChannelStore, closeModal, ContextMenuApi, FluxDispatcher, GuildStore, Menu, openModal, React, ReadStateStore, ReadStateUtils, SelectedChannelStore, SelectedGuildStore, TextInput, Tooltip, useDrag, useDrop, useEffect, useRef, UserStore, useState } from "@webpack/common";
 
 import { NotificationDot } from "./ChannelTab";
 import { BookmarkContextMenu, EditModal } from "./ContextMenus";

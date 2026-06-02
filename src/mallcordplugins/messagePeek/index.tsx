@@ -10,9 +10,9 @@ import { DecoratorProps } from "@api/MemberListDecorators";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { AttachmentIcon, GifIcon, ImageIcon, Microphone, StickerIcon, VideoIcon } from "@components/Icons";
-import betterActivities from "@mallcordplugins/betterActivities";
+import betterActivities from "@nun/betterActivities";
 import showMeYourName from "@plugins/showMeYourName";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
@@ -242,7 +242,7 @@ export default definePlugin({
     description: "Shows the last message preview and timestamp in the Direct Messages list.",
     dependencies: ["MemberListDecoratorsAPI"],
     tags: ["Appearance", "Chat"],
-    authors: [Devs.prism, MallCordDevs.justjxke],
+    authors: [Devs.prism, NDev.justjxke],
     settings,
     patches: [
         {

@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
@@ -33,7 +33,7 @@ export default definePlugin({
     name: "NoTelemetry",
     description: "Blocks additional Discord telemetry beyond the built-in NoTrack plugin: experiment exposure reporting, call diagnostics, and remote debug logging.",
     tags: ["Privacy"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     patches: [

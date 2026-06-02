@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const Millis = {
@@ -55,7 +55,7 @@ export default definePlugin({
     name: "CustomStatusTimeouts",
     description: "Adds configurable timeout presets to the status (presence) menu.",
     tags: ["Activity", "Utility"],
-    authors: [MallCordDevs.Kiri, MallCordDevs.thororen],
+    authors: [NDev.Kiri, NDev.thororen],
     settings,
     patches: [
         {

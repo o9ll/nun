@@ -15,7 +15,7 @@ interface CommandPaletteActionBarProps {
     onOpenActions?(): void;
 }
 
-const MallCordIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
+const NunIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"

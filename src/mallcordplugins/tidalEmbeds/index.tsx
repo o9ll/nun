@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "TidalEmbeds",
     description: "Embeds TIDAL songs to make them playable in Discord.",
     tags: ["Appearance", "Chat", "Media"],
-    authors: [MallCordDevs.vmohammad],
+    authors: [NDev.vmohammad],
     dependencies: ["MessageUpdaterAPI", "MessageAccessoriesAPI"],
     patches: [
         {

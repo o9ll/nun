@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { toProxiedUrl } from "@mallcordplugins/fileUpload/constants";
-import { settings } from "@mallcordplugins/fileUpload/settings";
+import { toProxiedUrl } from "@nun/fileUpload/constants";
+import { settings } from "@nun/fileUpload/settings";
 import { PluginNative } from "@utils/types";
 
 type S3Store = {

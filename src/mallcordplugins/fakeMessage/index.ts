@@ -5,7 +5,7 @@
  */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { UserStore } from "@webpack/common";
 
@@ -13,7 +13,7 @@ export default definePlugin({
     name: "FakeMessage",
     description: "Send a client-side fake message posed as any user via /fakemsg. Only you can see it.",
     tags: ["Chat", "Fun"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     dependencies: ["CommandsAPI"],
 
     commands: [

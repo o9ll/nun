@@ -14,13 +14,13 @@ import { Heart } from "@components/Heart";
 import { PencilIcon } from "@components/Icons";
 import { Margins } from "@components/margins";
 import { Notice } from "@components/Notice";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { openInviteModal } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { User } from "@vencord/discord-types";
 import { extractAndLoadChunksLazy } from "@webpack";
-import { IconUtils, Menu, openModal,UserStore } from "@webpack/common";
+import { IconUtils, Menu, openModal, UserStore } from "@webpack/common";
 
 import { SetAvatarModal } from "./AvatarModal";
 
@@ -65,7 +65,7 @@ export default definePlugin({
     name: "UserPFP",
     description: "Allows you to use an animated avatar without Nitro",
     tags: ["Appearance", "Customisation", "Servers"],
-    authors: [MallCordDevs.nexpid, Devs.thororen, MallCordDevs.soapphia, MallCordDevs.sketchmyname],
+    authors: [NDev.nexpid, Devs.thororen, NDev.soapphia, NDev.sketchmyname],
     settings,
     data,
     settingsAboutComponent: () => (

@@ -7,7 +7,7 @@
 import "./style.css";
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 import { useAuthorizationStore } from "./lib/stores/AuthorizationStore";
@@ -22,7 +22,7 @@ export default definePlugin({
     description: "Show off songs on your profile",
     dependencies: ["ProfileCollectionsAPI"],
     tags: ["Appearance", "Media"],
-    authors: [MallCordDevs.nexpid],
+    authors: [NDev.nexpid],
     settings,
     patches: [
         // Full profile modal sections (lazy loaded)

@@ -97,8 +97,8 @@ export default definePlugin({
             registerAction({
                 id: "openDevSettings",
                 label: "Open Dev tab",
-                callback: () => SettingsRouter.openUserSettings("mallcord_patch_helper_panel"),
-                registrar: "MallCord"
+                callback: () => SettingsRouter.openUserSettings("nun_patch_helper_panel"),
+                registrar: "Nun"
             });
         }
     },

@@ -24,7 +24,7 @@ import { RendererSettings } from "./settings";
 import { patchTrayMenu } from "./trayMenu";
 import { IS_VANILLA } from "./utils/constants";
 
-console.log("[MallCord] Starting up...");
+console.log("[Nun] Starting up...");
 
 // Our injector file at app/index.js
 const injectorPath = require.main!.filename;
@@ -52,7 +52,7 @@ if (!IS_VANILLA) {
         try {
             require("./hostUpdateHook").installHostUpdateHook();
         } catch (err) {
-            console.error("[MallCord] Failed to install host update hook", err);
+            console.error("[Nun] Failed to install host update hook", err);
         }
     }
 
@@ -153,7 +153,7 @@ if (!IS_VANILLA) {
         s.set("DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING", true);
     });
 
-    process.env.DATA_DIR = join(app.getPath("userData"), "..", "MallCord");
+    process.env.DATA_DIR = join(app.getPath("userData"), "..", "Nun");
 
     // Monkey patch commandLine to:
     // - disable WidgetLayering: Fix DevTools context menus https://github.com/electron/electron/issues/38790
@@ -178,8 +178,8 @@ if (!IS_VANILLA) {
     app.commandLine.appendSwitch("disable-background-timer-throttling");
     app.commandLine.appendSwitch("disable-backgrounding-occluded-windows");
 } else {
-    console.log("[MallCord] Running in vanilla mode. Not loading MallCord");
+    console.log("[Nun] Running in vanilla mode. Not loading Nun");
 }
 
-console.log("[MallCord] Loading original Discord app.asar");
+console.log("[Nun] Loading original Discord app.asar");
 require(require.main!.filename);

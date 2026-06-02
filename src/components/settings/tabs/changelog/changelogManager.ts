@@ -30,11 +30,11 @@ export interface UpdateSession {
 
 export type ChangelogHistory = UpdateSession[];
 
-const CHANGELOG_HISTORY_KEY = "MallCordChangelog_History";
-const LAST_SEEN_HASH_KEY = "MallCordChangelog_LastSeenHash";
-const KNOWN_PLUGINS_KEY = "MallCordChangelog_KnownPlugins";
-const KNOWN_SETTINGS_KEY = "MallCordChangelog_KnownSettings";
-const LAST_REPO_CHECK_KEY = "MallCordChangelog_LastRepoCheck";
+const CHANGELOG_HISTORY_KEY = "NunChangelog_History";
+const LAST_SEEN_HASH_KEY = "NunChangelog_LastSeenHash";
+const KNOWN_PLUGINS_KEY = "NunChangelog_KnownPlugins";
+const KNOWN_SETTINGS_KEY = "NunChangelog_KnownSettings";
+const LAST_REPO_CHECK_KEY = "NunChangelog_LastRepoCheck";
 const GITHUB_COMPARE_ENDPOINT = "https://api.github.com/repos";
 
 type KnownPluginSettingsMap = Map<string, Set<string>>;

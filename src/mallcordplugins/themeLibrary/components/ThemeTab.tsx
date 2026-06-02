@@ -13,7 +13,7 @@ import { HeadingPrimary, HeadingTertiary } from "@components/Heading";
 import { OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings";
-import { SearchStatus, Theme, ThemeLikeProps } from "@mallcordplugins/themeLibrary/types";
+import { SearchStatus, Theme, ThemeLikeProps } from "@nun/themeLibrary/types";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";

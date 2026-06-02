@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { LyricsData, Provider } from "@mallcordplugins/musicControls/spotify/lyrics/providers/types";
-import { Track } from "@mallcordplugins/musicControls/spotify/SpotifyStore";
+import { LyricsData, Provider } from "@nun/musicControls/spotify/lyrics/providers/types";
+import { Track } from "@nun/musicControls/spotify/SpotifyStore";
 
 const baseUrlLrclib = "https://lrclib.net/api/get";
 
@@ -38,7 +38,7 @@ export async function getLyricsLrclib(track: Track): Promise<LyricsData | null> 
     const url = `${baseUrlLrclib}?${params.toString()}`;
     const response = await fetch(url, {
         headers: {
-            "User-Agent": "SpotifyLyrics for MallCord (https://github.com/Masterjoona/vc-spotifylyrics)"
+            "User-Agent": "SpotifyLyrics for Nun (https://github.com/Masterjoona/vc-spotifylyrics)"
         }
     });
 

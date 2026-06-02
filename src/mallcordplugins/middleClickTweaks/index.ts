@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/index";
+import { NDev } from "@utils/index";
 import definePlugin, { OptionType } from "@utils/types";
 
 const MIDDLE_CLICK = 1;
@@ -78,7 +78,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "MiddleClickTweaks",
     description: "Various middle click tweaks, such as with pasting and link opening.",
-    authors: [MallCordDevs.Etorix, MallCordDevs.korzi],
+    authors: [NDev.Etorix, NDev.korzi],
     settings,
 
     tags: ["Utility"],

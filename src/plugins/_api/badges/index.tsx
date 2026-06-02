@@ -24,24 +24,24 @@ import { openContributorModal } from "@components/settings/tabs";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import { Logger } from "@utils/Logger";
-import { shouldShowMallCordContributorBadge } from "@utils/misc";
+import { shouldShowNunContributorBadge } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { ContextMenuApi, Menu, Toasts, UserStore } from "@webpack/common";
 
 import Plugins, { PluginMeta } from "~plugins";
 
-import { MallCordDonorModal, MallCordTranslatorModal, VencordDonorModal } from "./modals";
+import { NunDonorModal, NunTranslatorModal, VencordDonorModal } from "./modals";
 
-const MALLCORD_CONTRIBUTOR_BADGE = "https://iili.io/C3jZGrg.th.png";
+const NUN_CONTRIBUTOR_BADGE = "https://iili.io/C3jZGrg.th.png";
 const USERPLUGIN_CONTRIBUTOR_BADGE = "https://iili.io/C3jZGrg.th.png";
-const MALLCORD_DEV_BADGE = "https://i.pinimg.com/736x/0d/7a/bd/0d7abdc86f81fff675983ca4e63d23a3.jpg";
+const NUN_DEV_BADGE = "https://i.pinimg.com/736x/0d/7a/bd/0d7abdc86f81fff675983ca4e63d23a3.jpg";
 
-const MallCordDevBadge: ProfileBadge = {
-    id: "mallcord_dev_badge",
-    description: "MallCord Dev",
-    iconSrc: MALLCORD_DEV_BADGE,
+const NunDevBadge: ProfileBadge = {
+    id: "nun_dev_badge",
+    description: "Nun Dev",
+    iconSrc: NUN_DEV_BADGE,
     position: BadgePosition.START,
-    shouldShow: ({ userId }) => userId === "740252723160809512",
+    shouldShow: ({ userId }) => userId === "1146203933811953713",
     props: {
         style: {
             borderRadius: "50%",
@@ -50,12 +50,12 @@ const MallCordDevBadge: ProfileBadge = {
     },
 };
 
-const MallCordContributorBadge: ProfileBadge = {
-    id: "mallcord_contributor_badge",
-    description: "MallCord Contributor",
-    iconSrc: MALLCORD_CONTRIBUTOR_BADGE,
+const NunContributorBadge: ProfileBadge = {
+    id: "nun_contributor_badge",
+    description: "Nun Contributor",
+    iconSrc: NUN_CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
-    shouldShow: ({ userId }) => shouldShowMallCordContributorBadge(userId),
+    shouldShow: ({ userId }) => shouldShowNunContributorBadge(userId),
     onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId)),
     props: {
         style: {
@@ -88,7 +88,7 @@ const UserPluginContributorBadge: ProfileBadge = {
 };
 
 const DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
-let MallCordDonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
+let NunDonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
 
 async function loadBadges(url: string, noCache = false) {
     const init = {} as RequestInit;
@@ -98,9 +98,9 @@ async function loadBadges(url: string, noCache = false) {
 }
 
 async function loadAllBadges(noCache = false) {
-    // MallCord doesn't show Vencord donor badges; only load MallCord's set.
-    const mallcordBadges = await loadBadges("https://badge.equicord.org/badges.json", noCache);
-    MallCordDonorBadges = mallcordBadges;
+    // Nun doesn't show Vencord donor badges; only load Nun's set.
+    const nunBadges = await loadBadges("https://badge.equicord.org/badges.json", noCache);
+    NunDonorBadges = nunBadges;
 }
 
 let intervalId: any;
@@ -168,8 +168,8 @@ export default definePlugin({
         return DonorBadges;
     },
 
-    get MallCordDonorBadges() {
-        return MallCordDonorBadges;
+    get NunDonorBadges() {
+        return NunDonorBadges;
     },
 
     toolboxActions: {
@@ -183,7 +183,7 @@ export default definePlugin({
         }
     },
 
-    userProfileBadges: [MallCordDevBadge, MallCordContributorBadge, UserPluginContributorBadge],
+    userProfileBadges: [NunDevBadge, NunContributorBadge, UserPluginContributorBadge],
 
     async start() {
         await loadAllBadges();
@@ -245,9 +245,9 @@ export default definePlugin({
         } satisfies ProfileBadge));
     },
 
-    getMallCordDonorBadges(userId: string) {
-        return MallCordDonorBadges[userId]?.map((badge, idx) => ({
-            id: `mallcord_donor_badge_${idx}`,
+    getNunDonorBadges(userId: string) {
+        return NunDonorBadges[userId]?.map((badge, idx) => ({
+            id: `nun_donor_badge_${idx}`,
             iconSrc: badge.badge,
             description: badge.tooltip,
             position: BadgePosition.START,
@@ -261,7 +261,7 @@ export default definePlugin({
                 ContextMenuApi.openContextMenu(event, () => <BadgeContextMenu badge={badge} />);
             },
             onClick() {
-                return badge.tooltip === "MallCord Translator" ? MallCordTranslatorModal() : MallCordDonorModal();
+                return badge.tooltip === "Nun Translator" ? NunTranslatorModal() : NunDonorModal();
             },
         } satisfies ProfileBadge));
     }

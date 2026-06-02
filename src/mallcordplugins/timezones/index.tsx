@@ -10,11 +10,11 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { Message, User } from "@vencord/discord-types";
 import { findByPropsLazy, findCssClassesLazy } from "@webpack";
-import { Button, Menu, openModal,showToast, Toasts, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
+import { Button, Menu, openModal, showToast, Toasts, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
 
 import { deleteTimezone, getTimezone, loadDatabaseTimezones, setUserDatabaseTimezone } from "./database";
 import { SetTimezoneModal } from "./TimezoneModal";
@@ -254,7 +254,7 @@ const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: {
 
 export default definePlugin({
     name: "Timezones",
-    authors: [Devs.Aria, MallCordDevs.creations],
+    authors: [Devs.Aria, NDev.creations],
     description: "Shows the local time of users in profiles and message headers",
     tags: ["Appearance", "Chat", "Utility"],
     contextMenus: {

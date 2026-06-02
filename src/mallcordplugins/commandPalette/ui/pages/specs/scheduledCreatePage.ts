@@ -5,8 +5,8 @@
  */
 
 import { isPluginEnabled, plugins } from "@api/PluginManager";
-import { toggleEnabled } from "@mallcordplugins/mallcordHelper/utils";
-import { addScheduledMessage } from "@mallcordplugins/scheduledMessages/utils";
+import { toggleEnabled } from "@nun/nunHelper/utils";
+import { addScheduledMessage } from "@nun/scheduledMessages/utils";
 import { ChannelStore, SelectedChannelStore } from "@webpack/common";
 
 import { resolveAllChannels } from "../../../query/resolvers";

@@ -6,9 +6,9 @@
 
 import { isPluginEnabled, plugins } from "@api/PluginManager";
 import { NotesIcon } from "@components/Icons";
-import { toggleEnabled } from "@mallcordplugins/mallcordHelper/utils";
-import type { ScheduledMessage } from "@mallcordplugins/scheduledMessages/types";
-import { addScheduledMessage, getChannelDisplayInfo, getScheduledMessages, removeScheduledMessage, sendScheduledMessageNow, updateScheduledMessageTime } from "@mallcordplugins/scheduledMessages/utils";
+import { toggleEnabled } from "@nun/nunHelper/utils";
+import type { ScheduledMessage } from "@nun/scheduledMessages/types";
+import { addScheduledMessage, getChannelDisplayInfo, getScheduledMessages, removeScheduledMessage, sendScheduledMessageNow, updateScheduledMessageTime } from "@nun/scheduledMessages/utils";
 import { sleep } from "@utils/misc";
 import { ChannelActionCreators, ChannelStore, NavigationRouter, SelectedChannelStore, Toasts, UserStore } from "@webpack/common";
 

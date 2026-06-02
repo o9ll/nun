@@ -6,7 +6,7 @@
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { migratePluginSettings } from "@api/Settings";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { sendMessage } from "@utils/discord";
 import { useForceUpdater } from "@utils/react";
@@ -134,7 +134,7 @@ export default definePlugin({
     description: "Allows you to repeat messages quickly. If you hold shift while clicking the Repeat option, it will reply to the message.",
     dependencies: ["MessagePopoverAPI"],
     tags: ["Chat"],
-    authors: [MallCordDevs.Tolgchu, Devs.thororen],
+    authors: [NDev.Tolgchu, Devs.thororen],
     contextMenus: {
         "message": messageCtxPatch
     },

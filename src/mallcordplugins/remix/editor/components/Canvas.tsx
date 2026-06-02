@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { initInput } from "@mallcordplugins/remix/editor/input";
-import { bounds } from "@mallcordplugins/remix/editor/tools/crop";
-import { heightFromBounds, widthFromBounds } from "@mallcordplugins/remix/editor/utils/canvas";
+import { initInput } from "@nun/remix/editor/input";
+import { bounds } from "@nun/remix/editor/tools/crop";
+import { heightFromBounds, widthFromBounds } from "@nun/remix/editor/utils/canvas";
 import { useEffect, useRef } from "@webpack/common";
 
 export let canvas: HTMLCanvasElement | null = null;

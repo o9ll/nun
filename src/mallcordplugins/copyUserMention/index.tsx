@@ -6,7 +6,7 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { copyToClipboard } from "@utils/clipboard";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import type { Channel, User } from "@vencord/discord-types";
 import { Menu } from "@webpack/common";
@@ -46,7 +46,7 @@ const UserContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: U
 
 export default definePlugin({
     name: "CopyUserMention",
-    authors: [MallCordDevs.Cortex, Devs.castdrian],
+    authors: [NDev.Cortex, Devs.castdrian],
     description: "Adds a button to copy user's mention on the user context menu, works best with ValidUser.",
     tags: ["Chat", "Utility"],
     contextMenus: {

@@ -8,7 +8,7 @@ import "./styles.css";
 
 import { MagnifyingGlassIcon } from "@components/Icons";
 import SettingsPlugin from "@plugins/_core/settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { removeFromArray } from "@utils/misc";
 import definePlugin, { StartAt } from "@utils/types";
 import { SettingsRouter } from "@webpack/common";
@@ -20,24 +20,24 @@ export default definePlugin({
     name: "IconViewer",
     description: "Adds a new tab to settings to preview all icons.",
     tags: ["Developers"],
-    authors: [MallCordDevs.iamme],
+    authors: [NDev.iamme],
     dependencies: ["Settings", "ConcatenatedModules"],
     startAt: StartAt.WebpackReady,
     toolboxActions: {
         "Open Icons Tab"() {
-            SettingsRouter.openUserSettings("mallcord_icon_viewer_panel");
+            SettingsRouter.openUserSettings("nun_icon_viewer_panel");
         },
     },
     settingsAboutComponent: SettingsAbout,
     start() {
         SettingsPlugin.customEntries.push({
-            key: "mallcord_icon_viewer",
+            key: "nun_icon_viewer",
             title: "Icon Finder",
             Component: IconsTab,
             Icon: MagnifyingGlassIcon
         });
     },
     stop() {
-        removeFromArray(SettingsPlugin.customEntries, e => e.key === "mallcord_icon_viewer");
+        removeFromArray(SettingsPlugin.customEntries, e => e.key === "nun_icon_viewer");
     },
 });

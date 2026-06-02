@@ -97,7 +97,7 @@ interface SettingsLayoutBuilder {
 const settings = definePluginSettings({
     settingsLocation: {
         type: OptionType.SELECT,
-        description: "Where to put the MallCord settings section",
+        description: "Where to put the Nun settings section",
         options: [
             { label: "At the very top", value: "top" },
             { label: "Above the Nitro section", value: "aboveNitro", default: true },
@@ -184,51 +184,51 @@ export default definePlugin({
         const layout = originalLayoutBuilder.buildLayout();
         if (originalLayoutBuilder.key !== "$Root") return layout;
         if (!Array.isArray(layout)) return layout;
-        if (layout.some(s => s?.key === "mallcord_section")) return layout;
+        if (layout.some(s => s?.key === "nun_section")) return layout;
 
         const { buildEntry } = this;
 
-        const mallcordEntries: SettingsLayoutNode[] = [
+        const nunEntries: SettingsLayoutNode[] = [
             buildEntry({
-                key: "mallcord_main",
-                title: "MallCord",
-                panelTitle: "MallCord Settings",
+                key: "nun_main",
+                title: "Nun",
+                panelTitle: "Nun Settings",
                 Component: VencordTab,
                 Icon: MainSettingsIcon
             }),
             buildEntry({
-                key: "mallcord_plugins",
+                key: "nun_plugins",
                 title: "Plugins",
                 Component: PluginsTab,
                 Icon: PluginsIcon
             }),
             buildEntry({
-                key: "mallcord_themes",
+                key: "nun_themes",
                 title: "Themes",
                 Component: ThemesTab,
                 Icon: PaintbrushIcon
             }),
             !IS_UPDATER_DISABLED && UpdaterTab && buildEntry({
-                key: "mallcord_updater",
+                key: "nun_updater",
                 title: "Updater",
-                panelTitle: "MallCord Updater",
+                panelTitle: "Nun Updater",
                 Component: UpdaterTab,
                 Icon: UpdaterIcon
             }),
             buildEntry({
-                key: "mallcord_changelog",
+                key: "nun_changelog",
                 title: "Changelog",
                 Component: ChangelogTab,
                 Icon: LogIcon,
             }),
             buildEntry({
-                key: "mallcord_backup_restore",
+                key: "nun_backup_restore",
                 title: "Backup & Restore",
                 Component: BackupAndRestoreTab,
                 Icon: BackupRestoreIcon
             }),
             !IS_STANDALONE && PatchHelperTab && buildEntry({
-                key: "mallcord_patch_helper",
+                key: "nun_patch_helper",
                 title: "Patch Helper",
                 Component: PatchHelperTab,
                 Icon: PatchHelperIcon
@@ -236,11 +236,11 @@ export default definePlugin({
             ...this.customEntries.map(buildEntry)
         ].filter(isTruthy);
 
-        const mallcordSection: SettingsLayoutNode = {
-            key: "mallcord_section",
+        const nunSection: SettingsLayoutNode = {
+            key: "nun_section",
             type: LayoutTypes.SECTION,
-            useTitle: () => "MallCord Settings",
-            buildLayout: () => mallcordEntries
+            useTitle: () => "Nun Settings",
+            buildLayout: () => nunEntries
         };
 
         const { settingsLocation } = settings.store;
@@ -263,7 +263,7 @@ export default definePlugin({
             idx += 1;
         }
 
-        layout.splice(idx, 0, mallcordSection);
+        layout.splice(idx, 0, nunSection);
 
         return layout;
     },
@@ -305,7 +305,7 @@ export default definePlugin({
     getInfoRows() {
         const { electronVersion, chromiumVersion, getVersionInfo } = this;
 
-        const rows = [`MallCord ${gitHashShort}${getVersionInfo()}`];
+        const rows = [`Nun ${gitHashShort}${getVersionInfo()}`];
 
         if (electronVersion) rows.push(`Electron ${electronVersion}`);
         if (chromiumVersion) rows.push(`Chromium ${chromiumVersion}`);

@@ -10,27 +10,27 @@ import { OptionType } from "@utils/types";
 import { useEffect, UserStore, useState } from "@webpack/common";
 
 const settings = definePluginSettings({
-    showMallCordDonor: {
+    showNunDonor: {
         type: OptionType.BOOLEAN,
-        description: "Enable to show MallCord Donor badges in chat.",
+        description: "Enable to show Nun Donor badges in chat.",
         hidden: true,
         default: true
     },
-    MallCordDonorPosition: {
+    NunDonorPosition: {
         type: OptionType.NUMBER,
-        description: "The position of the MallCord Donor badges.",
+        description: "The position of the Nun Donor badges.",
         hidden: true,
         default: 0
     },
-    showMallCordContributor: {
+    showNunContributor: {
         type: OptionType.BOOLEAN,
-        description: "Enable to show MallCord Contributor badges in chat.",
+        description: "Enable to show Nun Contributor badges in chat.",
         hidden: true,
         default: true
     },
-    MallCordContributorPosition: {
+    NunContributorPosition: {
         type: OptionType.NUMBER,
-        description: "The position of the MallCord Contributor badge.",
+        description: "The position of the Nun Contributor badge.",
         hidden: true,
         default: 1
     },
@@ -93,8 +93,8 @@ export default settings;
 
 const BadgeSettings = () => {
     const [images, setImages] = useState([
-        { src: "https://badge.equicord.org/donor.webp", shown: settings.store.showMallCordDonor, title: "MallCord donor badges", key: "MallCordDonor", position: settings.store.MallCordDonorPosition },
-        { src: "https://iili.io/C3jZGrg.th.png", shown: settings.store.showMallCordContributor, title: "MallCord contributor badge", key: "MallCordContributer", position: settings.store.MallCordContributorPosition },
+        { src: "https://badge.equicord.org/donor.webp", shown: settings.store.showNunDonor, title: "Nun donor badges", key: "NunDonor", position: settings.store.NunDonorPosition },
+        { src: "https://iili.io/C3jZGrg.th.png", shown: settings.store.showNunContributor, title: "Nun contributor badge", key: "NunContributer", position: settings.store.NunContributorPosition },
         { src: "https://cdn.discordapp.com/emojis/1026533070955872337.png", shown: settings.store.showVencordDonor, title: "Vencord donor badges", key: "VencordDonor", position: settings.store.VencordDonorPosition },
         { src: "https://cdn.discordapp.com/emojis/1092089799109775453.png", shown: settings.store.showVencordContributor, title: "Vencord contributor badge", key: "VencordContributer", position: settings.store.VencordContributorPosition },
         { src: "https://cdn.discordapp.com/badge-icons/bf01d1073931f921909045f3a39fd264.png", shown: settings.store.showDiscordProfile, title: "Discord profile badges (HypeSquad, Discord Staff, Early Supporter, etc.)", key: "DiscordProfile", position: settings.store.DiscordProfilePosition },
@@ -104,13 +104,13 @@ const BadgeSettings = () => {
     useEffect(() => {
         images.forEach(image => {
             switch (image.key) {
-                case "MallCordDonor":
-                    settings.store.MallCordDonorPosition = image.position;
-                    settings.store.showMallCordDonor = image.shown;
+                case "NunDonor":
+                    settings.store.NunDonorPosition = image.position;
+                    settings.store.showNunDonor = image.shown;
                     break;
-                case "MallCordContributer":
-                    settings.store.MallCordContributorPosition = image.position;
-                    settings.store.showMallCordContributor = image.shown;
+                case "NunContributer":
+                    settings.store.NunContributorPosition = image.position;
+                    settings.store.showNunContributor = image.shown;
                     break;
                 case "VencordDonor":
                     settings.store.VencordDonorPosition = image.position;

@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-// Ported to MallCord from Nightcord (coll, viciouscal); see https://git.nightcord.su/nightcord/nightcord
+// Ported to Nun from Nightcord (coll, viciouscal); see https://git.nightcord.su/nightcord/nightcord
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { Forms } from "@webpack/common";
 
@@ -198,7 +198,7 @@ function removeCSS() {
 export default definePlugin({
     name: "SmoothType",
     description: "Fully customize the cursor caret — transition delay, easing, and color — for a smooth typing animation.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     start() {

@@ -6,7 +6,7 @@
 
 import "./style.css";
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { FluxDispatcher } from "@webpack/common";
 
@@ -27,7 +27,7 @@ export default definePlugin({
     name: "GifCollections",
     description: "Allows you to create collections of gifs.",
     tags: ["Chat", "Emotes"],
-    authors: [MallCordDevs.creations],
+    authors: [NDev.creations],
     settings,
     contextMenus: {
         "message": addCollectionContextMenuPatch,

@@ -5,7 +5,7 @@
  */
 
 import { isPluginEnabled, plugins } from "@api/PluginManager";
-import { toggleEnabled } from "@mallcordplugins/mallcordHelper/utils";
+import { toggleEnabled } from "@nun/nunHelper/utils";
 import { SettingsRouter, Toasts } from "@webpack/common";
 
 import { DEFAULT_CATEGORY_ID } from "../../metadata/categories";
@@ -43,7 +43,7 @@ async function ensureThemeLibraryPluginEnabled() {
 
 async function runOpenThemeLibrary() {
     if (!await ensureThemeLibraryPluginEnabled()) return;
-    SettingsRouter.openUserSettings("mallcord_theme_library_panel");
+    SettingsRouter.openUserSettings("nun_theme_library_panel");
 }
 
 export function createThemeLibraryExtensionCommand(): CommandEntry {

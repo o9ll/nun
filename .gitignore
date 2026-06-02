@@ -7,7 +7,7 @@ node_modules
 
 *.exe
 vencord_installer
-mallcord_installer
+nun_installer
 
 .idea
 .DS_Store
@@ -37,7 +37,7 @@ ExtensionCache/
 .wakatime-project
 
 # built installer
-mallcord-setup.exe
+nun-setup.exe
 installer/sea-prep.blob
 installer/sea-config.json
 

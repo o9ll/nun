@@ -6,7 +6,7 @@
 
 import * as DataStore from "@api/DataStore";
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { VoiceState } from "@vencord/discord-types";
@@ -52,7 +52,7 @@ export default definePlugin({
     name: "VoiceRejoin",
     description: "Rejoins DM/Server call automatically when restarting Discord.",
     tags: ["Servers", "Utility", "Voice"],
-    authors: [MallCordDevs.omaw, MallCordDevs.keircn],
+    authors: [NDev.omaw, NDev.keircn],
     settings,
 
     flux: {

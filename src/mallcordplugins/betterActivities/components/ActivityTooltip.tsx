@@ -5,8 +5,8 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { ActivityTooltipProps } from "@mallcordplugins/betterActivities/types";
-import { ActivityView, cl } from "@mallcordplugins/betterActivities/utils";
+import { ActivityTooltipProps } from "@nun/betterActivities/types";
+import { ActivityView, cl } from "@nun/betterActivities/utils";
 import { UserStore } from "@webpack/common";
 
 export function ActivityTooltip({ activity, application, user }: Readonly<ActivityTooltipProps>) {

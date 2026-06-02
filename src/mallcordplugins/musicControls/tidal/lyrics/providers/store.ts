@@ -5,10 +5,10 @@
  */
 
 import { showNotification } from "@api/Notifications";
-import { settings } from "@mallcordplugins/musicControls/settings";
-import { getLyrics } from "@mallcordplugins/musicControls/tidal/lyrics/api";
-import { EnhancedLyric } from "@mallcordplugins/musicControls/tidal/lyrics/types";
-import { TidalStore } from "@mallcordplugins/musicControls/tidal/TidalStore";
+import { settings } from "@nun/musicControls/settings";
+import { getLyrics } from "@nun/musicControls/tidal/lyrics/api";
+import { EnhancedLyric } from "@nun/musicControls/tidal/lyrics/types";
+import { TidalStore } from "@nun/musicControls/tidal/TidalStore";
 import { proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher } from "@webpack/common";
 

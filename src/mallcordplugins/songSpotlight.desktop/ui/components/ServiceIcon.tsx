@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { cl } from "@mallcordplugins/songSpotlight.desktop/lib/utils";
-import { AppleMusicIcon, SoundcloudIcon, SpotifyIcon, TidalIcon } from "@mallcordplugins/songSpotlight.desktop/ui/common";
+import { cl } from "@nun/songSpotlight.desktop/lib/utils";
+import { AppleMusicIcon, SoundcloudIcon, SpotifyIcon, TidalIcon } from "@nun/songSpotlight.desktop/ui/common";
 import { getServiceLabel } from "@song-spotlight/api/util";
 import { Tooltip, useMemo } from "@webpack/common";
 import { JSX } from "react";

@@ -18,7 +18,7 @@
 
 import "./styles.css";
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
@@ -43,7 +43,7 @@ type EmojiDescriptor = {
 
 export default definePlugin({
     name: "DragFavoriteEmotes",
-    authors: [MallCordDevs.PWall],
+    authors: [NDev.PWall],
     description: "Adds the ability to change the order of your favourite emotes",
     tags: ["Customisation", "Chat", "Emotes"],
     patches: [

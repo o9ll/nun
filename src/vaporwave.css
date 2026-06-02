@@ -1,6 +1,6 @@
 /*
- * MallCord Vaporwave Theme
- * A e s t h e t i c  neon reskin for Discord, toggleable from the MallCord settings tab.
+ * Nun Vaporwave Theme
+ * A e s t h e t i c  neon reskin for Discord, toggleable from the Nun settings tab.
  * Copyright (c) 2026 unfamiliardev
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -100,7 +100,7 @@ button[class*="lookFilled_"][class*="colorBrand_"] {
     border-radius: 8px !important;
 }
 
-/* MallCord's own settings tab accents inherit the palette */
+/* Nun's own settings tab accents inherit the palette */
 .vc-vencord-tab-title,
 .vc-settings-tab h1 {
     background: linear-gradient(90deg, var(--mc-pink), var(--mc-cyan));

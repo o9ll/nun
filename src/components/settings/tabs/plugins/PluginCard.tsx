@@ -32,7 +32,7 @@ interface PluginCardProps extends React.HTMLProps<HTMLDivElement> {
 export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, onMouseLeave, isNew }: PluginCardProps) {
     const settings = Settings.plugins[plugin.name];
     const pluginMeta = PluginMeta[plugin.name];
-    const isMallCordPlugin = pluginMeta.folderName.startsWith("src/mallcordplugins/") ?? false;
+    const isNunPlugin = pluginMeta.folderName.startsWith("src/nun/") ?? false;
 
     const isEnabled = () => isPluginEnabled(plugin.name);
 
@@ -88,10 +88,10 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
 
     const pluginInfo = [
         {
-            condition: isMallCordPlugin,
+            condition: isNunPlugin,
             src: "https://iili.io/C3AK6Na.png",
-            alt: "MallCord",
-            title: "MallCord Plugin"
+            alt: "Nun",
+            title: "Nun Plugin"
         }
     ];
 

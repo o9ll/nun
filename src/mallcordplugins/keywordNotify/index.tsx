@@ -13,7 +13,7 @@ import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { DeleteIcon } from "@components/Icons";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
@@ -316,7 +316,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "KeywordNotify",
-    authors: [MallCordDevs.camila314, MallCordDevs.x3rt],
+    authors: [NDev.camila314, NDev.x3rt],
     description: "Sends a notification if a given message matches certain keywords or regexes",
     tags: ["Chat", "Notifications"],
     settings,

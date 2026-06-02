@@ -7,7 +7,7 @@
 import "./styles.css";
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { settings as PluginSettings } from "@mallcordplugins/toastNotifications/index";
+import { settings as PluginSettings } from "@nun/toastNotifications/index";
 import { classNameFactory } from "@utils/css";
 import { findComponentByCodeLazy } from "@webpack";
 import { FluxDispatcher, GuildStore, IconUtils, React, useEffect, useMemo, useRef, useState } from "@webpack/common";

@@ -91,21 +91,21 @@ function openAboutWindow() {
     });
 }
 
-function createMallCordMenuItems(): MenuItemConstructorOptions[] {
+function createNunMenuItems(): MenuItemConstructorOptions[] {
     return [
         {
-            label: "MallCord",
+            label: "Nun",
             submenu: [
                 {
-                    label: "About MallCord",
+                    label: "About Nun",
                     click: () => openAboutWindow()
                 },
                 {
-                    label: cachedUpdateAvailable ? "Update MallCord" : "Check for Updates",
+                    label: cachedUpdateAvailable ? "Update Nun" : "Check for Updates",
                     click: () => sendToRenderer(IpcEvents.TRAY_CHECK_UPDATES)
                 },
                 {
-                    label: "Repair MallCord",
+                    label: "Repair Nun",
                     click: () => sendToRenderer(IpcEvents.TRAY_REPAIR)
                 },
                 { type: "separator" },
@@ -127,11 +127,11 @@ export function patchTrayMenu(): void {
     const originalBuildFromTemplate = Menu.buildFromTemplate;
 
     Menu.buildFromTemplate = function (template: MenuItemConstructorOptions[]) {
-        const alreadyPatched = template.some(item => item.label === "MallCord");
+        const alreadyPatched = template.some(item => item.label === "Nun");
         if (isTrayMenu(template) && !alreadyPatched) {
             const insertIndex = findInsertIndex(template);
-            const mallcordItems = createMallCordMenuItems();
-            template.splice(insertIndex, 0, ...mallcordItems);
+            const nunItems = createNunMenuItems();
+            template.splice(insertIndex, 0, ...nunItems);
         }
 
         return originalBuildFromTemplate.call(this, template);

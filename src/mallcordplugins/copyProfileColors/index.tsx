@@ -6,7 +6,7 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { copyToClipboard } from "@utils/clipboard";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
 import { User } from "@vencord/discord-types";
@@ -115,7 +115,7 @@ export default definePlugin({
     name: "CopyProfileColors",
     description: "A plugin to copy people's profile gradient colors to clipboard.",
     tags: ["Appearance", "Customisation"],
-    authors: [MallCordDevs.Crxa, MallCordDevs.Cortex, MallCordDevs.Gir0fa],
+    authors: [NDev.Crxa, NDev.Cortex, NDev.Gir0fa],
     contextMenus: {
         "user-context": userContextMenuPatch,
         "user-profile-actions": userContextMenuPatch

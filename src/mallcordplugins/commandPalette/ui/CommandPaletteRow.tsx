@@ -71,7 +71,7 @@ export function CommandPaletteRow({ item, selected, onClick, onDoubleClick, onHo
         if (category.includes("discord-settings") || metadata.includes("settings")) return MainSettingsIcon;
         if (metadata.includes("update") || metadata.includes("changelog")) return UpdaterIcon;
         if (metadata.includes("reload") || metadata.includes("restart")) return RestartIcon;
-        if ((metadata.includes("notification") || metadata.includes("mallcord"))
+        if ((metadata.includes("notification") || metadata.includes("nun"))
             && metadata.includes("mute")
             && !metadata.includes("voice")
             && !metadata.includes("deafen")

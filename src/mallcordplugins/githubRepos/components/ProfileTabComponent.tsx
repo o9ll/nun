@@ -5,9 +5,9 @@
  */
 
 import { BaseText } from "@components/BaseText";
-import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@mallcordplugins/githubRepos/githubApi";
-import { GitHubRepo } from "@mallcordplugins/githubRepos/types";
-import { openModal,React, useEffect, UserProfileStore, useState } from "@webpack/common";
+import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@nun/githubRepos/githubApi";
+import { GitHubRepo } from "@nun/githubRepos/types";
+import { openModal, React, useEffect, UserProfileStore, useState } from "@webpack/common";
 
 import { cl, settings } from "..";
 import { RepoCard } from "./RepoCard";

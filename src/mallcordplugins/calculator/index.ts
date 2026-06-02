@@ -1,17 +1,17 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 Dann
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { findOption, RequiredMessageOption, sendBotMessage } from "@api/Commands";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "Calculator",
     description: "/calc does quick maths right in the chat box.",
-    authors: [MallCordDevs.Dann],
+    authors: [NDev.Dann],
     dependencies: ["CommandsAPI"],
     commands: [
         {

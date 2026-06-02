@@ -8,10 +8,10 @@ import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { LinkIcon } from "@components/Icons";
 import { Link } from "@components/Link";
-import { apiConstants } from "@mallcordplugins/songSpotlight.desktop/lib/api";
-import { useSongStore } from "@mallcordplugins/songSpotlight.desktop/lib/stores/SongStore";
-import { cl, formatCoverTooltip, formatDurationMs } from "@mallcordplugins/songSpotlight.desktop/lib/utils";
-import { Native, useRender } from "@mallcordplugins/songSpotlight.desktop/service";
+import { apiConstants } from "@nun/songSpotlight.desktop/lib/api";
+import { useSongStore } from "@nun/songSpotlight.desktop/lib/stores/SongStore";
+import { cl, formatCoverTooltip, formatDurationMs } from "@nun/songSpotlight.desktop/lib/utils";
+import { Native, useRender } from "@nun/songSpotlight.desktop/service";
 import {
     CardClasses,
     ExplicitTag,
@@ -20,11 +20,11 @@ import {
     PlayButton,
     PuzzlePieceIcon,
     TrashIcon,
-} from "@mallcordplugins/songSpotlight.desktop/ui/common";
-import AudioPlayer from "@mallcordplugins/songSpotlight.desktop/ui/components/AudioPlayer";
-import ProgressCircle from "@mallcordplugins/songSpotlight.desktop/ui/components/ProgressCircle";
-import ServiceIcon from "@mallcordplugins/songSpotlight.desktop/ui/components/ServiceIcon";
-import { openSettingsModal } from "@mallcordplugins/songSpotlight.desktop/ui/settings";
+} from "@nun/songSpotlight.desktop/ui/common";
+import AudioPlayer from "@nun/songSpotlight.desktop/ui/components/AudioPlayer";
+import ProgressCircle from "@nun/songSpotlight.desktop/ui/components/ProgressCircle";
+import ServiceIcon from "@nun/songSpotlight.desktop/ui/components/ServiceIcon";
+import { openSettingsModal } from "@nun/songSpotlight.desktop/ui/settings";
 import { RenderInfoEntryBased, RenderSongInfo } from "@song-spotlight/api/handlers";
 import { Song as SongType } from "@song-spotlight/api/structs";
 import { isListLayout, sid } from "@song-spotlight/api/util";

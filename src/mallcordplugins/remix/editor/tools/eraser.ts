@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { brushCanvas, render } from "@mallcordplugins/remix/editor/components/Canvas";
-import { currentSize, ToolDefinition } from "@mallcordplugins/remix/editor/components/Toolbar";
-import { Mouse } from "@mallcordplugins/remix/editor/input";
+import { brushCanvas, render } from "@nun/remix/editor/components/Canvas";
+import { currentSize, ToolDefinition } from "@nun/remix/editor/components/Toolbar";
+import { Mouse } from "@nun/remix/editor/input";
 
 export const EraseTool: ToolDefinition = {
     onMouseMove() {

@@ -1,18 +1,18 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 unfamiliardev
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { IconUtils, UserStore } from "@webpack/common";
 
 export default definePlugin({
     name: "AvatarGrabber",
     description: "/avatar grabs the full-resolution avatar of any user (or yourself).",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     dependencies: ["CommandsAPI"],
     commands: [
         {

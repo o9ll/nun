@@ -15,7 +15,7 @@ import { ExcludedReasons, PluginDependencyList } from "@components/settings/tabs
 import { PluginCard } from "@components/settings/tabs/plugins/PluginCard";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { EQUIBOT_USER_ID } from "@utils/constants";
-import { isMallCordGuild, isMallCordSupport } from "@utils/misc";
+import { isNunGuild, isNunSupport } from "@utils/misc";
 import { Message } from "@vencord/discord-types";
 import { showToast, Tooltip, useMemo } from "@webpack/common";
 import { JSX } from "react";
@@ -41,7 +41,7 @@ export function ChatPluginCard({ url, description }: { url: string, description:
     if (excludedPlugin || !p) {
         const toolTipText = excludedPlugin
             ? `${pluginName} is only available on the ${ExcludedReasons[ExcludedPlugins[pluginName]]}`
-            : "This plugin is not on this version of MallCord. Try updating!";
+            : "This plugin is not on this version of Nun. Try updating!";
 
         const card = (
             <AddonCard
@@ -80,7 +80,7 @@ export function ChatPluginCard({ url, description }: { url: string, description:
 
     if (required) {
         const tooltipText = p.required || !dependents.length
-            ? "This plugin is required for MallCord to function."
+            ? "This plugin is required for Nun to function."
             : <PluginDependencyList deps={dependents} />;
 
         return (
@@ -116,8 +116,8 @@ export const PluginCards = ErrorBoundary.wrap(function PluginCards({ message }: 
     message.embeds?.forEach(embed => {
         if (!embed.url?.startsWith("https://equicord.org/plugins/") && !embed.url?.startsWith("https://vencord.dev/plugins/")) return;
 
-        const isMallCord = isMallCordGuild(message.channel_id) && isMallCordSupport(message.author.id);
-        if (!isMallCord) return;
+        const isNun = isNunGuild(message.channel_id) && isNunSupport(message.author.id);
+        if (!isNun) return;
 
         const pluginNameFromUrl = new URL(embed.url).pathname.split("/")[2];
         const actualPluginName = Object.keys(plugins).find(name =>

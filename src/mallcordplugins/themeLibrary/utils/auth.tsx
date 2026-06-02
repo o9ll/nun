@@ -6,8 +6,8 @@
 
 import * as DataStore from "@api/DataStore";
 import { showNotification } from "@api/Notifications";
-import { logger, themeRequest } from "@mallcordplugins/themeLibrary/components/ThemeTab";
-import { OAuth2AuthorizeModal, openModal,Toasts, UserStore } from "@webpack/common";
+import { logger, themeRequest } from "@nun/themeLibrary/components/ThemeTab";
+import { OAuth2AuthorizeModal, openModal, Toasts, UserStore } from "@webpack/common";
 
 export async function authorizeUser(triggerModal: boolean = true) {
     const isAuthorized = await getAuthorization();

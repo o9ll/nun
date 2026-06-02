@@ -56,7 +56,7 @@ function Switches() {
         {
             key: "vaporwaveTheme",
             title: "Vaporwave Theme",
-            description: "Skin Discord in MallCord's signature vaporwave look — neon pink/cyan/purple, glow accents, and a retro grid. Toggles instantly, no restart needed.",
+            description: "Skin Discord in Nun's signature vaporwave look — neon pink/cyan/purple, glow accents, and a retro grid. Toggles instantly, no restart needed.",
         },
         {
             key: "useQuickCss",
@@ -161,7 +161,7 @@ function Switches() {
     });
 }
 
-function MallCordSettings() {
+function NunSettings() {
     const donateImage = useMemo(() =>
         Math.random() > 0.5 ? DEFAULT_DONATE_IMAGE : SHIGGY_DONATE_IMAGE,
         []
@@ -171,16 +171,16 @@ function MallCordSettings() {
 
     return (
         <SettingsTab>
-            {(isMallCordDonor(user?.id) || isVencordDonor(user?.id)) ? (
+            {(isNunDonor(user?.id) || isVencordDonor(user?.id)) ? (
                 <SpecialCard
                     title="Donations"
                     subtitle="Thank you for donating!"
                     description={
-                        isMallCordDonor(user?.id) && isVencordDonor(user?.id)
-                            ? "All Vencord users can see your Vencord donor badge, and MallCord users can see your MallCord donor badge. To change your Vencord donor badge, contact @vending.machine. For your MallCord donor badge, make a ticket in MallCord's server."
+                        isNunDonor(user?.id) && isVencordDonor(user?.id)
+                            ? "All Vencord users can see your Vencord donor badge, and Nun users can see your Nun donor badge. To change your Vencord donor badge, contact @vending.machine. For your Nun donor badge, make a ticket in Nun's server."
                             : isVencordDonor(user?.id)
                                 ? "All Vencord users can see your badge! You can manage your perks by messaging @vending.machine."
-                                : "All MallCord users can see your badge! You can manage your perks by making a ticket in MallCord's server."
+                                : "All Nun users can see your badge! You can manage your perks by making a ticket in Nun's server."
                     }
                     cardImage={VENNIE_DONATOR_IMAGE}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
@@ -191,7 +191,7 @@ function MallCordSettings() {
             ) : (
                 <SpecialCard
                     title="Support the Project"
-                    description="Please consider supporting the development of MallCord by donating!"
+                    description="Please consider supporting the development of Nun by donating!"
                     cardImage={donateImage}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
                     backgroundColor="#c3a3ce"
@@ -203,7 +203,7 @@ function MallCordSettings() {
                 <SpecialCard
                     title="Contributions"
                     subtitle="Thank you for contributing!"
-                    description="Since you've contributed to MallCord you now have a cool new badge!"
+                    description="Since you've contributed to Nun you now have a cool new badge!"
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
                     backgroundColor="#EDCC87"
@@ -266,7 +266,7 @@ function MallCordSettings() {
 
             <Heading className={Margins.top20}>Client Settings</Heading>
             <Paragraph className={Margins.bottom16}>
-                Configure how MallCord behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.
+                Configure how Nun behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.
             </Paragraph>
             <Notice.Info className={Margins.bottom20} style={{ width: "100%" }}>
                 You can customize where this settings section appears in Discord's settings menu by configuring the{" "}
@@ -291,10 +291,10 @@ function MallCordSettings() {
     );
 }
 
-export default wrapTab(MallCordSettings, "MallCord Settings");
+export default wrapTab(NunSettings, "Nun Settings");
 
-export function isMallCordDonor(userId: string): boolean {
-    const donorBadges = BadgeAPI.getMallCordDonorBadges(userId);
+export function isNunDonor(userId: string): boolean {
+    const donorBadges = BadgeAPI.getNunDonorBadges(userId);
     return GuildMemberStore.getMember(GUILD_ID, userId)?.roles.includes(DONOR_ROLE_ID) || !!donorBadges;
 }
 

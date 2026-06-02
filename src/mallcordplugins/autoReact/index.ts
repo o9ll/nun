@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { FluxDispatcher, RestAPI, UserStore } from "@webpack/common";
@@ -76,7 +76,7 @@ function onMessageCreate({ message, optimistic }: MessagePayload) {
 
         RestAPI.put({
             url: `/channels/${message.channel_id}/messages/${message.id}/reactions/${formatEmoji(rule.emoji)}/@me`,
-        }).catch(() => {});
+        }).catch(() => { });
     }
 }
 
@@ -84,7 +84,7 @@ export default definePlugin({
     name: "AutoReact",
     description: "Automatically react to messages containing specific keywords.",
     tags: ["Utility", "Chat"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     start() {

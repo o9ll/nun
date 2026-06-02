@@ -10,7 +10,7 @@ import { BadgePosition, ProfileBadge } from "@api/Badges";
 import { migratePluginSetting } from "@api/Settings";
 import { Button } from "@components/Button";
 import { BadgeContextMenu } from "@plugins/_api/badges";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { openInviteModal } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { ContextMenuApi, React, Toasts, UserStore } from "@webpack/common";
@@ -26,7 +26,7 @@ export default definePlugin({
     name: "GlobalBadges",
     description: "Adds global badges from other client mods",
     tags: ["Appearance"],
-    authors: [Devs.HypedDomi, MallCordDevs.Wolfie, Devs.thororen],
+    authors: [Devs.HypedDomi, NDev.Wolfie, Devs.thororen],
     settings,
     settingsAboutComponent: () => (
         <>

@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { CategoryImageProps, StickerCategoryProps } from "@mallcordplugins/moreStickers/types";
-import { cl } from "@mallcordplugins/moreStickers/utils";
+import { CategoryImageProps, StickerCategoryProps } from "@nun/moreStickers/types";
+import { cl } from "@nun/moreStickers/utils";
 import { React } from "@webpack/common";
 import { JSX } from "react";
 

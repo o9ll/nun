@@ -65,7 +65,7 @@ export const EXTENSIONS_CATALOG: ExtensionDefinition[] = [
         commandId: "extension-random-voice-join",
         commandLabel: "Join Random Voice",
         commandDescription: "Run the extension command from this detail page.",
-        sourcePath: "src/mallcordplugins/randomVoice",
+        sourcePath: "src/nun/randomVoice",
         tags: [TAG_PLUGINS, TAG_UTILITY],
         keywords: ["extension", "plugin", "random", "voice", "join", "channel", "vc"]
     },
@@ -89,7 +89,7 @@ export const EXTENSIONS_CATALOG: ExtensionDefinition[] = [
         commandId: "extension-scheduled-messages-open",
         commandLabel: "Open Scheduled Messages",
         commandDescription: "Open the ScheduledMessages modal.",
-        sourcePath: "src/mallcordplugins/scheduledMessages",
+        sourcePath: "src/nun/scheduledMessages",
         tags: [TAG_PLUGINS, TAG_UTILITY],
         keywords: ["extension", "plugin", "schedule", "message", "queue", "remind", "delay"]
     },
@@ -101,7 +101,7 @@ export const EXTENSIONS_CATALOG: ExtensionDefinition[] = [
         commandId: "extension-theme-library-open",
         commandLabel: "Open Theme Library",
         commandDescription: "Open the ThemeLibrary settings page.",
-        sourcePath: "src/mallcordplugins/themeLibrary",
+        sourcePath: "src/nun/themeLibrary",
         tags: [TAG_PLUGINS, TAG_UTILITY],
         keywords: ["extension", "plugin", "theme", "library", "themes", "settings"]
     }
@@ -109,7 +109,7 @@ export const EXTENSIONS_CATALOG: ExtensionDefinition[] = [
 
 export const extensionDefinitionsById = new Map(EXTENSIONS_CATALOG.map(extension => [extension.id, extension]));
 
-export const MALLCORD_REPOSITORY_BLOB_BASE_URL = "https://github.com/MallCord/MallCord/blob/main";
+export const NUN_REPOSITORY_BLOB_BASE_URL = "https://github.com/o9ll/nun/blob/main";
 
 export function normalizeRepositoryPath(path: string): string {
     return path.trim().replace(/^\/+/, "");
@@ -117,5 +117,5 @@ export function normalizeRepositoryPath(path: string): string {
 
 export function toRepositoryBlobUrl(path: string): string {
     const normalizedPath = normalizeRepositoryPath(path);
-    return `${MALLCORD_REPOSITORY_BLOB_BASE_URL}/${normalizedPath}`;
+    return `${NUN_REPOSITORY_BLOB_BASE_URL}/${normalizedPath}`;
 }

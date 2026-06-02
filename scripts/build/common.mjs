@@ -48,11 +48,11 @@ if (!IS_COMPANION_TEST && process.argv.includes("--companion-test"))
     console.error("--companion-test must be run with --reporter for any effect");
 
 export const IS_UPDATER_DISABLED = process.argv.includes("--disable-updater");
-export const gitHash = process.env.MALLCORD_HASH || execSync("git rev-parse HEAD", { encoding: "utf-8" }).trim();
+export const gitHash = process.env.NUN_HASH || execSync("git rev-parse HEAD", { encoding: "utf-8" }).trim();
 
 export const banner = {
     js: `
-// MallCord ${gitHash}
+// Nun ${gitHash}
 // Standalone: ${IS_STANDALONE}
 // Platform: ${IS_STANDALONE === false ? process.platform : "Universal"}
 // Updater Disabled: ${IS_UPDATER_DISABLED}
@@ -147,7 +147,7 @@ export const globPlugins = kind => ({
         });
 
         build.onLoad({ filter, namespace: "import-plugins" }, async () => {
-            const pluginDirs = ["plugins/_api", "plugins/_core", "plugins", "mallcordplugins/_api", "mallcordplugins/_core", "mallcordplugins", "userplugins"];
+            const pluginDirs = ["plugins/_api", "plugins/_core", "plugins", "nun/_api", "nun/_core", "nun", "userplugins"];
             let code = "";
             let pluginsCode = "\n";
             let metaCode = "\n";
@@ -229,7 +229,7 @@ export const gitRemotePlugin = {
             namespace: "git-remote", path: args.path
         }));
         build.onLoad({ filter, namespace: "git-remote" }, async () => {
-            let remote = process.env.MALLCORD_REMOTE;
+            let remote = process.env.NUN_REMOTE;
             if (!remote) {
                 const res = await promisify(exec)("git remote get-url origin", { encoding: "utf-8" });
                 remote = res.stdout.trim()

@@ -4,15 +4,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Menu } from "@webpack/common";
 
 const engines = [
-    { id: "google",   label: "Google Lens", url: (u: string) => `https://lens.google.com/uploadbyurl?url=${u}` },
-    { id: "yandex",   label: "Yandex",      url: (u: string) => `https://yandex.com/images/search?rpt=imageview&url=${u}` },
-    { id: "saucenao", label: "SauceNAO",    url: (u: string) => `https://saucenao.com/search.php?url=${u}` },
-    { id: "tineye",   label: "TinEye",      url: (u: string) => `https://tineye.com/search?url=${u}` },
+    { id: "google", label: "Google Lens", url: (u: string) => `https://lens.google.com/uploadbyurl?url=${u}` },
+    { id: "yandex", label: "Yandex", url: (u: string) => `https://yandex.com/images/search?rpt=imageview&url=${u}` },
+    { id: "saucenao", label: "SauceNAO", url: (u: string) => `https://saucenao.com/search.php?url=${u}` },
+    { id: "tineye", label: "TinEye", url: (u: string) => `https://tineye.com/search?url=${u}` },
 ];
 
 function addSearchItems(children: React.ReactNode[], props: Record<string, unknown>) {
@@ -40,7 +40,7 @@ export default definePlugin({
     name: "ImageSearch",
     description: "Adds a 'Search Image' submenu to image context menus with Google Lens, Yandex, SauceNAO, and TinEye.",
     tags: ["Utility", "Media"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
 
     contextMenus: {
         "message-media-context": addSearchItems,

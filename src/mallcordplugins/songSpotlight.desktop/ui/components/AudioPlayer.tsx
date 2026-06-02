@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { logger } from "@mallcordplugins/songSpotlight.desktop/lib/utils";
+import { logger } from "@nun/songSpotlight.desktop/lib/utils";
 import { RenderInfoEntry } from "@song-spotlight/api/handlers";
 import { showToast, Toasts, useCallback, useEffect, useMemo, useRef } from "@webpack/common";
 import { RefObject } from "react";

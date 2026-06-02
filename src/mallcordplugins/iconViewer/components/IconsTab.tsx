@@ -8,7 +8,7 @@ import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { SettingsTab, wrapTab } from "@components/settings";
 import { TooltipContainer } from "@components/TooltipContainer";
-import { iconsModule } from "@mallcordplugins/_core/concatenatedModules";
+import { iconsModule } from "@nun/_core/concatenatedModules";
 import { debounce } from "@shared/debounce";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";

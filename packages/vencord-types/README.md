@@ -1,11 +1,11 @@
-# MallCord Types
+# Nun Types
 
-Typings for MallCord's api, published to npm
+Typings for Nun's api, published to npm
 
 ```sh
-npm i @mallcord/types
+npm i @nun/types
 
-yarn add @mallcord/types
+yarn add @nun/types
 
-pnpm add @mallcord/types
+pnpm add @nun/types
 ```

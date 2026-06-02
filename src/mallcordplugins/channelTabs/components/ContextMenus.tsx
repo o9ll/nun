@@ -7,8 +7,8 @@
 import { BaseText } from "@components/BaseText";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, getDiscordFolderIcon, getDiscordFolderIconNames, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@mallcordplugins/channelTabs/util";
-import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "@mallcordplugins/channelTabs/util/types";
+import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, getDiscordFolderIcon, getDiscordFolderIconNames, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@nun/channelTabs/util";
+import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "@nun/channelTabs/util/types";
 import { getIntlMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { RenderModalProps } from "@vencord/discord-types";

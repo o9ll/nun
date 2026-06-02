@@ -3,9 +3,9 @@
 // @description     A Discord client mod - Web version
 // @version         %version%
 // @author          MallCord (https://github.com/MallCord)
-// @namespace       https://github.com/MallCord/MallCord
-// @supportURL      https://github.com/MallCord/MallCord
-// @icon            https://raw.githubusercontent.com/MallCord/MallCord/refs/heads/main/browser/icon.png
+// @namespace       https://github.com/o9ll/nun
+// @supportURL      https://github.com/o9ll/nun
+// @icon            https://raw.githubusercontent.com/o9ll/nun/refs/heads/main/browser/icon.png
 // @license         GPL-3.0
 // @match           *://*.discord.com/*
 // @grant           GM_xmlhttpRequest

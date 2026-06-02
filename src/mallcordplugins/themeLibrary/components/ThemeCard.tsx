@@ -10,7 +10,7 @@ import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { HeadingPrimary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import type { Theme, ThemeLikeProps } from "@mallcordplugins/themeLibrary/types";
+import type { Theme, ThemeLikeProps } from "@nun/themeLibrary/types";
 import { proxyLazy } from "@utils/lazy";
 import { Margins } from "@utils/margins";
 import { User } from "@vencord/discord-types";

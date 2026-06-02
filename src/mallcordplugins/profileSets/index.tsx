@@ -7,7 +7,7 @@
 import "./styles.css";
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { React } from "@webpack/common";
@@ -30,7 +30,7 @@ export default definePlugin({
     name: "ProfileSets",
     description: "Allows you to save and load different profile presets, via the Profile Section in Settings.",
     tags: ["Appearance", "Customisation", "Utility"],
-    authors: [MallCordDevs.omaw, MallCordDevs.justjxke],
+    authors: [NDev.omaw, NDev.justjxke],
     settings,
     patches: [
         {

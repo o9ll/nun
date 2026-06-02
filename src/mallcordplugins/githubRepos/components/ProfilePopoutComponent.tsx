@@ -6,11 +6,11 @@
 
 import { Paragraph } from "@components/Paragraph";
 import { Span } from "@components/Span";
-import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@mallcordplugins/githubRepos/githubApi";
-import { GitHubRepo } from "@mallcordplugins/githubRepos/types";
+import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@nun/githubRepos/githubApi";
+import { GitHubRepo } from "@nun/githubRepos/types";
 import { classes } from "@utils/misc";
 import { findCssClassesLazy } from "@webpack";
-import { Clickable, openModal,React, useEffect, UserProfileStore, useState } from "@webpack/common";
+import { Clickable, openModal, React, useEffect, UserProfileStore, useState } from "@webpack/common";
 
 import { ReposModal } from "./ReposModal";
 

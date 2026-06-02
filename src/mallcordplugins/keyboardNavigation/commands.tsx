@@ -26,15 +26,15 @@ export interface ButtonAction {
 }
 
 export const actions: ButtonAction[] = [
-    { id: "openMallCordSettings", label: "Open MallCord tab", callback: async () => await SettingsRouter.openUserSettings("mallcord_main_panel"), registrar: "MallCord" },
-    { id: "openPluginSettings", label: "Open Plugin tab", callback: () => SettingsRouter.openUserSettings("mallcord_plugins_panel"), registrar: "MallCord" },
-    { id: "openThemesSettings", label: "Open Themes tab", callback: () => SettingsRouter.openUserSettings("mallcord_themes_panel"), registrar: "MallCord" },
-    { id: "openUpdaterSettings", label: "Open Updater tab", callback: () => SettingsRouter.openUserSettings("mallcord_updater_panel"), registrar: "MallCord" },
-    { id: "openBackupSettings", label: "Open Backup & Restore tab", callback: () => SettingsRouter.openUserSettings("mallcord_backup_restore_panel"), registrar: "MallCord" },
-    { id: "restartClient", label: "Restart Client", callback: () => relaunch(), registrar: "MallCord" },
-    { id: "openQuickCSSFile", label: "Open Quick CSS File", callback: () => VencordNative.quickCss.openEditor(), registrar: "MallCord" },
-    { id: "openSettingsFolder", label: "Open Settings Folder", callback: async () => showItemInFolder(await VencordNative.settings.getSettingsDir()), registrar: "MallCord" },
-    { id: "openInGithub", label: "Open in Github", callback: async () => VencordNative.native.openExternal(await getRepo()), registrar: "MallCord" },
+    { id: "openNunSettings", label: "Open Nun tab", callback: async () => await SettingsRouter.openUserSettings("nun_main_panel"), registrar: "Nun" },
+    { id: "openPluginSettings", label: "Open Plugin tab", callback: () => SettingsRouter.openUserSettings("nun_plugins_panel"), registrar: "Nun" },
+    { id: "openThemesSettings", label: "Open Themes tab", callback: () => SettingsRouter.openUserSettings("nun_themes_panel"), registrar: "Nun" },
+    { id: "openUpdaterSettings", label: "Open Updater tab", callback: () => SettingsRouter.openUserSettings("nun_updater_panel"), registrar: "Nun" },
+    { id: "openBackupSettings", label: "Open Backup & Restore tab", callback: () => SettingsRouter.openUserSettings("nun_backup_restore_panel"), registrar: "Nun" },
+    { id: "restartClient", label: "Restart Client", callback: () => relaunch(), registrar: "Nun" },
+    { id: "openQuickCSSFile", label: "Open Quick CSS File", callback: () => VencordNative.quickCss.openEditor(), registrar: "Nun" },
+    { id: "openSettingsFolder", label: "Open Settings Folder", callback: async () => showItemInFolder(await VencordNative.settings.getSettingsDir()), registrar: "Nun" },
+    { id: "openInGithub", label: "Open in Github", callback: async () => VencordNative.native.openExternal(await getRepo()), registrar: "Nun" },
 
     {
         id: "openInBrowser", label: "Open in Browser", callback: async () => {
@@ -54,7 +54,7 @@ export const actions: ButtonAction[] = [
                     }
                 });
             }
-        }, registrar: "MallCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -79,7 +79,7 @@ export const actions: ButtonAction[] = [
             if (choice && enabled) {
                 return togglePlugin(choice, enabled.id === "enable");
             }
-        }, registrar: "MallCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -110,7 +110,7 @@ export const actions: ButtonAction[] = [
                     }
                 });
             }
-        }, registrar: "MallCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -125,7 +125,7 @@ export const actions: ButtonAction[] = [
                     position: Toasts.Position.BOTTOM
                 }
             });
-        }, registrar: "MallCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -134,12 +134,12 @@ export const actions: ButtonAction[] = [
 
             if (isOutdated) {
                 setTimeout(() => showNotification({
-                    title: "A MallCord update is available!",
+                    title: "A Nun update is available!",
                     body: "Click here to view the update",
                     permanent: true,
                     noPersist: true,
                     onClick() {
-                        SettingsRouter.openUserSettings("mallcord_updater_panel");
+                        SettingsRouter.openUserSettings("nun_updater_panel");
                     }
                 }), 10_000);
             } else {
@@ -152,7 +152,7 @@ export const actions: ButtonAction[] = [
                     }
                 });
             }
-        }, registrar: "MallCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -172,7 +172,7 @@ export const actions: ButtonAction[] = [
             if (choice) {
                 NavigationRouter.transitionToGuild(choice.id);
             }
-        }, registrar: "MallCord"
+        }, registrar: "Nun"
     }
 ];
 

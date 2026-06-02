@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-// Ported to MallCord from Nightcord; see https://git.nightcord.su/nightcord/nightcord
+// Ported to Nun from Nightcord; see https://git.nightcord.su/nightcord/nightcord
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { RestAPI, showToast, Toasts, UserStore } from "@webpack/common";
 
@@ -53,7 +53,7 @@ async function resetNick(guildId: string, forcedNick: string) {
 export default definePlugin({
     name: "AntiNickname",
     description: "Automatically resets any nickname forcefully assigned to you in a server. Works even without admin permissions.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     flux: {

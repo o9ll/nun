@@ -6,7 +6,7 @@
 
 /*
  * FFmpeg loading and worker code adapted from the MoreStickers plugin
- * by Leko and Arjix (src/mallcordplugins/moreStickers/utils.tsx)
+ * by Leko and Arjix (src/nun/moreStickers/utils.tsx)
  */
 
 import { FFmpeg } from "@ffmpeg/ffmpeg";

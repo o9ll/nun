@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelStore, FluxDispatcher, GuildMemberStore, StreamerModeStore, Toasts, UserStore, VoiceStateStore } from "@webpack/common";
 
@@ -358,7 +358,7 @@ export default definePlugin({
     name: "OrbolayBridge",
     description: "Bridge plugin to connect Orbolay to Discord",
     tags: ["Utility", "Voice"],
-    authors: [MallCordDevs.SpikeHD],
+    authors: [NDev.SpikeHD],
     settings,
     flux: {
         SPEAKING: handleSpeaking,

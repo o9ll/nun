@@ -19,8 +19,8 @@ import {
     openModal
 } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { MallCordDevs } from "@utils/constants";
-import { AuthenticationStore, Button, FluxDispatcher, IconUtils, Menu, React, Select, SnowflakeUtils,UserStore } from "@webpack/common";
+import { NDev } from "@utils/constants";
+import { AuthenticationStore, Button, FluxDispatcher, IconUtils, Menu, React, Select, SnowflakeUtils, UserStore } from "@webpack/common";
 import virtualMerge from "virtual-merge";
 
 // Labels are authored in English; this is a passthrough so the strings stay
@@ -152,12 +152,12 @@ interface CustomProfileData {
     copiedUserId?: string;
 }
 
-const LS_KEY_DATA = "MallCordCP_data";
-const LS_KEY_ENABLED = "MallCordCP_enabled";
+const LS_KEY_DATA = "NunCP_data";
+const LS_KEY_ENABLED = "NunCP_enabled";
 const DS_ALL_DATA = "customProfile_allData";
 const DS_ALL_ENABLED = "customProfile_allEnabled";
-const LS_ALL_DATA = "MallCordCP_allData";
-const LS_ALL_ENABLED = "MallCordCP_allEnabled";
+const LS_ALL_DATA = "NunCP_allData";
+const LS_ALL_ENABLED = "NunCP_allEnabled";
 
 let storedData: CustomProfileData = {};
 let isEnabled = false;
@@ -985,7 +985,7 @@ export default definePlugin({
     name: "CustomProfile",
     enabledByDefault: true,
     description: t("Visually customize your Discord profile (username, PFP, banner, badges, bio...) — persistent, only visible to you."),
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     dependencies: ["HeaderBarAPI", "ContextMenuAPI"],
 
     patches: [

@@ -19,7 +19,7 @@ on:
 env:
     FORCE_COLOR: true
     GITHUB_TOKEN: ${{ secrets.ETOKEN }}
-    REPO: MallCord/Equibuilds
+    REPO: o9ll/nunun
     USERNAME: GitHub-Actions
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 jobs:
     Build:
-        name: Build MallCord
+        name: Build Nun
         runs-on: ubuntu-latest
-        if: github.repository == 'MallCord/MallCord'
+        if: github.repository == 'o9ll/nun'
 
         steps:
             - uses: actions/checkout@v6
@@ -62,7 +62,7 @@ jobs:
               if: github.ref_name != 'bun'
               run: |
                   pnpm generatePluginJson dist/plugins.json
-                  pnpm generateMallCordPluginJson dist/mallcordplugins.json
+                  pnpm generateNunPluginJson dist/nun.json
                   pnpm generateVencordPluginJson dist/vencordplugins.json
                   pnpm generateDevsList dist/devs.json
 
@@ -86,7 +86,7 @@ jobs:
               if: github.ref_name == 'bun'
               run: |
                   bun run generatePluginJson dist/plugins.json
-                  bun run generateMallCordPluginJson dist/mallcordplugins.json
+                  bun run generateNunPluginJson dist/nun.json
                   bun run generateVencordPluginJson dist/vencordplugins.json
                   bun run generateDevsList dist/devs.json
 
@@ -111,7 +111,7 @@ jobs:
                   find . -size 0 -delete
 
                   mkdir -p userscript
-                  mv MallCord.user.* userscript/
+                  mv Nun.user.* userscript/
                   mv desktop.asar desktop/
                   mv equibop.asar equibop/
                   mv extension-*.zip browser/

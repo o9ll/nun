@@ -6,7 +6,7 @@
 
 import "./style.css";
 
-import { HiddenServersStore } from "@mallcordplugins/hideServers/HiddenServersStore";
+import { HiddenServersStore } from "@nun/hideServers/HiddenServersStore";
 import { classNameFactory } from "@utils/css";
 import { Button, GuildStore, useStateFromStores } from "@webpack/common";
 

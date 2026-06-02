@@ -6,7 +6,7 @@
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { RobotIcon } from "@components/Icons";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Message } from "@vencord/discord-types";
 import { ChannelStore, Menu } from "@webpack/common";
@@ -39,7 +39,7 @@ export default definePlugin({
     description: "A plugin that helps you answer trivia questions using AI.",
     dependencies: ["MessagePopoverAPI"],
     tags: ["Appearance", "Customisation", "Fun"],
-    authors: [MallCordDevs.yash],
+    authors: [NDev.yash],
     settings,
     contextMenus: {
         "message": messageCtxPatch

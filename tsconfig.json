@@ -59,8 +59,8 @@
             "@webpack/types": [
                 "./src/webpack/types"
             ],
-            "@mallcordplugins/*": [
-                "./src/mallcordplugins/*"
+            "@nun/*": [
+                "./src/nun/*"
             ]
         },
         "plugins": [

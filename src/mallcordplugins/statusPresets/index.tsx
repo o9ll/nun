@@ -21,12 +21,12 @@ import "./style.css";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { proxyLazy } from "@utils/lazy";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { extractAndLoadChunksLazy, findComponentByCodeLazy, findModuleId, wreq } from "@webpack";
-import { Menu, openModalLazy,OverridePremiumTypeStore, Toasts } from "@webpack/common";
+import { Menu, openModalLazy, OverridePremiumTypeStore, Toasts } from "@webpack/common";
 
 interface Emoji {
     animated: boolean;
@@ -123,7 +123,7 @@ export default definePlugin({
     name: "StatusPresets",
     description: "Allows you to remember your statuses and set them later",
     tags: ["Activity", "Utility"],
-    authors: [MallCordDevs.iamme],
+    authors: [NDev.iamme],
     settings,
     dependencies: ["UserSettingsAPI"],
     patches: [

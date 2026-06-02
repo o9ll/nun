@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Track } from "@mallcordplugins/musicControls/tidal/TidalStore";
+import { Track } from "@nun/musicControls/tidal/TidalStore";
 
 import { EnhancedLyric } from "./types";
 

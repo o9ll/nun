@@ -1,4 +1,4 @@
-# [<img src="https://iili.io/C3jZGrg.th.png" width="40" align="left" alt="MallCord">](https://github.com/MallCord/MallCord) MallCord
+# [<img src="https://iili.io/C3jZGrg.th.png" width="40" align="left" alt="Nun">](https://github.com/o9ll/nun) Nun
 
 [![License](https://img.shields.io/badge/License-GPL--3.0-ff71ce?style=flat)](./LICENSE)
 [![Vaporwave](https://img.shields.io/badge/aesthetic-vaporwave-01cdfe?style=flat)](#)
@@ -6,22 +6,22 @@
 
 > aesthetic vibes for your client.
 
-**MallCord** is a vaporwave-inspired Discord client mod by **matthew (unfamiliardev)**. It is a rebrand and reskin of
+**Nun** is a vaporwave-inspired Discord client mod by **matthew (unfamiliardev)**. It is a rebrand and reskin of
 [Equicord](https://github.com/Equicord/Equicord), which is itself an enhanced fork of
 [Vencord](https://github.com/Vendicated/Vencord) bundling 300+ community plugins.
 
-## Installing MallCord
+## Installing Nun
 
 ### Quick install
 
 **Linux / macOS**
 ```sh
-wget https://raw.githubusercontent.com/MallCord/MallCord/refs/heads/main/misc/install.sh && chmod +x install.sh && ./install.sh
+wget https://raw.githubusercontent.com/o9ll/nun/refs/heads/main/misc/install.sh && chmod +x install.sh && ./install.sh
 ```
 
 **Windows** — 
 ```sh
-irm "https://raw.githubusercontent.com/MallCord/MallCord/main/misc/install.bat" -OutFile install.bat; .\install.bat
+irm "https://raw.githubusercontent.com/o9ll/nun/main/misc/install.bat" -OutFile install.bat; .\install.bat
 ```
 The script checks all dependencies, clones the repo, builds, and injects into Discord automatically.
 
@@ -41,13 +41,13 @@ Install `pnpm`:
 npm i -g pnpm
 ```
 
-> :exclamation: **IMPORTANT** Make sure you aren't using an admin/root terminal from here onwards. It **will** mess up your Discord/MallCord instance and you **will** most likely have to reinstall.
+> :exclamation: **IMPORTANT** Make sure you aren't using an admin/root terminal from here onwards. It **will** mess up your Discord/Nun instance and you **will** most likely have to reinstall.
 
-Clone MallCord:
+Clone Nun:
 
 ```shell
-git clone https://github.com/MallCord/MallCord
-cd MallCord
+git clone https://github.com/o9ll/nun
+cd Nun
 ```
 
 Install dependencies:
@@ -56,31 +56,31 @@ Install dependencies:
 pnpm install --frozen-lockfile
 ```
 
-Build MallCord:
+Build Nun:
 
 ```shell
 pnpm build
 ```
 
-Inject MallCord into your desktop client:
+Inject Nun into your desktop client:
 
 ```shell
 pnpm inject
 ```
 
-Build MallCord for web:
+Build Nun for web:
 
 ```shell
 pnpm buildWeb
 ```
 
-After building MallCord's web extension, locate the appropriate ZIP file in the `dist` directory and follow your browser's guide for installing custom extensions, if supported.
+After building Nun's web extension, locate the appropriate ZIP file in the `dist` directory and follow your browser's guide for installing custom extensions, if supported.
 
 Note: Firefox extension zip requires Firefox for developers
 
 ## Support
 
-Need help, want to report a bug, or just hang out? Join the MallCord Discord server:
+Need help, want to report a bug, or just hang out? Join the Nun Discord server:
 
 **https://discord.gg/VBAJFf6fY6**
 
@@ -89,7 +89,7 @@ Need help, want to report a bug, or just hang out? Join the MallCord Discord ser
 Built on the shoulders of:
 
 - [Vencord](https://github.com/Vendicated/Vencord) by [Vendicated](https://github.com/Vendicated) — the original Discord client mod.
-- [Equicord](https://github.com/Equicord/Equicord) — the enhanced fork MallCord is based on.
+- [Equicord](https://github.com/Equicord/Equicord) — the enhanced fork Nun is based on.
 
 Huge thanks to everyone who contributed to those projects; individual plugin authors are credited in their respective source files.
 
@@ -97,17 +97,17 @@ Huge thanks to everyone who contributed to those projects; individual plugin aut
 
 Discord is trademark of Discord Inc., and solely mentioned for the sake of descriptivity.
 Mentioning it does not imply any affiliation with or endorsement by Discord Inc.
-Vencord is not connected to MallCord and as such, all donation links go to Vendicated's donation link.
+Vencord is not connected to Nun and as such, all donation links go to Vendicated's donation link.
 
 <details>
-<summary>Using MallCord violates Discord's terms of service</summary>
+<summary>Using Nun violates Discord's terms of service</summary>
 
 Client modifications are against Discord's Terms of Service.
 
 However, Discord is pretty indifferent about them and there are no known cases of users getting banned for using client mods! So you should generally be fine if you don't use plugins that implement abusive behaviour. But no worries, all inbuilt plugins are safe to use!
 
-Regardless, if your account is essential to you and getting disabled would be a disaster for you, you should probably not use any client mods (not exclusive to MallCord), just to be safe.
+Regardless, if your account is essential to you and getting disabled would be a disaster for you, you should probably not use any client mods (not exclusive to Nun), just to be safe.
 
-Additionally, make sure not to post screenshots with MallCord in a server where you might get banned for it.
+Additionally, make sure not to post screenshots with Nun in a server where you might get banned for it.
 
 </details>

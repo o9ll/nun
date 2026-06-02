@@ -6,7 +6,7 @@
 > Your contribution must be majority human written! Some AI assistance like inline suggestions is acceptable, but "vibecoded" contributions are not welcome.
 > Also **do not** use AI to generate your pull request description, README.md or in communication. Ignoring this rule will lead to a permanent block.
 
-MallCord is a community project and welcomes any kind of contribution from anyone!
+Nun is a community project and welcomes any kind of contribution from anyone!
 
 We have development documentation for new contributors, which can be found at <https://docs.equicord.org>.
 
@@ -46,7 +46,7 @@ Before starting your plugin:
 
 ## Plugin Rules
 
-To keep MallCord stable, secure and maintainable, all plugins must follow these rules:
+To keep Nun stable, secure and maintainable, all plugins must follow these rules:
 
 1. No simple slash-command plugins (e.g. `/cat`). If applicable, create a [user-installable Discord app](https://discord.com/developers/docs/change-log#userinstallable-apps-preview) instead.
 2. No simple text replacement plugins (the built-in TextReplace plugin already covers this).
@@ -62,9 +62,9 @@ To keep MallCord stable, secure and maintainable, all plugins must follow these 
 
 **Plugins that violate any of these rules will not be accepted.**
 
-## Improving MallCord Itself
+## Improving Nun Itself
 
-If you want to improve MallCord beyond plugins, such as internal features or performance improvements, you are welcome to open a feature request so it can be discussed.
+If you want to improve Nun beyond plugins, such as internal features or performance improvements, you are welcome to open a feature request so it can be discussed.
 
 Bug fixes, refactors, and documentation improvements are also highly appreciated!
 

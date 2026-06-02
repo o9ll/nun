@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
@@ -29,7 +29,7 @@ export default definePlugin({
     name: "VoiceSettings",
     description: "Extends voice chat audio bitrate beyond Discord's default and unlocks the push-to-talk release delay slider above its 2-second cap.",
     tags: ["Voice", "Utility"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     patches: [

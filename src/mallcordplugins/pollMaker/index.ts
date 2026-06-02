@@ -1,11 +1,11 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 Dann
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 const NUMBERS = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
@@ -13,7 +13,7 @@ const NUMBERS = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣
 export default definePlugin({
     name: "PollMaker",
     description: "/poll formats a quick poll. Use: question | option | option ...",
-    authors: [MallCordDevs.Dann],
+    authors: [NDev.Dann],
     dependencies: ["CommandsAPI"],
     commands: [
         {

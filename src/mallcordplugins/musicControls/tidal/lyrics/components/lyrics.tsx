@@ -6,10 +6,10 @@
 
 import { BaseText } from "@components/BaseText";
 import { TooltipContainer } from "@components/TooltipContainer";
-import { settings } from "@mallcordplugins/musicControls/settings";
-import { TidalLrcStore } from "@mallcordplugins/musicControls/tidal/lyrics/providers/store";
-import { TidalStore } from "@mallcordplugins/musicControls/tidal/TidalStore";
-import { ContextMenuApi, openModal,useEffect, useState, useStateFromStores } from "@webpack/common";
+import { settings } from "@nun/musicControls/settings";
+import { TidalLrcStore } from "@nun/musicControls/tidal/lyrics/providers/store";
+import { TidalStore } from "@nun/musicControls/tidal/TidalStore";
+import { ContextMenuApi, openModal, useEffect, useState, useStateFromStores } from "@webpack/common";
 
 import { LyricsContextMenu } from "./ctxMenu";
 import { LyricsModal } from "./modal";

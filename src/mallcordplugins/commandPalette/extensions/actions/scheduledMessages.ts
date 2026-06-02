@@ -5,8 +5,8 @@
  */
 
 import { isPluginEnabled, plugins } from "@api/PluginManager";
-import { toggleEnabled } from "@mallcordplugins/mallcordHelper/utils";
-import { openViewScheduledModal } from "@mallcordplugins/scheduledMessages/components/ViewScheduledModal";
+import { toggleEnabled } from "@nun/nunHelper/utils";
+import { openViewScheduledModal } from "@nun/scheduledMessages/components/ViewScheduledModal";
 import { Toasts } from "@webpack/common";
 
 import { DEFAULT_CATEGORY_ID } from "../../metadata/categories";

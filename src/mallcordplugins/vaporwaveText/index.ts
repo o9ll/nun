@@ -1,11 +1,11 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 unfamiliardev
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { findOption, RequiredMessageOption } from "@api/Commands";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 /** Convert ASCII to fullwidth characters: "aesthetic" -> "ａｅｓｔｈｅｔｉｃ" */
@@ -18,7 +18,7 @@ function toFullwidth(text: string): string {
 export default definePlugin({
     name: "VaporwaveText",
     description: "Adds /vaporwave to turn your message into ａｅｓｔｈｅｔｉｃ fullwidth text.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     dependencies: ["CommandsAPI"],
     commands: [
         {

@@ -19,7 +19,7 @@ export function openCommandPalette() {
     }
 
     modalSerial += 1;
-    const modalKey = `mallcord-command-palette-${modalSerial}`;
+    const modalKey = `nun-command-palette-${modalSerial}`;
     activeModalKey = openModal(
         modalProps => <CommandPaletteModal modalProps={modalProps} instanceKey={modalSerial} />,
         {

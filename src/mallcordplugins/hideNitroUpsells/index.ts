@@ -5,7 +5,7 @@
  */
 
 import { disableStyle, enableStyle } from "@api/Styles";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 import style from "./style.css?managed";
@@ -13,7 +13,7 @@ import style from "./style.css?managed";
 export default definePlugin({
     name: "HideNitroUpsells",
     description: "Hides Nitro upsell banners, gift buttons and 'boost' nags around the client.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     start: () => enableStyle(style),
     stop: () => disableStyle(style),
 });

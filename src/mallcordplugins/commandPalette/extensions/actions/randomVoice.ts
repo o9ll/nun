@@ -6,7 +6,7 @@
 
 import { isPluginEnabled, plugins } from "@api/PluginManager";
 import { openPluginModal } from "@components/settings/tabs";
-import { toggleEnabled } from "@mallcordplugins/mallcordHelper/utils";
+import { toggleEnabled } from "@nun/nunHelper/utils";
 import { ChannelActions, ChannelRouter, ChannelStore, MediaEngineStore, PermissionsBits, PermissionStore, SelectedChannelStore, Toasts, UserStore, VoiceActions, VoiceStateStore } from "@webpack/common";
 
 import { DEFAULT_CATEGORY_ID } from "../../metadata/categories";

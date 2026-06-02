@@ -7,10 +7,10 @@
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { PaintbrushIcon } from "@components/Icons";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { extractAndLoadChunksLazy } from "@webpack";
-import { ChannelStore, closeModal, DraftType, FluxDispatcher, Menu, openModal,PendingReplyStore, SelectedChannelStore, UploadHandler } from "@webpack/common";
+import { ChannelStore, closeModal, DraftType, FluxDispatcher, Menu, openModal, PendingReplyStore, SelectedChannelStore, UploadHandler } from "@webpack/common";
 
 import RemixModal from "./RemixModal";
 import css from "./styles.css?managed";
@@ -71,7 +71,7 @@ export default definePlugin({
     name: "RemixRevived",
     description: "Revives Remix and breings it to Desktop",
     tags: ["Customisation", "Fun"],
-    authors: [MallCordDevs.MrDiamond, MallCordDevs.meowabyte],
+    authors: [NDev.MrDiamond, NDev.meowabyte],
     contextMenus: {
         "channel-attach": UploadContextMenuPatch,
         "message": MessageContextMenuPatch,

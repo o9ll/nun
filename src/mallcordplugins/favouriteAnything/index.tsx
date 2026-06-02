@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { Embed } from "@vencord/discord-types";
@@ -26,7 +26,7 @@ export default definePlugin({
     name: "FavouriteAnything",
     description: "Favourite any image, video, or file attachment",
     tags: ["Chat", "Media"],
-    authors: [Devs.nin0dev, MallCordDevs.davri],
+    authors: [Devs.nin0dev, NDev.davri],
     searchTerms: ["favorite"],
     managedStyle,
     patches: [

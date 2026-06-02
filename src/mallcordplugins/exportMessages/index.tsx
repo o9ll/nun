@@ -10,7 +10,7 @@ import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { copyToClipboard } from "@utils/clipboard";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { showItemInFolder } from "@utils/native";
 import definePlugin, { OptionType } from "@utils/types";
 import { saveFile } from "@utils/web";
@@ -130,7 +130,7 @@ export default definePlugin({
     name: "ExportMessages",
     description: "Allows you to export any message to a file",
     tags: ["Chat", "Utility"],
-    authors: [MallCordDevs.veygax, MallCordDevs.dat_insanity],
+    authors: [NDev.veygax, NDev.dat_insanity],
     settings,
     contextMenus: {
         "message": messageContextMenuPatch

@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings, Settings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { MediaEngineStore } from "@webpack/common";
 
@@ -57,7 +57,7 @@ export default definePlugin({
     name: "StreamingCodecDisabler",
     description: "Disable codecs for streaming of your choice",
     tags: ["Utility", "Voice"],
-    authors: [MallCordDevs.davidkra230],
+    authors: [NDev.davidkra230],
     settings,
 
     patches: [

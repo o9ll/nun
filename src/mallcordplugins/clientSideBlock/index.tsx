@@ -6,7 +6,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Paragraph } from "@components/Paragraph";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { GuildMember } from "@vencord/discord-types";
 import { ChannelStore, GuildMemberStore, GuildRoleStore, React, RelationshipStore, UserStore } from "@webpack/common";
@@ -144,7 +144,7 @@ export default definePlugin({
     description: "Allows you to locally hide almost all content from any user",
     tags: ["Utility"],
     searchTerms: ["blocked", "block", "hide", "hidden", "noblockedmessages"],
-    authors: [Devs.Samwich, MallCordDevs.KamiRu],
+    authors: [Devs.Samwich, NDev.KamiRu],
     settings,
     activeNowView,
     shouldHideUser,

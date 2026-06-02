@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { brushCanvas, ctx, render } from "@mallcordplugins/remix/editor/components/Canvas";
-import { currentSize, ToolDefinition } from "@mallcordplugins/remix/editor/components/Toolbar";
-import { Mouse } from "@mallcordplugins/remix/editor/input";
-import { line } from "@mallcordplugins/remix/editor/utils/canvas";
+import { brushCanvas, ctx, render } from "@nun/remix/editor/components/Canvas";
+import { currentSize, ToolDefinition } from "@nun/remix/editor/components/Toolbar";
+import { Mouse } from "@nun/remix/editor/input";
+import { line } from "@nun/remix/editor/utils/canvas";
 
 export const BrushTool: ToolDefinition = {
     onMouseMove() {

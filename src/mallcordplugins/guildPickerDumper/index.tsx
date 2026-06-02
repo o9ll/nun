@@ -5,7 +5,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import type { Guild } from "@vencord/discord-types";
 import { EmojiStore, Menu, StickersStore } from "@webpack/common";
@@ -96,7 +96,7 @@ export default definePlugin({
     name: "GuildPickerDumper",
     description: "Context menu to dump and download a server's emojis and stickers.",
     tags: ["Emotes", "Servers", "Utility"],
-    authors: [MallCordDevs.Cortex, Devs.Samwich, MallCordDevs.Synth, Devs.thororen],
+    authors: [NDev.Cortex, Devs.Samwich, NDev.Synth, Devs.thororen],
     contextMenus: {
         "guild-context": Patch,
         "guild-header-popout": Patch

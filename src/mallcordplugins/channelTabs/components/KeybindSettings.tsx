@@ -8,7 +8,7 @@ import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { settings } from "@mallcordplugins/channelTabs/util";
+import { settings } from "@nun/channelTabs/util";
 import { IS_MAC } from "@utils/constants";
 import { Button, React, Text, useEffect, useRef, useState } from "@webpack/common";
 import { JSX } from "react";

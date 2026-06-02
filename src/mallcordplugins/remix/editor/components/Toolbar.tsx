@@ -6,10 +6,10 @@
 
 import { Paragraph } from "@components/Paragraph";
 import { Switch } from "@components/settings";
-import { BrushTool } from "@mallcordplugins/remix/editor/tools/brush";
-import { CropTool, resetBounds } from "@mallcordplugins/remix/editor/tools/crop";
-import { EraseTool } from "@mallcordplugins/remix/editor/tools/eraser";
-import { currentShape, setShape, setShapeFill, Shape, ShapeTool } from "@mallcordplugins/remix/editor/tools/shape";
+import { BrushTool } from "@nun/remix/editor/tools/brush";
+import { CropTool, resetBounds } from "@nun/remix/editor/tools/crop";
+import { EraseTool } from "@nun/remix/editor/tools/eraser";
+import { currentShape, setShape, setShapeFill, Shape, ShapeTool } from "@nun/remix/editor/tools/shape";
 import { Button, Select, Slider, useEffect, useState } from "@webpack/common";
 
 import { brushCanvas, canvas, cropCanvas, render, shapeCanvas } from "./Canvas";

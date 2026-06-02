@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { languages } from "@mallcordplugins/translatePlus/misc/languages";
-import { cl, Translation } from "@mallcordplugins/translatePlus/misc/types";
+import { languages } from "@nun/translatePlus/misc/languages";
+import { cl, Translation } from "@nun/translatePlus/misc/types";
 import { Message } from "@vencord/discord-types";
 import { Parser, useEffect, useState } from "@webpack/common";
 

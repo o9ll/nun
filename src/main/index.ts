@@ -62,8 +62,8 @@ if (!IS_VANILLA && !IS_EXTENSION) {
             }
         });
 
-        protocol.handle("mallcord", ({ url: unsafeUrl }) => {
-            let url = decodeURI(unsafeUrl).slice("mallcord://".length).replace(/\?v=\d+$/, "");
+        protocol.handle("nun", ({ url: unsafeUrl }) => {
+            let url = decodeURI(unsafeUrl).slice("nun://".length).replace(/\?v=\d+$/, "");
 
             if (url.endsWith("/")) url = url.slice(0, -1);
 
@@ -99,8 +99,8 @@ if (!IS_VANILLA && !IS_EXTENSION) {
         try {
             if (RendererSettings.store.enableReactDevtools)
                 installExt("fmkadmapgofadopljbjfkapdkoienihi")
-                    .then(() => console.info("[MallCord] Installed React Developer Tools"))
-                    .catch(err => console.error("[MallCord] Failed to install React Developer Tools", err));
+                    .then(() => console.info("[Nun] Installed React Developer Tools"))
+                    .catch(err => console.error("[Nun] Failed to install React Developer Tools", err));
         } catch { }
 
         initCsp();

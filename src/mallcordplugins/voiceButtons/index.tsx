@@ -5,7 +5,7 @@
  */
 
 import { Flex } from "@components/Flex";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { User } from "@vencord/discord-types";
 import { React } from "@webpack/common";
@@ -17,7 +17,7 @@ export default definePlugin({
     name: "VoiceButtons",
     description: "Quickly DM, mute, or deafen any user right from the voice-call panel.",
     tags: ["Servers", "Utility", "Voice"],
-    authors: [MallCordDevs.nicola02nb, MallCordDevs.omaw],
+    authors: [NDev.nicola02nb, NDev.omaw],
     settings,
     patches: [
         {

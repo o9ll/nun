@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { normalizeCorsProxyUrl, toProxiedUrl } from "@mallcordplugins/fileUpload/constants";
-import { settings } from "@mallcordplugins/fileUpload/settings";
-import { fallbackServiceOrder, serviceLabels, ServiceType, ShareXUploaderConfig, UploadResponse } from "@mallcordplugins/fileUpload/types";
+import { normalizeCorsProxyUrl, toProxiedUrl } from "@nun/fileUpload/constants";
+import { settings } from "@nun/fileUpload/settings";
+import { fallbackServiceOrder, serviceLabels, ServiceType, ShareXUploaderConfig, UploadResponse } from "@nun/fileUpload/types";
 import { copyToClipboard } from "@utils/clipboard";
 import { insertTextIntoChatInputBox } from "@utils/discord";
 import { Logger } from "@utils/Logger";

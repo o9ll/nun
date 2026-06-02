@@ -7,8 +7,8 @@
 import "./styles.css";
 
 import badges from "@plugins/_api/badges";
-import { Devs, MallCordDevs } from "@utils/constants";
-import { isMallCordPluginDev, isPluginDev } from "@utils/misc";
+import { Devs, NDev } from "@utils/constants";
+import { isNunPluginDev, isPluginDev } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
 
@@ -37,10 +37,10 @@ const discordBadges: readonly [number, string, string][] = Object.freeze([
 function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.Element | null {
 
     switch (badge) {
-        case "MallCordDonor":
+        case "NunDonor":
             return (
-                <span style={{ order: settings.store.MallCordDonorPosition }}>
-                    {badges.getMallCordDonorBadges(author.id)?.map(badge => (
+                <span style={{ order: settings.store.NunDonorPosition }}>
+                    {badges.getNunDonorBadges(author.id)?.map(badge => (
                         <RoleIconComponent
                             key={author.id}
                             className={roleIcon}
@@ -51,12 +51,12 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
                     ))}
                 </span>
             );
-        case "MallCordContributer":
-            return isMallCordPluginDev(author.id) ? (
-                <span style={{ order: settings.store.MallCordContributorPosition }}>
+        case "NunContributer":
+            return isNunPluginDev(author.id) ? (
+                <span style={{ order: settings.store.NunContributorPosition }}>
                     <RoleIconComponent
                         className={roleIcon}
-                        name="MallCord Contributor"
+                        name="Nun Contributor"
                         size={20}
                         src={"https://iili.io/C3jZGrg.th.png"}
                     />
@@ -128,8 +128,8 @@ function ChatBadges({ author }: { author: User; }) {
 
     return (
         <span className="vc-sbic-badge-row" style={{ margin: "2px" }}>
-            {settings.store.showMallCordDonor && <CheckBadge badge={"MallCordDonor"} author={author} />}
-            {settings.store.showMallCordContributor && <CheckBadge badge={"MallCordContributer"} author={author} />}
+            {settings.store.showNunDonor && <CheckBadge badge={"NunDonor"} author={author} />}
+            {settings.store.showNunContributor && <CheckBadge badge={"NunContributer"} author={author} />}
             {settings.store.showVencordDonor && <CheckBadge badge={"VencordDonor"} author={author} />}
             {settings.store.showVencordContributor && <CheckBadge badge={"VencordContributer"} author={author} />}
             {settings.store.showDiscordProfile && <CheckBadge badge={"DiscordProfile"} author={author} />}
@@ -140,7 +140,7 @@ function ChatBadges({ author }: { author: User; }) {
 
 export default definePlugin({
     name: "ShowBadgesInChat",
-    authors: [Devs.Inbestigator, MallCordDevs.KrystalSkull],
+    authors: [Devs.Inbestigator, NDev.KrystalSkull],
     description: "Shows the message author's badges beside their name in chat.",
     dependencies: ["MessageDecorationsAPI"],
     tags: ["Appearance", "Chat"],

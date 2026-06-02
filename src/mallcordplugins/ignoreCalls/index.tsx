@@ -10,7 +10,7 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Devs, MallCordDevs } from "@utils/constants";
+import { Devs, NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { Channel } from "@vencord/discord-types";
@@ -93,7 +93,7 @@ export default definePlugin({
     name: "IgnoreCalls",
     description: "Allows you to ignore calls from specific users or dm groups.",
     tags: ["Voice"],
-    authors: [MallCordDevs.TheArmagan, Devs.thororen],
+    authors: [NDev.TheArmagan, Devs.thororen],
     settings,
     patches: [
         {

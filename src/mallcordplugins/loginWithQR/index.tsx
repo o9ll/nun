@@ -9,7 +9,7 @@ import { definePluginSettings } from "@api/Settings";
 import { QrCodeIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import SettingsPlugin from "@plugins/_core/settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import { removeFromArray } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
@@ -43,7 +43,7 @@ export default definePlugin({
     name: "LoginWithQR",
     description: "Allows you to login to another device by scanning a login QR code, just like on mobile!",
     tags: ["Utility"],
-    authors: [MallCordDevs.nexpid],
+    authors: [NDev.nexpid],
 
     settings,
 
@@ -62,7 +62,7 @@ export default definePlugin({
 
     start() {
         SettingsPlugin.customEntries.push({
-            key: "mallcord_login_with_qr",
+            key: "nun_login_with_qr",
             title: getIntlMessage("USER_SETTINGS_SCAN_QR_CODE"),
             Component: openQrModal,
             Icon: QrCodeIcon
@@ -71,7 +71,7 @@ export default definePlugin({
     },
 
     stop() {
-        removeFromArray(SettingsPlugin.customEntries, e => e.key === "mallcord_login_with_qr");
+        removeFromArray(SettingsPlugin.customEntries, e => e.key === "nun_login_with_qr");
         unload();
     },
 });

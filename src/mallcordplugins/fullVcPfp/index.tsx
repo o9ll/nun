@@ -5,7 +5,7 @@
  */
 
 import { disableStyle, enableStyle } from "@api/Styles";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { ChannelRTCStore, ChannelStore, UserStore, VoiceStateStore } from "@webpack/common";
 
@@ -15,7 +15,7 @@ export default definePlugin({
     name: "FullVCPFP",
     description: "Makes avatars take up the entire vc tile",
     tags: ["Appearance", "Voice"],
-    authors: [MallCordDevs.mochienya],
+    authors: [NDev.mochienya],
     patches: [
         {
             find: "\"data-selenium-video-tile\":",

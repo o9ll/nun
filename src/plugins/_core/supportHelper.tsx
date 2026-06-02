@@ -26,14 +26,14 @@ import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { openSettingsTabModal, UpdaterTab } from "@components/settings";
-import { platformName } from "@mallcordplugins/mallcordHelper/utils";
+import { platformName } from "@nun/nunHelper/utils";
 import customIdle from "@plugins/customIdle";
 import { gitHash, gitHashShort } from "@shared/vencordUserAgent";
-import { CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, MALLCORD_TEAM, GUILD_ID, SUPPORT_CHANNEL_ID, SUPPORT_CHANNEL_IDS, VC_CONTRIB_ROLE_ID, VC_DONOR_ROLE_ID, VC_GUILD_ID, VC_REGULAR_ROLE_ID, VENCORD_CONTRIB_ROLE_ID } from "@utils/constants";
+import { CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, NUN_TEAM, GUILD_ID, SUPPORT_CHANNEL_ID, SUPPORT_CHANNEL_IDS, VC_CONTRIB_ROLE_ID, VC_DONOR_ROLE_ID, VC_GUILD_ID, VC_REGULAR_ROLE_ID, VENCORD_CONTRIB_ROLE_ID } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { isAnyPluginDev, isMallCordGuild, isMallCordSupport, isSupportChannel, tryOrElse } from "@utils/misc";
+import { isAnyPluginDev, isNunGuild, isNunSupport, isSupportChannel, tryOrElse } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
@@ -54,9 +54,9 @@ const TrustedRolesIds = [
     VC_CONTRIB_ROLE_ID, // Vencord Contributor
     VC_REGULAR_ROLE_ID, // Vencord Regular
     VC_DONOR_ROLE_ID, // Vencord Donor
-    MALLCORD_TEAM, // MallCord Team
-    DONOR_ROLE_ID, // MallCord Donor
-    CONTRIB_ROLE_ID, // MallCord Contributor
+    NUN_TEAM, // Nun Team
+    DONOR_ROLE_ID, // Nun Donor
+    CONTRIB_ROLE_ID, // Nun Contributor
     VENCORD_CONTRIB_ROLE_ID, // Vencord Contributor
 ];
 
@@ -136,7 +136,7 @@ async function generateDebugInfoMessage() {
     let clientString = `${clientInfo.name}`;
     clientString += `${clientInfo.version ? ` v${clientInfo.version}` : ""}`;
     clientString += `${clientInfo.info ? ` • ${clientInfo.info}` : ""}`;
-    clientString += `${clientInfo.shortHash ? ` • [${clientInfo.shortHash}](<https://github.com/MallCord/Equibop/commit/${clientInfo.hash}>)` : ""}`;
+    clientString += `${clientInfo.shortHash ? ` • [${clientInfo.shortHash}](<https://github.com/o9ll/unu/commit/${clientInfo.hash}>)` : ""}`;
 
     const spoofInfo = IS_EQUIBOP ? tryOrElse(() => VesktopNative.app.getPlatformSpoofInfo?.(), null) : null;
     const platformDisplay = spoofInfo?.spoofed
@@ -144,8 +144,8 @@ async function generateDebugInfoMessage() {
         : platformName();
 
     const info = {
-        MallCord:
-            `v${VERSION} • [${gitHashShort}](<https://github.com/MallCord/MallCord/commit/${gitHash}>)` +
+        Nun:
+            `v${VERSION} • [${gitHashShort}](<https://github.com/o9ll/nun/commit/${gitHash}>)` +
             `${IS_EQUIBOP ? "" : SettingsPlugin.getVersionInfo()} - ${Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
         Client: `${RELEASE_CHANNEL} ~ ${clientString}`,
         Platform: platformDisplay
@@ -170,7 +170,7 @@ async function generateDebugInfoMessage() {
     const commonIssues = {
         "Activity Sharing Disabled": tryOrElse(() => !ShowCurrentGame.getSetting(), false),
         "Link Embeds Disabled": tryOrElse(() => !ShowEmbeds.getSetting(), false),
-        "MallCord DevBuild": !IS_STANDALONE,
+        "Nun DevBuild": !IS_STANDALONE,
         "Equibop DevBuild": IS_EQUIBOP && tryOrElse(() => VesktopNative.app.isDevBuild?.(), false),
         "Platform Spoofed": spoofInfo?.spoofed ?? false,
         "Has UserPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
@@ -299,7 +299,7 @@ function DevBuildConfirmModal(props: RenderModalProps) {
             }}
         >
             <div>
-                <Paragraph>You are using a custom build of MallCord, which we do not provide support for!</Paragraph>
+                <Paragraph>You are using a custom build of Nun, which we do not provide support for!</Paragraph>
 
                 <Paragraph className={Margins.top8}>
                     We only provide support for <Link href="https://equicord.org/download">official builds</Link>.
@@ -331,17 +331,17 @@ export default definePlugin({
 
     commands: [
         {
-            name: "mallcord-debug",
-            description: "Send MallCord debug info",
+            name: "nun-debug",
+            description: "Send Nun debug info",
             // @ts-ignore
-            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isMallCordGuild(ctx?.guild?.id, true),
+            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isNunGuild(ctx?.guild?.id, true),
             execute: async () => ({ content: await generateDebugInfoMessage() })
         },
         {
-            name: "mallcord-plugins",
-            description: "Send MallCord plugin list",
+            name: "nun-plugins",
+            description: "Send Nun plugin list",
             // @ts-ignore
-            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isMallCordGuild(ctx?.guild?.id, true),
+            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isNunGuild(ctx?.guild?.id, true),
             execute: async () => {
                 const channelId = SelectedChannelStore.getChannelId();
                 const pluginList = generatePluginList();
@@ -385,7 +385,7 @@ export default definePlugin({
                             onCancel={() => openSettingsTabModal(UpdaterTab!)}
                         >
                             <div>
-                                <Paragraph>You are using an outdated version of MallCord! Chances are, your issue is already fixed.</Paragraph>
+                                <Paragraph>You are using an outdated version of Nun! Chances are, your issue is already fixed.</Paragraph>
                                 <Paragraph className={Margins.top8}>
                                     Please first update before asking for support!
                                 </Paragraph>
@@ -411,9 +411,9 @@ export default definePlugin({
                         variant="primary"
                     >
                         <div>
-                            <Paragraph>You are using an externally updated MallCord version, which we do not provide support for!</Paragraph>
+                            <Paragraph>You are using an externally updated Nun version, which we do not provide support for!</Paragraph>
                             <Paragraph className={Margins.top8}>
-                                Please either switch to an <Link href="https://equicord.org/download">officially supported version of MallCord</Link>, or
+                                Please either switch to an <Link href="https://equicord.org/download">officially supported version of Nun</Link>, or
                                 contact your package maintainer for support instead.
                             </Paragraph>
                         </div>
@@ -432,11 +432,11 @@ export default definePlugin({
     renderMessageAccessory(props) {
         const buttons = [] as JSX.Element[];
 
-        const mallcordSupport = isMallCordSupport(props.message.author.id);
+        const nunSupport = isNunSupport(props.message.author.id);
 
         const shouldAddUpdateButton =
             !IS_UPDATER_DISABLED
-            && ((isSupportChannel(props.channel.id) && mallcordSupport))
+            && ((isSupportChannel(props.channel.id) && nunSupport))
             && props.message.content?.toLowerCase().includes("update");
 
         if (shouldAddUpdateButton) {
@@ -461,15 +461,15 @@ export default definePlugin({
             );
         }
 
-        if (isSupportChannel(props.channel.id) && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel) && mallcordSupport) {
-            if (props.message.content.includes("/mallcord-debug") || props.message.content.includes("/mallcord-plugins")) {
+        if (isSupportChannel(props.channel.id) && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel) && nunSupport) {
+            if (props.message.content.includes("/nun-debug") || props.message.content.includes("/nun-plugins")) {
                 buttons.push(
                     <Button
                         key="vc-dbg"
                         color={Button.Colors.PRIMARY}
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
-                        Run /mallcord-debug
+                        Run /nun-debug
                     </Button>,
                     <Button
                         key="vc-plg-list"
@@ -489,12 +489,12 @@ export default definePlugin({
                             }
                         }}
                     >
-                        Run /mallcord-plugins
+                        Run /nun-plugins
                     </Button>
                 );
             }
 
-            if (mallcordSupport) {
+            if (nunSupport) {
                 const match = CodeBlockRe.exec(props.message.content || props.message.embeds[0]?.rawDescription || "");
                 if (match) {
                     buttons.push(
@@ -536,7 +536,7 @@ export default definePlugin({
 
         return (
             <Card variant="warning" className={Margins.top8} defaultPadding>
-                Please do not private message MallCord & Vencord plugin developers for support!
+                Please do not private message Nun & Vencord plugin developers for support!
                 <br />
                 Instead, use the support channel: {Parser.parse("https://discord.com/channels/1173279886065029291/1297590739911573585")}
                 {!ChannelStore.getChannel(SUPPORT_CHANNEL_ID) && " (Click the link to join)"}

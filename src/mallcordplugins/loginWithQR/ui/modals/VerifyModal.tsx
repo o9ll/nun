@@ -6,7 +6,7 @@
 
 import { BaseText } from "@components/BaseText";
 import { Button, TextButton } from "@components/Button";
-import { images } from "@mallcordplugins/loginWithQR/images";
+import { images } from "@nun/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
 import { RenderModalProps } from "@vencord/discord-types";
 import { findByPropsLazy } from "@webpack";
@@ -16,7 +16,8 @@ import {
     RestAPI,
     useEffect,
     useRef,
-    useState } from "@webpack/common";
+    useState
+} from "@webpack/common";
 
 import { cl } from "..";
 

@@ -5,13 +5,13 @@
  */
 
 import { AudioPlayerInternal, AudioPlayerOptions, audioProcessorFunctions, AudioType, identifyAudioType, playAudio } from "@api/AudioPlayer";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "AudioPlayerAPI",
     description: "API to play internal Discord audio files or external audio links.",
-    authors: [MallCordDevs.Etorix],
+    authors: [NDev.Etorix],
     AudioType,
     playAudio,
 

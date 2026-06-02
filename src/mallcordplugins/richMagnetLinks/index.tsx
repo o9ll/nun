@@ -6,11 +6,11 @@
 
 import "./styles.css";
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
-    authors: [MallCordDevs.cassie, MallCordDevs.mochienya, MallCordDevs.secp192k1],
+    authors: [NDev.cassie, NDev.mochienya, NDev.secp192k1],
     name: "RichMagnetLinks",
     description: "Renders magnet links like message links",
     tags: ["Appearance", "Chat"],

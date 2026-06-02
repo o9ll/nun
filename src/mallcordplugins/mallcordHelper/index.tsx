@@ -13,7 +13,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings, migratePluginToSettings, Settings } from "@api/Settings";
 import { ShieldIcon, WarningIcon } from "@components/Icons";
 import customRPC from "@plugins/customRPC";
-import { Devs, MallCordDevs, GUILD_ID, SUPPORT_CHANNEL_ID, SUPPORT_CHANNEL_IDS, VC_SUPPORT_CHANNEL_IDS } from "@utils/constants";
+import { Devs, NDev, GUILD_ID, SUPPORT_CHANNEL_ID, SUPPORT_CHANNEL_IDS, VC_SUPPORT_CHANNEL_IDS } from "@utils/constants";
 import { isAnyPluginDev } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { StandingState } from "@vencord/discord-types/enums";
@@ -24,9 +24,9 @@ import { ComponentType } from "react";
 import { PluginButtons } from "./pluginButtons";
 import { PluginCards } from "./pluginCards";
 
-migratePluginToSettings(true, "MallCordHelper", "NoBulletPoints", "noBulletPoints");
-migratePluginToSettings(true, "MallCordHelper", "NoModalAnimation", "noModalAnimation");
-migratePluginToSettings(true, "MallCordHelper", "GuildTagSettings", "disableAdoptTagPrompt");
+migratePluginToSettings(true, "NunHelper", "NoBulletPoints", "noBulletPoints");
+migratePluginToSettings(true, "NunHelper", "NoModalAnimation", "noModalAnimation");
+migratePluginToSettings(true, "NunHelper", "GuildTagSettings", "disableAdoptTagPrompt");
 
 let clicked = false;
 
@@ -141,18 +141,18 @@ const settings = definePluginSettings({
 });
 
 export default definePlugin({
-    name: "MallCordHelper",
+    name: "NunHelper",
     description: "Used to provide support, fix discord caused crashes, and other misc features.",
     tags: ["Appearance", "Commands", "Utility"],
     dependencies: ["CommandsAPI", "HeaderBarAPI", "MessageAccessoriesAPI"],
     authors: [
         Devs.thororen,
-        MallCordDevs.nyx,
-        MallCordDevs.Naibuu,
-        MallCordDevs.keircn,
-        MallCordDevs.SerStars,
-        MallCordDevs.mart,
-        MallCordDevs.omaw,
+        NDev.nyx,
+        NDev.Naibuu,
+        NDev.keircn,
+        NDev.SerStars,
+        NDev.mart,
+        NDev.omaw,
         Devs.Samwich,
         Devs.AutumnVN
     ],
@@ -367,8 +367,8 @@ export default definePlugin({
             if (VC_SUPPORT_CHANNEL_IDS.includes(channelId) && !clicked) {
                 return Alerts.show({
                     title: "Vencord Support Channel Warning",
-                    body: "Before asking for help. Check updates and if this issue is actually caused by MallCord!",
-                    confirmText: "MallCord Support",
+                    body: "Before asking for help. Check updates and if this issue is actually caused by Nun!",
+                    confirmText: "Nun Support",
                     onConfirm() {
                         NavigationRouter.transitionTo(`/channels/${GUILD_ID}/${SUPPORT_CHANNEL_ID}`);
                     },

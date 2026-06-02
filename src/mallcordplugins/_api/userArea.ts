@@ -5,7 +5,7 @@
  */
 
 import { isPluginEnabled } from "@api/PluginManager";
-import declutter from "@mallcordplugins/declutter";
+import declutter from "@nun/declutter";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findCssClassesLazy } from "@webpack";

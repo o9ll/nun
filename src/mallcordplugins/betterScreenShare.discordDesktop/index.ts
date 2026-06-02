@@ -7,7 +7,7 @@
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings, Settings } from "@api/Settings";
 import fakeNitro from "@plugins/fakeNitro";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 interface StreamQualityOpts {
@@ -61,7 +61,7 @@ export default definePlugin({
     name: "BetterScreenShare",
     description: "Unlock higher stream bitrates, custom frame rates, and resolutions for screen share on Discord Desktop, without requiring Nitro.",
     tags: ["Voice", "Utility"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     settings,
 
     patches: [

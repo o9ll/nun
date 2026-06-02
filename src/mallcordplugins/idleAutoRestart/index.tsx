@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { Menu, VoiceStateStore } from "@webpack/common";
@@ -37,7 +37,7 @@ export default definePlugin({
     name: "IdleAutoRestart",
     description: "Automatically restarts the client after being idle for a configurable amount of time, but avoids restarting while you are in VC.",
     tags: ["Utility"],
-    authors: [MallCordDevs.SteelTech],
+    authors: [NDev.SteelTech],
     settings,
 
     toolboxActions() {

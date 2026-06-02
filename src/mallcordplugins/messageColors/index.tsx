@@ -7,7 +7,7 @@
 import "./styles.css";
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin, { StartAt } from "@utils/types";
 import { React } from "@webpack/common";
 import type { ReactElement } from "react";
@@ -24,7 +24,7 @@ interface ParsedColorInfo {
 const requiredFirstCharacters = ["r", "h", "#"].flatMap(v => [v, v.toUpperCase()]);
 
 export default definePlugin({
-    authors: [MallCordDevs.Hen],
+    authors: [NDev.Hen],
     name: "MessageColors",
     description: "Displays color codes like #FF0042 inside of messages",
     tags: ["Appearance", "Chat"],

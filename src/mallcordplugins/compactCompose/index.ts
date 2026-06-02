@@ -1,11 +1,11 @@
 /*
- * MallCord, a vaporwave-inspired Discord client mod
+ * Nun, a vaporwave-inspired Discord client mod
  * Copyright (c) 2026 unfamiliardev
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { disableStyle, enableStyle } from "@api/Styles";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 import style from "./style.css?managed";
@@ -13,7 +13,7 @@ import style from "./style.css?managed";
 export default definePlugin({
     name: "CompactCompose",
     description: "Slims down the message box and hides the upload/gift clutter until you focus it.",
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     start: () => enableStyle(style),
     stop: () => disableStyle(style),
 });

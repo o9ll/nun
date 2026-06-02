@@ -7,7 +7,7 @@
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings, Settings } from "@api/Settings";
 import fakeNitro from "@plugins/fakeNitro";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { localStorage } from "@utils/localStorage";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -90,7 +90,7 @@ export default definePlugin({
     name: "EquibopStreamFixes",
     description: "Tries to fix stream quality on Equibop by patching Discord's encoder and quality restrictions.",
     tags: ["Voice"],
-    authors: [MallCordDevs.creations],
+    authors: [NDev.creations],
     settings,
 
     patches: [

@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { PickerContent, PickerContentHeader, PickerContentRow, PickerContentRowGrid, PickerHeaderProps, SidebarProps, Sticker, StickerCategoryType, StickerPack } from "@mallcordplugins/moreStickers/types";
-import { sendSticker } from "@mallcordplugins/moreStickers/upload";
-import { clPicker, FFmpegStateContext } from "@mallcordplugins/moreStickers/utils";
+import { PickerContent, PickerContentHeader, PickerContentRow, PickerContentRowGrid, PickerHeaderProps, SidebarProps, Sticker, StickerCategoryType, StickerPack } from "@nun/moreStickers/types";
+import { sendSticker } from "@nun/moreStickers/upload";
+import { clPicker, FFmpegStateContext } from "@nun/moreStickers/utils";
 import { debounce } from "@shared/debounce";
-import { Modal,openModal, React, TextInput } from "@webpack/common";
+import { Modal, openModal, React, TextInput } from "@webpack/common";
 import { JSX } from "react";
 
 import { CategoryImage, CategoryScroller, CategoryWrapper, StickerCategory } from "./categories";

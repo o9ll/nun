@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { MessageStore, React, TypingStore, UserStore, useStateFromStores } from "@webpack/common";
 
@@ -43,7 +43,7 @@ export default definePlugin({
     name: "DmReadReceipt",
     description: "Shows a Seen indicator on your messages in DMs when the other person has read them.",
     tags: ["Chat", "Utility"],
-    authors: [MallCordDevs.pepsify],
+    authors: [NDev.o9],
     dependencies: ["MessageDecorationsAPI"],
 
     renderMessageDecoration: props => <SeenIndicator {...props} />,

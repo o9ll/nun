@@ -7,7 +7,7 @@
 import "./styles.css";
 
 import { definePluginSettings } from "@api/Settings";
-import { MallCordDevs } from "@utils/constants";
+import { NDev } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { ColorUtils, React, showToast, Toasts } from "@webpack/common";
@@ -275,7 +275,7 @@ export default definePlugin({
     name: "BetterAudioPlayer",
     description: "Adds a spectrograph and oscilloscope visualizer to audio attachment players.",
     tags: ["Appearance", "Media", "Voice"],
-    authors: [MallCordDevs.creations],
+    authors: [NDev.creations],
     settings,
 
     patches: [

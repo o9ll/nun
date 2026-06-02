@@ -53,7 +53,7 @@ export interface PluginData {
 }
 
 export const devs = {} as Record<string, Dev>;
-export const mallcordDevs = {} as Record<string, Dev>;
+export const nunDevs = {} as Record<string, Dev>;
 
 export function getName(node: NamedDeclaration) {
     return node.name && isIdentifier(node.name) ? node.name.text : undefined;
@@ -100,26 +100,26 @@ export function parseDevs() {
     throw new Error("Could not find Devs constant");
 }
 
-export function parseMallCordDevs() {
+export function parseNDev() {
     const file = createSourceFile("constants.ts", readFileSync("src/utils/constants.ts", "utf8"), ScriptTarget.Latest);
 
     for (const child of file.getChildAt(0).getChildren()) {
         if (!isVariableStatement(child)) continue;
 
-        const devsDeclaration = child.declarationList.declarations.find(d => hasName(d, "MallCordDevs"));
+        const devsDeclaration = child.declarationList.declarations.find(d => hasName(d, "NDev"));
         if (!devsDeclaration?.initializer || !isCallExpression(devsDeclaration.initializer)) continue;
 
         const value = devsDeclaration.initializer.arguments[0];
 
-        if (!isSatisfiesExpression(value) || !isObjectLiteralExpression(value.expression)) throw new Error("Failed to parse MallCordDevs: not an object literal");
+        if (!isSatisfiesExpression(value) || !isObjectLiteralExpression(value.expression)) throw new Error("Failed to parse NDev: not an object literal");
 
         for (const prop of value.expression.properties) {
             const name = (prop.name as Identifier).text;
             const value = isPropertyAssignment(prop) ? prop.initializer : prop;
 
-            if (!isObjectLiteralExpression(value)) throw new Error(`Failed to parse MallCordDevs: ${name} is not an object literal`);
+            if (!isObjectLiteralExpression(value)) throw new Error(`Failed to parse NDev: ${name} is not an object literal`);
 
-            mallcordDevs[name] = {
+            nunDevs[name] = {
                 name: (getObjectProp(value, "name") as StringLiteral).text,
                 id: (getObjectProp(value, "id") as BigIntLiteral).text.slice(0, -1)
             };
@@ -128,7 +128,7 @@ export function parseMallCordDevs() {
         return;
     }
 
-    throw new Error("Could not find MallCordDevs constant");
+    throw new Error("Could not find NDev constant");
 }
 
 export async function parseFile(fileName: string) {
@@ -204,7 +204,7 @@ export async function parseFile(fileName: string) {
                     if (!isArrayLiteralExpression(value)) throw fail("authors is not an array literal");
                     data.authors = value.elements.map(e => {
                         if (!isPropertyAccessExpression(e)) throw fail("authors array contains non-property access expressions");
-                        const d = devs[getName(e)!] || mallcordDevs[getName(e)!];
+                        const d = devs[getName(e)!] || nunDevs[getName(e)!];
                         if (!d) throw fail(`couldn't look up author ${getName(e)}`);
                         return d;
                     });
@@ -249,7 +249,7 @@ export async function parseFile(fileName: string) {
             .join(posixSep)
             .replace(/\/index\.([jt]sx?)$/, "")
             .replace(/^src\/plugins\//, "")
-            .replace(/^src\/mallcordplugins\//, "");
+            .replace(/^src\/nun\//, "");
 
         return [data] as const;
     }

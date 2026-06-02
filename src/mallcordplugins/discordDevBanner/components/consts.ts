@@ -13,7 +13,7 @@ export const settings = definePluginSettings({
     format: {
         component: ({ setValue }) => FormatSetting(setValue),
         type: OptionType.COMPONENT,
-        default: "{mallcordIcon} MallCord {mallcordVersion} ({mallcordHash})",
+        default: "{nunIcon} Nun {nunVersion} ({nunHash})",
         restartNeeded: true
     }
 });
@@ -33,11 +33,11 @@ export const settingVariables = [
     "{buildNumber} - Discord build number (e.g. 123456)",
     "{buildHash} - Discord build hash (e.g. 123456789)",
     "",
-    "MallCord Variables:",
-    "{mallcordIcon} - MallCord icon",
-    "{mallcordVersion} - Version of MallCord (e.g. 1.0.0)",
-    "{mallcordHash} - MallCord build hash (e.g. 123456789)",
-    "{mallcordPlatform} - Platform MallCord is running on (e.g. Dev Build)",
+    "Nun Variables:",
+    "{nunIcon} - Nun icon",
+    "{nunVersion} - Version of Nun (e.g. 1.0.0)",
+    "{nunHash} - Nun build hash (e.g. 123456789)",
+    "{nunPlatform} - Platform Nun is running on (e.g. Dev Build)",
     "",
     "Equibop Specific Variables:",
     "{equibopHash} - Equibop build hash (e.g. 123456789)",

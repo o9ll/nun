@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { brushCanvas, render, shapeCanvas } from "@mallcordplugins/remix/editor/components/Canvas";
-import { ToolDefinition } from "@mallcordplugins/remix/editor/components/Toolbar";
-import { Mouse } from "@mallcordplugins/remix/editor/input";
-import { line } from "@mallcordplugins/remix/editor/utils/canvas";
+import { brushCanvas, render, shapeCanvas } from "@nun/remix/editor/components/Canvas";
+import { ToolDefinition } from "@nun/remix/editor/components/Toolbar";
+import { Mouse } from "@nun/remix/editor/input";
+import { line } from "@nun/remix/editor/utils/canvas";
 
 export type Shape = "rectangle" | "ellipse" | "line" | "arrow";
 

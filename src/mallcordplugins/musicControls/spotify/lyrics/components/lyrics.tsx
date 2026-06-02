@@ -6,10 +6,10 @@
 
 import { BaseText } from "@components/BaseText";
 import { TooltipContainer } from "@components/TooltipContainer";
-import { settings } from "@mallcordplugins/musicControls/settings";
-import { SpotifyLrcStore } from "@mallcordplugins/musicControls/spotify/lyrics/providers/store";
-import { SpotifyStore } from "@mallcordplugins/musicControls/spotify/SpotifyStore";
-import { ContextMenuApi, openModal,React, useEffect, useState, useStateFromStores } from "@webpack/common";
+import { settings } from "@nun/musicControls/settings";
+import { SpotifyLrcStore } from "@nun/musicControls/spotify/lyrics/providers/store";
+import { SpotifyStore } from "@nun/musicControls/spotify/SpotifyStore";
+import { ContextMenuApi, openModal, React, useEffect, useState, useStateFromStores } from "@webpack/common";
 
 import { LyricsContextMenu } from "./ctxMenu";
 import { LyricsModal } from "./modal";
