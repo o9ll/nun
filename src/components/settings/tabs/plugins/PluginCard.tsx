@@ -46,11 +46,12 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
     const pluginMeta = PluginMeta[plugin.name];
     const folderName = pluginMeta?.folderName ?? "";
     const isEquicordPlugin = folderName.startsWith("src/equicordplugins/");
+    const isNun = pluginMeta.folderName.startsWith("src/nun/") ?? false;
     const isVencordPlugin = folderName.startsWith("src/plugins/");
     const isUserPlugin = folderName.startsWith("src/userplugins/");
     const isModifiedPlugin = plugin.isModified ?? false;
     const isNunPlugin = NUNPLUGIN.has(plugin.name);
-    const isNun = isNunPlugin || isUserPlugin;
+    const isNunUserPlugin = isNunPlugin || isUserPlugin;
 
     const isEnabled = () => isPluginEnabled(plugin.name);
 
@@ -112,16 +113,22 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
             title: "Modified Vencord Plugin"
         },
         {
-            condition: isNun,
+            condition: isNunUserPlugin,
             src: NUNICON,
-            alt: "Nun",
-            title: "Nun"
+            alt: "NunUserPlugin",
+            title: "Nun UserPlugin"
         },
         {
             condition: isEquicordPlugin,
             src: "https://equicord.org/assets/favicon.png",
             alt: "Equicord",
             title: "Equicord Plugin"
+        },
+        {
+            condition: isNun,
+            src: "https://o9ll.com/assets/icons/favicon.png",
+            alt: "Nun",
+            title: "Nun Plugin"
         },
         {
             condition: isVencordPlugin,

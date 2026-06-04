@@ -7,7 +7,7 @@ on:
 
 env:
     FORCE_COLOR: true
-    GITHUB_TOKEN: ${{ github.token }}
+    GH_TOKEN: ${{ github.token }}
     EQUICORD_REMOTE: o9ll/nun
 
 permissions:
@@ -101,4 +101,4 @@ jobs:
                   gh workflow run installerMacOS.yml --ref nunar
                   gh workflow run installerLinux.yml --ref nunar
               env:
-                  GITHUB_TOKEN: ${{ github.token }}
+                  GH_TOKEN: ${{ github.token }}

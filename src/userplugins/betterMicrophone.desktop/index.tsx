@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { PluginInfo } from "@plugins/betterMicrophone.desktop/constants";
-import { openMicrophoneSettingsModal } from "@plugins/betterMicrophone.desktop/modals";
-import { MicrophonePatcher } from "@plugins/betterMicrophone.desktop/patchers";
-import { initMicrophoneStore } from "@plugins/betterMicrophone.desktop/stores";
-import { addSettingsPanelButton, Emitter, MicrophoneSettingsIcon, removeSettingsPanelButton } from "@plugins/philsPluginLibrary";
+import { PluginInfo } from "@userplugins/betterMicrophone.desktop/constants";
+import { openMicrophoneSettingsModal } from "@userplugins/betterMicrophone.desktop/modals";
+import { MicrophonePatcher } from "@userplugins/betterMicrophone.desktop/patchers";
+import { initMicrophoneStore } from "@userplugins/betterMicrophone.desktop/stores";
+import { addSettingsPanelButton, Emitter, MicrophoneSettingsIcon, removeSettingsPanelButton } from "@userplugins/philsPluginLibrary";
 import { Devs } from "@utils/constants";
 import { t } from "@utils/nunM";
 import definePlugin, { PluginNative } from "@utils/types";
@@ -29,8 +29,8 @@ export const Native = VencordNative.pluginHelpers.BetterMicrophone as PluginNati
 
 export default definePlugin({
     name: "BetterMicrophone",
-    get description() { return t("يتيح لك تخصيص إعدادات الميكروفون بشكل أعمق.", "Allows you to customize microphone settings more deeply."); },
-    authors: [Devs.viciouscal],
+    get description() { return t("تخصيص المايك", "Customize Mic."); },
+    authors: [Devs.o9],
     dependencies: ["PhilsPluginLibrary"],
     requiresRestart: true,
 
@@ -40,7 +40,7 @@ export default definePlugin({
         addSettingsPanelButton({
             name: PluginInfo.PLUGIN_NAME,
             icon: MicrophoneSettingsIcon,
-            tooltipText: "إعدادات الميكروفون",
+            tooltipText: "مايك",
             onClick: openMicrophoneSettingsModal
         });
         try {
@@ -63,6 +63,6 @@ export default definePlugin({
     },
 
     toolboxActions: {
-        "فتح إعدادات الميكروفون": openMicrophoneSettingsModal
+        "اعدادات المايك": openMicrophoneSettingsModal
     },
 });

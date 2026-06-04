@@ -5,7 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { addSettingsPanelButton, DeafenIcon, removeSettingsPanelButton } from "@plugins/philsPluginLibrary";
+import { addSettingsPanelButton, DeafenIcon, removeSettingsPanelButton } from "@userplugins/philsPluginLibrary";
 import { Devs } from "@utils/constants";
 import { t } from "@utils/nunM";
 import definePlugin, { OptionType } from "@utils/types";
@@ -48,9 +48,9 @@ const settings = definePluginSettings({
             { label: "F4", value: "f4", default: false },
             { label: "F5", value: "f5", default: false },
             { label: "F6", value: "f6", default: false },
-            { label: "F7", value: "f7", default: false },
+            { label: "F7", value: "f7", default: true },
             { label: "F8", value: "f8", default: false },
-            { label: "F9", value: "f9", default: true },
+            { label: "F9", value: "f9", default: false },
             { label: "F10", value: "f10", default: false },
             { label: "F11", value: "f11", default: false },
             { label: "F12", value: "f12", default: false },
@@ -164,8 +164,8 @@ function setupKeybindListener() {
 export default definePlugin({
     name: "FakeDeafen",
     get description() { return t("تظهر كأنك صامّ للصوت لكنك في الحقيقة لست كذلك.", "Appear as deafened to others while still being able to hear."); },
+    authors: [Devs.o9],
     dependencies: ["PhilsPluginLibrary"],
-    authors: [Devs.desu, Devs.viciouscal],
 
     patches: [
         {

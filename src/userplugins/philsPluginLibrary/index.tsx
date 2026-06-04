@@ -16,16 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { fakeD } from "@plugins/fakeDeafen";
-import { replacedUserPanelComponent } from "@plugins/philsPluginLibrary/patches";
+import { fakeD } from "@userplugins/fakeDeafen";
+import { replacedUserPanelComponent } from "@userplugins/philsPluginLibrary/patches";
 import { Devs } from "@utils/constants";
 import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "PhilsPluginLibrary",
-    get description() { return t("مكتبة لإضافات phil", "A library for phil's plugins."); },
-    authors: [Devs.viciouscal],
+    get description() { return t("مكتبة إضافات", "A library for phil's plugins."); },
+    authors: [Devs.o9],
     patches: [
         {
             find: '"--custom-app-panels-height",',

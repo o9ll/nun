@@ -16,6 +16,7 @@ import {
     SelectedGuildStore,
     Constants,
 } from "@webpack/common";
+import { Devs } from "@utils/constants";
 import { t } from "@utils/nunM";
 import definePlugin, { OptionType } from "@utils/types";
 import { User, VoiceState } from "@vencord/discord-types";
@@ -134,8 +135,8 @@ const UserContextMenuPatch: NavContextMenuPatchCallback = (
 export default definePlugin({
     name: "Leash",
     get description() { return t("يربط مستخدماً بك عبر نقله تلقائياً إلى القناة الصوتية التي تنتقل إليها\n\n⚠️ WARNING: Moving users to voice channels without their consent may violate Discord's Terms of Service and community guidelines. This feature requires server moderation permissions. Use responsibly.\n\n⚠️ تحذير: نقل المستخدمين قسراً إلى القنوات الصوتية دون موافقتهم قد ينتهك شروط خدمة Discord وإرشادات المجتمع. تتطلب هذه الميزة صلاحيات الإشراف في السيرفر. استخدمها بمسؤولية.", "Leashes a user to you by automatically moving them to whatever voice channel you join.\n\n⚠️ WARNING: Moving users to voice channels without their consent may violate Discord's Terms of Service and community guidelines. This feature requires server moderation permissions. Use responsibly."); },
+    authors: [Devs.o9],
     tags: ["Utility"],
-    authors: [{ name: "x2b", id: 0n }],
     settings,
     contextMenus: {
         "user-context": UserContextMenuPatch,

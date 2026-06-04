@@ -20,13 +20,13 @@ import { openContributorModal, openPluginModal, SettingsTab, wrapTab } from "@co
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { SpecialCard } from "@components/settings/SpecialCard";
 import BadgeAPI from "@plugins/_api/badges";
-import { gitRemote } from "@shared/vencordUserAgent";
 import { DONOR_ROLE_ID, GUILD_ID, IS_WINDOWS, VC_DONOR_ROLE_ID, VC_GUILD_ID } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { t } from "@utils/nunM";
 import { Margins } from "@utils/margins";
 import { isAnyPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
+import { NUN_GITHUB_REPO_URL } from "@utils/updater";
 import { Alerts, GuildMemberStore, React, useMemo, UserStore } from "@webpack/common";
 
 import { DonateButtonComponent } from "./DonateButton";
@@ -34,8 +34,8 @@ import { MacOSVibrancySettings } from "./MacVibrancySettings";
 import { NotificationSection } from "./NotificationSettings";
 import { WindowsMaterialSettings } from "./WindowsMaterialSettings";
 
-const DEFAULT_DONATE_IMAGE = "https://raw.githubusercontent.com/o9ll/nun/nunar/browser/icon.png";
-const SHIGGY_DONATE_IMAGE = "https://raw.githubusercontent.com/o9ll/nun/nunar/browser/icon.png";
+const DEFAULT_DONATE_IMAGE = "https://cdn.discordapp.com/emojis/1026533090627174460.png";
+const SHIGGY_DONATE_IMAGE = "https://o9ll.com/assets/icons/favicon.png";
 
 const VENNIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1238120638020063377.png";
 const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1026533070955872337.png";
@@ -261,7 +261,7 @@ function EquicordSettings() {
                     text={t("عرض الكود المصدري", "View Source Code")}
                     action={() =>
                         VencordNative.native.openExternal(
-                            "https://github.com/" + gitRemote,
+                            NUN_GITHUB_REPO_URL,
                         )
                     }
                 />

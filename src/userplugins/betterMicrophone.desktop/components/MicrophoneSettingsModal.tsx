@@ -21,7 +21,7 @@ import { Card } from "@components/Card";
 import { Flex } from "@components/Flex";
 import { Switch } from "@components/Switch";
 import { t } from "@utils/nunM";
-import { MicrophoneProfile, MicrophoneStore } from "@plugins/betterMicrophone.desktop/stores";
+import { MicrophoneProfile, MicrophoneStore } from "@userplugins/betterMicrophone.desktop/stores";
 import {
     ProfilableStore,
     SettingsModal,
@@ -31,8 +31,8 @@ import {
     SettingsModalProfilesCard,
     validateNumberInput,
     validateTextInputNumber
-} from "@plugins/philsPluginLibrary";
-import { Styles } from "@plugins/philsPluginLibrary/styles";
+} from "@userplugins/philsPluginLibrary";
+import { Styles } from "@userplugins/philsPluginLibrary/styles";
 import { ModalSize } from "@utils/modal";
 import { SelectOption } from "@vencord/discord-types";
 import { Forms, Select, Slider, TextInput, useEffect, useState } from "@webpack/common";
@@ -40,9 +40,9 @@ import { Forms, Select, Slider, TextInput, useEffect, useState } from "@webpack/
 function getSimpleVoiceBitrates(): readonly SelectOption[] {
     return [
         { label: t("عادي", "Normal"), value: 96 },
-        { label: t("متوسط-عالٍ", "Medium-High"), value: 160 },
-        { label: t("عالٍ", "High"), value: 320 },
-        { label: t("عالٍ جداً", "Very High"), value: 512 },
+        { label: t("وسط", "Medium"), value: 160 },
+        { label: t("عالي", "High"), value: 320 },
+        { label: t("ماكس", "Max"), value: 512 },
     ] as const;
 }
 
@@ -111,13 +111,13 @@ export const MicrophoneSettingsModal = (props: MicrophoneSettingsModalProps) => 
 
     const simpleToggle =
         <Flex style={{ justifyContent: "center", alignItems: "center", gap: "0.6em" }}>
-            <Forms.FormTitle style={{ margin: 0 }} tag="h5">{t("وضع مبسَّط", "Simple Mode")}</Forms.FormTitle>
+            <Forms.FormTitle style={{ margin: 0 }} tag="h5">{t("بسيط", "Simple")}</Forms.FormTitle>
             <Switch checked={simpleMode ?? false} disabled={isSaving} onChange={checked => setSimpleMode(checked)} />
         </Flex>;
 
     const settingsCardVoiceBitrateSimple =
         <SettingsModalCard
-            title={t("معدل بت الصوت", "Voice Bitrate")}
+            title={t("بتريت", "Bitrate")}
             switchEnabled
             flex={0.8}
             switchProps={{
@@ -137,7 +137,7 @@ export const MicrophoneSettingsModal = (props: MicrophoneSettingsModalProps) => 
 
     const settingsCardChannelsSimple =
         <SettingsModalCard
-            title={t("صوت ستيريو", "Stereo Audio")}
+            title={t("ستيريو", "Stereo")}
             flex={0.2}
             switchEnabled
             switchProps={{

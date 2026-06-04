@@ -5,7 +5,7 @@ on:
     workflow_call:
 
 env:
-    GITHUB_TOKEN: ${{ github.token }}
+    GH_TOKEN: ${{ github.token }}
 
 permissions:
     contents: write

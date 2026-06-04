@@ -10,7 +10,7 @@ import { t } from "@utils/nunM";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
 import { OpenExternalIcon } from "@components/Icons";
-import { EquicordDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import { copyWithToast, insertTextIntoChatInputBox, openImageModal, sendMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType, PluginNative } from "@utils/types";
@@ -954,8 +954,8 @@ function SettingsComponent() {
 export default definePlugin({
     name: "BigFileUploadEnhanced",
     get description() { return t("تجاوز حد رفع Discord برفع الملفات إلى خادم خارجي وإرسال الرابط في الدردشة، هذه النسخة أسرع ولا تستخدم تعديل DOM", "Bypass Discord's upload limit by uploading files to an external server and sharing the link in chat — this version is faster and does not use DOM manipulation."); },
+    authors: [Devs.o9],
     tags: ["Utility", "Chat"],
-    authors: [EquicordDevs.benjii, { name: "x2b", id: 0n }],
     settings,
 
     contextMenus: {

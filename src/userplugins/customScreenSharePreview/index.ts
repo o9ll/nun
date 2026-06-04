@@ -5,6 +5,7 @@
  */
 
 import { UserAreaRenderProps } from "@api/UserArea";
+import { Devs } from "@utils/constants";
 import { t } from "@utils/nunM";
 import definePlugin from "@utils/types";
 import { UserStore } from "@webpack/common";
@@ -19,11 +20,8 @@ import { parseStreamKey, stopSendingScreenSharePreview } from "./utilities";
 export default definePlugin({
     name: "CustomScreenSharePreview",
     get description() { return t("يضيف إمكانية اختيار صورتك الخاصة كمعاينة لمشاركة الشاشة.", "Adds the ability to choose your own image as a screen share preview."); },
+    authors: [Devs.o9],
     tags: ["Voice", "Utility"],
-    authors: [{
-        name: "no one",
-        id: 238416205193847602n,
-    }],
     dependencies: ["UserAreaAPI"],
 
     userAreaButton: {

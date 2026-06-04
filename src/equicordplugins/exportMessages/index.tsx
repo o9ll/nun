@@ -6,42 +6,106 @@
 
 import "./styles.css";
 
+import { ApplicationCommandInputType, ApplicationCommandOptionType } from "@api/Commands";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { copyToClipboard } from "@utils/clipboard";
 import { EquicordDevs } from "@utils/constants";
-import { t } from "@utils/nunM";
 import { showItemInFolder } from "@utils/native";
 import definePlugin, { OptionType } from "@utils/types";
 import { saveFile } from "@utils/web";
 import { Message } from "@vencord/discord-types";
-import { Menu, Toasts } from "@webpack/common";
+import { Menu, MessageStore, RestAPI, Toasts } from "@webpack/common";
 
 import { ContactsList } from "./types";
 
 const settings = definePluginSettings({
     openFileAfterExport: {
         type: OptionType.BOOLEAN,
-        get description() { return t("فتح الملف المُصدَّر بالتطبيق الافتراضي بعد التصدير", "Open the exported file in the default application after export"); },
+        description: "Open the exported file in the default file handler after export",
         default: true
     },
     exportContacts: {
         type: OptionType.BOOLEAN,
-        get description() { return t("تصدير قائمة الأصدقاء إلى الحافظة. يضيف زراً جديداً في شريط القائمة لتبويب الأصدقاء.", "Export the friends list to clipboard. Adds a new button in the menu bar for the Friends tab."); },
+        description: "Export a list of friends to your clipboard. Adds a new button to the menu bar for the friends tab.",
         default: false
     }
 });
 
-function formatMessage(message: Message) {
+function formatMessage(message: Message, allMessages: Message[] = [], includeReplies = true) {
     const { author } = message;
-    const timestamp = new Date(message.timestamp.toString()).toLocaleString();
 
-    let content = `[${timestamp}] ${author.username}`;
+    // Timestamp removed from individual messages; a consolidated time range is shown in the header instead.
+    let content = `${author.username}`;
     if (author.discriminator !== "0") {
         content += `#${author.discriminator}`;
     }
-    content += `: ${message.content}`;
+
+    if (includeReplies && ((message as any).referenced_message || message.messageReference || (message as any).type === 19)) {
+        let referencedMessage: any = null;
+
+        if ((message as any).referenced_message) {
+            referencedMessage = (message as any).referenced_message;
+        } else if (message.messageReference?.message_id) {
+            const replyId = message.messageReference.message_id;
+
+            referencedMessage = allMessages.find(msg => msg.id === replyId);
+
+            if (!referencedMessage) {
+                referencedMessage = MessageStore.getMessage(message.messageReference.channel_id, replyId);
+            }
+        } else if ((message as any).message_reference?.message_id) {
+            const replyId = (message as any).message_reference.message_id;
+
+            referencedMessage = allMessages.find(msg => msg.id === replyId);
+            if (!referencedMessage) {
+                referencedMessage = MessageStore.getMessage((message as any).message_reference.channel_id, replyId);
+            }
+        }
+
+        if (referencedMessage) {
+            let replyContent: string | undefined = (referencedMessage as any).content;
+
+            // If the referenced message has no text, try to surface sticker names instead
+            if (!replyContent || replyContent.trim().length === 0) {
+                const refStickerItems = ((referencedMessage as any).stickerItems ?? (referencedMessage as any).sticker_items ?? []) as Array<{ name?: string; }>;
+                const refStickerNames = Array.isArray(refStickerItems)
+                    ? refStickerItems.map(s => s?.name).filter((n): n is string => !!n && n.trim().length > 0)
+                    : [];
+                if (refStickerNames.length > 0) {
+                    replyContent = `[Sticker${refStickerNames.length > 1 ? "s" : ""}] ${refStickerNames.join(", ")}`;
+                }
+            }
+
+            content += ` (replying to: "${replyContent || "[No text content]"}")`;
+        } else {
+            content += " (replying to: [Message not found])";
+        }
+    }
+
+    // Prefer message text; if empty, include sticker names so the export isn't blank
+    const textContent = (message.content ?? "").trim();
+
+    // Gather sticker items from both camelCase and snake_case shapes
+    const stickerItems = (((message as any).stickerItems ?? (message as any).sticker_items) ?? []) as Array<{
+        name?: string;
+    }>;
+    const stickerNames = Array.isArray(stickerItems)
+        ? stickerItems.map(s => s?.name).filter((n): n is string => !!n && n.trim().length > 0)
+        : [];
+
+    if (textContent.length > 0) {
+        content += `: ${textContent}`;
+        if (stickerNames.length > 0) {
+            content += `\n  Stickers: ${stickerNames.join(", ")}`;
+        }
+    } else if (stickerNames.length > 0) {
+        content += `: [Sticker${stickerNames.length > 1 ? "s" : ""}] ${stickerNames.join(", ")}`;
+    } else {
+        // No text and no stickers; keep the colon to maintain format
+        content += ":";
+    }
 
     if (message.attachments?.length > 0) {
         content += "\n  Attachments:";
@@ -62,6 +126,546 @@ function formatMessage(message: Message) {
     return content;
 }
 
+async function fetchMessages(channelId: string, limit: number): Promise<Message[]> {
+    const allMessages: Message[] = [];
+    let beforeId: string | undefined;
+
+    try {
+        while (allMessages.length < limit) {
+            const remaining = limit - allMessages.length;
+            const batchSize = Math.min(100, remaining);
+
+            try {
+                const response = await RestAPI.get({
+                    url: `/channels/${channelId}/messages`,
+                    query: {
+                        limit: batchSize,
+                        ...(beforeId && { before: beforeId })
+                    }
+                });
+
+                if (!response.body || !Array.isArray(response.body) || response.body.length === 0) {
+                    break;
+                }
+
+                allMessages.push(...response.body);
+
+                beforeId = response.body[response.body.length - 1].id;
+
+                const delay = Math.min(200 + (allMessages.length / 100) * 50, 1000);
+                await new Promise(resolve => setTimeout(resolve, delay));
+
+            } catch (apiError) {
+                console.warn("API error during message fetch:", apiError);
+                if ((apiError as any)?.status === 429) {
+                    const retryAfter = ((apiError as any)?.body?.retry_after || 5) * 1000;
+                    console.log(`Rate limited, waiting ${retryAfter / 1000} seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, retryAfter));
+                    continue;
+                }
+                console.error("Non-rate-limit API error:", apiError);
+                break;
+            }
+        }
+
+        allMessages.sort((a, b) => {
+            const timestampA = new Date(a.timestamp.toString()).getTime();
+            const timestampB = new Date(b.timestamp.toString()).getTime();
+            return timestampA - timestampB;
+        });
+
+        const uniqueMessages = allMessages.filter((message, index, array) =>
+            array.findIndex(m => m.id === message.id) === index
+        );
+
+        return uniqueMessages.slice(-limit);
+
+    } catch (error) {
+        const loadedMessages = MessageStore.getMessages(channelId);
+        if (loadedMessages?._array) {
+            const sortedMessages = [...loadedMessages._array].sort((a, b) => {
+                const timestampA = new Date(a.timestamp.toString()).getTime();
+                const timestampB = new Date(b.timestamp.toString()).getTime();
+                return timestampA - timestampB;
+            });
+            return sortedMessages.slice(-limit);
+        }
+        return [];
+    }
+}
+
+async function fetchMessagesAfter(channelId: string, afterId: string, limit: number): Promise<Message[]> {
+    const allMessages: Message[] = [];
+    let currentAfterId = afterId;
+
+    try {
+        while (allMessages.length < limit) {
+            const remaining = limit - allMessages.length;
+            const batchSize = Math.min(100, remaining);
+
+            try {
+                const response = await RestAPI.get({
+                    url: `/channels/${channelId}/messages`,
+                    query: {
+                        limit: batchSize,
+                        after: currentAfterId
+                    }
+                });
+
+                if (!response.body || !Array.isArray(response.body) || response.body.length === 0) {
+                    break;
+                }
+
+                allMessages.push(...response.body);
+
+                // For 'after', the API returns messages in chronological order (oldest to newest).
+                // So the last message in the body is the newest one we've seen.
+                currentAfterId = response.body[response.body.length - 1].id;
+
+                const delay = Math.min(200 + (allMessages.length / 100) * 50, 1000);
+                await new Promise(resolve => setTimeout(resolve, delay));
+
+            } catch (apiError) {
+                console.warn("API error during message fetch:", apiError);
+                if ((apiError as any)?.status === 429) {
+                    const retryAfter = ((apiError as any)?.body?.retry_after || 5) * 1000;
+                    console.log(`Rate limited, waiting ${retryAfter / 1000} seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, retryAfter));
+                    continue;
+                }
+                console.error("Non-rate-limit API error:", apiError);
+                break;
+            }
+        }
+
+        return allMessages;
+
+    } catch (error) {
+        return [];
+    }
+}
+
+async function fetchMessagesBetween(channelId: string, fromId: string, toId: string): Promise<Message[]> {
+    const allMessages: Message[] = [];
+    // Ensure fromId is the older message (smaller snowflake ID)
+    const [startId, endId] = BigInt(fromId) < BigInt(toId) ? [fromId, toId] : [toId, fromId];
+    let currentAfterId = startId;
+
+    try {
+        while (true) {
+            try {
+                const response = await RestAPI.get({
+                    url: `/channels/${channelId}/messages`,
+                    query: {
+                        limit: 100,
+                        after: currentAfterId
+                    }
+                });
+
+                if (!response.body || !Array.isArray(response.body) || response.body.length === 0) {
+                    break;
+                }
+
+                // Filter messages that are within our range (up to and including endId)
+                const messagesInRange = response.body.filter((msg: Message) =>
+                    BigInt(msg.id) <= BigInt(endId)
+                );
+
+                allMessages.push(...messagesInRange);
+
+                // Check if we've reached or passed the end message
+                const lastMessageId = response.body[response.body.length - 1].id;
+                if (BigInt(lastMessageId) >= BigInt(endId)) {
+                    break;
+                }
+
+                currentAfterId = lastMessageId;
+
+                const delay = Math.min(200 + (allMessages.length / 100) * 50, 1000);
+                await new Promise(resolve => setTimeout(resolve, delay));
+
+            } catch (apiError) {
+                console.warn("API error during message fetch:", apiError);
+                if ((apiError as any)?.status === 429) {
+                    const retryAfter = ((apiError as any)?.body?.retry_after || 5) * 1000;
+                    console.log(`Rate limited, waiting ${retryAfter / 1000} seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, retryAfter));
+                    continue;
+                }
+                console.error("Non-rate-limit API error:", apiError);
+                break;
+            }
+        }
+
+        // Also fetch the starting message itself
+        try {
+            const startMsgResponse = await RestAPI.get({
+                url: `/channels/${channelId}/messages/${startId}`
+            });
+            if (startMsgResponse.body) {
+                allMessages.unshift(startMsgResponse.body);
+            }
+        } catch (e) {
+            console.warn("Could not fetch start message:", e);
+        }
+
+        // Sort by timestamp
+        allMessages.sort((a, b) => {
+            const timestampA = new Date(a.timestamp.toString()).getTime();
+            const timestampB = new Date(b.timestamp.toString()).getTime();
+            return timestampA - timestampB;
+        });
+
+        // Remove duplicates
+        const uniqueMessages = allMessages.filter((message, index, array) =>
+            array.findIndex(m => m.id === message.id) === index
+        );
+
+        return uniqueMessages;
+
+    } catch (error) {
+        console.error("Error fetching messages between IDs:", error);
+        return [];
+    }
+}
+
+function parseMessageInput(input: string): { messageId: string; channelId?: string; } | null {
+    const trimmed = input.trim();
+    if (/^\d{17,20}$/.test(trimmed)) {
+        return { messageId: trimmed };
+    }
+
+    const linkMatch = trimmed.match(
+        /^(?:https?:\/\/)?(?:canary\.|ptb\.)?discord(?:app)?\.com\/channels\/[^/]+\/(\d+)\/(\d+)$/
+    );
+
+    if (linkMatch) {
+        return {
+            channelId: linkMatch[1],
+            messageId: linkMatch[2]
+        };
+    }
+
+    return null;
+}
+
+async function exportMessagesRange(channelId: string, fromId: string, toId: string, useClipboard: boolean) {
+    try {
+        showNotification({
+            title: "Export Messages",
+            body: `Starting export of messages from ${fromId} to ${toId}...`,
+            icon: "⏳"
+        });
+
+        const messagesToExport = await fetchMessagesBetween(channelId, fromId, toId);
+
+        if (!messagesToExport || messagesToExport.length === 0) {
+            showNotification({
+                title: "Export Messages",
+                body: "No messages found in the specified range",
+                icon: "❌"
+            });
+            return;
+        }
+
+        const timestamp = new Date().toISOString().split("T")[0];
+        const filename = `messages-${channelId}-range-${timestamp}.txt`;
+
+        const firstMsg = messagesToExport[0];
+        const lastMsg = messagesToExport[messagesToExport.length - 1];
+        const firstDate = new Date(firstMsg.timestamp.toString());
+        const lastDate = new Date(lastMsg.timestamp.toString());
+
+        let content = `Exported ${messagesToExport.length} messages from channel\n`;
+        content += `Export date: ${new Date().toLocaleString()}\n`;
+        content += `Channel ID: ${channelId}\n`;
+        content += `From Message ID: ${fromId}\n`;
+        content += `To Message ID: ${toId}\n`;
+        content += `Message time range: ${firstDate.toLocaleString()} -> ${lastDate.toLocaleString()}\n`;
+        content += "=".repeat(50) + "\n\n";
+
+        let processedCount = 0;
+        for (const msg of messagesToExport) {
+            try {
+                if (msg && msg.author) {
+                    content += formatMessage(msg, messagesToExport) + "\n\n";
+                    processedCount++;
+                }
+            } catch (error) {
+                content += "[Error: Could not format this message]\n\n";
+            }
+        }
+
+        if (useClipboard) {
+            copyToClipboard(content);
+        } else if (IS_DISCORD_DESKTOP) {
+            const data = new TextEncoder().encode(content);
+            const result = await DiscordNative.fileManager.saveWithDialog(data, filename);
+
+            if (result && settings.store.openFileAfterExport) {
+                showItemInFolder(result);
+            }
+        } else {
+            const file = new File([content], filename, { type: "text/plain" });
+            saveFile(file);
+        }
+
+        showNotification({
+            title: "Export Messages",
+            body: `${processedCount} messages exported successfully`,
+            icon: "📄"
+        });
+
+    } catch (error) {
+        console.error(error);
+        showNotification({
+            title: "Export Messages",
+            body: "Failed to export messages",
+            icon: "❌"
+        });
+    }
+}
+
+async function exportMessagesSince(message: Message, messageCount: number = 1000) {
+    try {
+        showNotification({
+            title: "Export Messages",
+            body: `Starting export of messages since ${message.id}...`,
+            icon: "⏳"
+        });
+
+        const messagesToExport = [message];
+        const newMessages = await fetchMessagesAfter(message.channel_id, message.id, messageCount);
+        messagesToExport.push(...newMessages);
+
+        const timestamp = new Date().toISOString().split("T")[0];
+        const filename = `messages-${message.channel_id}-since-${message.id}-${timestamp}.txt`;
+
+        const firstDate = new Date(message.timestamp.toString());
+        const lastMsg = messagesToExport[messagesToExport.length - 1];
+        const lastDate = new Date(lastMsg.timestamp.toString());
+
+        let content = `Exported ${messagesToExport.length} messages from channel\n`;
+        content += `Export date: ${new Date().toLocaleString()}\n`;
+        content += `Channel ID: ${message.channel_id}\n`;
+        content += `Start Message ID: ${message.id}\n`;
+        content += `Message time range: ${firstDate.toLocaleString()} -> ${lastDate.toLocaleString()}\n`;
+        content += "=".repeat(50) + "\n\n";
+
+        let processedCount = 0;
+        for (const msg of messagesToExport) {
+            try {
+                if (msg && msg.author) {
+                    content += formatMessage(msg, messagesToExport) + "\n\n";
+                    processedCount++;
+                }
+            } catch (error) {
+                content += "[Error: Could not format this message]\n\n";
+            }
+        }
+
+        if (IS_DISCORD_DESKTOP) {
+            const data = new TextEncoder().encode(content);
+            const result = await DiscordNative.fileManager.saveWithDialog(data, filename);
+
+            if (result && settings.store.openFileAfterExport) {
+                showItemInFolder(result);
+            }
+        } else {
+            const file = new File([content], filename, { type: "text/plain" });
+            saveFile(file);
+        }
+
+        showNotification({
+            title: "Export Messages",
+            body: `${processedCount} messages exported successfully`,
+            icon: "📄"
+        });
+
+    } catch (error) {
+        console.error(error);
+        showNotification({
+            title: "Export Messages",
+            body: "Failed to export messages",
+            icon: "❌"
+        });
+    }
+}
+
+async function exportMessages(channelId: string, messageCount: number, useClipboard: boolean = true) {
+    try {
+        if (!channelId) {
+            showNotification({
+                title: "Export Messages",
+                body: "Invalid channel ID",
+                icon: "❌"
+            });
+            return;
+        }
+
+        if (messageCount <= 0 || messageCount > 10000) {
+            showNotification({
+                title: "Export Messages",
+                body: "Message count must be between 1 and 10,000",
+                icon: "❌"
+            });
+            return;
+        }
+
+        if (messageCount > 1000) {
+            showNotification({
+                title: "Export Messages",
+                body: `Starting export of ${messageCount} messages. This may take a while...`,
+                icon: "⏳"
+            });
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        let messagesToExport: Message[];
+        try {
+            messagesToExport = await fetchMessages(channelId, messageCount);
+        } catch (error) {
+            showNotification({
+                title: "Export Messages",
+                body: "Failed to fetch messages. Try again in a moment.",
+                icon: "❌"
+            });
+            return;
+        }
+
+        if (!messagesToExport || messagesToExport.length === 0) {
+            showNotification({
+                title: "Export Messages",
+                body: "No messages found in this channel",
+                icon: "❌"
+            });
+            return;
+        }
+
+        if (messagesToExport.length === 0) {
+            showNotification({
+                title: "Export Messages",
+                body: "No messages available to export",
+                icon: "❌"
+            });
+            return;
+        }
+
+        const timestamp = new Date().toISOString().split("T")[0];
+        const filename = `messages-${channelId}-${timestamp}.txt`;
+
+        const firstMsg = messagesToExport[0];
+        const lastMsg = messagesToExport[messagesToExport.length - 1];
+        const firstDate = new Date(firstMsg.timestamp.toString());
+        const lastDate = new Date(lastMsg.timestamp.toString());
+
+        let content = `Exported ${messagesToExport.length} messages from channel\n`;
+        content += `Export date: ${new Date().toLocaleString()}\n`;
+        content += `Channel ID: ${channelId}\n`;
+        content += `Message time range: ${firstDate.toLocaleString()} -> ${lastDate.toLocaleString()}\n`;
+        content += "=".repeat(50) + "\n\n";
+
+        let processedCount = 0;
+        for (const message of messagesToExport) {
+            try {
+                if (message && message.author) {
+                    content += formatMessage(message, messagesToExport) + "\n\n";
+                    processedCount++;
+                }
+            } catch (error) {
+                content += "[Error: Could not format this message]\n\n";
+            }
+
+            if (processedCount % 25 === 0) {
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+        }
+
+        if (processedCount === 0) {
+            showNotification({
+                title: "Export Messages",
+                body: "No valid messages could be processed",
+                icon: "❌"
+            });
+            return;
+        }
+
+        try {
+            if (useClipboard) {
+                try {
+                    await copyToClipboard(content);
+                    showNotification({
+                        title: "Export Messages",
+                        body: `${processedCount} messages copied to clipboard successfully`,
+                        icon: "📋"
+                    });
+                } catch (error) {
+                    showNotification({
+                        title: "Export Messages",
+                        body: "Failed to copy messages to clipboard",
+                        icon: "❌"
+                    });
+                }
+                return;
+            }
+
+            if (IS_DISCORD_DESKTOP) {
+                const data = new TextEncoder().encode(content);
+
+                if (data.length > 50 * 1024 * 1024) {
+                    showNotification({
+                        title: "Export Messages",
+                        body: "Export file too large. Try exporting fewer messages.",
+                        icon: "❌"
+                    });
+                    return;
+                }
+
+                const result = await DiscordNative.fileManager.saveWithDialog(data, filename);
+
+                if (result && settings.store.openFileAfterExport) {
+                    showItemInFolder(result);
+                }
+            } else {
+                const file = new File([content], filename, { type: "text/plain" });
+
+                if (file.size > 50 * 1024 * 1024) {
+                    showNotification({
+                        title: "Export Messages",
+                        body: "Export file too large. Try exporting fewer messages.",
+                        icon: "❌"
+                    });
+                    return;
+                }
+
+                saveFile(file);
+            }
+
+            showNotification({
+                title: "Export Messages",
+                body: `${processedCount} messages exported successfully as ${filename}`,
+                icon: "📄"
+            });
+
+        } catch (saveError) {
+            showNotification({
+                title: "Export Messages",
+                body: "Failed to save export file. Check permissions and try again.",
+                icon: "❌"
+            });
+        }
+
+    } catch (error) {
+        showNotification({
+            title: "Export Messages",
+            body: "An unexpected error occurred during export",
+            icon: "❌"
+        });
+    }
+}
+
+// Export a single message (for context menu)
 async function exportMessage(message: Message) {
     const timestamp = new Date(message.timestamp.toString()).toISOString().split("T")[0];
     const filename = `message-${message.id}-${timestamp}.txt`;
@@ -129,13 +733,125 @@ function getUsernames(contacts: ContactsList[], type: number): string[] {
 
 export default definePlugin({
     name: "ExportMessages",
-    get description() { return t("يتيح لك تصدير أي رسالة إلى ملف", "Allows you to export any message to a file"); },
-    tags: ["Chat", "Utility"],
+    description: "Export messages from channels via /exportmessages command or right-click context menu",
     authors: [EquicordDevs.veygax, EquicordDevs.dat_insanity],
     settings,
     contextMenus: {
         "message": messageContextMenuPatch
     },
+    commands: [
+        {
+            name: "exportmessages",
+            description: "Export a specified number of messages from the current channel",
+            inputType: ApplicationCommandInputType.BUILT_IN,
+            options: [
+                {
+                    name: "count",
+                    description: "Number of messages to export (default: 10, max: 10,000)",
+                    type: ApplicationCommandOptionType.INTEGER,
+                    required: false
+                },
+                {
+                    name: "clipboard",
+                    description: "Copy messages to clipboard instead of saving to file (default: true)",
+                    type: ApplicationCommandOptionType.BOOLEAN,
+                    required: false
+                }
+            ],
+            execute: (args, ctx) => {
+                const messageCount = Math.min(Math.max(Number(args[0]?.value) || 10, 1), 10000);
+                const useClipboard = args[1]?.value !== undefined ? Boolean(args[1]?.value) : true;
+
+                if (!ctx.channel?.id) {
+                    return;
+                }
+
+                exportMessages(ctx.channel.id, messageCount, useClipboard);
+            }
+        },
+        {
+            name: "exportrange",
+            description: "Export all messages between two message IDs",
+            inputType: ApplicationCommandInputType.BUILT_IN,
+            options: [
+                {
+                    name: "from",
+                    description: "Starting message ID (copy from message link or right-click -> Copy Message ID)",
+                    type: ApplicationCommandOptionType.STRING,
+                    required: true
+                },
+                {
+                    name: "to",
+                    description: "Ending message ID (copy from message link or right-click -> Copy Message ID)",
+                    type: ApplicationCommandOptionType.STRING,
+                    required: true
+                },
+                {
+                    name: "clipboard",
+                    description: "Copy messages to clipboard instead of saving to file (default: true)",
+                    type: ApplicationCommandOptionType.BOOLEAN,
+                    required: false
+                }
+            ],
+            execute: (args, ctx) => {
+                const fromInput = args.find(a => a.name === "from")?.value as string;
+                const toInput = args.find(a => a.name === "to")?.value as string;
+                const useClipboard = args.find(a => a.name === "clipboard")?.value !== undefined
+                    ? Boolean(args.find(a => a.name === "clipboard")?.value)
+                    : true;
+
+                if (!fromInput || !toInput) {
+                    showNotification({
+                        title: "Export Messages",
+                        body: "Both 'from' and 'to' message IDs are required",
+                        icon: "❌"
+                    });
+                    return;
+                }
+
+                if (!ctx.channel?.id) {
+                    showNotification({
+                        title: "Export Messages",
+                        body: "Could not determine channel ID",
+                        icon: "❌"
+                    });
+                    return;
+                }
+
+                const parsedFrom = parseMessageInput(fromInput);
+                const parsedTo = parseMessageInput(toInput);
+
+                if (!parsedFrom || !parsedTo) {
+                    showNotification({
+                        title: "Export Messages",
+                        body: "Invalid message ID or link. Use a message ID or full message link.",
+                        icon: "❌"
+                    });
+                    return;
+                }
+
+                if (parsedFrom.channelId && parsedFrom.channelId !== ctx.channel.id) {
+                    showNotification({
+                        title: "Export Messages",
+                        body: "The 'from' message is not in this channel",
+                        icon: "❌"
+                    });
+                    return;
+                }
+
+                if (parsedTo.channelId && parsedTo.channelId !== ctx.channel.id) {
+                    showNotification({
+                        title: "Export Messages",
+                        body: "The 'to' message is not in this channel",
+                        icon: "❌"
+                    });
+                    return;
+                }
+
+                exportMessagesRange(ctx.channel.id, parsedFrom.messageId, parsedTo.messageId, useClipboard);
+            }
+        }
+    ],
     patches: [
         {
             find: "fetchRelationships(){",
@@ -167,7 +883,7 @@ export default definePlugin({
     },
     addExportButton() {
         return <ErrorBoundary noop key=".2">
-            <button className="export-contacts-button" onClick={() => this.copyContactToClipboard()}>Export</button>
+            <button className="export-contacts-button" onClick={() => { this.copyContactToClipboard(); console.log("clicked"); }}>Export</button>
         </ErrorBoundary>;
     },
     copyContactToClipboard() {

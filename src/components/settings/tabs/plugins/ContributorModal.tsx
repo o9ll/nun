@@ -15,6 +15,7 @@ import { classNameFactory } from "@utils/css";
 import { fetchUserProfile } from "@utils/discord";
 import { t } from "@utils/nunM";
 import { pluralise } from "@utils/misc";
+import { NUN_GITHUB_REPO_URL } from "@utils/updater";
 import { RenderModalProps, User } from "@vencord/discord-types";
 import { Modal, openModal, showToast, useEffect, useMemo, UserProfileStore, useStateFromStores } from "@webpack/common";
 
@@ -56,7 +57,7 @@ function ContributorModal({ user, modalProps }: { user: User; modalProps: Render
             .sort((a, b) => Number(a.required ?? false) - Number(b.required ?? false));
     }, [user.id, user.username]);
 
-    const ContributedHyperLink = <Link href="https://github.com/Equicord/Equicord">{t("ساهم", "contributed")}</Link>;
+    const ContributedHyperLink = <Link href={NUN_GITHUB_REPO_URL}>{t("ساهم", "contributed")}</Link>;
 
     const hasLinks = website || githubName;
 

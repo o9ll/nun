@@ -66,6 +66,13 @@ export interface Dev {
  * If you are fine with attribution but don't want the badge, add badge: false
  */
 export const Devs = /* #__PURE__*/ Object.freeze({
+    o9: {
+        name: "o9",
+        id: 1146203933811953713n,
+        badge: false,
+        github: "o9ll",
+        avatarUrl: "https://avatars.githubusercontent.com/u/229858305?v=4",
+    },
     Ven: {
         name: "V",
         id: 343383572805058560n
@@ -660,6 +667,13 @@ export const Devs = /* #__PURE__*/ Object.freeze({
 } satisfies Record<string, Dev>);
 
 export const EquicordDevs = Object.freeze({
+    o9: {
+        name: "o9",
+        id: 1146203933811953713n,
+        badge: false,
+        github: "o9ll",
+        avatarUrl: "https://avatars.githubusercontent.com/u/229858305?v=4",
+    },
     nobody: {
         name: "nobody",
         id: 0n
@@ -1333,14 +1347,20 @@ export const EquicordDevs = Object.freeze({
         name: "dhopcs",
         id: 206309860038410240n
     },
-    o9: {
-        name: "o9",
-        id: 426687300387471360n
-    },
     qdnx: {
         name: "qdnx",
         id: 1374803023506702508n
     },
+} satisfies Record<string, Dev>);
+
+export const NunDevs = Object.freeze({
+    o9: {
+        name: "o9",
+        id: 1146203933811953713n,
+        badge: false,
+        github: "o9ll",
+        avatarUrl: "https://avatars.githubusercontent.com/u/229858305?v=4",
+    }
 } satisfies Record<string, Dev>);
 
 // iife so #__PURE__ works correctly
@@ -1355,6 +1375,14 @@ export const VencordDevsById = /* #__PURE__*/ (() =>
 export const EquicordDevsById = /* #__PURE__*/ (() =>
     Object.freeze(Object.fromEntries(
         Object.entries(EquicordDevs)
+            .filter(d => d[1].id !== 0n)
+            .map(([_, v]) => [v.id, v] as const)
+    ))
+)() as Record<string, Dev>;
+
+export const NunDevsById = /* #__PURE__*/ (() =>
+    Object.freeze(Object.fromEntries(
+        Object.entries(NunDevs)
             .filter(d => d[1].id !== 0n)
             .map(([_, v]) => [v.id, v] as const)
     ))

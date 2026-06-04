@@ -16,8 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { MicrophoneProfile, MicrophoneStore } from "@plugins/betterMicrophone.desktop/stores";
-import { ProfilableStore, types } from "@plugins/philsPluginLibrary";
+import { MicrophoneProfile, MicrophoneStore } from "@userplugins/betterMicrophone.desktop/stores";
+import { ProfilableStore, types } from "@userplugins/philsPluginLibrary";
 import { Logger } from "@utils/Logger";
 import { lodash } from "@webpack/common";
 

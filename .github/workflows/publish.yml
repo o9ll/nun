@@ -55,7 +55,7 @@ jobs:
               if: steps.check.outputs.release == 'true'
               uses: butlerlogic/action-autotag@1.1.2
               env:
-                  GITHUB_TOKEN: ${{ github.token }}
+                  GH_TOKEN: ${{ github.token }}
               with:
                   tag_prefix: "v"
 

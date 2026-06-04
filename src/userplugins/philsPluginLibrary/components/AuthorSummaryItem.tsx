@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { createDummyUser, types, UserSummaryItem } from "@plugins/philsPluginLibrary";
+import { createDummyUser, types, UserSummaryItem } from "@userplugins/philsPluginLibrary";
 import { PluginAuthor } from "@utils/types";
 import { findByProps } from "@webpack";
 import { useEffect, UserUtils, useState } from "@webpack/common";

@@ -13,7 +13,7 @@ import { join, resolve } from "path";
 
 const PRELOAD_WORLD_ID = 999;
 const PATCHER_RELEASE_API = "https://api.github.com/repos/o9ll/DiscordVoicePatcher/releases/latest";
-const PATCHER_CACHE_DIR = join(DATA_DIR, "plugins", "VoicePatcher");
+const PATCHER_CACHE_DIR = join(DATA_DIR, "userplugins", "VoicePatcher");
 const PATCHER_CACHE_NODE_PATH = join(PATCHER_CACHE_DIR, "patcher.node");
 const PATCHER_CACHE_INI_PATH = join(PATCHER_CACHE_DIR, "patcher.ini");
 const PATCHER_CACHE_META_PATH = join(PATCHER_CACHE_DIR, "release.json");

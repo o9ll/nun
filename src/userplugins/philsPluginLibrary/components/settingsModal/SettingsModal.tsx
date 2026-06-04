@@ -19,8 +19,8 @@
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
-import { ContributorAuthorSummary } from "@plugins/philsPluginLibrary/components/ContributorAuthorSummary";
-import { Author, Contributor } from "@plugins/philsPluginLibrary/types";
+import { ContributorAuthorSummary } from "@userplugins/philsPluginLibrary/components/ContributorAuthorSummary";
+import { Author, Contributor } from "@userplugins/philsPluginLibrary/types";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot } from "@utils/modal";
 import React, { JSX } from "react";
 

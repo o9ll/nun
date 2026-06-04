@@ -148,8 +148,8 @@ async function runUpdateCheck() {
                 notifiedForUpdatesThisSession = true;
 
                 showNotice(
-                    t("تم تحديث Nun!", "Nun has been updated!"),
-                    t("إعادة تشغيل", "Restart"),
+                    t("انتهى التحديث", "Done Updated"),
+                    t("رستارت", "Restart"),
                     relaunch
                 );
             }
@@ -160,7 +160,7 @@ async function runUpdateCheck() {
         notifiedForUpdatesThisSession = true;
 
         showNotice(
-            t("يتوفر إصدار جديد من Nun!", "A new version of Nun is available!"),
+            t("تحديث جديد", "New"),
             t("عرض التحديث", "View Update"),
             () => openSettingsTabModal(UpdaterTab!)
         );
@@ -178,9 +178,9 @@ function initTrayIpc() {
             VencordNative.tray.setUpdateState(isOutdated);
 
             if (isOutdated) {
-                showNotice("An Equicord update is available!", "View Update", () => openSettingsTabModal(UpdaterTab!));
+                showNotice("New", "View", () => openSettingsTabModal(UpdaterTab!));
             } else {
-                showNotice("No updates available, you're on the latest version!", "OK", popNotice);
+                showNotice("No Updates", "OK", popNotice);
             }
         } catch (err) {
             UpdateLogger.error("Failed to check for updates from tray", err);

@@ -1,4 +1,4 @@
-// Nun Client Installer  v1.14.13.0
+// Nun Client Installer  — DevBuild
 // Copyright (c) 2026 o9. All rights reserved.
 // Build: see build.ps1
 
@@ -491,7 +491,7 @@ sealed class InstallerForm : Form
     static readonly Color TEXT_MUTED = Color.FromArgb(100, 110, 130);
 
     const string GITHUB_URL  = "https://github.com/o9ll/nun";
-    const string VER         = "1.14.13.0";
+    const string VER         = "DevBuild";
 
     // Borderless-window drag
     [DllImport("user32.dll")] static extern int  SendMessage(IntPtr h, int m, int w, int l);

@@ -82,6 +82,12 @@
         "eslint.config.mjs"
     ],
     "exclude": [
-        "src/userplugins"
+        "src/userplugins",
+        "browser/browser.js",
+        "browser/extension.js",
+        "browser/chromium-unpacked",
+        "browser/firefox-unpacked",
+        "browser/vendor",
+        "dist"
     ]
 }

@@ -1,6 +1,6 @@
 /*
  * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
+ * Copyright ©023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,26 +16,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { readdirSync, writeFileSync } from "fs";
-import { getEntryPoint, isPluginFile, parseDevs, parseEquicordDevs, parseFile, PluginData } from "./utils";
+import { existsSync, readdirSync, writeFileSync } from "fs";
+import { nu, getEntryPoint, isPluginFile, parseNu, parseDevs, parseEquicordDevs, parseFile, PluginData } from "./utils";
 
 (async () => {
     parseDevs();
     parseEquicordDevs();
+    parseNu();
 
     const args = process.argv.slice(2);
 
+    const nunFlag = args.includes("--nun");
     const equicordFlag = args.includes("--equicord");
     const vencordFlag = args.includes("--vencord");
 
     let dirs: string[];
-
-    if (equicordFlag) {
+    if (nunFlag) {
+        dirs = ["src/nun/_core", "src/nun/_api", "src/nun"];
+    } else if (equicordFlag) {
         dirs = ["src/equicordplugins/_core", "src/equicordplugins"];
     } else if (vencordFlag) {
         dirs = ["src/plugins", "src/plugins/_core"];
     } else {
-        dirs = ["src/plugins", "src/plugins/_core", "src/equicordplugins/_core", "src/equicordplugins"];
+        dirs = ["src/plugins", "src/plugins/_core", "src/equicordplugins/_core", "src/equicordplugins", "src/nun/_core", "src/nun/_api", "src/nun"];
     }
 
     const outputPath = args.find(a => !a.startsWith("--")) ?? null;
@@ -43,7 +46,7 @@ import { getEntryPoint, isPluginFile, parseDevs, parseEquicordDevs, parseFile, P
     const plugins = [] as PluginData[];
 
     await Promise.all(
-        dirs.flatMap(dir =>
+        dirs.filter(dir => existsSync(dir)).flatMap(dir =>
             readdirSync(dir, { withFileTypes: true })
                 .filter(isPluginFile)
                 .map(async dirent => {

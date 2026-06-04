@@ -12,7 +12,7 @@ import { Heading } from "@components/Heading";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Switch } from "@components/Switch";
-import { applyAndLogPatches, Native, settings } from "@plugins/voicePatcher.desktop/index";
+import { applyAndLogPatches, Native, settings } from "@userplugins/voicePatcher.desktop/index";
 import { React, showToast, TextArea, TextInput, Toasts } from "@webpack/common";
 
 export default function VoicePatcherSettings() {

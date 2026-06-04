@@ -70,7 +70,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
                     <HeadingTertiary>{t("إعادة تشغيل مطلوبة!", "Restart Required!")}</HeadingTertiary>
                     <Paragraph className={cl("dep-text")}>
                         {t(
-                            "أعد التشغيل الآن لتطبيق الإضافات الجديدة وإعداداتها",
+                            "أعد التشغيل الآن لتطبيق البلوقنات الجديدة وإعداداتها",
                             "Restart now to apply the new plugins and their settings"
                         )}
                     </Paragraph>
@@ -80,13 +80,13 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
                 </>
             ) : (
                 <>
-                    <HeadingTertiary>{t("إدارة الإضافات", "Manage Plugins")}</HeadingTertiary>
+                    <HeadingTertiary>{t("إدارة البلوقنات", "Manage Plugins")}</HeadingTertiary>
                     <Paragraph>{t(
                         "اضغط على أيقونة الإعدادات أو المعلومات للاطلاع على تفاصيل الإضافة",
                         "Click the settings or info icon to see plugin details"
                     )}</Paragraph>
                     <Paragraph>{t(
-                        "الإضافات ذات أيقونة التروس تحتوي على إعدادات قابلة للتخصيص!",
+                        "البلوقنات ذات أيقونة التروس تحتوي على إعدادات قابلة للتخصيص!",
                         "Plugins with a gear icon have configurable settings!"
                     )}</Paragraph>
                 </>
@@ -100,7 +100,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
                         return openWarningModal(null, undefined, false, enabledPlugins.length, resetCheckAndDo);
                     }}
                 >
-                    {t("تعطيل كل الإضافات", "Disable All Plugins")}
+                    {t("تعطيل كل البلوقنات", "Disable All Plugins")}
                 </Button>
             )}
         </Card>
@@ -115,7 +115,8 @@ const enum SearchStatus {
     VENCORD,
     NEW,
     USER_PLUGINS,
-    API_PLUGINS
+    API_PLUGINS,
+    NUN
 }
 
 export const ExcludedReasons: Record<"web" | "discordDesktop" | "vesktop" | "equibop" | "desktop" | "dev", string> = {
@@ -146,7 +147,7 @@ function ExcludedPluginsList({ search }: { search: string; }) {
                         ))}
                     </ul>
                 </>
-                : t("لا توجد إضافات تطابق معايير البحث.", "No plugins match your search criteria.")
+                : t("لا توجد بلوقنات تطابق معايير البحث.", "No plugins match your search criteria.")
             }
         </Paragraph>
     );
@@ -225,6 +226,9 @@ export default function PluginSettings() {
                 break;
             case SearchStatus.EQUICORD:
                 if (!PluginMeta[plugin.name].folderName.startsWith("src/equicordplugins/")) return false;
+                break;
+            case SearchStatus.NUN:
+                if (!PluginMeta[plugin.name].folderName.startsWith("src/nun/")) return false;
                 break;
             case SearchStatus.VENCORD:
                 if (!PluginMeta[plugin.name].folderName.startsWith("src/plugins/")) return false;
@@ -346,7 +350,7 @@ export default function PluginSettings() {
                 title: t("إعادة تشغيل مطلوبة", "Restart Required"),
                 body: (
                     <>
-                        <p style={{ textAlign: "center" }}>{t("بعض الإضافات تستلزم إعادة تشغيل لتعطيلها كلياً.", "Some plugins require a restart to be fully disabled.")}</p>
+                        <p style={{ textAlign: "center" }}>{t("بعض البلوقنات تستلزم إعادة تشغيل لتعطيلها كلياً.", "Some plugins require a restart to be fully disabled.")}</p>
                         <p style={{ textAlign: "center" }}>{t("هل تريد إعادة التشغيل الآن؟", "Do you want to restart now?")}</p>
                     </>
                 ),
@@ -424,33 +428,33 @@ export default function PluginSettings() {
                 <div className={classes(Margins.bottom20, Margins.top8, cl("filter-controls"))}>
                     <Select
                         options={[
-                            { label: t("عرض الكل", "Show All"), value: SearchStatus.ALL, default: true },
-                            { label: t("عرض المفعَّلة", "Show Enabled"), value: SearchStatus.ENABLED },
-                            { label: t("عرض المعطَّلة", "Show Disabled"), value: SearchStatus.DISABLED },
-                            { label: t("عرض Nun", "Show Nun"), value: SearchStatus.EQUICORD },
-                            { label: t("عرض Vencord", "Show Vencord"), value: SearchStatus.VENCORD },
-                            { label: t("عرض الجديدة", "Show New"), value: SearchStatus.NEW },
-                            hasUserPlugins && { label: t("عرض الإضافات الشخصية", "Show User Plugins"), value: SearchStatus.USER_PLUGINS },
-                            { label: t("عرض إضافات API", "Show API Plugins"), value: SearchStatus.API_PLUGINS },
+                            { label: t("الكل", "All"), value: SearchStatus.ALL, default: true },
+                            { label: t("مفعله", "Enabled"), value: SearchStatus.ENABLED },
+                            { label: t("معطله", "Disabled"), value: SearchStatus.DISABLED },
+                            { label: t("نون", "Nun"), value: SearchStatus.EQUICORD },
+                            { label: t("فنكورد", "Vencord"), value: SearchStatus.VENCORD },
+                            { label: t("جديده", "New"), value: SearchStatus.NEW },
+                            hasUserPlugins && { label: t("بلوقنات مخصصه", "User Plugins"), value: SearchStatus.USER_PLUGINS },
+                            { label: t("بلوقنات API", "API Plugins"), value: SearchStatus.API_PLUGINS },
                         ].filter(isTruthy)}
                         serialize={String}
                         select={status => setSearchValue(prev => ({ ...prev, status }))}
                         isSelected={v => v === searchValue.status}
                         closeOnSelect={true}
-                        placeholder={t("تصفية حسب النوع", "Filter by type")}
+                        placeholder={t("نوع", "Filter by type")}
                     />
                     <SearchableSelect
                         options={PluginTags.map(tag => ({ label: tag, value: tag }))}
                         value={searchValue.tags}
                         onChange={tags => setSearchValue(prev => ({ ...prev, tags }))}
                         closeOnSelect={false}
-                        placeholder={t("تصفية حسب الوسوم", "Filter by tags")}
+                        placeholder={t("تاق", "Filter by tags")}
                         multi
                     />
                 </div>
             </ErrorBoundary>
 
-            <HeadingTertiary className={Margins.top20}>{t("الإضافات", "Plugins")}</HeadingTertiary>
+            <HeadingTertiary className={Margins.top20}>{t("البلوقنات", "Plugins")}</HeadingTertiary>
 
             {plugins.length || requiredPlugins.length
                 ? (
@@ -458,7 +462,7 @@ export default function PluginSettings() {
                         <div className={cl("grid")}>
                             {visiblePlugins.length
                                 ? visiblePlugins
-                                : <Paragraph>{t("لا توجد إضافات تطابق معايير البحث.", "No plugins match your search criteria.")}</Paragraph>
+                                : <Paragraph>{t("لا توجد بلوقنات.", "No plugins match your search criteria.")}</Paragraph>
                             }
                         </div>
                         {visibleCount < plugins.length && (
@@ -472,13 +476,13 @@ export default function PluginSettings() {
             <Divider className={Margins.top20} />
 
             <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
-                {t("الإضافات المطلوبة", "Required Plugins")}
+                {t("البلوقنات المطلوبة", "Required Plugins")}
             </HeadingTertiary>
 
             <div className={cl("grid")}>
                 {requiredPlugins.length
                     ? requiredPlugins
-                    : <Paragraph>{t("لا توجد إضافات تطابق معايير البحث.", "No plugins match your search criteria.")}</Paragraph>
+                    : <Paragraph>{t("لا توجد بلوقنات.", "No plugins match your search criteria.")}</Paragraph>
                 }
             </div>
         </SettingsTab >
@@ -488,7 +492,7 @@ export default function PluginSettings() {
 export function PluginDependencyList({ deps }: { deps: string[]; }) {
     return (
         <>
-            <Paragraph>{t("هذه الإضافة مطلوبة من قِبَل:", "This plugin is required by:")}</Paragraph>
+            <Paragraph>{t("هذه البلوقن مطلوب من قبل:", "This plugin is required by:")}</Paragraph>
             {deps.map((dep: string) => <Paragraph key={dep} className={cl("dep-text")}>{dep}</Paragraph>)}
         </>
     );

@@ -19,7 +19,7 @@ on:
 
 env:
     FORCE_COLOR: true
-    GITHUB_TOKEN: ${{ github.token }}
+    GH_TOKEN: ${{ github.token }}
     REPO: o9ll/Equibuilds
     USERNAME: GitHub-Actions
 
