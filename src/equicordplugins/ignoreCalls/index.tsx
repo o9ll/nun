@@ -94,7 +94,7 @@ export default definePlugin({
     name: "IgnoreCalls",
     get description() { return t("يتيح لك تجاهل المكالمات من مستخدمين محددين أو مجموعات الرسائل المباشرة.", "Allows you to ignore calls from specific users or group DMs."); },
     tags: ["Voice"],
-    authors: [EquicordDevs.TheArmagan, Devs.thororen],
+    authors: [EquicordDevs.o9, Devs.thororen],
     settings,
     patches: [
         {

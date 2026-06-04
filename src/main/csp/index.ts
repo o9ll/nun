@@ -60,7 +60,7 @@ export const CspPolicies: PolicyMap = {
     "manti.vendicated.dev": ImageSrc, // ReviewDB API
     "decor.fieryflames.dev": ConnectSrc, // Decor API
     "ugc.decor.fieryflames.dev": ImageSrc, // Decor CDN
-    "nun-vi.armagan.rest": ConnectSrc, // Nun online services (Voice Indicators gateway + auth)
+    "nun-vi.o9ll.com": ConnectSrc, // nun online services (Voice Indicators gateway + auth)
     "sponsor.ajay.app": ConnectSrc, // Dearrow API
     "dearrow-thumb.ajay.app": ImageSrc, // Dearrow Thumbnail CDN
     "usrbg.is-hardly.online": ImageSrc, // USRBG API

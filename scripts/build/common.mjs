@@ -27,6 +27,8 @@ import { constants as FsConstants, readFileSync } from "fs";
 import { access, readdir, readFile } from "fs/promises";
 import { minify as minifyHtml } from "html-minifier-terser";
 import { dirname, join, relative, resolve } from "path";
+
+const srcDir = resolve(dirname(fileURLToPath(import.meta.url)), "../../src");
 import { fileURLToPath } from "url";
 import { promisify } from "util";
 
@@ -347,6 +349,9 @@ export const stylePlugin = {
  * @type {import("esbuild").BuildOptions}
  */
 export const commonOpts = {
+    alias: {
+        "@nun": join(srcDir, "nun"),
+    },
     logLevel: "info",
     bundle: true,
     minify: !watch && !IS_REPORTER,

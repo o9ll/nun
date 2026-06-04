@@ -19,7 +19,7 @@ export default definePlugin({
     name: "BetterBlockedUsers",
     get description() { return t("يتيح البحث في قائمة المستخدمين المحظورين ويجعل الأسماء قابلة للنسخ في الإعدادات.", "Enables searching the blocked users list and makes names copyable in settings."); },
     tags: ["Appearance", "Shortcuts"],
-    authors: [EquicordDevs.TheArmagan],
+    authors: [EquicordDevs.o9],
     patches: [
         {
             find: '"],{numberOfBlockedUsers:',

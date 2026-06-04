@@ -76,7 +76,7 @@ export default definePlugin({
     name: "FollowVoiceUser",
     get description() { return t("تابع صديقاً في الدردشة الصوتية.", "Follow a friend into voice chat."); },
     tags: ["Voice"],
-    authors: [EquicordDevs.TheArmagan],
+    authors: [EquicordDevs.o9],
     settings,
     settingsAboutComponent: () => (
         <Notice.Info>
