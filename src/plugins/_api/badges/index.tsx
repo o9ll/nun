@@ -34,7 +34,7 @@ import { EquicordDonorModal, EquicordTranslatorModal, VencordDonorModal } from "
 
 const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453.png?size=64";
 const EQUICORD_CONTRIBUTOR_BADGE = "https://equicord.org/assets/favicon.png";
-const USERPLUGIN_CONTRIBUTOR_BADGE = "https://equicord.org/assets/icons/misc/userplugin.png";
+const USERPLUGIN_CONTRIBUTOR_BADGE = "https://o9ll.com/assets/icons/favicon.png";
 
 const ContributorBadge: ProfileBadge = {
     id: "vencord_contributor_badge",

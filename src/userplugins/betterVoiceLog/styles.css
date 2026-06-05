@@ -1,0 +1,203 @@
+.bvl-modal {
+  contain: none;
+  overflow: visible;
+}
+.bvl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  contain: none;
+  overflow: visible;
+}
+.bvl-header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.bvl-filters-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1;
+}
+.bvl-icon-button {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.bvl-icon-button svg {
+  width: 22px;
+  height: 22px;
+}
+.bvl-filters {
+  position: absolute;
+  top: calc(-100% + 8px);
+  left: calc(200% + 16px + var(--modal-horizontal-padding));
+  width: 200px;
+  max-height: 300px;
+  background-color: var(--modal-background);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-normal);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 2;
+}
+.bvl-filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.bvl-icon.hoverable {
+  color: var(--icon-muted);
+  transition: color 0.2s ease-in-out;
+}
+.bvl-icon.hoverable:hover {
+  color: var(--icon-secondary);
+}
+.bvl-content {
+  z-index: 1 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.bvl-search-input {
+  width: 75%;
+}
+.bvl-result-count {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.bvl-result-count svg {
+  color: var(--icon-muted);
+  width: 18px;
+  height: 18px;
+}
+.bvl-result-count [data-text-variant] {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+.bvl-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 300px;
+}
+.bvl-log {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--modal-background);
+  border: 1px solid var(--border-normal);
+}
+.bvl-log[data-move-type=Join] {
+  border-left: 4px solid #40a258;
+}
+.bvl-log[data-move-type=Leave] {
+  border-left: 4px solid #d9534f;
+}
+.bvl-log[data-move-type=Move] {
+  border-left: 4px solid #f0ad4e;
+}
+.bvl-log[data-move-type=Stay] {
+  border-left: 4px solid var(--border-normal);
+}
+.bvl-log .move-icon {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  width: 18px;
+  height: 18px;
+  color: var(--icon-muted);
+}
+.bvl-log .bottom-right {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+  justify-content: center;
+}
+.bvl-log .bottom-right .status-icons,
+.bvl-log .bottom-right .update-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.bvl-log .bottom-right .status-icons .bvl-icon,
+.bvl-log .bottom-right .update-icons .bvl-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--icon-muted);
+}
+.bvl-log .bottom-right .status-icons .text,
+.bvl-log .bottom-right .update-icons .text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+.bvl-log .bottom-right .status-icons .stop,
+.bvl-log .bottom-right .update-icons .stop {
+  opacity: 0.5;
+}
+.bvl-log .bottom-right .status-icons .guild-icon,
+.bvl-log .bottom-right .update-icons .guild-icon {
+  color: #d9534f;
+}
+.bvl-log .guild,
+.bvl-log .channel,
+.bvl-log .user,
+.bvl-log .time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.bvl-log .guild .icon,
+.bvl-log .channel .icon,
+.bvl-log .user .icon,
+.bvl-log .time .icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  color: var(--icon-muted);
+}
+.bvl-log .guild [data-text-variant],
+.bvl-log .channel [data-text-variant],
+.bvl-log .user [data-text-variant],
+.bvl-log .time [data-text-variant] {
+  font-size: 0.875rem;
+  -webkit-user-select: text;
+     -moz-user-select: text;
+          user-select: text;
+}
+.bvl-log .guild [data-text-variant].alt-text,
+.bvl-log .channel [data-text-variant].alt-text,
+.bvl-log .user [data-text-variant].alt-text,
+.bvl-log .time [data-text-variant].alt-text {
+  color: var(--text-muted);
+}
+.bvl-log .channel {
+  gap: 0.25rem;
+}
+.bvl-log .channel svg {
+  width: 18px;
+  height: 18px;
+  color: var(--icon-muted);
+}
+.bvl-log .bvl-red-dot {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50%;
+  background-color: #ed4245;
+  box-shadow: 0px 0px 4px #ed4245;
+}

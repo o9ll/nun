@@ -1,0 +1,8 @@
+list modal
+filters
+filter by any TVoiceUpdateType as checkbox list
+filter by any TVoiceMoveType as checkbox list
+context menu shorcuts for filters for guild, channel and user
+per guild and total voice activity from lastVoiceStates map as counts
+
+add mute, deaf, camera, live icons
