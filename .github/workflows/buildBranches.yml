@@ -1,21 +1,21 @@
 name: Build Branches
 
 on:
-    push:
-        branches:
-            - "**"
-            - "!pr-**"
     workflow_dispatch:
-        inputs:
-            branch:
-                type: choice
-                description: "Branch to build and upload"
-                options:
-                    - nunar
-                    - main
-                    - dev
-                    - translation
-                default: "dev"
+    #push:
+        #branches:
+            #- "**"
+            #- "!pr-**"
+        #inputs:
+            #branch:
+                #type: choice
+                #description: "Branch to build and upload"
+                #options:
+                    #- nunar
+                    #- main
+                    #- dev
+                    #- translation
+                #default: "dev"
 
 env:
     FORCE_COLOR: true

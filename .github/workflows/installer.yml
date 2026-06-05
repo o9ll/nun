@@ -1,18 +1,18 @@
 name: Build Installer EXE
 
 on:
-    push:
-        branches: [nunar]
-        paths:
-            - "installer/NunInstaller.cs"
-            - "installer/Nun.manifest"
-            - "installer/icon.ico"
-            - "installer/logo.png"
-            - ".github/workflows/installer.yml"
-    release:
-        types: [created]
     workflow_dispatch:
-    workflow_call:
+    #push:
+        #branches: [nunar]
+        #paths:
+            #- "installer/NunInstaller.cs"
+            #- "installer/Nun.manifest"
+            #- "installer/icon.ico"
+            #- "installer/logo.png"
+            #- ".github/workflows/installer.yml"
+    #release:
+        #types: [created]
+    #workflow_call:
 
 permissions:
     contents: write

@@ -1,21 +1,21 @@
 name: Test Patches
 on:
     workflow_dispatch:
-        inputs:
-            discord_branch:
-                type: choice
-                description: "Discord Branch to test patches on"
-                options:
-                    - both
-                    - stable
-                    - canary
-                default: both
-            webhook_url:
-                type: string
-                description: "Webhook URL that the report will be posted to. This will be
-                    visible for everyone, so DO NOT pass sensitive webhooks like
-                    discord webhook. This is meant to be used by Equibot."
-                required: false
+    #inputs:
+    #discord_branch:
+        #type: choice
+        #description: "Discord Branch to test patches on"
+        #options:
+            #- both
+            #- stable
+            #- canary
+        #default: both
+    #webhook_url:
+        #type: string
+        #description: "Webhook URL that the report will be posted to. This will be
+            #visible for everyone, so DO NOT pass sensitive webhooks like
+            #discord webhook. This is meant to be used by Equibot."
+        #required: false
 
 env:
     FORCE_COLOR: true

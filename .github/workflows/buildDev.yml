@@ -1,21 +1,22 @@
 name: Build DevBuild
 on:
-    workflow_run:
-        workflows: ["Upstream Sync"]
-        branches: [main]
-        types:
-            - completed
-    push:
-        branches:
-            - main
-        paths:
-            - .github/workflows/build.yml
-            - src/**
-            - browser/**
-            - scripts/build/**
-            - package.json
-            - pnpm-lock.yaml
     workflow_dispatch:
+    #workflow_run:
+        #workflows: ["Upstream Sync"]
+        #branches: [main]
+        #types:
+            #- completed
+    #push:
+        #branches:
+            #- main
+        #paths:
+            #- .github/workflows/build.yml
+            #- src/**
+            #- browser/**
+            #- scripts/build/**
+            #- package.json
+            #- pnpm-lock.yaml
+
 env:
     FORCE_COLOR: true
 

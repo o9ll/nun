@@ -1,9 +1,10 @@
 name: Release
 on:
-    push:
-        branches:
-            - nunar
-            - main
+    workflow_dispatch:
+    #push:
+        #branches:
+            #- nunar
+            #- main
 
 env:
     FORCE_COLOR: true

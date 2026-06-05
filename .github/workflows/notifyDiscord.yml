@@ -1,15 +1,17 @@
 name: Discord Notifications
 
 on:
-  push:
-    branches: [nunar]
-    paths-ignore:
-      - "**.md"
-      - ".github/ISSUE_TEMPLATE/**"
-      - ".github/PULL_REQUEST_TEMPLATE/**"
+    workflow_dispatch:
+    #push:
+      #branches: [nunar]
+      #paths-ignore:
+        #- "**.md"
+        #- ".github/ISSUE_TEMPLATE/**"
+        #- ".github/PULL_REQUEST_TEMPLATE/**"
 
 # Least-privilege token — this job only reads repo contents.
 # No write access, no package access, no secret access beyond explicit env vars.
+
 permissions:
   contents: read
 
