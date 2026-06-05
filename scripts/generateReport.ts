@@ -205,7 +205,7 @@ async function printReport() {
         const body = JSON.stringify({
             username: "Nun Reporter" + (CANARY ? " (Canary)" : ""),
             embeds,
-            avatar_url: "https://raw.githubusercontent.com/o9ll/nun/nunar/browser/icon.png"
+            avatar_url: "https://o9ll.com/assets/icons/favicon.png"
         });
 
         const headers = {

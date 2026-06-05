@@ -27,7 +27,7 @@ import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { HeadingTertiary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { SettingsTab } from "@components/settings";
+import { SettingsTab, wrapTab } from "@components/settings";
 import { debounce } from "@shared/debounce";
 import { ChangeList } from "@utils/ChangeList";
 import { classNameFactory } from "@utils/css";
@@ -153,7 +153,7 @@ function ExcludedPluginsList({ search }: { search: string; }) {
     );
 }
 
-export default function PluginSettings() {
+function PluginSettings() {
     const settings = useSettings();
     useSettings(["plugins.Settings.nunM"]);
 
@@ -225,13 +225,13 @@ export default function PluginSettings() {
                 if (!isPluginEnabled(plugin.name)) return false;
                 break;
             case SearchStatus.EQUICORD:
-                if (!PluginMeta[plugin.name].folderName.startsWith("src/equicordplugins/")) return false;
+                if (!PluginMeta[plugin.name]?.folderName.startsWith("src/equicordplugins/")) return false;
                 break;
             case SearchStatus.NUN:
-                if (!PluginMeta[plugin.name].folderName.startsWith("src/nun/")) return false;
+                if (!PluginMeta[plugin.name]?.folderName.startsWith("src/nun/")) return false;
                 break;
             case SearchStatus.VENCORD:
-                if (!PluginMeta[plugin.name].folderName.startsWith("src/plugins/")) return false;
+                if (!PluginMeta[plugin.name]?.folderName.startsWith("src/plugins/")) return false;
                 break;
             case SearchStatus.NEW:
                 if (!newPluginsSet?.has(plugin.name)) return false;
@@ -251,7 +251,7 @@ export default function PluginSettings() {
         return (
             plugin.name.toLowerCase().includes(search.replace(/\s+/g, "")) ||
             plugin.name.match(/[A-Z]/g)?.join("").toLowerCase().includes(search) ||
-            plugin.description.toLowerCase().includes(search) ||
+            (plugin.description ?? "").toLowerCase().includes(search) ||
             plugin.searchTerms?.some(t => t.toLowerCase().includes(search))
         );
     }, [searchValue, search]);
@@ -286,12 +286,12 @@ export default function PluginSettings() {
 
             if (!pluginFilter(p, newPluginsSet)) continue;
 
-            const isRequired = p.required || p.isDependency || depMap[p.name]?.some(d => settings.plugins[d].enabled);
+            const isRequired = p.required || p.isDependency || depMap[p.name]?.some(d => settings.plugins[d]?.enabled);
 
             if (isRequired) {
                 const tooltipText = p.required || !depMap[p.name]
                     ? t("هذه الإضافة ضرورية لعمل Nun.", "This plugin is required for Nun to function.")
-                    : <PluginDependencyList deps={depMap[p.name]?.filter(d => settings.plugins[d].enabled)} />;
+                    : <PluginDependencyList deps={depMap[p.name]?.filter(d => settings.plugins[d]?.enabled)} />;
 
                 requiredPlugins.push(
                     <Tooltip text={tooltipText} key={p.name}>
@@ -367,10 +367,10 @@ export default function PluginSettings() {
         const totalPlugins = Object.keys(Plugins).filter(p => !isApiPlugin(p));
         const enabledPlugins = Object.keys(Plugins).filter(p => isPluginEnabled(p) && !isApiPlugin(p));
 
-        const totalStockPlugins = totalPlugins.filter(p => !PluginMeta[p].userPlugin && !Plugins[p].hidden).length;
-        const totalUserPlugins = totalPlugins.filter(p => PluginMeta[p].userPlugin).length;
-        const enabledStockPlugins = enabledPlugins.filter(p => !PluginMeta[p].userPlugin).length;
-        const enabledUserPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin).length;
+        const totalStockPlugins = totalPlugins.filter(p => !PluginMeta[p]?.userPlugin && !Plugins[p].hidden).length;
+        const totalUserPlugins = totalPlugins.filter(p => PluginMeta[p]?.userPlugin).length;
+        const enabledStockPlugins = enabledPlugins.filter(p => !PluginMeta[p]?.userPlugin).length;
+        const enabledUserPlugins = enabledPlugins.filter(p => PluginMeta[p]?.userPlugin).length;
         return { totalStockPlugins, totalUserPlugins, enabledStockPlugins, enabledUserPlugins, enabledPlugins };
     }, [settings.plugins]);
 
@@ -378,11 +378,15 @@ export default function PluginSettings() {
     const [visibleCount, setVisibleCount] = React.useState(pluginsToLoad);
     const loadMore = React.useCallback(() => {
         setVisibleCount(v => Math.min(v + pluginsToLoad, plugins.length));
-    }, [plugins.length]);
+    }, [plugins.length, pluginsToLoad]);
 
     const dLoadMore = useMemo(() => debounce(loadMore, 100), [loadMore]);
 
     const [sentinelRef, isSentinelVisible] = useIntersection();
+    React.useEffect(() => {
+        setVisibleCount(Math.min(pluginsToLoad, plugins.length));
+    }, [searchValue.status, searchValue.value, searchValue.tags, plugins.length, pluginsToLoad]);
+
     React.useEffect(() => {
         if (isSentinelVisible && visibleCount < plugins.length) {
             dLoadMore();
@@ -431,7 +435,8 @@ export default function PluginSettings() {
                             { label: t("الكل", "All"), value: SearchStatus.ALL, default: true },
                             { label: t("مفعله", "Enabled"), value: SearchStatus.ENABLED },
                             { label: t("معطله", "Disabled"), value: SearchStatus.DISABLED },
-                            { label: t("نون", "Nun"), value: SearchStatus.EQUICORD },
+                            { label: t("نون", "Nun"), value: SearchStatus.NUN },
+                            { label: t("إيكويكورد", "Equicord"), value: SearchStatus.EQUICORD },
                             { label: t("فنكورد", "Vencord"), value: SearchStatus.VENCORD },
                             { label: t("جديده", "New"), value: SearchStatus.NEW },
                             hasUserPlugins && { label: t("بلوقنات مخصصه", "User Plugins"), value: SearchStatus.USER_PLUGINS },
@@ -488,6 +493,8 @@ export default function PluginSettings() {
         </SettingsTab >
     );
 }
+
+export default wrapTab(PluginSettings, "Plugins");
 
 export function PluginDependencyList({ deps }: { deps: string[]; }) {
     return (

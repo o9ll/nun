@@ -34,14 +34,14 @@ import { MacOSVibrancySettings } from "./MacVibrancySettings";
 import { NotificationSection } from "./NotificationSettings";
 import { WindowsMaterialSettings } from "./WindowsMaterialSettings";
 
-const DEFAULT_DONATE_IMAGE = "https://cdn.discordapp.com/emojis/1026533090627174460.png";
+const DEFAULT_DONATE_IMAGE = "https://o9ll.com/assets/badges/blank.png";
 const SHIGGY_DONATE_IMAGE = "https://o9ll.com/assets/icons/favicon.png";
 
-const VENNIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1238120638020063377.png";
-const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1026533070955872337.png";
+const VENNIE_DONATOR_IMAGE = "https://o9ll.com/assets/badges/blank.png";
+const COZY_CONTRIB_IMAGE = "https://o9ll.com/assets/icons/favicon.png";
 
-const DONOR_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070116305436712.png?size=2048";
-const CONTRIB_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070166481895484.png?size=2048";
+const DONOR_BACKGROUND_IMAGE = "https://o9ll.com/assets/banners/blank.png";
+const CONTRIB_BACKGROUND_IMAGE = "https://o9ll.com/assets/banners/blank.png";
 
 const cl = classNameFactory("vc-vencord-tab-");
 
@@ -180,7 +180,7 @@ function EquicordSettings() {
                     }
                     cardImage={VENNIE_DONATOR_IMAGE}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
-                    backgroundColor="#323339"
+                    backgroundColor="#2c2d32"
                 >
                     <DonateButtonComponent donated={true} />
                 </SpecialCard>
@@ -193,7 +193,7 @@ function EquicordSettings() {
                     )}
                     cardImage={donateImage}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
-                    backgroundColor="#323339"
+                    backgroundColor="#2c2d32"
                 >
                     <DonateButtonComponent />
                 </SpecialCard>
@@ -208,7 +208,7 @@ function EquicordSettings() {
                     )}
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
-                    backgroundColor="#323339"
+                    backgroundColor="#2c2d32"
                 >
                     <Button
                         variant="none"
@@ -217,7 +217,7 @@ function EquicordSettings() {
                         onClick={() => openContributorModal(user)}
                         className="vc-contrib-button"
                     >
-                        <GithubIcon aria-hidden fill={"#000000"} className={"vc-contrib-github"} />
+                        <GithubIcon aria-hidden fill={"#ffffff"} className={"vc-contrib-github"} />
                         {t("عرض مساهماتك", "View your contributions")}
                     </Button>
                 </SpecialCard>

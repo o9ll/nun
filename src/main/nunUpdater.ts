@@ -9,7 +9,7 @@
  *
  * On every launch this checks GitHub for a newer build (i.e. the build hash
  * changed), and if so downloads the Nun client installer and re-installs the
- * current Discord branch via `NunClientInstaller.exe --install <platform>`.
+ * current Discord branch via `nun.exe --install <platform>`.
  *
  * The installer rarely changes, so it is cached on disk and only re-downloaded
  * when its ETag changes.
@@ -35,10 +35,10 @@ const error = (...args: unknown[]) => console.error("[Nun:Updater]", ...args);
 
 const NUN_REPO = gitRemote || "o9ll/nun";
 const INSTALLER_EXE_URL =
-    "https://github.com/o9ll/nun-installer/releases/download/latest/NunClientInstaller.exe";
+    "https://github.com/o9ll/nun-installer/releases/download/latest/nun.exe";
 
 const INSTALLER_DIR = join(DATA_DIR, "installer");
-const INSTALLER_PATH = join(INSTALLER_DIR, "NunClientInstaller.exe");
+const INSTALLER_PATH = join(INSTALLER_DIR, "nun.exe");
 const ETAG_PATH = join(INSTALLER_DIR, "etag.txt");
 // Tracks the build we last installed, so we don't re-install an unchanged one.
 const BUILD_MARKER_PATH = join(INSTALLER_DIR, "last-build.txt");
@@ -137,7 +137,7 @@ async function ensureInstaller(): Promise<string> {
     return INSTALLER_PATH;
 }
 
-/** Run `NunClientInstaller.exe --install <platform>`, detached, fire-and-forget. */
+/** Run `nun.exe --install <platform>`, detached, fire-and-forget. */
 function runInstaller(exePath: string, channel: ReleaseChannel) {
     log(`Running installer: --install ${channel}`);
 

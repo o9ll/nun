@@ -166,6 +166,7 @@ export const globPlugins = kind => ({
                     if (fileName.startsWith("_") || fileName.startsWith(".")) continue;
                     if (fileName === "index.ts") continue;
                     if (/\.(zip|rar|7z|tar|gz|bz2)/.test(fileName)) continue;
+                    if (!file.isDirectory() && !/\.tsx?$/.test(fileName)) continue;
 
                     const target = getPluginTarget(fileName);
 

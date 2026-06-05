@@ -46,7 +46,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
     const pluginMeta = PluginMeta[plugin.name];
     const folderName = pluginMeta?.folderName ?? "";
     const isEquicordPlugin = folderName.startsWith("src/equicordplugins/");
-    const isNun = pluginMeta.folderName.startsWith("src/nun/") ?? false;
+    const isNun = folderName.startsWith("src/nun/");
     const isVencordPlugin = folderName.startsWith("src/plugins/");
     const isUserPlugin = folderName.startsWith("src/userplugins/");
     const isModifiedPlugin = plugin.isModified ?? false;
