@@ -44,6 +44,10 @@ Before starting your plugin:
 > [!WARNING]
 > Skipping these steps may result in your plugin being rejected, even if it is technically correct.
 
+## nun Rules
+1. No Rules
+2. We made a fork not a plugin.
+
 ## Plugin Rules
 
 To keep Equicord stable, secure and maintainable, all plugins must follow these rules:
