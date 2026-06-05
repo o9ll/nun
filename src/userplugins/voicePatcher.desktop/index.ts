@@ -8,6 +8,7 @@ import { definePluginSettings } from "@api/Settings";
 import definePlugin, { OptionType, PluginNative } from "@utils/types";
 
 import Settings from "./components/Settings";
+import VoicePatcherSettingsAbout from "./components/SettingsAbout";
 
 export const Native = VencordNative.pluginHelpers.VoicePatcher as PluginNative<typeof import("./native")>;
 
@@ -57,9 +58,10 @@ export function applyAndLogPatches(disabledPatches: string, customPatches: strin
 
 export default definePlugin({
     name: "VoicePatcher",
-    description: "Patches discord_voice.node in memory for stereo/bitrate unlocks",
+    description: "Patches discord_voice.node in memory for stereo and high bitrate unlocks. Base layer for GoXLR desktop voice setups.",
     authors: [{ name: "o9", id: 426687300387471360n }],
     settings,
+    settingsAboutComponent: VoicePatcherSettingsAbout,
     start() {
         try {
             const nativeModules = globalThis.DiscordNative?.nativeModules;

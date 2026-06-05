@@ -143,7 +143,7 @@ export const MicrophoneSettingsModal = (props: MicrophoneSettingsModalProps) => 
                 disabled: isSaving,
                 onChange: status => {
                     setChannelsEnabled(status);
-                    setChannels(2);
+                    setChannels(status ? 2 : 1);
                 }
             }}>
         </SettingsModalCard>;
@@ -268,9 +268,9 @@ export const MicrophoneSettingsModal = (props: MicrophoneSettingsModalProps) => 
 
     const infoCard =
         <Card style={{ ...Styles.infoCard }}>
-            <Forms.FormTitle tag="h5">{"Important Note"}</Forms.FormTitle>
+            <Forms.FormTitle tag="h5">{"GoXLR SM7B Setup"}</Forms.FormTitle>
             <Forms.FormText>
-                {"To fully benefit from this plugin, please disable"} <span style={{ fontWeight: "bold" }}>Krisp</span> {"and"} <span style={{ fontWeight: "bold" }}>{"Echo Cancellation"}</span>{", otherwise features like stereo audio (channels) will not work."}
+                {"Use the GoXLR SM7B profile (mono, 160 kbps, 48 kHz). In GoXLR app: Condenser mode, ~30 dB gain with Cloudlifter. Discord input: Chat Mic (TC-Helicon GoXLR Mini). Disable Krisp, echo cancellation, noise suppression, and auto gain."}
             </Forms.FormText>
         </Card>;
 
