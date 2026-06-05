@@ -85,8 +85,8 @@
         "src/userplugins",
         "browser/browser.js",
         "browser/extension.js",
-        "browser/chromium-unpacked",
-        "browser/firefox-unpacked",
+        "browser/nun-chrom-upk",
+        "browser/nun-ffx-upk",
         "browser/vendor",
         "dist"
     ]

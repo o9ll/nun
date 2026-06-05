@@ -106,7 +106,7 @@ const buildConfigs = [
             IS_USERSCRIPT: "true",
             window: "unsafeWindow",
         },
-        outfile: "dist/Nun.user.js",
+        outfile: "dist/nun.user.js",
         banner: {
             js: readFileSync("browser/userscript.meta.js", "utf-8").replace("%version%", `${VERSION}.${new Date().getTime()}`)
         },
@@ -156,8 +156,8 @@ async function loadDir(dir, basePath = "") {
  */
 async function buildExtension(target, files) {
     const entries = {
-        "dist/Nun.js": await readFile("dist/browser/extension.js"),
-        "dist/Nun.css": await readFile("dist/browser/extension.css"),
+        "dist/nun.js": await readFile("dist/browser/extension.js"),
+        "dist/nun.css": await readFile("dist/browser/extension.css"),
         ...await loadDir("dist/browser/vendor/monaco", "dist/browser/"),
         ...Object.fromEntries(await Promise.all(files.map(async f => {
             let content = await readFile(join("browser", f));
@@ -185,17 +185,17 @@ async function buildExtension(target, files) {
     console.info("Unpacked Extension written to dist/browser/" + target);
 }
 
-const appendCssRuntime = readFile("dist/Nun.user.css", "utf-8").then(content => {
+const appendCssRuntime = readFile("dist/nun.user.css", "utf-8").then(content => {
     const cssRuntime = `unsafeWindow._vcUserScriptRendererCss=\`${content.replaceAll("`", "\\`")}\``;
 
-    return appendFile("dist/Nun.user.js", cssRuntime);
+    return appendFile("dist/nun.user.js", cssRuntime);
 });
 
 if (!process.argv.includes("--skip-extension")) {
     await Promise.all([
         appendCssRuntime,
-        buildExtension("chromium-unpacked", ["modifyResponseHeaders.json", "content.js", "manifest.json", "icon.png"]),
-        buildExtension("firefox-unpacked", ["background.js", "content.js", "manifestv2.json", "icon.png"]),
+        buildExtension("nun-chrom-upk", ["modifyResponseHeaders.json", "content.js", "manifest.json", "icon.png"]),
+        buildExtension("nun-ffx-upk", ["background.js", "content.js", "manifestv2.json", "icon.png"]),
     ]);
 
     const createExtensionZip = async (srcDir, destFile, label) => {
@@ -214,8 +214,8 @@ if (!process.argv.includes("--skip-extension")) {
         console.info(`Packed ${label} written to ${destFile}`);
     };
     await Promise.all([
-        createExtensionZip("dist/browser/chromium-unpacked", "dist/extension-chrome.zip", "Chromium Extension"),
-        createExtensionZip("dist/browser/firefox-unpacked", "dist/extension-firefox.zip", "Firefox Extension"),
+        createExtensionZip("dist/browser/nun-chrom-upk", "dist/nun-chrom.zip", "Chromium Extension"),
+        createExtensionZip("dist/browser/nun-ffx-upk", "dist/nun-ffx.zip", "Firefox Extension"),
     ]);
 } else {
     await appendCssRuntime;

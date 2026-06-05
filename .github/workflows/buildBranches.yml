@@ -112,9 +112,9 @@ jobs:
                   find . -size 0 -delete
 
                   mkdir -p userscript
-                  mv Equicord.user.* userscript/
+                  mv nun.user.* userscript/
                   mv desktop.asar desktop/
-                  mv equibop.asar equibop/
+                  mv equibop.asar unu/
                   mv extension-*.zip browser/
 
                   git add -A
