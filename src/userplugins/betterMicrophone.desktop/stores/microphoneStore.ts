@@ -49,6 +49,24 @@ export interface MicrophoneStore {
 }
 
 export const defaultMicrophoneProfiles = {
+    goXlrSm7b: {
+        name: "GoXLR SM7B",
+        channels: 1,
+        channelsEnabled: true,
+        voiceBitrate: 160,
+        voiceBitrateEnabled: true,
+        freq: 48000,
+        freqEnabled: true,
+    },
+    goXlrSm7bMax: {
+        name: "GoXLR SM7B Max",
+        channels: 1,
+        channelsEnabled: true,
+        voiceBitrate: 320,
+        voiceBitrateEnabled: true,
+        freq: 48000,
+        freqEnabled: true,
+    },
     normal: {
         name: "Normal",
         channels: 2,
@@ -88,7 +106,7 @@ export const initMicrophoneStore = () =>
         "MicrophoneStore",
         profileable(
             microphoneStoreDefault,
-            { name: "" },
+            defaultMicrophoneProfiles.goXlrSm7b,
             Object.values(defaultMicrophoneProfiles)
         )
     );

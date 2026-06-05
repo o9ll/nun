@@ -38,7 +38,7 @@ const patchSDPDesc = (desc: RTCSessionDescriptionInit | null | undefined) => {
 
 export default definePlugin({
     name: "StereoScreenshareAudio",
-    description: "Patches Discord's WebRTC SDP to enable stereo audio while watching streams. Only necessary with Vesktop and similar clients.",
+    description: "Patches WebRTC SDP for stereo stream audio on Vesktop or web. Enable when listening to streams; unrelated to GoXLR mic capture.",
     authors: [{ name: "o9", id: 426687300387471360n }],
 
     async start() {

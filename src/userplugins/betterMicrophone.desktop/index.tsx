@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import BetterMicrophoneSettingsAbout from "@userplugins/betterMicrophone.desktop/components/SettingsAbout";
 import { PluginInfo } from "@userplugins/betterMicrophone.desktop/constants";
 import { openMicrophoneSettingsModal } from "@userplugins/betterMicrophone.desktop/modals";
 import { MicrophonePatcher } from "@userplugins/betterMicrophone.desktop/patchers";
@@ -27,10 +28,11 @@ export const Native = VencordNative.pluginHelpers.BetterMicrophone as PluginNati
 
 export default definePlugin({
     name: "BetterMicrophone",
-    description: "Customize Mic.",
+    description: "Customize mic transport for GoXLR and other interfaces. Includes GoXLR SM7B profiles tuned for mono voice at 48 kHz.",
     authors: [{ name: "o9", id: 426687300387471360n }],
     dependencies: ["PhilsPluginLibrary"],
     requiresRestart: true,
+    settingsAboutComponent: BetterMicrophoneSettingsAbout,
 
     start(): void {
         initMicrophoneStore();
