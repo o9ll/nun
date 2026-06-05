@@ -9,7 +9,7 @@
 import "./styles.css";
 
 import type { RenderModalProps } from "@vencord/discord-types";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import { saveFile } from "@utils/web";
 import { Button, Modal, React, TextInput, useState } from "@webpack/common";
 
@@ -19,14 +19,14 @@ type SortKey = "name" | "hooks" | "listeners" | "patches" | "uiInjects" | "risk"
 
 function exportJson(rows: ScoredPlugin[], heapMB: number | null) {
     const payload = {
-        _esharq: "diagnostics",
+        _nun: "diagnostics",
         version: 1,
         takenAt: new Date().toISOString(),
         heapMB,
         plugins: rows,
     };
     const date = new Date().toISOString().slice(0, 10);
-    saveFile(new File([JSON.stringify(payload, null, 2)], `esharq-diagnostics-${date}.json`, { type: "application/json" }));
+    saveFile(new File([JSON.stringify(payload, null, 2)], `nun-diagnostics-${date}.json`, { type: "application/json" }));
 }
 
 export function DiagnosticsModal({ modalProps, initial, heapMB, rescan }: {
@@ -68,22 +68,22 @@ export function DiagnosticsModal({ modalProps, initial, heapMB, rescan }: {
 
     return (
         <Modal {...modalProps} size="lg" title={t("تشخيص", "Nun Diagnostics")}>
-            <div className="esharq-diag">
-                <div className="esharq-diag-sub">
+            <div className="nun-diag">
+                <div className="nun-diag-sub">
                     {t("لقطة موارد الإضافات لمرة واحدة", "One-time plugin resource snapshot")}
                 </div>
 
-                <div className="esharq-diag-toolbar">
-                    <div className="esharq-diag-searchwrap">
+                <div className="nun-diag-toolbar">
+                    <div className="nun-diag-searchwrap">
                         <TextInput
                             placeholder={t("بحث...", "Search...")}
                             value={search}
                             onChange={setSearch}
                         />
                     </div>
-                    <div className="esharq-diag-actions">
+                    <div className="nun-diag-actions">
                         {heapMB != null && (
-                            <span className="esharq-diag-heap" title={t("ذاكرة JS الحالية", "Current JS heap")}>
+                            <span className="nun-diag-heap" title={t("ذاكرة JS الحالية", "Current JS heap")}>
                                 Heap: {heapMB} MB
                             </span>
                         )}
@@ -96,8 +96,8 @@ export function DiagnosticsModal({ modalProps, initial, heapMB, rescan }: {
                     </div>
                 </div>
 
-                <div className="esharq-diag-tablewrap">
-                    <table className="esharq-diag-table">
+                <div className="nun-diag-tablewrap">
+                    <table className="nun-diag-table">
                         <thead>
                             <tr>
                                 {columns.map(c => (
@@ -114,22 +114,22 @@ export function DiagnosticsModal({ modalProps, initial, heapMB, rescan }: {
                         </thead>
                         <tbody>
                             {view.length === 0 ? (
-                                <tr><td colSpan={6} className="esharq-diag-empty">{t("لا نتائج", "No results")}</td></tr>
+                                <tr><td colSpan={6} className="nun-diag-empty">{t("لا نتائج", "No results")}</td></tr>
                             ) : view.map(r => (
-                                <tr key={r.name} className={`esharq-diag-row lvl-${r.level}`}>
+                                <tr key={r.name} className={`nun-diag-row lvl-${r.level}`}>
                                     <td>{r.name}</td>
                                     <td className="num">{r.hooks}</td>
                                     <td className="num">{r.listeners}</td>
                                     <td className="num">{r.patches}</td>
                                     <td className="num">{r.uiInjects}</td>
-                                    <td className="num"><span className={`esharq-diag-badge ${r.level}`}>{r.risk}</span></td>
+                                    <td className="num"><span className={`nun-diag-badge ${r.level}`}>{r.risk}</span></td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
 
-                <div className="esharq-diag-foot">
+                <div className="nun-diag-foot">
                     {view.length} / {rows.length} {t("إضافة", "plugins")}
                 </div>
             </div>

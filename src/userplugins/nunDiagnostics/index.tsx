@@ -8,7 +8,7 @@ import { HeaderBarButton } from "@api/HeaderBar";
 import { definePluginSettings, useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { EquicordDevs } from "@utils/constants";
-import { t } from "@utils/esharqI18n";
+import { t } from "@utils/nunM";
 import definePlugin, { OptionType } from "@utils/types";
 import { Button, openModal, React } from "@webpack/common";
 

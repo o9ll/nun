@@ -5,11 +5,11 @@
  */
 
 import { getAccessToken, isAuthorized } from "@nun/_api/nunOnlineServices";
+import { debounce } from "@shared/debounce";
 import { proxyLazy } from "@utils/lazy";
 import { Logger } from "@utils/Logger";
 import type { VoiceState as DiscordVoiceState } from "@vencord/discord-types";
 import { ChannelStore, GuildMemberStore, GuildStore, showToast, Toasts, UserStore, VoiceStateStore, zustandCreate } from "@webpack/common";
-import { debounce } from "lodash";
 
 import { BATCH_INTERVAL_MS, WS_URL } from "./constants";
 import { type MetaUpsert, VoiceIndicatorsClient, type VoiceState as ReportVoiceState } from "./sdk/VoiceIndicatorsClient";

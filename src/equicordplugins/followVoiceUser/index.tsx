@@ -63,7 +63,7 @@ const UserContextMenuPatch: NavContextMenuPatchCallback = (children, { channel, 
                 }
 
                 followedUserInfo = {
-                    lastChannelId: UserStore.getCurrentUser().id,
+                    lastChannelId: VoiceStateStore.getVoiceStateForUser(user.id)?.channelId ?? "",
                     userId: user.id
                 };
                 setChecked(true);

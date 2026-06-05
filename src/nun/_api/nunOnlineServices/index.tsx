@@ -37,7 +37,7 @@ function AuthorizeButton() {
                     } else {
                         authorize().then(
                             () => showToast("Connected to Nun online services.", Toasts.Type.SUCCESS),
-                            () => { }
+                            () => showToast("Could not connect to Nun online services.", Toasts.Type.FAILURE)
                         );
                     }
                 }}
