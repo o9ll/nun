@@ -1,16 +1,16 @@
 import { IpcEvents } from "@shared/IpcEvents";
 import { ipcMain, BrowserWindow, dialog, shell } from "electron";
 import { FSWatcher, mkdirSync, watch } from "fs";
-import { BD_PLUGINS_DIR, DATA_DIR } from "./utils/constants";
+import { NU_PLUGINS_DIR, DATA_DIR } from "./utils/constants";
 import { readdir, readFile, stat, rm, writeFile } from "fs/promises";
 import { join } from "path";
-import { PluginInfo } from "@bd/core/pluginmanager";
+import { PluginInfo } from "@nu/core/pluginmanager";
 
-mkdirSync(BD_PLUGINS_DIR, { recursive: true });
+mkdirSync(NU_PLUGINS_DIR, { recursive: true });
 
-ipcMain.on(IpcEvents.BD_GET_DATA_DIR, (e) => e.returnValue = DATA_DIR);
+ipcMain.on(IpcEvents.NU_GET_DATA_DIR, (e) => e.returnValue = DATA_DIR);
 
-ipcMain.handle(IpcEvents.BD_OPEN_DIALOG, async (event, options) => {
+ipcMain.handle(IpcEvents.NU_OPEN_DIALOG, async (event, options) => {
     const {
         mode = "open",
         openDirectory = false,
@@ -54,8 +54,8 @@ ipcMain.handle(IpcEvents.BD_OPEN_DIALOG, async (event, options) => {
 let pluginWatcher: FSWatcher | null = null;
 const fileSet = new Set<string>();
 const ignoreUpdates = new Set<string>();
-ipcMain.handle(IpcEvents.BD_GET_PLUGINS, async ({ sender }) => {
-    const files = await readdir(BD_PLUGINS_DIR, { withFileTypes: true });
+ipcMain.handle(IpcEvents.NU_GET_PLUGINS, async ({ sender }) => {
+    const files = await readdir(NU_PLUGINS_DIR, { withFileTypes: true });
     const pluginFiles = files
         .filter(f => f.isFile() && f.name.endsWith(".plugin.js"))
         .map(f => f.name);
@@ -68,10 +68,10 @@ ipcMain.handle(IpcEvents.BD_GET_PLUGINS, async ({ sender }) => {
     if (pluginWatcher) pluginWatcher.close();
     const updateTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
-    pluginWatcher = watch(BD_PLUGINS_DIR, { persistent: false }, async (type, filename) => {
+    pluginWatcher = watch(NU_PLUGINS_DIR, { persistent: false }, async (type, filename) => {
         if (!filename || !filename.endsWith(".plugin.js")) return;
 
-        const filePath = join(BD_PLUGINS_DIR, filename);
+        const filePath = join(NU_PLUGINS_DIR, filename);
         const stats = await stat(filePath).catch(() => null);
 
         if (!stats) {
@@ -79,7 +79,7 @@ ipcMain.handle(IpcEvents.BD_GET_PLUGINS, async ({ sender }) => {
             if (!fileSet.has(filename)) return;
             fileSet.delete(filename);
 
-            sender.postMessage(IpcEvents.BD_PLUGIN_DELETED, filename);
+            sender.postMessage(IpcEvents.NU_PLUGIN_DELETED, filename);
             return;
         }
 
@@ -99,7 +99,7 @@ ipcMain.handle(IpcEvents.BD_GET_PLUGINS, async ({ sender }) => {
         if (type === "rename") {
             // Plugin created
             fileSet.add(filename);
-            sender.postMessage(IpcEvents.BD_PLUGIN_CREATED, info);
+            sender.postMessage(IpcEvents.NU_PLUGIN_CREATED, info);
 
             // A few changes event will also be fired, ignore it
             ignoreUpdates.add(filename);
@@ -108,7 +108,7 @@ ipcMain.handle(IpcEvents.BD_GET_PLUGINS, async ({ sender }) => {
             // Plugin updated, debounce changes
             if (updateTimeouts.has(filename)) clearTimeout(updateTimeouts.get(filename));
             const timeout = setTimeout(() => {
-                sender.postMessage(IpcEvents.BD_PLUGIN_UPDATED, info);
+                sender.postMessage(IpcEvents.NU_PLUGIN_UPDATED, info);
                 updateTimeouts.delete(filename);
             }, 500);
 
@@ -120,32 +120,32 @@ ipcMain.handle(IpcEvents.BD_GET_PLUGINS, async ({ sender }) => {
 });
 
 const writeToFile = async (filename: string, code: string) => {
-    const path = join(BD_PLUGINS_DIR, filename);
+    const path = join(NU_PLUGINS_DIR, filename);
 
     ignoreUpdates.add(filename);
     setTimeout(() => ignoreUpdates.delete(filename), 2000);
     await writeFile(path, code);
 };
 
-ipcMain.handle(IpcEvents.BD_CREATE_PLUGIN, async (_, filename: string, code: string) => {
+ipcMain.handle(IpcEvents.NU_CREATE_PLUGIN, async (_, filename: string, code: string) => {
     await writeToFile(filename, code);
     fileSet.add(filename);
 });
 
-ipcMain.handle(IpcEvents.BD_UPDATE_PLUGIN, async (_, filename: string, code: string) => {
+ipcMain.handle(IpcEvents.NU_UPDATE_PLUGIN, async (_, filename: string, code: string) => {
     await writeToFile(filename, code);
 });
 
-ipcMain.handle(IpcEvents.BD_DELETE_PLUGIN, async (_, filename: string) => {
-    const path = join(BD_PLUGINS_DIR, filename);
+ipcMain.handle(IpcEvents.NU_DELETE_PLUGIN, async (_, filename: string) => {
+    const path = join(NU_PLUGINS_DIR, filename);
     await rm(path);
     fileSet.delete(filename);
 });
 
-ipcMain.handle(IpcEvents.BD_OPEN_PLUGIN_FOLDER, () => shell.openPath(BD_PLUGINS_DIR));
+ipcMain.handle(IpcEvents.NU_OPEN_PLUGIN_FOLDER, () => shell.openPath(NU_PLUGINS_DIR));
 
 async function readPluginFile(file: string) {
-    const path = join(BD_PLUGINS_DIR, file);
+    const path = join(NU_PLUGINS_DIR, file);
 
     const [code, stats] = await Promise.all([
         readFile(path, "utf-8"),

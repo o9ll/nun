@@ -1,0 +1,104 @@
+.nu-layer {
+  position: absolute;
+}
+
+.nu-tooltip {
+  position: relative;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  max-width: 190px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  z-index: 1002;
+  will-change: opacity, transform;
+  box-shadow: var(--elevation-high);
+  color: var(--text-strong);
+}
+
+.nu-tooltip-content {
+  padding: 8px 12px;
+  overflow: hidden;
+}
+
+.nu-tooltip-pointer {
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+}
+
+.nu-tooltip-primary {
+  background-color: var(--background-base-low);
+  color: var(--text-default);
+}
+
+.nu-tooltip-primary .nu-tooltip-pointer {
+  border-top-color: var(--background-base-lowest);
+}
+
+.nu-tooltip-info {
+  background-color: #4a90e2;
+}
+
+.nu-tooltip-info .nu-tooltip-pointer {
+  border-top-color: #4a90e2;
+}
+
+.nu-tooltip-success {
+  background-color: #43b581;
+}
+
+.nu-tooltip-success .nu-tooltip-pointer {
+  border-top-color: #43b581;
+}
+
+.nu-tooltip-danger {
+  background-color: #f04747;
+}
+
+.nu-tooltip-danger .nu-tooltip-pointer {
+  border-top-color: #f04747;
+}
+
+.nu-tooltip-warn {
+  background-color: #ffa600;
+}
+
+.nu-tooltip-warn .nu-tooltip-pointer {
+  border-top-color: #ffa600;
+}
+
+.nu-tooltip-top .nu-tooltip-pointer {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+}
+
+.nu-tooltip-bottom .nu-tooltip-pointer {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  transform: rotate(180deg);
+}
+
+.nu-tooltip-right .nu-tooltip-pointer {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  margin-top: -5px;
+  border-left-width: 5px;
+  transform: rotate(90deg);
+}
+
+.nu-tooltip-left .nu-tooltip-pointer {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -5px;
+  border-left-width: 5px;
+  transform: rotate(270deg);
+}

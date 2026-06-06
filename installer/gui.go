@@ -439,7 +439,7 @@ func renderInstaller() g.Widget {
 		g.Style().SetFontSize(20).To(
 			renderErrorCard(
 				DiscordYellow,
-				"Despite looking like the normal Vencord installer this installs BDVencord instead. See https://github.com/TheLazySquid/BDVencord for more info.",
+				"Despite looking like the normal Vencord installer this installs Nun instead. See https://github.com/o9ll/nun for more info.",
 				90,
 			),
 		),
@@ -634,7 +634,7 @@ func loop() {
 		Layout(
 			g.Align(g.AlignCenter).To(
 				g.Style().SetFontSize(40).To(
-					g.Label("BDVencord Installer"),
+					g.Label("Nun Installer"),
 				),
 			),
 

@@ -1,0 +1,61 @@
+.nu-filled-checkmark {
+  background: #43b581;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  margin-right: 4px;
+  /* Align with other icons */
+  color: var(--interactive-text-active);
+}
+
+.nu-empty-updates {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-strong);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.nu-empty-updates svg {
+  color: #43b581;
+  margin-bottom: 20px;
+}
+
+.nu-button.nu-button-icon svg {
+  color: var(--interactive-text-default);
+}
+
+.nu-button.nu-button-icon:hover svg {
+  color: var(--interactive-text-hover);
+}
+
+.nu-button.nu-button-icon.animate {
+  animation: 500ms linear infinite nu-update-spin;
+}
+
+.nu-button.nu-button-icon.no-animate {
+  animation: none !important;
+}
+
+.nu-settings-group-title .nu-button-icon {
+  margin-left: 3px;
+  margin-right: -8px;
+}
+
+@keyframes nu-update-spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,86 @@
+.nu-text-normal {
+  color: var(--text-default);
+}
+
+.nu-text-muted {
+  color: var(--text-muted);
+}
+
+.nu-text-error {
+  color: var(--red-400);
+}
+
+.nu-text-brand {
+  color: var(--text-brand);
+}
+
+.nu-text-link {
+  color: var(--text-link);
+}
+
+.nu-header-primary {
+  color: var(--text-strong);
+}
+
+.nu-header-secondary {
+  color: var(--text-default);
+}
+
+.nu-text-yellow {
+  color: var(--text-feedback-warning);
+}
+
+.nu-text-green {
+  color: var(--text-feedback-positive);
+}
+
+.nu-text-red {
+  color: var(--status-danger);
+}
+
+.nu-text-white {
+  color: var(--white-500);
+}
+
+.nu-text-10 {
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.nu-text-12 {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.nu-text-14 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.nu-text-16 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.nu-text-20 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.nu-text-24 {
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.nu-text-32 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.nu-text-strong {
+  font-weight: 600;
+}
+
+.nu-selectable {
+  user-select: text;
+}

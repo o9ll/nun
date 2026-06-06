@@ -26,7 +26,7 @@ export const CspPolicies: PolicyMap = {
 
     "*.github.io": ImageAndCssSrc, // GitHub pages, used by most themes
     "github.com": ImageAndCssSrc, // GitHub content (stuff uploaded to markdown forms), used by most themes
-    "*.githubusercontent.com": ImageAndCssSrc, // GitHub raw, used by some themes, and github avatars, used by the BD store
+    "*.githubusercontent.com": ImageAndCssSrc, // GitHub raw, used by some themes, and github avatars, used by the NU store
     "*.gitlab.io": ImageAndCssSrc, // GitLab pages, used by some themes
     "gitlab.com": ImageAndCssSrc, // GitLab raw, used by some themes
     "*.codeberg.page": ImageAndCssSrc, // Codeberg pages, used by some themes
@@ -134,7 +134,7 @@ const patchCsp = (headers: PolicyMap) => {
 
 export function initCsp() {
     session.defaultSession.webRequest.onHeadersReceived(({ responseHeaders, resourceType }, cb) => {
-        // BDVencord needs to fully remove the CSP for compatibility
+        // Nun needs to fully remove the CSP for compatibility
         if (!responseHeaders) return cb({ cancel: false });
 
         const headers = Object.keys(responseHeaders);

@@ -2,23 +2,23 @@ import "./PluginModal.css";
 import { Margins } from "@components/margins";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { Forms, React, Text, Tooltip } from "@webpack/common";
-import { BDPlugin } from "@bd/core/pluginmanager";
+import { NUPlugin } from "@nu/core/pluginmanager";
 import { Flex } from "@components/Flex";
 import { classes } from "@utils/misc";
 import type { RefObject } from "react";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { DonateButton, GithubButton, PatreonButton, SupportServerIcon, WebsiteButton } from "../plugins/LinkIconButton";
 import { classNameFactory } from "@utils/css";
-import Modals from "@bd/ui/modals";
+import Modals from "@nu/ui/modals";
 
 const cl = classNameFactory("vc-plugin-modal-");
 
-interface BDPluginModalProps extends ModalProps {
-    plugin: BDPlugin;
+interface NUPluginModalProps extends ModalProps {
+    plugin: NUPlugin;
     enabled: boolean;
 }
 
-function BDPluginModal({ plugin, enabled, onClose, transitionState }: BDPluginModalProps) {
+function NUPluginModal({ plugin, enabled, onClose, transitionState }: NUPluginModalProps) {
     const getSettings = () => {
         if (!enabled) return <Forms.FormText>Plugins need to be enabled to access their settings.</Forms.FormText>;
 
@@ -47,7 +47,7 @@ function BDPluginModal({ plugin, enabled, onClose, transitionState }: BDPluginMo
                 render() {
                     if (this.state.hasError) return <Forms.FormText>Failed to load settings panel.</Forms.FormText>;
                     return React.createElement("div", {
-                        className: "bd-addon-settings-wrap",
+                        className: "addon-settings-wrap",
                         ref: this.elementRef,
                         dangerouslySetInnerHTML: typeof (this.element) === "string" ? { __html: this.element } : undefined
                     });
@@ -116,7 +116,7 @@ function BDPluginModal({ plugin, enabled, onClose, transitionState }: BDPluginMo
                     <Text>{plugin.author}</Text>
                 </section>
 
-                <section className="bd-plugin-settings">
+                <section className="plugin-settings">
                     <Text variant="heading-lg/semibold" className={classes(Margins.top16, Margins.bottom8)}>Settings</Text>
                     <ErrorBoundary noop>
                         {getSettings()}
@@ -127,9 +127,9 @@ function BDPluginModal({ plugin, enabled, onClose, transitionState }: BDPluginMo
     );
 }
 
-export function openPluginModal(plugin: BDPlugin, enabled: boolean) {
+export function openPluginModal(plugin: NUPlugin, enabled: boolean) {
     openModal(modalProps => (
-        <BDPluginModal
+        <NUPluginModal
             {...modalProps}
             plugin={plugin}
             enabled={enabled}

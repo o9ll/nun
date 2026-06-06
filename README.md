@@ -1,23 +1,23 @@
-# BDVencord
+# Nun
 [![Discord Support Server](https://img.shields.io/badge/Discord-Support_Server-5865F2?logo=discord)](https://discord.gg/6tE9en9yKX)
 
-BDVencord is a modified version of [Vencord](https://vencord.dev/) which is capable of running [BetterDiscord](https://betterdiscord.app/) plugins alongside Vencord ones. It only works on Discord Desktop.
+Nun is a modified version of [Vencord](https://vencord.dev/) which is capable of running [BetterDiscord](https://betterdiscord.app/) plugins alongside Vencord ones. It only works on Discord Desktop.
 
 ## Installation
 
-You can download the installer for your respective platform in the [Installer Release](https://github.com/TheLazySquid/BDVencord/releases/tag/installer). The installer is currently a lightly modified version of the Vencord installer, which will install BDVencord despite looking the same. You can also [build from source](#building-from-source).
+You can download the installer for your respective platform in the [Installer Release](https://github.com/o9ll/nun/releases/tag/installer). The installer is currently a lightly modified version of the Vencord installer, which will install Nun despite looking the same. You can also [build from source](#building-from-source).
 
 ## Usage
 
-The easiest way to download plugins is to click "Open BetterDiscord plugin store" in the "BD Plugins" tab in settings.
+The easiest way to download plugins is to click "Open BetterDiscord plugin store" in the "NU Plugins" tab in settings.
 
-You can also download `.plugin.js` files from the [BetterDiscord site](https://betterdiscord.app/plugins) and the drag and drop them into BD Plugins in settings, or place them directly in your `Vencord/plugins` folder. This can easily be found by clicking "Open Plugin Folder" in the BD Plugins tab of settings.
+You can also download `.plugin.js` files from the [BetterDiscord site](https://betterdiscord.app/plugins) and the drag and drop them into NU Plugins in settings, or place them directly in your `Vencord/plugins` folder. This can easily be found by clicking "Open Plugin Folder" in the NU Plugins tab of settings.
 
-Plugins can be enabled/disabled from inside the BD Plugins tab in settings. Their settings can also be accessed there.
+Plugins can be enabled/disabled from inside the NU Plugins tab in settings. Their settings can also be accessed there.
 
 ## Compatibility
 
-BDVencord aims for 100% compatibility with BetterDiscord plugins. If you find any incompatibilities, please open an issue.
+Nun aims for 100% compatibility with BetterDiscord plugins. If you find any incompatibilities, please open an issue.
 
 ## Building from source
 

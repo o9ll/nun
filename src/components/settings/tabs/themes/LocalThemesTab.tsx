@@ -93,7 +93,7 @@ export function LocalThemesTab() {
                     </Link>
                     <Link href="https://github.com/search?q=discord+theme">GitHub</Link>
                 </div>
-                <Forms.FormText>If using the BD site, click on "Download" and place the downloaded .theme.css file into your themes folder.</Forms.FormText>
+                <Forms.FormText>If using the NU site, click on "Download" and place the downloaded .theme.css file into your themes folder.</Forms.FormText>
             </Card>
 
             <Card>

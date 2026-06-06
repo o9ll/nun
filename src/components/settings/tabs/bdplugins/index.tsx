@@ -8,13 +8,13 @@ import { Margins } from "@components/margins";
 import { cl, SearchStatus } from "../plugins";
 import { isTruthy } from "@utils/guards";
 import { Paragraph } from "@components/Paragraph";
-import pluginmanager from "@bd/core/pluginmanager";
-import BDPluginCard from "./PluginCard";
+import pluginmanager from "@nu/core/pluginmanager";
+import NUPluginCard from "./PluginCard";
 import { Settings } from "@api/Settings";
-import { useStateFromStores } from "@bd/ui/hooks";
-import DiscordModules from "@bd/webpack/modules";
+import { useStateFromStores } from "@nu/ui/hooks";
+import DiscordModules from "@nu/webpack/modules";
 import { Flex } from "@components/Flex";
-import { LucideIcon } from "@bd/ui/icons";
+import { LucideIcon } from "@nu/ui/icons";
 import { Folder, Check, X, IconNode, FileUp, Store, ChevronRight } from "lucide";
 import { Card } from "@components/Card";
 import { openPluginStore } from "./Store";
@@ -28,15 +28,15 @@ interface ActionButtonProps {
 
 function StoreCard() {
     return (
-        <Card className="bd-store-card" onClick={() => openPluginStore()}>
-            <div className="bd-store-card-icon">
+        <Card className="store-card" onClick={() => openPluginStore()}>
+            <div className="store-card-icon">
                 <LucideIcon icon={Store} size="24px" />
             </div>
-            <div className="bd-store-card-body">
+            <div className="store-card-body">
                 <div>Open BetterDiscord plugin store</div>
                 <div>Browse official BetterDiscord plugins</div>
             </div>
-            <div className="bd-store-card-caret">
+            <div className="store-card-caret">
                 <LucideIcon icon={ChevronRight} size="24px" />
             </div>
         </Card>
@@ -47,7 +47,7 @@ function ActionButton({ title, icon, onClick }: ActionButtonProps) {
     return (
         <DiscordModules.Tooltip color="primary" position="top" aria-label={title} text={title}>
             {(props) => (
-                <button {...props} onClick={onClick} className="bd-action-button">
+                <button {...props} onClick={onClick} className="action-button">
                     <LucideIcon icon={icon} size={18} color="white" />
                 </button>
             )}
@@ -55,7 +55,7 @@ function ActionButton({ title, icon, onClick }: ActionButtonProps) {
     );
 }
 
-function BDPlugins() {
+function NUPlugins() {
     const [searchValue, setSearchValue] = useState({ value: "", status: SearchStatus.ALL });
     const plugins = useStateFromStores(pluginmanager, () => pluginmanager.addonList.concat(), [pluginmanager], true);
     const [dragCounter, setDragCounter] = useState(0);
@@ -67,8 +67,8 @@ function BDPlugins() {
     const status = searchValue.status;
 
     const filteredPlugins = plugins.filter((plugin) => {
-        if (status === SearchStatus.ENABLED && !Settings.bdplugins[plugin.id]) return false;
-        else if (status === SearchStatus.DISABLED && Settings.bdplugins[plugin.id]) return false;
+        if (status === SearchStatus.ENABLED && !Settings.nuplugins[plugin.id]) return false;
+        else if (status === SearchStatus.DISABLED && Settings.nuplugins[plugin.id]) return false;
 
         if (!search.length) return true;
 
@@ -106,7 +106,7 @@ function BDPlugins() {
     return (
         <SettingsTab>
             <Flex>
-                <ActionButton title="Open Plugin Folder" icon={Folder} onClick={() => VencordNative.bd.openPluginFolder()} />
+                <ActionButton title="Open Plugin Folder" icon={Folder} onClick={() => VencordNative.nu.openPluginFolder()} />
                 <ActionButton title="Enable All" icon={Check} onClick={() => pluginmanager.enableAll()} />
                 <ActionButton title="Disable All" icon={X} onClick={() => pluginmanager.disableAll()} />
                 <ActionButton title="Upload Plugin" icon={FileUp} onClick={uploadPlugin} />
@@ -142,7 +142,7 @@ function BDPlugins() {
             <HeadingTertiary className={Margins.top20}>Plugins</HeadingTertiary>
 
             <div
-                className={classes(cl("grid"), dragCounter > 0 && "bd-drop-indicator")}
+                className={classes(cl("grid"), dragCounter > 0 && "drop-indicator")}
                 onDragEnter={onDragEnter}
                 onDragLeave={onDragLeave}
                 onDragOver={onDragOver}
@@ -150,9 +150,9 @@ function BDPlugins() {
             >
                 {filteredPlugins.length
                     ? filteredPlugins.map(plugin => (
-                        <BDPluginCard key={plugin.id} plugin={plugin} />
+                        <NUPluginCard key={plugin.id} plugin={plugin} />
                     )) : (
-                        <div className="bd-no-plugins">
+                        <div className="no-plugins">
                             {plugins.length > 0 ? (
                                 <Paragraph>No plugins meet the search criteria.</Paragraph>
                             ) : (
@@ -169,4 +169,4 @@ function BDPlugins() {
     );
 }
 
-export default wrapTab(BDPlugins, "BDPlugins");
+export default wrapTab(NUPlugins, "NUPlugins");

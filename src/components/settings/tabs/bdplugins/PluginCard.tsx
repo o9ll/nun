@@ -1,15 +1,15 @@
 import { AddonCard } from "@components/settings/AddonCard";
-import type { BDPlugin } from "@bd/core/pluginmanager";
+import type { NUPlugin } from "@nu/core/pluginmanager";
 import { cl } from "../plugins";
 import { CogWheel, DeleteIcon, InfoIcon } from "@components/Icons";
 import { openPluginModal } from "./PluginModal";
-import pluginmanager from "@bd/core/pluginmanager";
-import Modals from "@bd/ui/modals";
+import pluginmanager from "@nu/core/pluginmanager";
+import Modals from "@nu/ui/modals";
 import { useSettings } from "@api/Settings";
 
-export default function BDPluginCard({ plugin }: { plugin: BDPlugin; }) {
-    const settings = useSettings([`bdplugins.${plugin.id}`]);
-    const enabled = settings.bdplugins[plugin.id] ?? false;
+export default function NUPluginCard({ plugin }: { plugin: NUPlugin; }) {
+    const settings = useSettings([`nuplugins.${plugin.id}`]);
+    const enabled = settings.nuplugins[plugin.id] ?? false;
 
     const trySetEnabled = (enabled: boolean) => {
         if (enabled) pluginmanager.enable(plugin);

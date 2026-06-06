@@ -54,16 +54,16 @@ export const enum IpcEvents {
     RENDERER_CSS_UPDATE = "VencordRendererCssUpdate",
     PRELOAD_GET_RENDERER_JS = "VencordPreloadGetRendererJs",
 
-    BD_GET_PLUGINS = "BDVencordGetPlugins",
-    BD_PLUGIN_CREATED = "BDVencordPluginCreated",
-    BD_PLUGIN_DELETED = "BDVencordPluginDeleted",
-    BD_PLUGIN_UPDATED = "BDVencordPluginUpdated",
+    NU_GET_PLUGINS = "NunGetPlugins",
+    NU_PLUGIN_CREATED = "NunPluginCreated",
+    NU_PLUGIN_DELETED = "NunPluginDeleted",
+    NU_PLUGIN_UPDATED = "NunPluginUpdated",
 
-    BD_GET_DATA_DIR = "BDVencordGetDataDir",
-    BD_OPEN_DIALOG = "BDVencordOpenDialog",
-    BD_UPDATE_PLUGIN = "BDVencordUpdatePlugin",
-    BD_CREATE_PLUGIN = "BDVencordCreatePlugin",
-    BD_DELETE_PLUGIN = "BDVencordDeletePlugin",
-    BD_OPEN_PLUGIN_FOLDER = "BDVencordOpenPluginFolder",
-    BD_NAVIGATED = "BDVencordNavigate"
+    NU_GET_DATA_DIR = "NunGetDataDir",
+    NU_OPEN_DIALOG = "NunOpenDialog",
+    NU_UPDATE_PLUGIN = "NunUpdatePlugin",
+    NU_CREATE_PLUGIN = "NunCreatePlugin",
+    NU_DELETE_PLUGIN = "NunDeletePlugin",
+    NU_OPEN_PLUGIN_FOLDER = "NunOpenPluginFolder",
+    NU_NAVIGATED = "NunNavigate"
 }

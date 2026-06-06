@@ -11,10 +11,10 @@ import (
 	"vencordinstaller/buildinfo"
 )
 
-const ReleaseUrl = "https://api.github.com/repos/TheLazySquid/BDVencord/releases/290026220"
-const InstallerReleaseUrl = "https://api.github.com/repos/TheLazySquid/BDVencord/releases/291054553"
+const ReleaseUrl = "https://api.github.com/repos/o9ll/nun/releases/290026220"
+const InstallerReleaseUrl = "https://api.github.com/repos/o9ll/nun/releases/291054553"
 
-var UserAgent = "BDVencordInstaller/" + buildinfo.InstallerGitHash + " (https://github.com/TheLazySquid/BDVencord)"
+var UserAgent = "NunInstaller/" + buildinfo.InstallerGitHash + " (https://github.com/o9ll/nun)"
 
 var (
 	DiscordGreen  = color.RGBA{R: 0x2D, G: 0x7C, B: 0x46, A: 0xFF}

@@ -29,7 +29,7 @@ import { ExperimentStore, Forms, React } from "@webpack/common";
 
 import hideBugReport from "./hideBugReport.css?managed";
 
-const KbdStyles = findByPropsLazy("key", "combo");
+const KnuStyles = findByPropsLazy("key", "combo");
 
 const modKey = IS_MAC ? "cmd" : "ctrl";
 const altKey = IS_MAC ? "opt" : "alt";
@@ -139,10 +139,10 @@ export default definePlugin({
                 <Forms.FormTitle tag="h3">More Information</Forms.FormTitle>
                 <Paragraph size="md">
                     You can open Discord's DevTools via {" "}
-                    <div className={KbdStyles.combo} style={{ display: "inline-flex" }}>
-                        <kbd className={KbdStyles.key}>{modKey}</kbd> +{" "}
-                        <kbd className={KbdStyles.key}>{altKey}</kbd> +{" "}
-                        <kbd className={KbdStyles.key}>O</kbd>{" "}
+                    <div className={KnuStyles.combo} style={{ display: "inline-flex" }}>
+                        <knu className={KnuStyles.key}>{modKey}</knu> +{" "}
+                        <knu className={KnuStyles.key}>{altKey}</knu> +{" "}
+                        <knu className={KnuStyles.key}>O</knu>{" "}
                     </div>
                 </Paragraph>
             </React.Fragment>

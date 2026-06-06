@@ -111,7 +111,7 @@ if (!IS_VANILLA) {
                 }
 
                 this.webContents.on("did-navigate-in-page", () => {
-                    this.webContents.send(IpcEvents.BD_NAVIGATED);
+                    this.webContents.send(IpcEvents.NU_NAVIGATED);
                 });
             } else super(options);
         }

@@ -3,13 +3,13 @@ import { Margins } from "@components/margins";
 import { classes } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { React, Text } from "@webpack/common";
-import pluginmanager, { PluginMeta } from "@bd/core/pluginmanager";
-import toasts from "@bd/stores/toasts";
-import { BdWebAddon } from "@bd/types/addonstore";
-import Button from "@bd/ui/base/button";
-import { LucideIcon } from "@bd/ui/icons";
-import CheckBox from "@bd/ui/settings/components/checkbox";
-import { parseJSDoc } from "@bd/utils/jsdoc";
+import pluginmanager, { PluginMeta } from "@nu/core/pluginmanager";
+import toasts from "@nu/stores/toasts";
+import { NuWebAddon } from "@nu/types/addonstore";
+import Button from "@nu/ui/base/button";
+import { LucideIcon } from "@nu/ui/icons";
+import CheckBox from "@nu/ui/settings/components/checkbox";
+import { parseJSDoc } from "@nu/utils/jsdoc";
 import { Github, IconNode, Info, Tag, User } from "lucide";
 
 interface PopupProps {
@@ -22,11 +22,11 @@ function PopupItem({ icon, content, onClick }: PopupProps) {
     return (
         <Flex
             onClick={onClick}
-            className={classes("bd-install-modal-item", onClick && "bd-install-modal-clickable")}
+            className={classes("install-modal-item", onClick && "install-modal-clickable")}
             alignItems="center"
         >
-            <div className="bd-install-modal-item-leading"><LucideIcon icon={icon} /></div>
-            <div className="bd-install-modal-item-content">{content}</div>
+            <div className="install-modal-item-leading"><LucideIcon icon={icon} /></div>
+            <div className="install-modal-item-content">{content}</div>
         </Flex>
     );
 }
@@ -74,7 +74,7 @@ function InstallPopup(props: InstallProps & ModalProps) {
             </ModalHeader>
 
             <ModalContent className={Margins.bottom16}>
-                <div className="bd-install-modal-items">
+                <div className="install-modal-items">
                     <PopupItem icon={Info} content={props.description} />
                     <PopupItem icon={Tag} content={props.version} />
                     {props.source && <PopupItem icon={Github} content={props.filename} onClick={openSource} />}
@@ -104,7 +104,7 @@ export function openInstallPopup(props: InstallProps) {
     });
 }
 
-export async function confirmWebInstall(plugin: BdWebAddon) {
+export async function confirmWebInstall(plugin: NuWebAddon) {
     const create = async (enable: boolean) => {
         const res = await fetch(plugin.latest_source_url);
         const code = await res.text();

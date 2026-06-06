@@ -1,15 +1,15 @@
-import { BdWebAddon } from "@bd/types/addonstore";
-import DiscordModules from "@bd/webpack/modules";
-import { LucideIcon } from "@bd/ui/icons";
+import { NuWebAddon } from "@nu/types/addonstore";
+import DiscordModules from "@nu/webpack/modules";
+import { LucideIcon } from "@nu/ui/icons";
 import { BadgeCheck, CircleHelp, Github, Globe, Trash2 } from "lucide";
-import Button from "@bd/ui/base/button";
-import Modals from "@bd/ui/modals";
+import Button from "@nu/ui/base/button";
+import Modals from "@nu/ui/modals";
 import { useState } from "@webpack/common";
-import pluginmanager from "@bd/core/pluginmanager";
+import pluginmanager from "@nu/core/pluginmanager";
 import { confirmWebInstall } from "./InstallPopup";
 
 interface Props {
-    plugin: BdWebAddon;
+    plugin: NuWebAddon;
 }
 
 const baseUrl = "https://betterdiscord.app";
@@ -68,9 +68,9 @@ export default function PluginStoreCard({ plugin }: Props) {
     };
 
     return (
-        <div className="bd-addon-store-card">
-            <div className="bd-addon-store-card-splash">
-                <div className="bd-addon-store-card-preview">
+        <div className="addon-store-card">
+            <div className="addon-store-card-splash">
+                <div className="addon-store-card-preview">
                     <img
                         src={resolveThumbnail(plugin.thumbnail_url)}
                         onError={(event) => {
@@ -78,15 +78,15 @@ export default function PluginStoreCard({ plugin }: Props) {
                             event.currentTarget.src = resolveThumbnail();
                         }}
                         loading="lazy"
-                        className="bd-addon-store-card-preview-img"
+                        className="addon-store-card-preview-img"
                         alt={`Thumbnail for ${plugin.name}`}
                     />
                 </div>
-                <div className="bd-addon-store-card-author">
+                <div className="addon-store-card-author">
                     <svg
                         height={48}
                         width={48}
-                        className="bd-addon-store-card-author-svg"
+                        className="addon-store-card-author-svg"
                         viewBox="0 0 48 48"
                     >
                         <foreignObject
@@ -97,11 +97,11 @@ export default function PluginStoreCard({ plugin }: Props) {
                             overflow="visible"
                             mask="url(#svg-mask-squircle)"
                         >
-                            <div className="bd-addon-store-card-author-mask">
+                            <div className="addon-store-card-author-mask">
                                 <svg
                                     height={40}
                                     width={40}
-                                    className="bd-addon-store-card-author-svg"
+                                    className="addon-store-card-author-svg"
                                     viewBox="0 0 40 40"
                                 >
                                     <foreignObject
@@ -116,7 +116,7 @@ export default function PluginStoreCard({ plugin }: Props) {
                                             {(props) => (
                                                 <img
                                                     loading="lazy"
-                                                    className="bd-addon-store-card-author-img"
+                                                    className="addon-store-card-author-img"
                                                     src={resolveAvatar(plugin.author.github_id)}
                                                     {...props}
                                                     onClick={() => openAuthorPage(plugin.author.display_name)}
@@ -129,42 +129,42 @@ export default function PluginStoreCard({ plugin }: Props) {
                         </foreignObject>
                     </svg>
                 </div>
-                {/* BDVencord TODO: New / Recently updated */}
+                {/* Nun TODO: New / Recently updated */}
             </div>
-            <div className="bd-addon-store-card-body">
-                <div className="bd-addon-store-card-name">
-                    {/* @ts-expect-error bd */}
+            <div className="addon-store-card-body">
+                <div className="addon-store-card-name">
+                    {/* @ts-expect-error nu */}
                     <DiscordModules.Tooltip text="Official" aria-label="Official" hideOnClick={false}>
                         {(props) => (
-                            <div className="bd-flower-star" {...props}>
+                            <div className="flower-star" {...props}>
                                 <LucideIcon icon={BadgeCheck} size={16} />
                             </div>
                         )}
                     </DiscordModules.Tooltip>
                     <span>{plugin.name}</span>
                 </div>
-                <div className="bd-addon-store-card-description">{plugin.description}</div>
-                <div className="bd-addon-store-card-tags">
+                <div className="addon-store-card-description">{plugin.description}</div>
+                <div className="addon-store-card-tags">
                     {plugin.tags.map((tag) => (
                         <span
-                            className="bd-addon-store-card-tag"
+                            className="addon-store-card-tag"
                         >
                             {tag}
                         </span>
                     ))}
                 </div>
-                <div className="bd-addon-store-card-spacer" />
-                <div className="bd-addon-store-card-info">
-                    <div className="bd-addon-store-card-likes">
-                        <div className="bd-addon-store-card-dot" />
-                        <div className="bd-addon-store-card-value">{plugin.likes}</div>
+                <div className="addon-store-card-spacer" />
+                <div className="addon-store-card-info">
+                    <div className="addon-store-card-likes">
+                        <div className="addon-store-card-dot" />
+                        <div className="addon-store-card-value">{plugin.likes}</div>
                     </div>
-                    <div className="bd-addon-store-card-downloads">
-                        <div className="bd-addon-store-card-dot" />
-                        <div className="bd-addon-store-card-value">{plugin.downloads}</div>
+                    <div className="addon-store-card-downloads">
+                        <div className="addon-store-card-dot" />
+                        <div className="addon-store-card-value">{plugin.downloads}</div>
                     </div>
                 </div>
-                <div className="bd-addon-store-card-actions">
+                <div className="addon-store-card-actions">
                     <DiscordModules.Tooltip text="Website">
                         {(props) => (
                             <Button
@@ -203,7 +203,7 @@ export default function PluginStoreCard({ plugin }: Props) {
                             )}
                         </DiscordModules.Tooltip>
                     )}
-                    <div className="bd-addon-store-card-spacer" />
+                    <div className="addon-store-card-spacer" />
                     {isInstalled ? (
                         <DiscordModules.Tooltip text="Delete">
                             {(props) => (

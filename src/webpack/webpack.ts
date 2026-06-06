@@ -26,9 +26,9 @@ import type { FluxStore } from "@vencord/discord-types";
 import type { Module, ModuleExports, ModuleFactory, WebpackRequire } from "@vencord/discord-types/webpack";
 
 import type { AnyModuleFactory, AnyWebpackRequire } from "./types";
-import MainPatcher from "@bd/core/patcher";
-import PluginManager from "@bd/core/pluginmanager";
-import { getModule } from "@bd/webpack";
+import MainPatcher from "@nu/core/patcher";
+import PluginManager from "@nu/core/pluginmanager";
+import { getModule } from "@nu/webpack";
 
 const logger = new Logger("Webpack");
 
@@ -198,7 +198,7 @@ export function _initWebpack(webpackRequire: WebpackRequire) {
     });
 }
 
-// Credits to Zerebos for implementing this in BD, thus giving the idea for us to implement it too
+// Credits to Zerebos for implementing this in NU, thus giving the idea for us to implement it too
 const TypedArray = Object.getPrototypeOf(Int8Array);
 
 const PROXY_CHECK = "is this a proxy that returns values for any key?";

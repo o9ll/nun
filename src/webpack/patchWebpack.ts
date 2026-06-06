@@ -14,7 +14,7 @@ import { WebpackRequire } from "@vencord/discord-types/webpack";
 
 import { AnyModuleFactory, AnyWebpackRequire, MaybePatchedModuleFactory, PatchedModuleFactory } from "./types";
 import { _blacklistBadModules, _initWebpack, factoryListeners, findModuleFactory, moduleListeners, waitForSubscriptions, wreq } from "./webpack";
-import parseDeclarations from "@bd/utils/parseDeclarations";
+import parseDeclarations from "@nu/utils/parseDeclarations";
 
 export const patches = [] as Patch[];
 

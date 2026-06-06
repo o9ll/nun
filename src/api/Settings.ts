@@ -90,9 +90,9 @@ export interface Settings {
         settingsSyncVersion: number;
     };
 
-    bdplugins: {
+    nuplugins: {
         [plugin: string]: boolean;
-    }
+    };
 }
 
 const DefaultSettings: Settings = {
@@ -130,7 +130,7 @@ const DefaultSettings: Settings = {
         settingsSyncVersion: 0
     },
 
-    bdplugins: {}
+    nuplugins: {}
 };
 
 const settings = !IS_REPORTER ? VencordNative.settings.get() : {} as Settings;

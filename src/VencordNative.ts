@@ -10,7 +10,7 @@ import type { PluginIpcMappings } from "@main/ipcPlugins";
 import type { UserThemeHeader } from "@main/themes";
 import { IpcEvents } from "@shared/IpcEvents";
 import type { IpcRes } from "@utils/types";
-import { PluginInfo } from "@bd/core/pluginmanager";
+import { PluginInfo } from "@nu/core/pluginmanager";
 import { ipcRenderer } from "electron/renderer";
 
 export function invoke<T = any>(event: IpcEvents, ...args: any[]) {
@@ -102,27 +102,27 @@ export default {
 
     pluginHelpers: PluginHelpers,
 
-    bd: {
-        getPlugins: () => invoke<PluginInfo[]>(IpcEvents.BD_GET_PLUGINS),
+    nu: {
+        getPlugins: () => invoke<PluginInfo[]>(IpcEvents.NU_GET_PLUGINS),
         addPluginCreateListener(cb: (info: PluginInfo) => void) {
-            ipcRenderer.on(IpcEvents.BD_PLUGIN_CREATED, (_, info: PluginInfo) => cb(info));
+            ipcRenderer.on(IpcEvents.NU_PLUGIN_CREATED, (_, info: PluginInfo) => cb(info));
         },
         addPluginUpdateListener(cb: (info: PluginInfo) => void) {
-            ipcRenderer.on(IpcEvents.BD_PLUGIN_UPDATED, (_, info: PluginInfo) => cb(info));
+            ipcRenderer.on(IpcEvents.NU_PLUGIN_UPDATED, (_, info: PluginInfo) => cb(info));
         },
         addPluginDeleteListener(cb: (filename: string) => void) {
-            ipcRenderer.on(IpcEvents.BD_PLUGIN_DELETED, (_, filename: string) => cb(filename));
+            ipcRenderer.on(IpcEvents.NU_PLUGIN_DELETED, (_, filename: string) => cb(filename));
         },
 
-        getDataDir: () => sendSync<string>(IpcEvents.BD_GET_DATA_DIR),
-        deletePlugin: (filename: string) => invoke<void>(IpcEvents.BD_DELETE_PLUGIN, filename),
-        updatePlugin: (filename: string, code: string) => invoke<void>(IpcEvents.BD_UPDATE_PLUGIN, filename, code),
-        createPlugin: (filename: string, code: string) => invoke<void>(IpcEvents.BD_CREATE_PLUGIN, filename, code),
-        openPluginFolder: () => invoke<void>(IpcEvents.BD_OPEN_PLUGIN_FOLDER),
+        getDataDir: () => sendSync<string>(IpcEvents.NU_GET_DATA_DIR),
+        deletePlugin: (filename: string) => invoke<void>(IpcEvents.NU_DELETE_PLUGIN, filename),
+        updatePlugin: (filename: string, code: string) => invoke<void>(IpcEvents.NU_UPDATE_PLUGIN, filename, code),
+        createPlugin: (filename: string, code: string) => invoke<void>(IpcEvents.NU_CREATE_PLUGIN, filename, code),
+        openPluginFolder: () => invoke<void>(IpcEvents.NU_OPEN_PLUGIN_FOLDER),
 
-        openDialog: (options: any) => invoke<any>(IpcEvents.BD_OPEN_DIALOG, options),
+        openDialog: (options: any) => invoke<any>(IpcEvents.NU_OPEN_DIALOG, options),
         addSwitchListener(cb: () => void) {
-            ipcRenderer.on(IpcEvents.BD_NAVIGATED, () => cb());
+            ipcRenderer.on(IpcEvents.NU_NAVIGATED, () => cb());
         },
     }
 };

@@ -18,13 +18,13 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { BackupRestoreIcon, CloudIcon, MainSettingsIcon, PaintbrushIcon, PatchHelperIcon, PlaceholderIcon, PluginsIcon, UpdaterIcon, VesktopSettingsIcon } from "@components/Icons";
-import { BackupAndRestoreTab, CloudTab, PatchHelperTab, PluginsTab, ThemesTab, UpdaterTab, VencordTab, BDPluginsTab } from "@components/settings/tabs";
+import { BackupAndRestoreTab, CloudTab, PatchHelperTab, PluginsTab, ThemesTab, UpdaterTab, VencordTab, NUPluginsTab } from "@components/settings/tabs";
 import { Devs } from "@utils/constants";
 import { isTruthy } from "@utils/guards";
 import definePlugin, { IconProps, OptionType } from "@utils/types";
 import { waitFor } from "@webpack";
 import { React } from "@webpack/common";
-import { BDLogo } from "@bd/ui/icons";
+import { NULogo } from "@nu/ui/icons";
 import type { ComponentType, PropsWithChildren, ReactNode } from "react";
 
 import gitHash from "~git-hash";
@@ -184,10 +184,10 @@ export default definePlugin({
                 Icon: PluginsIcon
             }),
             buildEntry({
-                key: "bd_plugins",
-                title: "BD Plugins",
-                Component: BDPluginsTab,
-                Icon: BDLogo
+                key: "nu_plugins",
+                title: "NU Plugins",
+                Component: NUPluginsTab,
+                Icon: NULogo
             }),
             buildEntry({
                 key: "vencord_themes",
@@ -298,7 +298,7 @@ export default definePlugin({
     getInfoRows() {
         const { electronVersion, chromiumVersion, additionalInfo } = this;
 
-        const rows = [`BDVencord ${gitHash}${additionalInfo}`];
+        const rows = [`Nun ${gitHash}${additionalInfo}`];
 
         if (electronVersion) rows.push(`Electron ${electronVersion}`);
         if (chromiumVersion) rows.push(`Chromium ${chromiumVersion}`);
