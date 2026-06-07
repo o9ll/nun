@@ -269,7 +269,7 @@ function EquicordSettings() {
                     onClick={() => openPluginModal(plugins.Settings)}
                     style={{ cursor: "pointer", color: "var(--text-link)" }}
                 >
-                    Settings Plugin
+                    Settings
                 </a>.
             </Notice.Info>
 
@@ -283,7 +283,7 @@ function EquicordSettings() {
     );
 }
 
-export default wrapTab(EquicordSettings, "Nun Settings");
+export default wrapTab(EquicordSettings, "Settings");
 
 export function isEquicordDonor(userId: string): boolean {
     const donorBadges = BadgeAPI.getEquicordDonorBadges(userId);

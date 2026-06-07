@@ -51,7 +51,7 @@ const settings = definePluginSettings({
     baseUrl: {
         type: OptionType.STRING,
         description: "Base URL of the Nun online services backend.",
-        default: "",
+        default: "http://127.0.0.1:8787",
         onChange: setBaseUrl,
     },
     authorization: {

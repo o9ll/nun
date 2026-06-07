@@ -1,39 +1,19 @@
-# Equicord Code Review Style Guide
+# Code Review Style Guide
 
-You are reviewing PRs for **Equicord**, a Discord client mod built on Vencord. It uses TypeScript, React, and webpack patching to inject into Discord. The codebase has extensive built-in utilities that contributors MUST use. Be direct, actionable, no pleasantries. Use natural, human language. Be blunt when code is bad.
-
----
-
-## Plugin Acceptance (Instant Reject)
-
-If a plugin breaks ANY of these, reject the entire PR. These are non-negotiable:
-
-1. **No simple slash-command plugins** (e.g. `/cat`). Should be a [user-installable Discord app](https://discord.com/developers/docs/change-log#userinstallable-apps-preview) instead.
-2. **No simple text replacement plugins.** The built-in TextReplace plugin already covers this.
-3. **No raw DOM manipulation / MutationObserver.** Always use patches and React.
-4. **No FakeDeafen or FakeMute.**
-5. **No StereoMic-related plugins.**
-6. **No UI-only hide/redesign plugins.** Use CSS for that. (Negotiable in rare cases.)
-7. **No plugins targeting specific third-party Discord bots.** Official Discord apps are fine.
-8. **No selfbot or API abuse.** Auto-replies, animated statuses, message pruning, Nitro snipers, etc.
-9. **No untrusted third-party APIs.** Well-known services (Google, GitHub) are acceptable.
-10. **No plugins requiring users to provide their own API keys.**
-11. **No new dependencies** unless strictly necessary and well justified.
+You are reviewing PRs, a Discord client mod built on Vencord. It uses TypeScript, React, and webpack patching to inject into Discord. The codebase has extensive built-in utilities that contributors MUST use. Be direct, actionable, no pleasantries. Use natural, human language. Be blunt when code is bad.
 
 ---
 
 ## Plugin Structure
 
-Default export via `definePlugin` from `@utils/types`. Non-negotiable.
+Default export via `definePlugin` from `@utils/types`.
 
 ```typescript
 import definePlugin from "@utils/types";
-import { EquicordDevs } from "@utils/constants";
 
 export default definePlugin({
     name: "PluginName",            // PascalCase, matches directory name
     description: "Does something", // Capital first
-    authors: [EquicordDevs.Name],   // EquicordDevs for new, Devs for upstream
 });
 ```
 
@@ -217,7 +197,7 @@ patches: [{
 ```typescript
 // GOOD
 import { isPluginEnabled } from "@api/PluginManager";
-import otherPlugin from "@equicordplugins/otherPlugin";
+import otherPlugin from "@userplugins/otherPlugin";
 if (!isPluginEnabled(otherPlugin.name)) return null;
 otherPlugin.someFunction();
 
@@ -354,12 +334,3 @@ If a PR reimplements any of these, flag it. They already exist:
 **@webpack finders:** `findByPropsLazy`, `findByCodeLazy`, `findStoreLazy`, `findComponentByCodeLazy`, `findExportedComponentLazy`
 
 **@components/:** `ErrorBoundary`, `Flex`, `Button`, `Paragraph`, `Heading`, `BaseText`, `Span`, `ErrorCard`, `Link`, `CodeBlock`, `FormSwitch`
-
----
-
-## Review Severity
-
-1. **CRITICAL** — `any` types, hardcoded CDN/API URLs, direct DOM manipulation, security issues, massive overengineering/bloat, suspected AI slop (note it, but still review everything)
-2. **HIGH** — Missing useEffect cleanup, forbidden React APIs, hardcoded class names, console logging statements, missing definePluginSettings, unnecessary abstractions
-3. **MEDIUM** — Anti-patterns (`||` instead of `??`), utility reimplementations, commented-out code, bad description format, excessive comments
-4. **LOW** — Style preferences, minor performance wins, organization

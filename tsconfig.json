@@ -20,6 +20,9 @@
         "target": "ESNEXT",
         "jsx": "preserve",
         "paths": {
+            "@nu/*": [
+                "./src/nu/*"
+            ],
             "@main/*": [
                 "./src/main/*"
             ],
@@ -81,4 +84,7 @@
         "scripts/**/*",
         "eslint.config.mjs"
     ],
+    "exclude": [
+        "src/userexclude"
+    ]
 }

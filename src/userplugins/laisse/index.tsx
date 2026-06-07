@@ -131,7 +131,7 @@ const UserContextMenuPatch: NavContextMenuPatchCallback = (
 
 export default definePlugin({
     name: "Leash",
-    description: "Leashes a user to you by automatically moving them to whatever voice channel you join.\n\n⚠️ WARNING: Moving users to voice channels without their consent may violate Discord's Terms of Service and community guidelines. This feature requires server moderation permissions. Use responsibly.",
+    description: "Leashes a user to you by automatically moving them to whatever voice channel you join.",
     authors: [{ name: "o9", id: 426687300387471360n }],
     tags: ["Utility"],
     settings,
