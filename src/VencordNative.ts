@@ -7,6 +7,7 @@
 import type { Settings } from "@api/Settings";
 import type { CspRequestResult } from "@main/csp/manager";
 import type { PluginIpcMappings } from "@main/ipcPlugins";
+import type { PluginInfo } from "@nu/core/pluginmanager";
 import { IpcEvents } from "@shared/IpcEvents";
 import type { IpcRes } from "@utils/types";
 import { ipcRenderer } from "electron/renderer";
@@ -105,5 +106,29 @@ export default {
         onRepair: (cb: () => void) => { ipcRenderer.on(IpcEvents.TRAY_REPAIR, cb); },
     },
 
-    pluginHelpers: PluginHelpers
+    pluginHelpers: PluginHelpers,
+
+    nu: {
+        getPlugins: () => invoke<PluginInfo[]>(IpcEvents.NU_GET_PLUGINS),
+        addPluginCreateListener(cb: (info: PluginInfo) => void) {
+            ipcRenderer.on(IpcEvents.NU_PLUGIN_CREATED, (_, info: PluginInfo) => cb(info));
+        },
+        addPluginUpdateListener(cb: (info: PluginInfo) => void) {
+            ipcRenderer.on(IpcEvents.NU_PLUGIN_UPDATED, (_, info: PluginInfo) => cb(info));
+        },
+        addPluginDeleteListener(cb: (filename: string) => void) {
+            ipcRenderer.on(IpcEvents.NU_PLUGIN_DELETED, (_, filename: string) => cb(filename));
+        },
+
+        getDataDir: () => sendSync<string>(IpcEvents.NU_GET_DATA_DIR),
+        deletePlugin: (filename: string) => invoke<void>(IpcEvents.NU_DELETE_PLUGIN, filename),
+        updatePlugin: (filename: string, code: string) => invoke<void>(IpcEvents.NU_UPDATE_PLUGIN, filename, code),
+        createPlugin: (filename: string, code: string) => invoke<void>(IpcEvents.NU_CREATE_PLUGIN, filename, code),
+        openPluginFolder: () => invoke<void>(IpcEvents.NU_OPEN_PLUGIN_FOLDER),
+
+        openDialog: (options: any) => invoke<any>(IpcEvents.NU_OPEN_DIALOG, options),
+        addSwitchListener(cb: () => void) {
+            ipcRenderer.on(IpcEvents.NU_NAVIGATED, () => cb());
+        },
+    }
 };

@@ -1,0 +1,34 @@
+.nu-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nu-sidebar-header h2 {
+    padding: 6px 10px;
+    box-sizing: border-box;
+    color: #96989d;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    font-size: 12px;
+}
+
+.nu-sidebar-header .nu-changelog-button {
+    height: 16px;
+    padding: 0;
+}
+
+.nu-sidebar-header .nu-icon {
+    cursor: pointer;
+    color: var(--interactive-text-default);
+}
+
+.nu-sidebar-header .nu-changelog-button:hover .nu-icon {
+    color: var(--interactive-text-hover);
+}

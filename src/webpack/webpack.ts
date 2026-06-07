@@ -17,13 +17,16 @@
 */
 
 import { traceFunction } from "@debug/Tracer";
+import MainPatcher from "@nu/core/patcher";
+import PluginManager from "@nu/core/pluginmanager";
+import { getModule } from "@nu/webpack";
 import { makeLazy, proxyLazy } from "@utils/lazy";
 import { LazyComponent } from "@utils/lazyReact";
 import { Logger } from "@utils/Logger";
 import { canonicalizeMatch } from "@utils/patches";
 import { escapeRegExp } from "@utils/text";
 import type { FluxStore } from "@vencord/discord-types";
-import type { ModuleExports, ModuleFactory, WebpackRequire } from "@vencord/discord-types/webpack";
+import type { Module, ModuleExports, ModuleFactory, WebpackRequire } from "@vencord/discord-types/webpack";
 
 import type { AnyModuleFactory, AnyWebpackRequire } from "./types";
 
@@ -41,7 +44,7 @@ export let cache: WebpackRequire["c"];
 
 export const fluxStores = new Map<string, FluxStore>();
 
-export type FilterFn = (mod: any) => boolean;
+export type FilterFn = (mod: any, module?: Module) => boolean;
 
 export type PropsFilter = Array<string>;
 export type CodeFilter = Array<string | RegExp>;
@@ -112,6 +115,55 @@ export const filters = {
 export type CallbackFn = (module: ModuleExports, id: PropertyKey) => void;
 export type FactoryListernFn = (factory: AnyModuleFactory, moduleId: PropertyKey) => void;
 
+let done = false;
+let loadingModules = 1;
+let moduleLoadTimeout: ReturnType<typeof setTimeout> | null = null;
+
+function onLoadStart() {
+    loadingModules++;
+    if (moduleLoadTimeout) {
+        clearTimeout(moduleLoadTimeout);
+        moduleLoadTimeout = null;
+    }
+}
+
+function onLoadEnd() {
+    if (done) return;
+
+    loadingModules--;
+    if (loadingModules > 0) return;
+
+    if (moduleLoadTimeout) clearTimeout(moduleLoadTimeout);
+    moduleLoadTimeout = setTimeout(() => {
+        done = true;
+        PluginManager.startPlugins("idle");
+        MainPatcher.unpatchAll("WebpackRequire");
+    }, 50);
+}
+
+function patchModuleLoading() {
+    waitFor(m => m.appFirstRenderAfterReadyPayload, mod => {
+        MainPatcher.after("WebpackRequire", mod, "appFirstRenderAfterReadyPayload", () => {
+            onLoadEnd();
+        });
+    });
+
+    MainPatcher.after("WebpackRequire", wreq, "e", (_, __, loadPromise) => {
+        onLoadStart();
+        loadPromise.finally(onLoadEnd);
+    });
+
+    MainPatcher.before("WebpackRequire", wreq, "l", (_, args) => {
+        onLoadStart();
+
+        const onLoad = args[1];
+        args[1] = function (event: Event) {
+            onLoadEnd();
+            onLoad.call(this, event);
+        };
+    });
+}
+
 export const waitForSubscriptions = new Map<FilterFn, CallbackFn>();
 export const moduleListeners = new Set<CallbackFn>();
 export const factoryListeners = new Set<FactoryListernFn>();
@@ -119,6 +171,24 @@ export const factoryListeners = new Set<FactoryListernFn>();
 export function _initWebpack(webpackRequire: WebpackRequire) {
     wreq = webpackRequire;
     cache = webpackRequire.c;
+    patchModuleLoading();
+
+    wreq.d = (target: object, exports: any) => {
+        for (const key in exports) {
+            if (!Reflect.has(exports, key)) continue;
+
+            try {
+                Object.defineProperty(target, key, {
+                    get: () => exports[key](),
+                    set: v => { exports[key] = () => v; },
+                    enumerable: true,
+                    configurable: true
+                });
+            }
+            catch (error) {
+            }
+        }
+    };
 
     Reflect.defineProperty(webpackRequire.c, Symbol.toStringTag, {
         value: "ModuleCache",
@@ -403,7 +473,6 @@ export const lazyWebpackSearchHistory = [] as Array<[TypeWebpackSearchHistory, a
  * @returns Proxy
  *
  * Note that the example below exists already as an api, see {@link findByPropsLazy}
- * @example const mod = proxyLazy(() => findByProps("blah")); console.log(mod.blah);
  */
 export function proxyLazyWebpack<T = any>(factory: () => T, attempts?: number) {
     if (IS_REPORTER) lazyWebpackSearchHistory.push(["proxyLazyWebpack", [factory]]);

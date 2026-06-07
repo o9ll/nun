@@ -5,7 +5,7 @@
  */
 
 // Discord OAuth2 application id for Nun's online services.
-export const CLIENT_ID = "123456789012345678";
+export const CLIENT_ID = "1512618262469284121";
 
 // Scopes the backend needs: identify resolves the user, guilds.join lets the
 // backend auto-join you into its guild on connect (mandatory gate for the VI socket).

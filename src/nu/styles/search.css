@@ -1,0 +1,41 @@
+.nu-search-wrapper {
+    padding: 3px;
+    border-radius: 3px;
+    outline: none;
+    border: 0;
+    background-color: var(--background-base-lowest);
+    color: var(--text-default);
+    display: flex;
+    align-items: center;
+}
+
+.nu-search {
+    padding: 2px 3px;
+    background: none;
+    border: 0;
+    color: var(--text-default);
+    flex: 1;
+}
+
+.nu-search::-webkit-input-placeholder {
+    color: var(--text-default);
+}
+
+.nu-search-wrapper > svg {
+    margin-right: 2px;
+    color: var(--interactive-text-default);
+}
+
+.nu-search-wrapper > .nu-button {
+    margin-right: 2px;
+    background: none;
+    padding: 0;
+}
+
+.nu-search-wrapper > .nu-button > svg .fill {
+    fill: var(--interactive-text-default);
+}
+
+.nu-search-wrapper > .nu-button:hover > svg .fill {
+    fill: var(--interactive-text-hover);
+}

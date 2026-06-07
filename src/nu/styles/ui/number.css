@@ -1,0 +1,47 @@
+.nu-number-input-wrapper {
+    display: flex;
+}
+
+.nu-number-input::-webkit-inner-spin-button,
+.nu-number-input::-webkit-outer-spin-button {
+    display: none;
+}
+
+.nu-number-input {
+    box-sizing: border-box;
+    padding: 8px 12px;
+    background-color: var(--input-background-default);
+    border: 1px solid var(--input-border-default);
+    color: var(--text-default);
+    text-align: center;
+    font-size: 16px;
+}
+
+.nu-number-input:focus-within {
+    border-color: var(--nu-brand);
+}
+
+.nu-number-input:not([min][max]) {
+    width: 65px;
+}
+
+.nu-button.nu-number-input-decrement {
+    border-right: unset;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.nu-button.nu-number-input-increment {
+    border-left: unset;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.nu-number-input-wrapper.nu-number-input-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.nu-number-input-wrapper.nu-number-input-disabled .nu-number-input,
+.nu-number-input-wrapper.nu-number-input-disabled .nu-button.nu-number-input-decrement,
+.nu-number-input-wrapper.nu-number-input-disabled .nu-button.nu-number-input-increment {
+    pointer-events: none;
+}

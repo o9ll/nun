@@ -100,6 +100,10 @@ export interface Settings {
         settingsSyncVersion: number;
     };
 
+    nuplugins: {
+        [plugin: string]: boolean;
+    };
+
     ignoreResetWarning: boolean;
 
     userCssVars: {
@@ -154,7 +158,9 @@ const DefaultSettings: Settings = {
 
     ignoreResetWarning: false,
 
-    userCssVars: {}
+    userCssVars: {},
+
+    nuplugins: {}
 };
 
 const settings = !IS_REPORTER ? VencordNative.settings.get() : {} as Settings;

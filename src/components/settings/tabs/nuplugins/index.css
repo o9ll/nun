@@ -1,0 +1,17 @@
+.nu-action-button {
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.nu-no-plugins {
+    grid-column: span 2;
+    padding-top: 5px;
+    padding-bottom: 25px;
+}
+
+.nu-drop-indicator {
+    outline: 4px dashed white;
+    border-radius: 12px;
+    opacity: 0.85;
+}

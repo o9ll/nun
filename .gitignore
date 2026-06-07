@@ -26,7 +26,6 @@ lerna-debug.log*
 
 .modules/
 #src/userplugins
-src/userexclude
 
 ExtensionCache/
 /settings
@@ -36,8 +35,5 @@ ExtensionCache/
 
 # wakatime related stuff
 .wakatime-project
-/server
-/src/nu
-/installer
-.github/workflows/publish.yml
-.github/workflows/build-installer.yml
+
+src/userexclude

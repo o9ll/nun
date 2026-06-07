@@ -46,7 +46,8 @@ export default defineConfig(
                     ["@webpack/common", "./src/webpack/common"],
                     ["@utils", "./src/utils"],
                     ["@api", "./src/api"],
-                    ["@components", "./src/components"]
+                    ["@components", "./src/components"],
+                    ["@nu", "./src/nu"]
                 ]
             }
         },

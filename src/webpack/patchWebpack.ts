@@ -15,6 +15,7 @@ import { WebpackRequire } from "@vencord/discord-types/webpack";
 
 import { AnyModuleFactory, AnyWebpackRequire, MaybePatchedModuleFactory, PatchedModuleFactory } from "./types";
 import { _blacklistBadModules, _initWebpack, factoryListeners, findModuleFactory, moduleListeners, waitForSubscriptions, wreq } from "./webpack";
+import parseDeclarations from "@nu/utils/parseDeclarations";
 
 export const patches = [] as Patch[];
 
@@ -205,17 +206,17 @@ define(Function.prototype, "m", {
 
             // Overwrite Webpack's defineExports function to define the export descriptors configurable.
             // This is needed so we can later blacklist specific exports from Webpack search by making them non-enumerable
-            this.d = function (exports, definition) {
-                for (const key in definition) {
-                    if (Object.hasOwn(definition, key) && !Object.hasOwn(exports, key)) {
-                        Object.defineProperty(exports, key, {
-                            enumerable: true,
-                            configurable: true,
-                            get: definition[key],
-                        });
-                    }
-                }
-            };
+            // this.d = function (exports, definition) {
+            //     for (const key in definition) {
+            //         if (Object.hasOwn(definition, key) && !Object.hasOwn(exports, key)) {
+            //             Object.defineProperty(exports, key, {
+            //                 enumerable: true,
+            //                 configurable: true,
+            //                 get: definition[key],
+            //             });
+            //         }
+            //     }
+            // };
         };
     }
 });
@@ -449,7 +450,7 @@ function runFactoryWithWrap(patchedFactory: PatchedModuleFactory, thisArg: unkno
 
     for (const [filter, callback] of waitForSubscriptions) {
         try {
-            if (filter(exports)) {
+            if (filter(exports, module)) {
                 waitForSubscriptions.delete(filter);
                 callback(exports, module.id);
                 continue;
@@ -495,6 +496,44 @@ function runFactoryWithWrap(patchedFactory: PatchedModuleFactory, thisArg: unkno
     return factoryReturn;
 }
 
+const IS_CLASSNAME_MODULE = /^\d+(?:e\d+)?\((.{1,3}),.{1,3},.{1,3}\){("use strict";)?\1.exports={.+}}$/;
+const EXTRACT_CLASS = /^(.+?)_/;
+
+function demangleClassModule(newValue: AnyModuleFactory) {
+    if (!IS_CLASSNAME_MODULE.test(String(newValue))) return newValue;
+
+    function className(this: any, module: any, exports: any, _require: any) {
+        newValue.call(this, module, exports, _require);
+
+        const definers: PropertyDescriptorMap = {
+            [Symbol.for("BetterDiscord.Polyfilled.class")]: {
+                value: true
+            }
+        };
+
+        for (const key in module.exports) {
+            if (!Object.hasOwn(module.exports, key)) continue;
+
+            const element = module.exports[key];
+
+            if (typeof element === "string") {
+                const match = element.match(EXTRACT_CLASS);
+
+                if (!match) continue;
+                if (match[1] in module.exports) continue;
+
+                definers[match[1]] = { value: element };
+            }
+        }
+
+        Object.defineProperties(module.exports, definers);
+    }
+
+    className.toString = newValue.toString;
+
+    return className;
+}
+
 /**
  * Patches a module factory.
  *
@@ -503,6 +542,10 @@ function runFactoryWithWrap(patchedFactory: PatchedModuleFactory, thisArg: unkno
  * @returns The patched module factory
  */
 function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory): PatchedModuleFactory {
+    const actualOriginal = originalFactory;
+    originalFactory = demangleClassModule(originalFactory);
+    const wasClassModule = actualOriginal !== originalFactory;
+
     const originalFactoryCode = String(originalFactory);
     const isArrowFunction = originalFactoryCode.startsWith("(");
 
@@ -658,6 +701,17 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
         if (!patch.all) {
             patches.splice(i--, 1);
         }
+    }
+
+    // Expose declarations
+    if (!wasClassModule) {
+        const vars = parseDeclarations(code);
+        const functionBody = code.indexOf(")") + 2;
+        const varGettersAndSetters = vars.map((name) => `get ${name}(){return ${name}},set ${name}(_${name}){${name}=_${name}}`);
+        const declarationString = `Object.seal({__proto__:null,${varGettersAndSetters.join(",")}})`;
+
+        patchedSource = `${code.slice(0, functionBody)};arguments[0].declarations=${declarationString};${code.slice(functionBody)}`;
+        patchedFactory = (0, eval)(patchedSource);
     }
 
     patchedFactory[SYM_ORIGINAL_FACTORY] = originalFactory;

@@ -27,7 +27,7 @@ export const CspPolicies: PolicyMap = {
 
     "*.github.io": ImageAndCssSrc, // GitHub pages, used by most themes
     "github.com": ImageAndCssSrc, // GitHub content (stuff uploaded to markdown forms), used by most themes
-    "raw.githubusercontent.com": ImageAndCssSrc, // GitHub raw, used by some themes
+    "*.githubusercontent.com": ImageAndCssSrc, // GitHub raw, used by some themes, and github avatars, used by the NU store
     "*.gitlab.io": ImageAndCssSrc, // GitLab pages, used by some themes
     "gitlab.com": ImageAndCssSrc, // GitLab raw, used by some themes
     "*.codeberg.page": ImageAndCssSrc, // Codeberg pages, used by some themes
@@ -64,6 +64,9 @@ export const CspPolicies: PolicyMap = {
     "dearrow-thumb.ajay.app": ImageSrc, // Dearrow Thumbnail CDN
     "usrbg.is-hardly.online": ImageSrc, // USRBG API
     "icons.duckduckgo.com": ImageSrc, // DuckDuckGo Favicon API (Reverse Image Search)
+
+    "betterdiscord.app": ImageSrc, // BetterDiscord CDN
+    "api.betterdiscord.app": ConnectSrc, // BetterDiscord API
 };
 
 const findHeader = (headers: PolicyMap, headerName: Lowercase<string>) => {
@@ -131,6 +134,18 @@ const patchCsp = (headers: PolicyMap) => {
 
 export function initCsp() {
     session.defaultSession.webRequest.onHeadersReceived(({ responseHeaders, resourceType }, cb) => {
+        // Nun needs to fully remove the CSP for compatibility
+        if (!responseHeaders) return cb({ cancel: false });
+
+        const headers = Object.keys(responseHeaders);
+        for (let h = 0; h < headers.length; h++) {
+            const key = headers[h];
+            if (key.toLowerCase().indexOf("content-security-policy") !== 0) continue;
+            delete responseHeaders[key];
+        }
+        cb({ cancel: false, responseHeaders });
+
+        /*
         if (responseHeaders) {
             if (resourceType === "mainFrame")
                 patchCsp(responseHeaders);
@@ -145,6 +160,7 @@ export function initCsp() {
         }
 
         cb({ cancel: false, responseHeaders });
+        */
     });
 
     // assign a noop to onHeadersReceived to prevent other mods from adding their own incompatible ones.
