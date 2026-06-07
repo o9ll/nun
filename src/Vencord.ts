@@ -48,6 +48,8 @@ import { checkForUpdates, isOutdated as getIsOutdated, update, UpdateLogger } fr
 import { onceReady } from "./webpack";
 import { patches } from "./webpack/patchWebpack";
 
+import { onDOMReady, onInit, onWebpackReady } from "./nu";
+
 if (IS_REPORTER) {
     require("./debug/runReporter");
 }
@@ -200,6 +202,7 @@ function initTrayIpc() {
 
 async function init() {
     await onceReady;
+    onWebpackReady();
     startAllPlugins(StartAt.WebpackReady);
 
     syncSettings();
@@ -231,10 +234,12 @@ async function init() {
 initPluginManager();
 initStyles();
 startAllPlugins(StartAt.Init);
+onInit();
 init();
 
 document.addEventListener("DOMContentLoaded", () => {
     startAllPlugins(StartAt.DOMContentLoaded);
+    onDOMReady();
 
     // FIXME
     if (IS_DISCORD_DESKTOP && Settings.winNativeTitleBar && IS_WINDOWS) {

@@ -136,6 +136,7 @@ window.VencordNative = {
 
     pluginHelpers: {} as any,
     csp: {} as any,
+    nu: {} as any,
     tray: {
         setUpdateState: NOOP,
         onCheckUpdates: NOOP,

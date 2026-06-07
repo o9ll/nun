@@ -23,6 +23,7 @@ import { dirname, join } from "path";
 import { RendererSettings } from "./settings";
 import { patchTrayMenu } from "./trayMenu";
 import { IS_VANILLA } from "./utils/constants";
+import { IpcEvents } from "@shared/IpcEvents";
 
 console.log("[Equicord] Starting up...");
 
@@ -132,6 +133,10 @@ if (!IS_VANILLA) {
                 // Disable the Electron call entirely so that Discord can't dynamically change the size
                 this.setMinimumSize = (_width: number, _height: number) => { };
             }
+
+            this.webContents.on("did-navigate-in-page", () => {
+                this.webContents.send(IpcEvents.NU_NAVIGATED);
+            });
         }
     }
     Object.assign(BrowserWindow, electron.BrowserWindow);

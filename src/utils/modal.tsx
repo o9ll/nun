@@ -18,6 +18,7 @@
 
 import { filters, findComponentByCodeLazy, mapMangledModuleLazy } from "@webpack";
 import { closeAllModals, closeModal, openMediaModal, openModal, openModalLazy } from "@webpack/common";
+import type { ComponentType, PropsWithChildren, ReactNode, Ref } from "react";
 
 import { LazyComponent } from "./react";
 
@@ -29,6 +30,61 @@ export const enum ModalSize {
     DYNAMIC = "dynamic",
 }
 
+const enum ModalTransitionState {
+    ENTERING,
+    ENTERED,
+    EXITING,
+    EXITED,
+    HIDDEN,
+}
+
+/** @deprecated Migrate to new Modals */
+export interface ModalProps {
+    transitionState: ModalTransitionState;
+    onClose(): void;
+}
+
+interface Modals {
+    ModalRoot: ComponentType<PropsWithChildren<{
+        transitionState: ModalTransitionState;
+        size?: ModalSize;
+        role?: "alertdialog" | "dialog";
+        className?: string;
+        fullscreenOnMobile?: boolean;
+        "aria-label"?: string;
+        "aria-labelledby"?: string;
+        onAnimationEnd?(): string;
+    }>>;
+    ModalHeader: ComponentType<PropsWithChildren<{
+        justify?: string;
+        direction?: string;
+        align?: string;
+        wrap?: string;
+        separator?: boolean;
+        className?: string;
+    }>>;
+    ModalContent: ComponentType<PropsWithChildren<{
+        className?: string;
+        scrollerRef?: Ref<HTMLElement>;
+        [prop: string]: any;
+    }>>;
+    ModalFooter: ComponentType<PropsWithChildren<{
+        justify?: string;
+        direction?: string;
+        align?: string;
+        wrap?: string;
+        separator?: boolean;
+        className?: string;
+    }>>;
+    ModalCloseButton: ComponentType<{
+        focusProps?: any;
+        onClick(): void;
+        withCircleBackground?: boolean;
+        hideOnFullscreen?: boolean;
+        className?: string;
+    }>;
+}
+
 /** @deprecated Migrate to new Modals */
 export const Modals = mapMangledModuleLazy(".MODAL_ROOT_LEGACY,", {
     ModalRoot: filters.componentByCode('.MODAL,"aria-labelledby":'),
@@ -36,18 +92,18 @@ export const Modals = mapMangledModuleLazy(".MODAL_ROOT_LEGACY,", {
     ModalContent: filters.componentByCode("scrollbarType:"),
     ModalFooter: filters.componentByCode(".HORIZONTAL_REVERSE,"),
     ModalCloseButton: filters.componentByCode(".withCircleBackground")
-}) as never;
+}) as Modals;
 
 /** @deprecated Migrate to new Modals */
-export const ModalRoot = LazyComponent(() => (Modals as any).ModalRoot) as never;
+export const ModalRoot = LazyComponent(() => Modals.ModalRoot);
 /** @deprecated Migrate to new Modals */
-export const ModalHeader = LazyComponent(() => (Modals as any).ModalHeader) as never;
+export const ModalHeader = LazyComponent(() => Modals.ModalHeader);
 /** @deprecated Migrate to new Modals */
-export const ModalContent = LazyComponent(() => (Modals as any).ModalContent) as never;
+export const ModalContent = LazyComponent(() => Modals.ModalContent);
 /** @deprecated Migrate to new Modals */
-export const ModalFooter = LazyComponent(() => (Modals as any).ModalFooter) as never;
+export const ModalFooter = LazyComponent(() => Modals.ModalFooter);
 /** @deprecated Migrate to new Modals */
-export const ModalCloseButton = LazyComponent(() => (Modals as any).ModalCloseButton) as never;
+export const ModalCloseButton = LazyComponent(() => Modals.ModalCloseButton);
 export const CloseButton = findComponentByCodeLazy("CLOSE_BUTTON_LABEL");
 
 /** @deprecated Migrate to new Modals */
@@ -70,3 +126,5 @@ export {
     /** @deprecated Migrate to new Modals */
     openModalLazy
 };
+
+export type { ReactNode };

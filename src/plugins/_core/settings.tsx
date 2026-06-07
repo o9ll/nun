@@ -15,6 +15,7 @@ import {
     ThemesTab,
     UpdaterTab,
     VencordTab,
+    NUPluginsTab
 } from "@components/settings";
 import { gitHashShort } from "@shared/vencordUserAgent";
 import { Devs } from "@utils/constants";
@@ -22,6 +23,7 @@ import { isTruthy } from "@utils/guards";
 import definePlugin, { IconProps, OptionType } from "@utils/types";
 import { waitFor } from "@webpack";
 import { React } from "@webpack/common";
+import { NULogo } from "@nu/ui/icons";
 import type { ComponentType, PropsWithChildren, ReactNode } from "react";
 
 const enum LayoutType {
@@ -192,8 +194,8 @@ export default definePlugin({
         const equicordEntries: SettingsLayoutNode[] = [
             buildEntry({
                 key: "equicord_main",
-                title: "Nun",
-                panelTitle: "Nun Settings",
+                title: "Settings",
+                panelTitle: "Settings",
                 Component: VencordTab,
                 Icon: MainSettingsIcon
             }),
@@ -204,6 +206,12 @@ export default definePlugin({
                 Icon: PluginsIcon
             }),
             buildEntry({
+                key: "nu_plugins",
+                title: "NU Plugins",
+                Component: NUPluginsTab,
+                Icon: NULogo
+            }),
+            buildEntry({
                 key: "equicord_themes",
                 title: "Themes",
                 Component: ThemesTab,
@@ -212,32 +220,32 @@ export default definePlugin({
             !IS_UPDATER_DISABLED && UpdaterTab && buildEntry({
                 key: "equicord_updater",
                 title: "Updater",
-                panelTitle: "Nun Updater",
+                panelTitle: "Updater",
                 Component: UpdaterTab,
                 Icon: UpdaterIcon
             }),
             buildEntry({
                 key: "equicord_changelog",
-                title: "Changelog",
+                title: "Change",
                 Component: ChangelogTab,
                 Icon: LogIcon,
             }),
             buildEntry({
                 key: "equicord_cloud",
                 title: "Cloud",
-                panelTitle: "Nun Cloud",
+                panelTitle: "Cloud",
                 Component: CloudTab,
                 Icon: CloudIcon
             }),
             buildEntry({
                 key: "equicord_backup_restore",
-                title: "Backup & Restore",
+                title: "Backup",
                 Component: BackupAndRestoreTab,
                 Icon: BackupRestoreIcon
             }),
             !IS_STANDALONE && PatchHelperTab && buildEntry({
                 key: "equicord_patch_helper",
-                title: "Patch Helper",
+                title: "Patch",
                 Component: PatchHelperTab,
                 Icon: PatchHelperIcon
             }),
@@ -247,7 +255,7 @@ export default definePlugin({
         const equicordSection: SettingsLayoutNode = {
             key: "equicord_section",
             type: LayoutTypes.SECTION,
-            useTitle: () => "Nun Settings",
+            useTitle: () => "💠",
             buildLayout: () => equicordEntries
         };
 
@@ -313,7 +321,7 @@ export default definePlugin({
     getInfoRows() {
         const { electronVersion, chromiumVersion, getVersionInfo } = this;
 
-        const rows = [`Equicord ${gitHashShort}${getVersionInfo()}`];
+        const rows = [`Nun ${gitHashShort}${getVersionInfo()}`];
 
         if (electronVersion) rows.push(`Electron ${electronVersion}`);
         if (chromiumVersion) rows.push(`Chromium ${chromiumVersion}`);

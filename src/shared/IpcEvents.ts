@@ -57,4 +57,17 @@ export const enum IpcEvents {
     TRAY_CHECK_UPDATES = "VencordTrayCheckUpdates",
     TRAY_ABOUT = "VencordTrayAbout",
     SUPPORTS_WINDOWS_MATERIAL = "VencordSupportsWindowsMaterial",
+
+    NU_GET_PLUGINS = "NunGetPlugins",
+    NU_PLUGIN_CREATED = "NunPluginCreated",
+    NU_PLUGIN_DELETED = "NunPluginDeleted",
+    NU_PLUGIN_UPDATED = "NunPluginUpdated",
+
+    NU_GET_DATA_DIR = "NunGetDataDir",
+    NU_OPEN_DIALOG = "NunOpenDialog",
+    NU_UPDATE_PLUGIN = "NunUpdatePlugin",
+    NU_CREATE_PLUGIN = "NunCreatePlugin",
+    NU_DELETE_PLUGIN = "NunDeletePlugin",
+    NU_OPEN_PLUGIN_FOLDER = "NunOpenPluginFolder",
+    NU_NAVIGATED = "NunNavigate"
 }

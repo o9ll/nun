@@ -1,0 +1,138 @@
+import type { Webpack } from "../types";
+import { getDefaultKey, makeException, shouldSkipModule, wrapDeclarationFilter, wrapModuleFilter } from "./shared";
+import WebpackCache from "./cache";
+import { wreq } from "@webpack";
+
+export function getDeclaration(module: Webpack.Module<any>, filter: Webpack.ExportedOnlyFilter) {
+    const wrappedFilter = wrapDeclarationFilter(filter);
+
+    for (const name in module.declarations) {
+        if (!wrappedFilter(module.declarations[name])) continue;
+        return module.declarations[name];
+    }
+}
+
+export function getMatched<T>(module: Webpack.Module<any>, filter: Webpack.ModuleFilter, options: Webpack.Options): T | undefined {
+    const { defaultExport = true, searchExports = false, searchDefault = true, raw = false } = options;
+
+    if (shouldSkipModule(module.exports)) return;
+
+    if (filter(module.exports, module, module.id)) {
+        if (options.declarationFilter) return getDeclaration(module, options.declarationFilter);
+        return raw ? module as T : module.exports;
+    }
+
+    if (!searchExports && !searchDefault) return;
+
+    let defaultKey: string | undefined;
+    const searchKeys: string[] = [];
+    if (searchExports) searchKeys.push(...Object.keys(module.exports));
+    else if (searchDefault && (defaultKey = getDefaultKey(module))) searchKeys.push(defaultKey);
+
+    for (let i = 0; i < searchKeys.length; i++) {
+        const key = searchKeys[i];
+        const exported = module.exports[key];
+
+        if (shouldSkipModule(exported)) continue;
+
+        if (filter(exported, module, module.id)) {
+            if (options.declarationFilter) return getDeclaration(module, options.declarationFilter);
+            if (!defaultExport && defaultKey === key) return module.exports;
+            if (raw) return module as T;
+            return exported;
+        }
+    }
+}
+
+export function getModule<T>(filter: Webpack.ModuleFilter, options: Webpack.Options = {}): T | undefined {
+    filter = wrapModuleFilter(filter);
+
+    if (options.firstId) {
+        const module = wreq.c[options.firstId];
+        if (module) {
+            const matched = getMatched<T>(module, filter, options);
+            if (matched) return matched;
+        }
+    }
+
+    let cacheId = options.cacheId;
+    if (!cacheId && cacheId !== null) cacheId = WebpackCache.getIdFromStack();
+
+    if (cacheId) {
+        const id = WebpackCache.get(cacheId);
+        const module = wreq.c[id];
+
+        if (module) {
+            const matched = getMatched<T>(module, filter, options);
+            if (matched) return matched;
+        }
+    }
+
+    const keys = Object.keys(wreq.c);
+    for (let i = 0; i < keys.length; i++) {
+        const module = wreq.c[keys[i]];
+        const matched = getMatched<T>(module, filter, options);
+
+        if (matched) {
+            if (cacheId) WebpackCache.set(cacheId, keys[i]);
+            return matched;
+        }
+    }
+
+    if (options.fatal) throw makeException();
+    return undefined;
+}
+
+export function getAllModules<T extends unknown[]>(filter: Webpack.ModuleFilter, options: Webpack.Options = {}): T {
+    const { defaultExport = true, searchExports = false, searchDefault = true, raw = false, fatal = false } = options;
+
+    filter = wrapModuleFilter(filter);
+    const modules = [] as unknown as T;
+
+    const webpackModules = Object.values(wreq.c);
+    for (let i = 0; i < webpackModules.length; i++) {
+        const module = webpackModules[i];
+
+        if (shouldSkipModule(module.exports)) continue;
+
+        if (filter(module.exports, module, module.id)) {
+            if (options.declarationFilter) {
+                const declared = getDeclaration(module, options.declarationFilter);
+                if (declared) modules.push(declared);
+            }
+            else {modules.push(raw ? module : module.exports);}
+        }
+
+        if (!searchExports && !searchDefault) continue;
+
+        let defaultKey: string | undefined;
+        const searchKeys: string[] = [];
+        if (searchExports) searchKeys.push(...Object.keys(module.exports));
+        else if (searchDefault && (defaultKey = getDefaultKey(module))) searchKeys.push(defaultKey);
+
+        for (let j = 0; j < searchKeys.length; j++) {
+            const key = searchKeys[j];
+            const exported = module.exports[key];
+
+            if (shouldSkipModule(exported)) continue;
+
+            if (filter(exported, module, module.id)) {
+                if (options.declarationFilter) {
+                    const declared = getDeclaration(module, options.declarationFilter);
+                    if (declared) modules.push(declared);
+                    continue;
+                }
+
+                if (!defaultExport && defaultKey === key) {
+                    modules.push(module.exports);
+                    continue;
+                }
+
+                modules.push(raw ? module : exported);
+            }
+        }
+    }
+
+    if (fatal && modules.length === 0) throw makeException();
+    return modules;
+}

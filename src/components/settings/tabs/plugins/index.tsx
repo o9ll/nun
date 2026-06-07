@@ -97,7 +97,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
     );
 }
 
-const enum SearchStatus {
+export const enum SearchStatus {
     ALL,
     ENABLED,
     DISABLED,
@@ -202,7 +202,7 @@ export default function PluginSettings() {
 
     const hasUserPlugins = useMemo(() => !IS_STANDALONE && Object.values(PluginMeta).some(m => m.userPlugin), []);
 
-    const [searchValue, setSearchValue] = useState({ value: "", tags: [] as PluginTag[], status: SearchStatus.ALL });
+    const [searchValue, setSearchValue] = useState({ value: "", tags: [] as PluginTag[], status: hasUserPlugins ? SearchStatus.USER_PLUGINS : SearchStatus.ALL });
 
     const search = searchValue.value.toLowerCase();
     const onSearch = (query: string) => setSearchValue(prev => ({ ...prev, value: query }));
@@ -418,14 +418,14 @@ export default function PluginSettings() {
                 <div className={classes(Margins.bottom20, Margins.top8, cl("filter-controls"))}>
                     <Select
                         options={[
-                            { label: "Show All", value: SearchStatus.ALL, default: true },
-                            { label: "Show Enabled", value: SearchStatus.ENABLED },
-                            { label: "Show Disabled", value: SearchStatus.DISABLED },
-                            { label: "Show Equicord", value: SearchStatus.EQUICORD },
-                            { label: "Show Vencord", value: SearchStatus.VENCORD },
-                            { label: "Show New", value: SearchStatus.NEW },
-                            hasUserPlugins && { label: "Show Nun", value: SearchStatus.USER_PLUGINS },
-                            { label: "Show API Plugins", value: SearchStatus.API_PLUGINS },
+                            { label: "All", value: SearchStatus.ALL, ...(!hasUserPlugins && { default: true }) },
+                            { label: "Enabled", value: SearchStatus.ENABLED },
+                            { label: "Disabled", value: SearchStatus.DISABLED },
+                            { label: "Equicord", value: SearchStatus.EQUICORD },
+                            { label: "Vencord", value: SearchStatus.VENCORD },
+                            { label: "New", value: SearchStatus.NEW },
+                            hasUserPlugins && { label: "💠", value: SearchStatus.USER_PLUGINS, default: true },
+                            { label: "API Plugins", value: SearchStatus.API_PLUGINS },
                         ].filter(isTruthy)}
                         serialize={String}
                         select={status => setSearchValue(prev => ({ ...prev, status }))}
