@@ -1,6 +1,6 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -19,6 +19,7 @@ export default definePlugin({
     description: "Turns plain social links into embeddable URLs so posts and videos are fully viewable in Discord instead of forcing users to open the external site.",
     authors: [{ name: "o9", id: 426687300387471360n }],
 
+    tags: ["Nun"],
     replaceUrl(originalUrl: string): string {
         let newUrl: URL;
         try {
@@ -33,7 +34,7 @@ export default definePlugin({
 
     onBeforeMessageSend(_, msg) {
         if (/https:\/\//.test(msg.content)) {
-            msg.content = this.replaceUrl(msg.content); // needs fixing because this only works with raw url message
+            msg.content = this.replaceUrl(msg.content);
         }
     }
 });

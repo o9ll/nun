@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import DOMManager from "../core/dommanager";
 
 
@@ -105,22 +111,22 @@ export default class Tooltip {
         // this.labelElement.textContent = this.label;
         this.container.append(this.element);
 
-        if (this.side == "top") {
+        if (this.side === "top") {
             if (this.canShowAbove || (!this.canShowAbove && this.preventFlip)) this.showAbove();
             else this.showBelow();
         }
 
-        if (this.side == "bottom") {
+        if (this.side === "bottom") {
             if (this.canShowBelow || (!this.canShowBelow && this.preventFlip)) this.showBelow();
             else this.showAbove();
         }
 
-        if (this.side == "left") {
+        if (this.side === "left") {
             if (this.canShowLeft || (!this.canShowLeft && this.preventFlip)) this.showLeft();
             else this.showRight();
         }
 
-        if (this.side == "right") {
+        if (this.side === "right") {
             if (this.canShowRight || (!this.canShowRight && this.preventFlip)) this.showRight();
             else this.showLeft();
         }

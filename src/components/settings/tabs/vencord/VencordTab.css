@@ -1,5 +1,5 @@
 :root {
-    --vc-donatebutton: #ffc1cbc2;
+    --vc-donatebutton: #414148c2;
     --vc-donatebutton-secondary: #f7536fe5;
 }
 
@@ -51,4 +51,10 @@
 .vc-vencord-tab-settings-link {
     color: var(--text-link);
     display: inline-block;
+}
+
+.vc-vencord-tab-support-card .vc-special-title,
+.vc-vencord-tab-support-card .vc-special-subtitle,
+.vc-vencord-tab-support-card .vc-special-text {
+    color: #fff;
 }

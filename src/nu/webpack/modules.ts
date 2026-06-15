@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import type React from "react";
 import type ReactDOMBaseType from "react-dom";
 import type ReactDOMClientType from "react-dom/client";
@@ -12,7 +18,7 @@ interface ModuleQueries {
     InviteActions: InviteActions;
     ReactSpring: ReactSpring;
     Dispatcher: Dispatcher;
-    Tooltip: React.ComponentType<{ color?: string; position?: string; text?: string; children: React.FunctionComponent; }>;
+    Tooltip: React.ComponentType<{ color?: string; position?: string; text?: string; "aria-label"?: string; hideOnClick?: boolean; children: React.FunctionComponent; }>;
     User: any;
     createBotMessage: any;
     Messages: any;

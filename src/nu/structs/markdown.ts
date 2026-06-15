@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import DiscordModules from "../webpack/modules";
 import extend from "../utils/extend";
 import type { ReactElement } from "react";

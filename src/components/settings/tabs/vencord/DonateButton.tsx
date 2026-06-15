@@ -20,11 +20,13 @@ export function DonateButtonComponent({ donated = false }) {
         <Flex>
             <DonateButton
                 equicord={true}
-                className={!donated ? "vc-donate-support-button" : ""}
-                style={{ marginTop: "1em" }} />
+                variant={donated ? "none" : "primary"}
+                style={{ marginTop: "1em" }}
+            />
             <InviteButton
-                className={!donated ? "vc-invite-support-button" : ""}
-                style={{ marginTop: "1em" }} />
+                variant={donated ? "none" : "secondary"}
+                style={{ marginTop: "1em" }}
+            />
         </Flex>
     );
 }

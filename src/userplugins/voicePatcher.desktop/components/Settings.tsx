@@ -1,6 +1,6 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -12,7 +12,7 @@ import { Heading } from "@components/Heading";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Switch } from "@components/Switch";
-import { applyAndLogPatches, Native, settings } from "@userplugins/voicePatcher.desktop/index";
+import { applyAndLogPatches, Native, settings } from "../../voicePatcher.desktop/index";
 import { React, showToast, TextArea, TextInput, Toasts } from "@webpack/common";
 
 export default function VoicePatcherSettings() {

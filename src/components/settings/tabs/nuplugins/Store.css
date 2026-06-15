@@ -1,5 +1,258 @@
+.nu-plugin-store-panel {
+    width: 100%;
+    min-width: 0;
+}
+
 .nu-plugin-store-cards {
     display: grid;
     gap: 16px;
-    grid-template-columns: 320px 320px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+    width: 100%;
+}
+
+.nu-addon-store-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+    background: var(--card-background-default);
+    border: 1px solid var(--border-subtle);
+    transition: box-shadow 0.1s ease-out, transform 0.1s ease-out, background 0.1s ease-out;
+}
+
+.nu-addon-store-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--elevation-high);
+}
+
+.nu-addon-store-card-author {
+    position: absolute;
+    bottom: -21px;
+    left: 12px;
+}
+
+.nu-addon-store-card-author-mask {
+    padding: 4px;
+    background-color: var(--card-background-default);
+}
+
+.nu-addon-store-card-author-svg {
+    contain: paint;
+}
+
+.nu-addon-store-card-author-img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.nu-addon-store-card-splash {
+    height: 143px;
+    position: relative;
+    display: block;
+    overflow: visible;
+    margin-bottom: 32px;
+}
+
+.nu-addon-store-card-preview {
+    display: block;
+    position: absolute;
+    inset: 0;
+}
+
+.nu-addon-store-card-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nu-addon-store-card-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px 16px;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.nu-addon-store-card-name {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--text-default);
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.nu-addon-store-card-description {
+    color: var(--text-subtle);
+    overflow: hidden;
+    margin: 4px 0 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    font-size: 14px;
+    line-height: 1.2857;
+    user-select: text;
+    overflow-wrap: anywhere;
+}
+
+.nu-addon-store-card-tags {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    user-select: none;
+}
+
+.nu-addon-store-card-tag {
+    color: var(--text-subtle);
+    background: var(--background-base-lower);
+    border: 1px solid var(--border-subtle);
+    padding: 2px 5px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.nu-addon-store-card-spacer {
+    flex: 1 1 auto;
+}
+
+.nu-addon-store-card-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.nu-addon-store-card-downloads,
+.nu-addon-store-card-likes {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-subtle);
+    font-size: 12px;
+    line-height: 1.3333;
+}
+
+.nu-addon-store-card-dot {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    background-color: var(--green-360, #3ba55c);
+}
+
+.nu-addon-store-card-downloads .nu-addon-store-card-dot {
+    background-color: var(--brand-500, #5865f2);
+}
+
+.nu-addon-store-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.nu-flower-star {
+    color: var(--green-360, #3ba55c);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.nu-paginator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.nu-paginator-bubbles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.nu-paginator-back,
+.nu-paginator-next,
+.nu-paginator-bubble {
+    font-weight: 600;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    min-height: 28px;
+    min-width: 28px;
+    padding: 6px;
+    cursor: pointer;
+    color: var(--text-default);
+}
+
+.nu-paginator-back,
+.nu-paginator-next {
+    padding: 0 8px;
+    background: transparent;
+    border: none;
+}
+
+.nu-paginator-back:disabled,
+.nu-paginator-next:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.nu-paginator-bubble {
+    border-radius: 14px;
+}
+
+.nu-paginator-back:not(:disabled):hover,
+.nu-paginator-next:not(:disabled):hover,
+.nu-paginator-bubble:hover {
+    color: var(--interactive-text-hover, var(--text-default));
+    background-color: var(--background-base-lower);
+}
+
+.nu-paginator-bubble[data-selected="true"] {
+    color: var(--white, #fff);
+    background-color: var(--brand-500, #5865f2);
+}
+
+.nu-paginator-bubble[data-selected="true"]:hover {
+    color: var(--white, #fff);
+    background-color: var(--brand-500, #5865f2);
+}
+
+@media (width <=600px) {
+    .nu-plugin-store-panel .vc-plugins-filter-controls {
+        height: auto;
+        grid-template-columns: 1fr;
+    }
+}
+
+.visual-refresh .nu-addon-store-card {
+    background-color: var(--background-surface-high);
+    border: 1px solid var(--border-subtle);
+}
+
+.visual-refresh .nu-addon-store-card:hover {
+    background-color: var(--background-surface-high);
 }

@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-/* eslint-disable */
 /* Sourced from https://raw.githubusercontent.com/nexpid/fatass-horse/5363cf9b5904211de79d2597200374340efac676/horse.js */
 
 // https://github.com/adryd325/oneko.js

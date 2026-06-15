@@ -1,14 +1,21 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import "./Store.css";
+import "../plugins/styles.css";
+import { HeadingTertiary } from "@components/Heading";
 import { Margins } from "@components/margins";
-import { ModalCloseButton, ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { React, Select, Text, TextInput, useState } from "@webpack/common";
-import { RenderModalProps } from "@vencord/discord-types";
+import { React, Select, SettingsRouter, TextInput, useState } from "@webpack/common";
 import PluginStore from "@nu/core/pluginstore";
 import PluginStoreCard from "./StoreCard";
 import Paginator from "@nu/ui/misc/paginator";
 import { classes } from "@utils/misc";
 import pluginmanager from "@nu/core/pluginmanager";
 import { Paragraph } from "@components/Paragraph";
+import { cl } from "../plugins";
 
 const pageSize = 20;
 
@@ -22,7 +29,7 @@ enum SortType {
     Name = "name"
 }
 
-function StoreModal({ transitionState, onClose }: RenderModalProps) {
+export function PluginStorePanel() {
     const [page, setPage] = useState(0);
     const [sort, setSort] = useState(SortType.Downloads);
     const [search, setSearch] = useState("");
@@ -57,63 +64,65 @@ function StoreModal({ transitionState, onClose }: RenderModalProps) {
     const wrapper = React.useRef<HTMLDivElement>(null);
 
     return (
-        <ModalRoot size={ModalSize.DYNAMIC} transitionState={transitionState}>
-            <ModalHeader separator={false} className={Margins.bottom8}>
-                <Text variant="heading-xl/bold" style={{ flexGrow: 1 }}>BetterDiscord Plugin Store</Text>
-                <ModalCloseButton onClick={onClose} />
-            </ModalHeader>
+        <section className="nu-plugin-store-panel">
+            <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
+                BetterDiscord Plugin Store
+            </HeadingTertiary>
 
-            <ModalContent className={Margins.bottom16}>
-                <div className={classes(Margins.bottom20, "vc-plugins-filter-controls")}>
-                    <TextInput
-                        autoFocus value={search}
-                        placeholder="Search for a plugin..."
-                        onChange={(query: string) => setSearch(query)}
-                    />
-                    <Select
-                        options={[
-                            { label: "Most Downloads", value: SortType.Downloads, default: true },
-                            { label: "Not Installed", value: SortType.NotInstalled },
-                            { label: "Most Likes", value: SortType.Likes },
-                            { label: "Last Updated", value: SortType.Modified },
-                            { label: "Newest", value: SortType.ReleaseDate },
-                            { label: "Author", value: SortType.Author },
-                            { label: "Name", value: SortType.Name }
-                        ]}
-                        serialize={String}
-                        select={(type) => setSort(type)}
-                        isSelected={v => v === sort}
-                        closeOnSelect={true}
-                    />
-                </div>
-
-                <div className="plugin-store-cards" ref={wrapper}>
-                    {plugins.slice(page * pageSize, page * pageSize + pageSize).map(plugin => (
-                        <PluginStoreCard key={plugin.id} plugin={plugin} />
-                    ))}
-                </div>
-
-                {plugins.length === 0 && (
-                    <Paragraph>No plugins match search</Paragraph>
-                )}
-
-                <Paginator
-                    currentPage={page}
-                    length={plugins.length}
-                    pageSize={pageSize}
-                    maxVisible={9}
-                    onPageChange={(newPage) => {
-                        setPage(newPage);
-                        wrapper.current?.closest('[class*="scrollerBase"]')?.scrollTo({ top: 0, behavior: "smooth" });
+            <div className={classes(Margins.bottom20, cl("filter-controls"))}>
+                <TextInput
+                    value={search}
+                    placeholder="Search for a plugin..."
+                    onChange={(query: string) => {
+                        setSearch(query);
+                        setPage(0);
                     }}
                 />
-            </ModalContent>
-        </ModalRoot>
+                <Select
+                    options={[
+                        { label: "Most Downloads", value: SortType.Downloads, default: true },
+                        { label: "Not Installed", value: SortType.NotInstalled },
+                        { label: "Most Likes", value: SortType.Likes },
+                        { label: "Last Updated", value: SortType.Modified },
+                        { label: "Newest", value: SortType.ReleaseDate },
+                        { label: "Author", value: SortType.Author },
+                        { label: "Name", value: SortType.Name }
+                    ]}
+                    serialize={String}
+                    select={(type) => {
+                        setSort(type);
+                        setPage(0);
+                    }}
+                    isSelected={v => v === sort}
+                    closeOnSelect={true}
+                />
+            </div>
+
+            <div className="nu-plugin-store-cards" ref={wrapper}>
+                {plugins.slice(page * pageSize, page * pageSize + pageSize).map(plugin => (
+                    <PluginStoreCard key={plugin.id} plugin={plugin} />
+                ))}
+            </div>
+
+            {plugins.length === 0 && (
+                <Paragraph>No plugins match search</Paragraph>
+            )}
+
+            <Paginator
+                className={cl("page-buttons")}
+                currentPage={page}
+                length={plugins.length}
+                pageSize={pageSize}
+                maxVisible={9}
+                onPageChange={(newPage) => {
+                    setPage(newPage);
+                    wrapper.current?.closest('[class*="scrollerBase"]')?.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+            />
+        </section>
     );
 }
 
 export function openPluginStore() {
-    openModal(modalProps => (
-        <StoreModal {...modalProps} />
-    ));
+    SettingsRouter.openUserSettings("nu_plugins_panel");
 }

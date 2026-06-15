@@ -75,7 +75,7 @@ export function EquicordDonorModal() {
     openModal(props => (
         <ErrorBoundary noop onError={() => {
             props.onClose();
-            VencordNative.native.openExternal("https://github.com/sponsors/thororen1234");
+            VencordNative.native.openExternal("https://github.com/sponsors/o9ll");
         }}>
             <Modal
                 {...props}
@@ -99,13 +99,13 @@ export function EquicordDonorModal() {
                     <Flex>
                         <img
                             role="presentation"
-                            src="https://cdn.discordapp.com/emojis/1026533070955872337.png"
+                            src="https://badges.vencord.dev/badges/246768049934434304/ad3647fccf3423efa69c6f19f21c5bb429ffa243.webp"
                             alt=""
                             style={{ margin: "auto" }}
                         />
                         <img
                             role="presentation"
-                            src="https://cdn.discordapp.com/emojis/1026533090627174460.png"
+                            src="https://badges.vencord.dev/badges/150253802442719232/3cfdfddb1196ce8af4769f3d234bcdfe5cd74982.webp"
                             alt=""
                             style={{ margin: "auto" }}
                         />

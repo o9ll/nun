@@ -84,8 +84,9 @@
 }
 
 .nu-button .nu-button-content {
-    --button--underline-color: transparent;
-    background-image: linear-gradient(0deg, transparent, transparent 1px, var(--button--underline-color) 0, var(--button--underline-color) 2px, transparent 0);
+    --button-underline-color: transparent;
+
+    background-image: linear-gradient(0deg, transparent, transparent 1px, var(--button-underline-color) 0, var(--button-underline-color) 2px, transparent 0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -154,12 +155,10 @@
 
 /* Button Looks */
 .nu-button-filled {
-    -webkit-transition: background-color .17s ease, color .17s ease;
-    transition: background-color .17s ease, color .17s ease
+    transition: background-color .17s ease, color .17s ease;
 }
 
 .nu-button-outlined {
-    -webkit-transition: color .17s ease, background-color .17s ease, border-color .17s ease;
     transition: color .17s ease, background-color .17s ease, border-color .17s ease;
     border-width: 1px;
     border-style: solid
@@ -167,9 +166,8 @@
 
 .nu-button-blank {
     background: transparent;
-    color: currentColor;
+    color: currentcolor;
     border: 0;
-    /* padding: 0; */
     margin: 0
 }
 
@@ -189,7 +187,6 @@
 .nu-button-filled.nu-button-color-brand {
     color: var(--white-500);
     background-color: var(--nu-brand);
-    /* NU Blue */
 }
 
 .nu-button-filled.nu-button-color-brand:hover {
@@ -202,7 +199,6 @@
 
 .nu-button-filled.nu-button-color-brand:disabled {
     background-color: var(--nu-brand);
-    /* NU Blue */
     opacity: 0.4;
 }
 
@@ -225,12 +221,10 @@
 
 .nu-button-link.nu-button-color-brand {
     color: var(--nu-brand);
-    /* NU Blue */
 }
 
 .nu-button-link.nu-button-color-brand:hover .nu-button-content {
-    --button--underline-color: var(--nu-brand);
-    /* NU Blue */
+    --button-underline-color: var(--nu-brand);
 }
 
 
@@ -275,7 +269,7 @@
 }
 
 .nu-button-link.nu-button-color-blurple:hover .nu-button-content {
-    --button--underline-color: var(--brand-experiment)
+    --button-underline-color: var(--brand-experiment)
 }
 
 
@@ -284,11 +278,6 @@
 .nu-button-filled.nu-button-color-yellow {
     color: var(--white-500);
     background-color: var(--status-warning)
-}
-
-.nu-button-filled.nu-button-color-yellow:active,
-.nu-button-filled.nu-button-color-yellow:hover {
-    background-color: null;
 }
 
 .nu-button-filled.nu-button-color-yellow:disabled {
@@ -301,7 +290,7 @@
 }
 
 .nu-button-outlined.nu-button-color-yellow:active {
-    background-color: hsl(var(--yellow-300-hsl)/.1)
+    background-color: hsl(var(--yellow-300-hsl)/10%)
 }
 
 .nu-button-link.nu-button-color-yellow {
@@ -309,7 +298,7 @@
 }
 
 .nu-button-link.nu-button-color-yellow:hover .nu-button-content {
-    --button--underline-color: var(--status-warning)
+    --button-underline-color: var(--status-warning)
 }
 
 
@@ -318,11 +307,6 @@
 .nu-button-filled.nu-button-color-link {
     color: var(--white-500);
     background-color: var(--text-link)
-}
-
-.nu-button-filled.nu-button-color-link:active,
-.nu-button-filled.nu-button-color-link:hover {
-    background-color: null
 }
 
 .nu-button-filled.nu-button-color-link:disabled {
@@ -335,7 +319,7 @@
 }
 
 .nu-button-outlined.nu-button-color-link:active {
-    background-color: hsl(var(--text-link-hsl)/.1)
+    background-color: hsl(var(--text-link-hsl)/10%)
 }
 
 .nu-button-link.nu-button-color-link {
@@ -343,7 +327,7 @@
 }
 
 .nu-button-link.nu-button-color-link:hover .nu-button-content {
-    --button--underline-color: var(--text-link)
+    --button-underline-color: var(--text-link)
 }
 
 
@@ -352,11 +336,6 @@
 .nu-button-filled.nu-button-color-white {
     color: var(--primary-500);
     background-color: var(--white-500)
-}
-
-.nu-button-filled.nu-button-color-white:active,
-.nu-button-filled.nu-button-color-white:hover {
-    background-color: null
 }
 
 .nu-button-filled.nu-button-color-white:disabled {
@@ -369,7 +348,7 @@
 }
 
 .nu-button-outlined.nu-button-color-white:active {
-    background-color: hsl(var(--white-500-hsl)/.1)
+    background-color: hsl(var(--white-500-hsl)/10%)
 }
 
 .nu-button-link.nu-button-color-white {
@@ -377,7 +356,7 @@
 }
 
 .nu-button-link.nu-button-color-white:hover .nu-button-content {
-    --button--underline-color: var(--white-500)
+    --button-underline-color: var(--white-500)
 }
 
 
@@ -418,7 +397,7 @@
 }
 
 .nu-button-link.nu-button-color-red:hover .nu-button-content {
-    --button--underline-color: var(--text-danger)
+    --button-underline-color: var(--text-danger)
 }
 
 
@@ -458,7 +437,7 @@
 }
 
 .nu-button-link.nu-button-color-green:hover .nu-button-content {
-    --button--underline-color: var(--green-360)
+    --button-underline-color: var(--green-360)
 }
 
 
@@ -499,7 +478,7 @@
 }
 
 .theme-dark .nu-button-link.nu-button-color-primary:hover .nu-button-content {
-    --button--underline-color: var(--white-500)
+    --button-underline-color: var(--white-500)
 }
 
 .theme-light .nu-button-link.nu-button-color-primary {
@@ -507,7 +486,7 @@
 }
 
 .theme-light .nu-button-link.nu-button-color-primary:hover .nu-button-content {
-    --button--underline-color: var(--primary-400)
+    --button-underline-color: var(--primary-400)
 }
 
 
@@ -515,19 +494,19 @@
 /* Color Transparent */
 .theme-dark .nu-button-filled.nu-button-color-transparent {
     color: var(--primary-100);
-    background-color: hsl(var(--white-500-hsl)/.1)
+    background-color: hsl(var(--white-500-hsl)/10%)
 }
 
 .theme-dark .nu-button-filled.nu-button-color-transparent:hover {
-    background-color: hsl(var(--white-500-hsl)/.05)
+    background-color: hsl(var(--white-500-hsl)/5%)
 }
 
 .theme-dark .nu-button-filled.nu-button-color-transparent:active {
-    background-color: hsl(var(--white-500-hsl)/.01)
+    background-color: hsl(var(--white-500-hsl)/1%)
 }
 
 .theme-dark .nu-button-filled.nu-button-color-transparent:disabled {
-    background-color: hsl(var(--white-500-hsl)/.1)
+    background-color: hsl(var(--white-500-hsl)/10%)
 }
 
 .theme-dark .nu-button-outlined.nu-button-color-transparent {
@@ -536,7 +515,7 @@
 }
 
 .theme-dark .nu-button-outlined.nu-button-color-transparent:active {
-    background-color: hsl(var(--primary-200-hsl)/.1)
+    background-color: hsl(var(--primary-200-hsl)/10%)
 }
 
 .theme-dark .nu-button-link.nu-button-color-transparent {
@@ -544,24 +523,24 @@
 }
 
 .theme-dark .nu-button-link.nu-button-color-transparent:hover .nu-button-content {
-    --button--underline-color: var(--primary-200)
+    --button-underline-color: var(--primary-200)
 }
 
 .theme-light .nu-button-filled.nu-button-color-transparent {
     color: var(--primary-400);
-    background-color: hsl(var(--primary-400-hsl)/.01)
+    background-color: hsl(var(--primary-400-hsl)/1%)
 }
 
 .theme-light .nu-button-filled.nu-button-color-transparent:hover {
-    background-color: hsl(var(--primary-400-hsl)/.2)
+    background-color: hsl(var(--primary-400-hsl)/20%)
 }
 
 .theme-light .nu-button-filled.nu-button-color-transparent:active {
-    background-color: hsl(var(--primary-400-hsl)/.25)
+    background-color: hsl(var(--primary-400-hsl)/25%)
 }
 
 .theme-light .nu-button-filled.nu-button-color-transparent:disabled {
-    background-color: hsl(var(--primary-400-hsl)/.01)
+    background-color: hsl(var(--primary-400-hsl)/1%)
 }
 
 .theme-light .nu-button-outlined.nu-button-color-transparent {
@@ -570,7 +549,7 @@
 }
 
 .theme-light .nu-button-outlined.nu-button-color-transparent:active {
-    background-color: hsl(var(--primary-400-hsl)/.1)
+    background-color: hsl(var(--primary-400-hsl)/10%)
 }
 
 .theme-light .nu-button-link.nu-button-color-transparent {
@@ -578,5 +557,5 @@
 }
 
 .theme-light .nu-button-link.nu-button-color-transparent:hover .nu-button-content {
-    --button--underline-color: var(--primary-400)
+    --button-underline-color: var(--primary-400)
 }

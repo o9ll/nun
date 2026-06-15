@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { React } from "@webpack/common";
 import clsx from "clsx";
 import type { PropsWithChildren } from "react";
@@ -25,7 +31,7 @@ type RootProps = PropsWithChildren<{
 
 export default function ModalRoot({ className, transitionState, children, size = Sizes.DYNAMIC, style = Styles.CUSTOM }: RootProps) {
     const { Anims, ReactSpring: Spring, FocusLock } = DiscordModules;
-    const visible = transitionState == 0 || transitionState == 1; // 300 ms
+    const visible = transitionState === 0 || transitionState === 1; // 300 ms
 
     const preferences: any = React.useContext(DiscordModules.AccessibilityContext ?? {});
     const reducedMotion = preferences?.reducedMotion?.enabled ?? document.documentElement?.classList.contains("reduce-motion");

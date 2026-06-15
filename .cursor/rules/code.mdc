@@ -1,0 +1,204 @@
+---
+description: Nun Code Style
+alwaysApply: true
+---
+
+# Code Style
+
+Nun = Discord client mod (TypeScript + React + webpack patches, Vencord/Equicord fork).
+Prioritize correctness, minimal code, and existing utilities. No overengineering.
+
+---
+
+# Core Principles
+
+- Minimal change > refactor
+- Declarative APIs > manual wiring
+- Prefer existing utilities over custom code
+- No comments unless explicitly requested
+- No unused abstractions or defensive coding
+- Keep code small, direct, predictable
+
+---
+
+# Plugin Structure
+
+```ts
+import definePlugin from "@utils/types";
+
+export default definePlugin({
+  name: "Plugin",
+  description: "Plugin description",
+});
+```
+
+Use declarative APIs:
+- `flux` over FluxDispatcher subscriptions
+- `contextMenus` over manual patches
+- `chatBarButton` / `messagePopoverButton` over manual UI injection
+- `managedStyle` over manual style toggles
+
+Lifecycle:
+- Everything in `start()` must be cleaned in `stop()` unless declarative API handles it
+
+---
+
+# Forbidden Patterns
+
+| Bad | Good |
+|---|---|
+| `value !== null && value !== undefined` | `value != null` |
+| `array && array.length > 0` | `array?.length` |
+| `value \|\| default` | `value ?? default` |
+| template concat | `classes()` |
+| hardcoded CDN URLs | `IconUtils.*` |
+| `/api/v9/...` | `Constants.Endpoints` |
+| `any` | typed Discord objects |
+| `as unknown as` | correct typing |
+| `React.memo()` | remove |
+| `React.cloneElement` | alternative approach |
+| `React.lazy(import())` | `LazyComponent` |
+| empty `catch {}` | handled error |
+| `console.log/warn` | remove |
+| `document.querySelector` | webpack patches |
+| magic numbers | constants |
+| commented dead code | delete |
+
+---
+
+# TypeScript Rules
+
+- Prefer inference
+- Use `const`, arrow functions
+- Early returns > nesting
+- No redundant types
+- No comments
+
+---
+
+# React Rules
+
+- Return `null` only (never undefined)
+- Always cleanup effects
+- Wrap patched components in ErrorBoundary
+- Use proper cleanup for listeners/timers
+
+---
+
+# Discord Types
+
+Always use:
+
+```ts
+import { User, Guild, Message } from "@vencord/discord-types";
+```
+
+No `any`, no unsafe casts.
+
+---
+
+# CSS
+
+- Always use `classNameFactory`
+- Combine via `classes()`
+
+```ts
+const cl = classNameFactory("vc-plugin-");
+className={classes(cl("x"), cond && cl("y"))}
+```
+
+---
+
+# Settings
+
+- `settings.store` = reactive
+- `settings.plain` = avoid unless required
+
+---
+
+# Patches
+
+Rules:
+- One concern per patch
+- Small regex scope (`.{0,n}` only)
+- Avoid broad matchers (`.*`)
+- Never rely on minified variable names
+- Use stable anchors (`#{intl::KEY}`)
+- Only capture groups when reused
+
+---
+
+# Plugins Interop
+
+```ts
+import { isPluginEnabled } from "@api/PluginManager";
+
+if (!isPluginEnabled(other.name)) return;
+```
+
+No direct global plugin access.
+
+---
+
+# Performance
+
+- Map/Set > arrays for lookup
+- `.find()` > `.filter()[0]`
+- `Promise.all()` for parallel work
+- No unnecessary helpers
+
+---
+
+# Cleanup Rules
+
+Every resource must be cleaned unless declarative:
+- listeners
+- intervals
+- observers
+- timers
+- subscriptions
+
+Prefer declarative APIs to avoid manual cleanup.
+
+---
+
+# Code Hygiene
+
+- Remove dead code
+- No overengineering
+- No unused imports
+- No logging in production plugins
+- Prefer fewer lines over abstractions
+
+---
+
+# Built-in Utilities
+
+Do NOT reimplement:
+
+- `@utils/misc`: classes, sleep, parseUrl
+- `@utils/css`: classNameFactory
+- `@utils/discord`: sendMessage, copyWithToast
+- `@utils/react`: hooks
+- `@webpack/common`: stores, actions, utils
+
+---
+
+# AI Slop Heuristics
+
+Flag:
+- excessive comments
+- over-defensive null checks
+- unnecessary wrappers
+- duplicated utilities
+- verbose naming
+
+Still fully review code.
+
+---
+
+# Review Policy
+
+- Focus on real issues only
+- Prefer fewer, high-impact findings
+- Ignore cosmetic noise

@@ -1,23 +1,63 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { getAccessToken, isAuthorized } from "@userplugins/_api/nunOnlineServices";
+import { getAccessToken as getOnlineAccessToken, isAuthorized as isOnlineAuthorized } from "../_api/onlineServices";
+import { getWsUrl as getOnlineWsUrl } from "../_api/onlineServices/constants";
+import { getAccessToken as getNunAccessToken, isAuthorized as isNunAuthorized } from "../_api/nunServices";
+import { getWsUrl as getNunWsUrl } from "../_api/nunServices/constants";
 import { debounce } from "@shared/debounce";
 import { proxyLazy } from "@utils/lazy";
 import { Logger } from "@utils/Logger";
 import type { VoiceState as DiscordVoiceState } from "@vencord/discord-types";
 import { ChannelStore, GuildMemberStore, GuildStore, showToast, Toasts, UserStore, VoiceStateStore, zustandCreate } from "@webpack/common";
 
-import { BATCH_INTERVAL_MS, WS_URL } from "./constants";
+import { BATCH_INTERVAL_MS } from "./constants";
 import { type MetaUpsert, VoiceIndicatorsClient, type VoiceState as ReportVoiceState } from "./sdk/VoiceIndicatorsClient";
+import { settings } from "./settings";
 import type { ChannelLogEntry, ChannelQueryResult, HydratedSession, UserChannelLogEntry } from "./types";
 
 const logger = new Logger("VoiceIndicators");
 
-const vi = new VoiceIndicatorsClient({ url: WS_URL, getAccessToken });
+interface Backend {
+    wsUrl: string;
+    getAccessToken: () => Promise<string>;
+    isAuthorized: () => boolean;
+}
+
+function getBackend(): Backend {
+    if (settings.store.backend === "nunServices") {
+        return {
+            wsUrl: getNunWsUrl(),
+            getAccessToken: getNunAccessToken,
+            isAuthorized: isNunAuthorized,
+        };
+    }
+
+    return {
+        wsUrl: getOnlineWsUrl(),
+        getAccessToken: getOnlineAccessToken,
+        isAuthorized: isOnlineAuthorized,
+    };
+}
+
+let vi: VoiceIndicatorsClient | null = null;
+let activeBackend: string | null = null;
+
+function getVi(): VoiceIndicatorsClient {
+    const backend = settings.store.backend;
+    if (!vi || activeBackend !== backend) {
+        vi?.close();
+        const { wsUrl, getAccessToken } = getBackend();
+        vi = new VoiceIndicatorsClient({ url: wsUrl, getAccessToken });
+        activeBackend = backend;
+        bindViEvents(vi);
+        started = false;
+    }
+    return vi;
+}
 
 // ── Reactive session store ───────────────────────────────────────────────────
 interface VoiceStoreState {
@@ -43,7 +83,7 @@ async function ensureConnected(): Promise<void> {
     if (started) return;
     if (connecting) return connecting;
 
-    connecting = vi.connect().then(
+    connecting = getVi().connect().then(
         () => { started = true; },
         e => { connecting = null; throw e; }
     ).finally(() => { connecting = null; });
@@ -57,7 +97,7 @@ const channelListeners = new Map<string, Set<() => void>>();
 export function subscribeUser(userId: string): void {
     const next = (userRefCounts.get(userId) ?? 0) + 1;
     userRefCounts.set(userId, next);
-    if (next === 1) vi.subscribe({ users: [userId] });
+    if (next === 1) getVi().subscribe({ users: [userId] });
     void ensureConnected().catch(() => { });
 }
 
@@ -65,7 +105,7 @@ export function unsubscribeUser(userId: string): void {
     const next = (userRefCounts.get(userId) ?? 0) - 1;
     if (next <= 0) {
         userRefCounts.delete(userId);
-        vi.unsubscribe({ users: [userId] });
+        getVi().unsubscribe({ users: [userId] });
     } else {
         userRefCounts.set(userId, next);
     }
@@ -76,7 +116,7 @@ export function subscribeChannel(channelId: string, onChange: () => void): () =>
     if (!set) {
         set = new Set();
         channelListeners.set(channelId, set);
-        vi.subscribe({ channels: [channelId] });
+        getVi().subscribe({ channels: [channelId] });
     }
     set.add(onChange);
     void ensureConnected().catch(() => { });
@@ -87,7 +127,7 @@ export function subscribeChannel(channelId: string, onChange: () => void): () =>
         current.delete(onChange);
         if (current.size === 0) {
             channelListeners.delete(channelId);
-            vi.unsubscribe({ channels: [channelId] });
+            getVi().unsubscribe({ channels: [channelId] });
         }
     };
 }
@@ -102,12 +142,11 @@ const flushUsers = debounce(() => {
 
     ensureConnected()
         .then(async () => {
-            const result = await vi.queryUsers(ids) as Record<string, HydratedSession[]>;
+            const result = await getVi().queryUsers(ids) as Record<string, HydratedSession[]>;
             const map: Record<string, HydratedSession[]> = {};
             const missingChannels = new Set<string>();
             for (const id of ids) {
                 map[id] = result[id] ?? [];
-                // Backend knows nothing about them but we might: contribute their whole channel.
                 if (map[id].length === 0) {
                     const cid = VoiceStateStore.getVoiceStateForUser(id)?.channelId;
                     if (cid) missingChannels.add(cid);
@@ -116,7 +155,7 @@ const flushUsers = debounce(() => {
             useVoiceStore.getState().setMany(map);
             missingChannels.forEach(reportChannel);
         })
-        .catch(e => { if (isAuthorized()) logger.error("Bulk user query failed", e); });
+        .catch(e => { if (getBackend().isAuthorized()) logger.error("Bulk user query failed", e); });
 }, BATCH_INTERVAL_MS);
 
 export function requestUserSessions(userId: string): void {
@@ -127,25 +166,24 @@ export function requestUserSessions(userId: string): void {
 // ── Direct queries (for the modal) ───────────────────────────────────────────
 export async function queryUserSessions(userId: string): Promise<HydratedSession[]> {
     await ensureConnected();
-    return await vi.queryUser(userId) as HydratedSession[];
+    return await getVi().queryUser(userId) as HydratedSession[];
 }
 
 export async function queryChannelMembers(channelId: string): Promise<ChannelQueryResult> {
     await ensureConnected();
-    const result = await vi.queryChannel(channelId) as ChannelQueryResult;
-    // Backend has no members but we might know them locally: contribute it.
+    const result = await getVi().queryChannel(channelId) as ChannelQueryResult;
     if (!result.members?.length) reportChannel(channelId);
     return result;
 }
 
 export async function queryUserLog(userId: string): Promise<UserChannelLogEntry[]> {
     await ensureConnected();
-    return await vi.queryUserLog(userId) as UserChannelLogEntry[];
+    return await getVi().queryUserLog(userId) as UserChannelLogEntry[];
 }
 
 export async function queryChannelLog(channelId: string): Promise<ChannelLogEntry[]> {
     await ensureConnected();
-    return await vi.queryChannelLog(channelId) as ChannelLogEntry[];
+    return await getVi().queryChannelLog(channelId) as ChannelLogEntry[];
 }
 
 // ── Crowd-sourced reporting ──────────────────────────────────────────────────
@@ -188,40 +226,33 @@ function buildMeta(vs: DiscordVoiceState): MetaUpsert {
     return meta;
 }
 
-/** Push every voice state this client currently knows about to the backend. */
 function reportAllVoiceStates(): void {
     for (const byUser of Object.values(VoiceStateStore.getAllVoiceStates())) {
         for (const vs of Object.values(byUser)) {
             if (!vs.channelId) continue;
-            vi.report(toReport(vs), buildMeta(vs));
+            getVi().report(toReport(vs), buildMeta(vs));
         }
     }
 }
 
 function reportChannel(channelId: string): void {
     for (const vs of Object.values(VoiceStateStore.getVoiceStatesForChannel(channelId))) {
-        vi.report(toReport(vs), buildMeta(vs));
+        getVi().report(toReport(vs), buildMeta(vs));
     }
 }
 
-/** Backfill guild metadata from our local store when the backend hasn't got it yet. */
 export function reportGuildMeta(guildId: string): void {
     const guild = GuildStore.getGuild(guildId);
-    if (guild) vi.upsertMeta({ guild: { id: guild.id, name: guild.name, icon: guild.icon ?? undefined, vanityCode: guild.vanityURLCode ?? undefined } });
+    if (guild) getVi().upsertMeta({ guild: { id: guild.id, name: guild.name, icon: guild.icon ?? undefined, vanityCode: guild.vanityURLCode ?? undefined } });
 }
 
-/** Forward live VOICE_STATE_UPDATES to the backend (joins, leaves, moves, mutes). */
 export function reportVoiceStates(voiceStates: DiscordVoiceState[]): void {
     if (!started) return;
-    for (const vs of voiceStates) vi.report(toReport(vs), buildMeta(vs));
+    for (const vs of voiceStates) getVi().report(toReport(vs), buildMeta(vs));
 }
 
 let reportTimer: ReturnType<typeof setTimeout> | null = null;
 
-/**
- * Report all known voice states shortly after Discord finishes loading them.
- * Called on READY_SUPPLEMENTAL, with a small delay so the stores settle first.
- */
 export function reportKnownVoiceStatesSoon(): void {
     if (reportTimer) clearTimeout(reportTimer);
     reportTimer = setTimeout(() => {
@@ -230,32 +261,31 @@ export function reportKnownVoiceStatesSoon(): void {
     }, 100);
 }
 
-// ── Event wiring ─────────────────────────────────────────────────────────────
-vi.on("voiceDelta", d => {
-    if (userRefCounts.has(d.userId)) requestUserSessions(d.userId);
+function bindViEvents(client: VoiceIndicatorsClient): void {
+    client.on("voiceDelta", d => {
+        if (userRefCounts.has(d.userId)) requestUserSessions(d.userId);
 
-    for (const cid of [d.channelId, d.fromChannelId]) {
-        if (cid == null) continue;
-        channelListeners.get(cid)?.forEach(cb => cb());
-    }
-});
+        for (const cid of [d.channelId, d.fromChannelId]) {
+            if (cid == null) continue;
+            channelListeners.get(cid)?.forEach(cb => cb());
+        }
+    });
 
-vi.on("ready", () => {
-    // Crowd-source: push every voice state we currently know about.
-    reportAllVoiceStates();
-    // Refresh everything we're tracking after a (re)connect.
-    for (const id of userRefCounts.keys()) requestUserSessions(id);
-});
+    client.on("ready", () => {
+        reportAllVoiceStates();
+        for (const id of userRefCounts.keys()) requestUserSessions(id);
+    });
 
-vi.on("revalidate", ({ channelId }) => reportChannel(channelId));
+    client.on("revalidate", ({ channelId }) => reportChannel(channelId));
 
-vi.on("fatal", ({ code, message }) => {
-    started = false;
-    logger.error(`Connection terminated: ${code} ${message}`);
-    if (code === "AUTH_INVALID" || code === "GUILD_JOIN_FAILED") {
-        showToast("Voice Indicators session expired. Re-authorize from the plugin settings.", Toasts.Type.FAILURE);
-    }
-});
+    client.on("fatal", ({ code, message }) => {
+        started = false;
+        logger.error(`Connection terminated: ${code} ${message}`);
+        if (code === "AUTH_INVALID" || code === "GUILD_JOIN_FAILED") {
+            showToast("Voice Indicators session expired. Re-authorize from the plugin settings.", Toasts.Type.FAILURE);
+        }
+    });
+}
 
 export function stopClient(): void {
     started = false;
@@ -264,6 +294,8 @@ export function stopClient(): void {
     pendingUsers.clear();
     userRefCounts.clear();
     channelListeners.clear();
-    vi.close();
+    vi?.close();
+    vi = null;
+    activeBackend = null;
     useVoiceStore.getState().clear();
 }

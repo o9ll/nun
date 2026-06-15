@@ -1,9 +1,14 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { React } from "@webpack/common";
 import Root from "./root";
 import Header from "./header";
 import Footer from "./footer";
 import Content from "./content";
-
 import Text from "../base/text";
 import Button from "../base/button";
 import type {PropsWithChildren} from "react";

@@ -85,6 +85,6 @@
         "eslint.config.mjs"
     ],
     "exclude": [
-        "src/userexclude"
+        "userexclude"
     ]
 }

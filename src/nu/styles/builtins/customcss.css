@@ -218,29 +218,6 @@
   background: var(--background-base-lowest);
 }
 
-.nu-error-toggle {
-  width: 30% !important;
-  padding: 12px !important;
-  text-align: center !important;
-  background: var(--background-base-lowest) !important;
-  border: none !important;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-default);
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-}
-
-.nu-error-toggle.expanded {
-  background: var(--interactive-background-selected) !important;
-}
-
-.nu-error-toggle:hover {
-  background: var(--interactive-background-hover) !important;
-}
-
 .nu-error-actions {
   display: flex;
   gap: 8px;
@@ -261,11 +238,11 @@
 }
 
 .nu-error-github {
-  background-color: "#fdd18c" !important;
+  background-color: #fdd18c !important;
 }
 
 .nu-error-github:hover {
-  background-color: "#fcc145" !important;
+  background-color: #fcc145 !important;
 }
 
 .nu-error-discord {

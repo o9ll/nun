@@ -1,3 +1,10 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+import "./Store.css";
 import { NuWebAddon } from "@nu/types/addonstore";
 import DiscordModules from "@nu/webpack/modules";
 import { LucideIcon } from "@nu/ui/icons";
@@ -68,9 +75,9 @@ export default function PluginStoreCard({ plugin }: Props) {
     };
 
     return (
-        <div className="addon-store-card">
-            <div className="addon-store-card-splash">
-                <div className="addon-store-card-preview">
+        <div className="nu-addon-store-card">
+            <div className="nu-addon-store-card-splash">
+                <div className="nu-addon-store-card-preview">
                     <img
                         src={resolveThumbnail(plugin.thumbnail_url)}
                         onError={(event) => {
@@ -78,15 +85,15 @@ export default function PluginStoreCard({ plugin }: Props) {
                             event.currentTarget.src = resolveThumbnail();
                         }}
                         loading="lazy"
-                        className="addon-store-card-preview-img"
+                        className="nu-addon-store-card-preview-img"
                         alt={`Thumbnail for ${plugin.name}`}
                     />
                 </div>
-                <div className="addon-store-card-author">
+                <div className="nu-addon-store-card-author">
                     <svg
                         height={48}
                         width={48}
-                        className="addon-store-card-author-svg"
+                        className="nu-addon-store-card-author-svg"
                         viewBox="0 0 48 48"
                     >
                         <foreignObject
@@ -97,11 +104,11 @@ export default function PluginStoreCard({ plugin }: Props) {
                             overflow="visible"
                             mask="url(#svg-mask-squircle)"
                         >
-                            <div className="addon-store-card-author-mask">
+                            <div className="nu-addon-store-card-author-mask">
                                 <svg
                                     height={40}
                                     width={40}
-                                    className="addon-store-card-author-svg"
+                                    className="nu-addon-store-card-author-svg"
                                     viewBox="0 0 40 40"
                                 >
                                     <foreignObject
@@ -116,7 +123,7 @@ export default function PluginStoreCard({ plugin }: Props) {
                                             {(props) => (
                                                 <img
                                                     loading="lazy"
-                                                    className="addon-store-card-author-img"
+                                                    className="nu-addon-store-card-author-img"
                                                     src={resolveAvatar(plugin.author.github_id)}
                                                     {...props}
                                                     onClick={() => openAuthorPage(plugin.author.display_name)}
@@ -131,40 +138,37 @@ export default function PluginStoreCard({ plugin }: Props) {
                 </div>
                 {/* Nun TODO: New / Recently updated */}
             </div>
-            <div className="addon-store-card-body">
-                <div className="addon-store-card-name">
-                    {/* @ts-expect-error nu */}
+            <div className="nu-addon-store-card-body">
+                <div className="nu-addon-store-card-name">
                     <DiscordModules.Tooltip text="Official" aria-label="Official" hideOnClick={false}>
                         {(props) => (
-                            <div className="flower-star" {...props}>
+                            <div className="nu-flower-star" {...props}>
                                 <LucideIcon icon={BadgeCheck} size={16} />
                             </div>
                         )}
                     </DiscordModules.Tooltip>
                     <span>{plugin.name}</span>
                 </div>
-                <div className="addon-store-card-description">{plugin.description}</div>
-                <div className="addon-store-card-tags">
-                    {plugin.tags.map((tag) => (
-                        <span
-                            className="addon-store-card-tag"
-                        >
+                <div className="nu-addon-store-card-description">{plugin.description}</div>
+                <div className="nu-addon-store-card-tags">
+                    {plugin.tags.map(tag => (
+                        <span key={tag} className="nu-addon-store-card-tag">
                             {tag}
                         </span>
                     ))}
                 </div>
-                <div className="addon-store-card-spacer" />
-                <div className="addon-store-card-info">
-                    <div className="addon-store-card-likes">
-                        <div className="addon-store-card-dot" />
-                        <div className="addon-store-card-value">{plugin.likes}</div>
+                <div className="nu-addon-store-card-spacer" />
+                <div className="nu-addon-store-card-info">
+                    <div className="nu-addon-store-card-likes">
+                        <div className="nu-addon-store-card-dot" />
+                        <div className="nu-addon-store-card-value">{plugin.likes}</div>
                     </div>
-                    <div className="addon-store-card-downloads">
-                        <div className="addon-store-card-dot" />
-                        <div className="addon-store-card-value">{plugin.downloads}</div>
+                    <div className="nu-addon-store-card-downloads">
+                        <div className="nu-addon-store-card-dot" />
+                        <div className="nu-addon-store-card-value">{plugin.downloads}</div>
                     </div>
                 </div>
-                <div className="addon-store-card-actions">
+                <div className="nu-addon-store-card-actions">
                     <DiscordModules.Tooltip text="Website">
                         {(props) => (
                             <Button
@@ -203,7 +207,7 @@ export default function PluginStoreCard({ plugin }: Props) {
                             )}
                         </DiscordModules.Tooltip>
                     )}
-                    <div className="addon-store-card-spacer" />
+                    <div className="nu-addon-store-card-spacer" />
                     {isInstalled ? (
                         <DiscordModules.Tooltip text="Delete">
                             {(props) => (

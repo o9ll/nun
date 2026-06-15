@@ -1,25 +1,13 @@
 /*
- * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 import { Card } from "@components/Card";
 import { Flex } from "@components/Flex";
 import { Switch } from "@components/Switch";
-import { MicrophoneProfile, MicrophoneStore } from "@userplugins/betterMicrophone.desktop/stores";
+import { MicrophoneProfile, MicrophoneStore } from "../../betterMicrophone.desktop/stores";
 import {
     ProfilableStore,
     SettingsModal,
@@ -30,9 +18,8 @@ import {
     SettingsModalProfilesCard,
     validateNumberInput,
     validateTextInputNumber
-} from "@userplugins/philsPluginLibrary";
-import { Styles } from "@userplugins/philsPluginLibrary/styles";
-import { ModalSize } from "@utils/modal";
+} from "../../philsPluginLibrary";
+import { Styles } from "../../philsPluginLibrary/styles";
 import { SelectOption } from "@vencord/discord-types";
 import { Forms, Select, Slider, TextInput, useEffect, useState } from "@webpack/common";
 
@@ -268,15 +255,15 @@ export const MicrophoneSettingsModal = (props: MicrophoneSettingsModalProps) => 
 
     const infoCard =
         <Card style={{ ...Styles.infoCard }}>
-            <Forms.FormTitle tag="h5">{"GoXLR SM7B Setup"}</Forms.FormTitle>
+            <Forms.FormTitle tag="h5">{"Setup"}</Forms.FormTitle>
             <Forms.FormText>
-                {"Use the GoXLR SM7B profile (mono, 160 kbps, 48 kHz). In GoXLR app: Condenser mode, ~30 dB gain with Cloudlifter. Discord input: Chat Mic (TC-Helicon GoXLR Mini). Disable Krisp, echo cancellation, noise suppression, and auto gain."}
+                {"Profile (Stereo, 512 kbps, 48 kHz). Condenser mode, 28 - 36 dB gain with Cloudlifter. Disable Krisp, echo cancellation, noise suppression, and auto gain."}
             </Forms.FormText>
         </Card>;
 
     return (
         <SettingsModal
-            size={simpleMode ? ModalSize.DYNAMIC : ModalSize.DYNAMIC}
+            size="dynamic"
             title={"Microphone Settings"}
             closeButtonName={"Apply"}
             footerContent={

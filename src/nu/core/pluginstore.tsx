@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { Logger } from "@utils/Logger";
 import toasts from "@nu/stores/toasts";
 import { NuWebAddon } from "@nu/types/addonstore";
@@ -46,7 +52,7 @@ export default class PluginStore {
     }
 
     static checkUpdates() {
-        let updatable: string[] = [];
+        const updatable: string[] = [];
 
         for (const plugin of pluginmanager.addonList) {
             const storePlugin = this.plugins[plugin.filename];
@@ -69,9 +75,9 @@ export default class PluginStore {
             title: "BetterDiscord Plugin Updater",
             content: [
                 message,
-                <ul className="notification-updates-list">
-                    {updatable.map((filename) =>
-                        <li>
+                <ul key="updates" className="notification-updates-list">
+                    {updatable.map(filename =>
+                        <li key={filename}>
                             {this.plugins[filename].name}
                             {" "}
                             <i>({this.plugins[filename].version})</i>

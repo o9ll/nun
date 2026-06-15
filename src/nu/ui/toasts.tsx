@@ -1,10 +1,15 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { React } from "@webpack/common";
 import DiscordModules from "../webpack/modules";
 import DOMManager from "../core/dommanager";
 import ToastStore from "../stores/toasts";
 import ToastIcon from "./toasts/ToastIcon";
 import { useStateFromStores } from "./hooks";
-
 import clsx from "clsx";
 import type { Root } from "react-dom/client";
 

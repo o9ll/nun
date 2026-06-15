@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 /**
  * Simple logger for the lib and plugins.
  *
@@ -5,7 +11,7 @@
  * @version 0.1.0
  */
 
-/* eslint-disable no-console */
+ 
 
 /**
  * List of logging types.

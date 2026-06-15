@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { React } from "@webpack/common";
 
 import Button from "../../base/button";
@@ -45,7 +51,7 @@ export default function Keybind({ value: initialValue, onChange, max = 4, cleara
         if (event.repeat || state.accum.includes(event.key)) return;
 
         state.accum.push(event.key);
-        if (state.accum.length == max) {
+        if (state.accum.length === max) {
             setState({ isRecording: false, accum: [] });
             setValue(state.accum.slice(0));
             onChange?.(state.accum);

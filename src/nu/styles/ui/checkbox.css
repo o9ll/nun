@@ -1,7 +1,5 @@
 .nu-checkbox {
     position: relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
     user-select: none;
     gap: 8px;
     cursor: pointer;
@@ -23,8 +21,6 @@
     opacity: 0;
     margin: 0;
     padding: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     z-index: 1;
 }

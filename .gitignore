@@ -25,7 +25,7 @@ lerna-debug.log*
 *.tsbuildinfo
 
 .modules/
-#src/userplugins
+src/userplugins
 
 ExtensionCache/
 /settings
@@ -36,4 +36,5 @@ ExtensionCache/
 # wakatime related stuff
 .wakatime-project
 
-src/userexclude
+userexclude
+xx

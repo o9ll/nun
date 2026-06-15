@@ -28,7 +28,7 @@ export default definePlugin({
     async start() {
         SettingsPlugin.customEntries.push({
             key: "equicord_i_remember_you",
-            title: "I Remember You",
+            title: "Remember",
             Component: () => <DataUI usersCollection={data.usersCollection} />,
             Icon: EyeIcon
         });

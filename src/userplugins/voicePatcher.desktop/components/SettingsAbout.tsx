@@ -1,6 +1,6 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -11,18 +11,18 @@ import { Margins } from "@components/margins";
 export default function VoicePatcherSettingsAbout() {
     return (
         <>
-            <Heading className={Margins.bottom8} tag="h5">GoXLR MINI + SM7B stack</Heading>
+            <Heading className={Margins.bottom8} tag="h5">Setup</Heading>
             <Paragraph>
-                Keep all default patches enabled. This unlocks stereo and high bitrate in discord_voice.node.
-                Pair with BetterMicrophone using the GoXLR SM7B profile (mono, 160 kbps, 48 kHz).
+                1. Unlock stereo and high bitrate.
+                2. Profile stereo + 512 kbps + 48 kHz.
             </Paragraph>
             <Paragraph className={Margins.top8}>
-                Hardware chain: SM7B → Cloudlifter CL-1 → GoXLR MINI XLR input.
-                GoXLR app: Condenser mode, gain ~28 to 35 dB. Discord input: Chat Mic (TC-Helicon GoXLR Mini).
+                3. Mic → Cloudlifter → Mixer input.
+                4. Mic Condenser + Gain 28 to 35 dB.
             </Paragraph>
             <Paragraph className={Margins.top8}>
-                Disable Krisp and all Discord audio processing so GoXLR gate, compressor, and EQ stay intact.
-                StereoMic is not needed on desktop Discord. Use StereoScreenshareAudio only on Vesktop for stream listening.
+                5. Disable Krisp.
+                6. Disable all audio processing.
             </Paragraph>
         </>
     );

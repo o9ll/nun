@@ -1,66 +1,36 @@
-# Vencord Installer
+# Nun Installer
 
-The Vencord Installer allows you to install [Vencord, the cutest Discord Desktop client mod](https://github.com/Vendicated/Vencord)
-
-![image](https://user-images.githubusercontent.com/45497981/226734476-5fb42420-844d-4e27-ae06-4799118e086e.png)
+The Nun Installer patches Discord on Windows to load [Nun](https://github.com/o9ll/nun).
 
 ## Usage
 
-See https://vencord.dev/download
+See https://github.com/o9ll/nun
 
-## Building from source
+## Building from source (Windows)
 
-### Prerequisites 
+### Prerequisites
 
-You need to install the [Go programming language](https://go.dev/doc/install) and GCC, the GNU Compiler Collection (MinGW on Windows)
+- [Go](https://go.dev/doc/install)
+- GCC via [MinGW-w64](https://www.mingw-w64.org/) (or MSYS2 with `mingw-w64-x86_64-gcc`)
+- For the GUI build: SDL2 dev libraries (`mingw-w64-x86_64-SDL2` on MSYS2)
 
-<details>
-<summary>Additionally, if you're using Linux, you have to install some additional dependencies:</summary>
-
-#### Base dependencies
-```sh
-apt install -y pkg-config libsdl2-dev libglx-dev libgl1-mesa-dev
-dnf install pkg-config libGL-devel libXxf86vm-devel
-```
-
-#### X11 dependencies
-```sh
-apt install -y xorg-dev
-dnf install libXcursor-devel libXi-devel libXinerama-devel libXrandr-devel
-```
-
-#### Wayland dependencies
-```sh
-apt install -y libwayland-dev libxkbcommon-dev wayland-protocols extra-cmake-modules
-dnf install wayland-devel libxkbcommon-devel wayland-protocols-devel extra-cmake-modules
-```
-
-</details>
-
-### Building
-
-#### Install dependencies
+### Install dependencies
 
 ```sh
 go mod tidy
 ```
 
-#### Build the GUI
+### Build the GUI
 
-##### Windows / Mac / Linux X11
 ```sh
-go build
+go-winres make --product-version "dev"
+CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags static -ldflags "-s -w -H=windowsgui"
 ```
 
-##### Linux Wayland
+### Build the CLI
+
 ```sh
-go build --tags wayland
+CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -v -tags "static cli" -ldflags "-s -w"
 ```
 
-#### Build the CLI
-```
-go build --tags cli
-```
-
-You might want to pass some flags to this command to get a better build.
-See [the GitHub workflow](https://github.com/Vendicated/VencordInstaller/blob/main/.github/workflows/release.yml) for what flags I pass or if you want more precise instructions
+See [.github/workflows/build-installer.yml](../.github/workflows/build-installer.yml) for the full release build flags.

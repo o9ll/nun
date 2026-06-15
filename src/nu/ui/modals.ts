@@ -1,17 +1,21 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import Logger from "../core/logger";
 // import Settings from "@stores/settings";
 import Patcher from "../core/patcher";
 import DiscordModules from "../webpack/modules";
 import DOMManager from "../core/dommanager";
 import Events from "../core/emitter";
-
 import ErrorBoundary from "./errorboundary";
 import TextElement from "./base/text";
 import ModalRoot from "./modals/root";
 // import ModalHeader from "./modals/header";
 // import ModalContent from "./modals/content";
 // import ModalFooter from "./modals/footer";
-
 import ConfirmationModal, { type ConfirmationModalOptions } from "./modals/confirmation";
 // import Button from "./base/button";
 import CustomMarkdown from "./base/markdown";

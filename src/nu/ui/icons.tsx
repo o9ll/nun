@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { IconProps } from "@utils/types";
 import { React } from "@webpack/common";
 import type { IconNode } from "lucide";
@@ -13,7 +19,7 @@ export function LucideIcon({ icon, size = 24, color, className }: IconOptions) {
     const stroke = color ?? "currentColor";
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={stroke} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className={className}>
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
             {icon.map(([tag, attrs]) => React.createElement(tag, attrs))}
         </svg>
     );
@@ -25,7 +31,7 @@ interface NULogoProps extends IconProps {
 
 export function NULogo({ accent = false, width = 16, height = 16 }: NULogoProps) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 2000 2000" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 2000 2000" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path
                 d="M1402.2,631.7c-9.7-353.4-286.2-496-642.6-496H68.4v714.1l442,398V490.7h257c274.5,0,274.5,344.9,0,344.9H597.6v329.5h169.8c274.5,0,274.5,344.8,0,344.8h-699v354.9h691.2c356.3,0,632.8-142.6,642.6-496c0-162.6-44.5-284.1-122.9-368.6C1357.7,915.8,1402.2,794.3,1402.2,631.7z"
                 fill={accent ? "var(--nu-brand)" : "currentcolor"}

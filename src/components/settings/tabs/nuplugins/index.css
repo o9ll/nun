@@ -1,17 +1,33 @@
+.nu-tab {
+    width: 100%;
+    min-width: 0;
+}
+
+.nu-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
 .nu-action-button {
-    background: none;
-    padding: 0;
-    cursor: pointer;
+    margin-right: 0;
 }
 
 .nu-no-plugins {
-    grid-column: span 2;
+    grid-column: 1 / -1;
     padding-top: 5px;
     padding-bottom: 25px;
 }
 
 .nu-drop-indicator {
-    outline: 4px dashed white;
+    outline: 4px dashed var(--text-subtle);
     border-radius: 12px;
     opacity: 0.85;
+}
+
+@media (width <=600px) {
+    .nu-tab .vc-plugins-filter-controls {
+        height: auto;
+        grid-template-columns: 1fr;
+    }
 }

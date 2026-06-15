@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import Modals from "../ui/modals";
 import Toasts, { type ToastOptions } from "../stores/toasts";
 import Notices, { type NoticeOptions } from "../ui/notices";
@@ -231,7 +237,7 @@ const UI = {
             if (!setting.id || !setting.type) throw new Error(`Setting item missing id or type`);
 
             if (setting.type === "category") {
-                const shownByDefault = setting.hasOwnProperty("shown") ? setting.shown : true;
+                const shownByDefault = "shown" in setting ? setting.shown : true;
 
                 return React.createElement(Group, {
                     ...setting,

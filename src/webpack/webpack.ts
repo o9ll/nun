@@ -19,7 +19,6 @@
 import { traceFunction } from "@debug/Tracer";
 import MainPatcher from "@nu/core/patcher";
 import PluginManager from "@nu/core/pluginmanager";
-import { getModule } from "@nu/webpack";
 import { makeLazy, proxyLazy } from "@utils/lazy";
 import { LazyComponent } from "@utils/lazyReact";
 import { Logger } from "@utils/Logger";

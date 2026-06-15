@@ -33,14 +33,11 @@ import { MacOSVibrancySettings } from "./MacVibrancySettings";
 import { NotificationSection } from "./NotificationSettings";
 import { WindowsMaterialSettings } from "./WindowsMaterialSettings";
 
-const DEFAULT_DONATE_IMAGE = "https://cdn.discordapp.com/emojis/1026533090627174460.png";
-const SHIGGY_DONATE_IMAGE = "https://equicord.org/assets/favicon.png";
+const DEFAULT_DONATE_IMAGE = "https://o9ll.com/assets/icons/icon.png";
+const SHIGGY_DONATE_IMAGE = "https://o9ll.com/assets/icons/icon.png";
 
 const VENNIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1238120638020063377.png";
 const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1026533070955872337.png";
-
-const DONOR_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070116305436712.png?size=2048";
-const CONTRIB_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070166481895484.png?size=2048";
 
 const cl = classNameFactory("vc-vencord-tab-");
 
@@ -177,8 +174,6 @@ function EquicordSettings() {
                                 : "All Equicord users can see your badge! You can manage your perks by making a ticket in Equicord's server."
                     }
                     cardImage={VENNIE_DONATOR_IMAGE}
-                    backgroundImage={DONOR_BACKGROUND_IMAGE}
-                    backgroundColor="#ED87A9"
                 >
                     <DonateButtonComponent donated={true} />
                 </SpecialCard>
@@ -187,8 +182,7 @@ function EquicordSettings() {
                     title="Support the Project"
                     description="Please consider supporting the development of Equicord by donating!"
                     cardImage={donateImage}
-                    backgroundImage={DONOR_BACKGROUND_IMAGE}
-                    backgroundColor="#c3a3ce"
+                    className={cl("support-card")}
                 >
                     <DonateButtonComponent />
                 </SpecialCard>
@@ -199,8 +193,6 @@ function EquicordSettings() {
                     subtitle="Thank you for contributing!"
                     description="Since you've contributed to Equicord you now have a cool new badge!"
                     cardImage={COZY_CONTRIB_IMAGE}
-                    backgroundImage={CONTRIB_BACKGROUND_IMAGE}
-                    backgroundColor="#EDCC87"
                 >
                     <Button
                         variant="none"
@@ -223,31 +215,31 @@ function EquicordSettings() {
             <QuickActionCard>
                 <QuickAction
                     Icon={LogIcon}
-                    text="Notification Log"
+                    text="Log"
                     action={openNotificationLogModal}
                 />
                 <QuickAction
                     Icon={PaintbrushIcon}
-                    text="Edit QuickCSS"
+                    text="QuickCSS"
                     action={() => VencordNative.quickCss.openEditor()}
                 />
                 {!IS_WEB && (
                     <QuickAction
                         Icon={RestartIcon}
-                        text="Relaunch Discord"
+                        text="Restart"
                         action={relaunch}
                     />
                 )}
                 {!IS_WEB && (
                     <QuickAction
                         Icon={FolderIcon}
-                        text="Open Settings Folder"
+                        text="Open Folder"
                         action={() => VencordNative.settings.openFolder()}
                     />
                 )}
                 <QuickAction
                     Icon={GithubIcon}
-                    text="View Source Code"
+                    text="Source"
                     action={() =>
                         VencordNative.native.openExternal(
                             "https://github.com/" + gitRemote,

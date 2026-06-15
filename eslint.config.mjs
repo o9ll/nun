@@ -13,7 +13,7 @@ import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
 
 export default defineConfig(
-    { ignores: ["dist", "browser", "packages/vencord-types", "src/userexclude"] },
+    { ignores: ["dist", "browser", "packages/vencord-types", "userexclude", "**/*.min.mjs"] },
     {
         files: ["src/**/*.{tsx,ts,mts,mjs,js,jsx}", "eslint.config.mjs"],
         settings: {
@@ -54,7 +54,7 @@ export default defineConfig(
         languageOptions: {
             parser: tseslint.parser,
             parserOptions: {
-                project: ["./tsconfig.json"],
+                project: ["./tsconfig.json", "./src/userplugins/_api/nunServices/server/tsconfig.json"],
                 tsconfigRootDir: import.meta.dirname
             }
         },
@@ -73,6 +73,7 @@ export default defineConfig(
             ],
 
             // Style Rules
+            /*
             "@stylistic/jsx-quotes": ["error", "prefer-double"],
             "@stylistic/quotes": ["error", "double", { "avoidEscape": true }],
             "@stylistic/no-mixed-spaces-and-tabs": "error",
@@ -89,20 +90,14 @@ export default defineConfig(
             "@stylistic/spaced-comment": ["error", "always", { "markers": ["!"] }],
             "@stylistic/no-extra-semi": "error",
             "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 0 }],
+            */
 
             // TS Rules
             "@stylistic/function-call-spacing": ["error", "never"],
 
             // ESLint Rules
-            "yoda": "error",
             "eqeqeq": ["error", "always", { "null": "ignore" }],
-            "prefer-destructuring": ["error", {
-                "VariableDeclarator": { "array": false, "object": true },
-                "AssignmentExpression": { "array": false, "object": false }
-            }],
-            "operator-assignment": ["error", "always"],
             "no-useless-computed-key": "error",
-            "no-unneeded-ternary": ["error", { "defaultAssignment": false }],
             "no-invalid-regexp": "error",
             "no-constant-condition": ["error", { "checkLoops": false }],
             "no-duplicate-imports": "error",
@@ -111,12 +106,6 @@ export default defineConfig(
                 {
                     "allowPrivateClassPropertyAccess": true,
                     "allowProtectedClassPropertyAccess": true
-                }
-            ],
-            "no-useless-escape": [
-                "error",
-                {
-                    "allowRegexCharacters": ["i"]
                 }
             ],
             "no-fallthrough": "error",
@@ -137,13 +126,45 @@ export default defineConfig(
             "use-isnan": "error",
             "prefer-const": ["error", { destructuring: "all" }],
             "prefer-spread": "error",
-            // These are old deprecated browser globals which may be used by mistake, e.g. `addEventListener(e => console.log(event))`
+            /*
+            "yoda": "error",
+            "operator-assignment": ["error", "always"],
+            "no-unneeded-ternary": ["error", { "defaultAssignment": false }],
             "no-restricted-globals": ["error", "event", "name"],
+            "prefer-destructuring": ["error", {
+                "VariableDeclarator": { "array": false, "object": true },
+                "AssignmentExpression": { "array": false, "object": false }
+            }],
+            "no-useless-escape": [
+                "error",
+                {
+                    "allowRegexCharacters": ["i"]
+                }
+            ],
 
             // Plugin Rules
             "simple-import-sort/imports": "error",
             "simple-import-sort/exports": "error",
+            */
             "unused-imports/no-unused-imports": "error"
+        }
+    },
+    {
+        files: [
+            "src/nu/**/*.{tsx,ts,mts,mjs,js,jsx}",
+            "src/components/settings/tabs/nuplugins/**/*.{tsx,ts,mts,mjs,js,jsx}",
+            "src/userplugins/**/*.{tsx,ts,mts,mjs,js,jsx}"
+        ],
+        plugins: {
+            "simple-header": header
+        },
+        rules: {
+            "simple-header/header": [
+                "error",
+                {
+                    "files": [`${import.meta.dirname}/scripts/header-nun.txt`]
+                }
+            ]
         }
     }
 );

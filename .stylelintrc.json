@@ -7,5 +7,14 @@
                 "message": "Expected class selector to be kebab-case with camelCase segments"
             }
         ]
-    }
+    },
+    "overrides": [
+        {
+            "files": ["src/nu/**/*.css", "src/components/settings/tabs/nuplugins/**/*.css"],
+            "rules": {
+                "no-descending-specificity": null,
+                "custom-property-pattern": null
+            }
+        }
+    ]
 }

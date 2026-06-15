@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import ContextMenuPatcher from "@nu/api/contextmenu";
 import pluginmanager from "./pluginmanager";
 import { openPluginModal } from "@components/settings/tabs/nuplugins/PluginModal";

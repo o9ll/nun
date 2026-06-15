@@ -1,8 +1,16 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import "./index.css";
+import "../plugins/styles.css";
 import { HeadingTertiary } from "@components/Heading";
 import { SettingsTab, wrapTab } from "../BaseTab";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Select, TextInput, useState } from "@webpack/common";
+import { React, Select, TextInput, useEffect, useRef, useState } from "@webpack/common";
+import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import { Margins } from "@components/margins";
 import { cl, SearchStatus } from "../plugins";
@@ -13,12 +21,12 @@ import NUPluginCard from "./PluginCard";
 import { Settings } from "@api/Settings";
 import { useStateFromStores } from "@nu/ui/hooks";
 import DiscordModules from "@nu/webpack/modules";
-import { Flex } from "@components/Flex";
 import { LucideIcon } from "@nu/ui/icons";
-import { Folder, Check, X, IconNode, FileUp, Store, ChevronRight } from "lucide";
-import { Card } from "@components/Card";
-import { openPluginStore } from "./Store";
+import { Folder, Check, X, IconNode, FileUp } from "lucide";
+import { PluginStorePanel } from "./Store";
 import { confirmFileInstall } from "./InstallPopup";
+
+const nuCl = classNameFactory("nu-");
 
 interface ActionButtonProps {
     title: string;
@@ -26,29 +34,12 @@ interface ActionButtonProps {
     onClick: () => void;
 }
 
-function StoreCard() {
-    return (
-        <Card className="store-card" onClick={() => openPluginStore()}>
-            <div className="store-card-icon">
-                <LucideIcon icon={Store} size="24px" />
-            </div>
-            <div className="store-card-body">
-                <div>Open BetterDiscord plugin store</div>
-                <div>Browse official BetterDiscord plugins</div>
-            </div>
-            <div className="store-card-caret">
-                <LucideIcon icon={ChevronRight} size="24px" />
-            </div>
-        </Card>
-    );
-}
-
 function ActionButton({ title, icon, onClick }: ActionButtonProps) {
     return (
         <DiscordModules.Tooltip color="primary" position="top" aria-label={title} text={title}>
             {(props) => (
-                <button {...props} onClick={onClick} className="action-button">
-                    <LucideIcon icon={icon} size={18} color="white" />
+                <button {...props} onClick={onClick} className={classes(cl("info-button"), nuCl("action-button"))}>
+                    <LucideIcon icon={icon} size={18} className={cl("info-icon")} />
                 </button>
             )}
         </DiscordModules.Tooltip>
@@ -56,9 +47,14 @@ function ActionButton({ title, icon, onClick }: ActionButtonProps) {
 }
 
 function NUPlugins() {
+    const tabRef = useRef<HTMLDivElement>(null);
     const [searchValue, setSearchValue] = useState({ value: "", status: SearchStatus.ALL });
     const plugins = useStateFromStores(pluginmanager, () => pluginmanager.addonList.concat(), [pluginmanager], true);
     const [dragCounter, setDragCounter] = useState(0);
+
+    useEffect(() => {
+        tabRef.current?.closest('[class*="scrollerBase"]')?.scrollTo({ top: 0 });
+    }, []);
 
     const onSearch = (query: string) => setSearchValue(prev => ({ ...prev, value: query }));
     const onStatusChange = (status: SearchStatus) => setSearchValue(prev => ({ ...prev, status }));
@@ -105,65 +101,67 @@ function NUPlugins() {
 
     return (
         <SettingsTab>
-            <Flex>
-                <ActionButton title="Open Plugin Folder" icon={Folder} onClick={() => VencordNative.nu.openPluginFolder()} />
-                <ActionButton title="Enable All" icon={Check} onClick={() => pluginmanager.enableAll()} />
-                <ActionButton title="Disable All" icon={X} onClick={() => pluginmanager.disableAll()} />
-                <ActionButton title="Upload Plugin" icon={FileUp} onClick={uploadPlugin} />
-            </Flex>
-
-            <StoreCard />
-
-            <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
-                Filters
-            </HeadingTertiary>
-
-            <div className={classes(Margins.bottom20, cl("filter-controls"))}>
-                <ErrorBoundary noop>
-                    <TextInput autoFocus value={searchValue.value} placeholder="Search for a plugin..." onChange={onSearch} />
-                </ErrorBoundary>
-                <div>
-                    <ErrorBoundary noop>
-                        <Select
-                            options={[
-                                { label: "Show All", value: SearchStatus.ALL, default: true },
-                                { label: "Show Enabled", value: SearchStatus.ENABLED },
-                                { label: "Show Disabled", value: SearchStatus.DISABLED }
-                            ].filter(isTruthy)}
-                            serialize={String}
-                            select={onStatusChange}
-                            isSelected={v => v === searchValue.status}
-                            closeOnSelect={true}
-                        />
-                    </ErrorBoundary>
+            <div ref={tabRef} className={classes(cl("settings"), nuCl("tab"))}>
+                <div className={nuCl("action-buttons")}>
+                    <ActionButton title="Open Plugin Folder" icon={Folder} onClick={() => VencordNative.nu.openPluginFolder()} />
+                    <ActionButton title="Enable All" icon={Check} onClick={() => pluginmanager.enableAll()} />
+                    <ActionButton title="Disable All" icon={X} onClick={() => pluginmanager.disableAll()} />
+                    <ActionButton title="Upload Plugin" icon={FileUp} onClick={uploadPlugin} />
                 </div>
-            </div>
 
-            <HeadingTertiary className={Margins.top20}>Plugins</HeadingTertiary>
+                <PluginStorePanel />
 
-            <div
-                className={classes(cl("grid"), dragCounter > 0 && "drop-indicator")}
-                onDragEnter={onDragEnter}
-                onDragLeave={onDragLeave}
-                onDragOver={onDragOver}
-                onDrop={onDrop}
-            >
-                {filteredPlugins.length
-                    ? filteredPlugins.map(plugin => (
-                        <NUPluginCard key={plugin.id} plugin={plugin} />
-                    )) : (
-                        <div className="no-plugins">
-                            {plugins.length > 0 ? (
-                                <Paragraph>No plugins meet the search criteria.</Paragraph>
-                            ) : (
-                                <>
-                                    <Paragraph>You have no BetterDiscord plugins installed.</Paragraph>
-                                    <Paragraph>Use the upload button or drag and drop a .plugin.js file here to install it.</Paragraph>
-                                </>
-                            )}
-                        </div>
-                    )
-                }
+                <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
+                    Filters
+                </HeadingTertiary>
+
+                <div className={classes(Margins.bottom20, cl("filter-controls"))}>
+                    <ErrorBoundary noop>
+                        <TextInput value={searchValue.value} placeholder="Search for a plugin..." onChange={onSearch} />
+                    </ErrorBoundary>
+                    <div>
+                        <ErrorBoundary noop>
+                            <Select
+                                options={[
+                                    { label: "Show All", value: SearchStatus.ALL, default: true },
+                                    { label: "Show Enabled", value: SearchStatus.ENABLED },
+                                    { label: "Show Disabled", value: SearchStatus.DISABLED }
+                                ].filter(isTruthy)}
+                                serialize={String}
+                                select={onStatusChange}
+                                isSelected={v => v === searchValue.status}
+                                closeOnSelect={true}
+                            />
+                        </ErrorBoundary>
+                    </div>
+                </div>
+
+                <HeadingTertiary className={Margins.top20}>Plugins</HeadingTertiary>
+
+                <div
+                    className={classes(cl("grid"), dragCounter > 0 && nuCl("drop-indicator"))}
+                    onDragEnter={onDragEnter}
+                    onDragLeave={onDragLeave}
+                    onDragOver={onDragOver}
+                    onDrop={onDrop}
+                >
+                    {filteredPlugins.length
+                        ? filteredPlugins.map(plugin => (
+                            <NUPluginCard key={plugin.id} plugin={plugin} />
+                        )) : (
+                            <div className={nuCl("no-plugins")}>
+                                {plugins.length > 0 ? (
+                                    <Paragraph>No plugins meet the search criteria.</Paragraph>
+                                ) : (
+                                    <>
+                                        <Paragraph>You have no BetterDiscord plugins installed.</Paragraph>
+                                        <Paragraph>Use the upload button or drag and drop a .plugin.js file here to install it.</Paragraph>
+                                    </>
+                                )}
+                            </div>
+                        )
+                    }
+                </div>
             </div>
         </SettingsTab>
     );

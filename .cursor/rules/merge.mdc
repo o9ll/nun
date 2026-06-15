@@ -1,0 +1,105 @@
+---
+description: Merge plugins into the existing plugin, not a hub
+globs: src/userplugins/**
+alwaysApply: false
+---
+
+# Merge Rules
+
+Follow `.cursor/rules/styleguide.mdc` first. If anything here conflicts with it, obey `styleguide.mdc`.
+
+Apply these rules when changing Nun plugin code in `src/userplugins/**`.
+
+## Default behavior
+
+Do not create a new hub plugin, feature bucket, or broad refactor unless the user explicitly asks for that architecture.
+
+When plugins are similar, merge the code into the existing plugin itself with the smallest possible structural change. Preserve the original plugin entrypoint unless there is a hard technical reason not to.
+
+## What to do first
+
+- Search the codebase before writing new code.
+- Reuse existing exports, utilities, settings, patches, and helper functions before adding wrappers or reimplementing anything.
+- If a function, component, store, setting, or patch already exists, use it directly.
+
+## Integration rules
+
+Prefer this order:
+
+1. Keep the current plugin file as the primary home.
+2. Fold related behavior into the same plugin.
+3. Split only when a split already exists or is strictly necessary.
+4. Delete dead code instead of parking it in new folders.
+5. Keep migrations and compatibility shims minimal.
+
+Do not move code into `features/`, `handlers/`, `stores/`, or `patchers/` just to make the tree look organized. That is architecture churn, not improvement.
+
+## Diff rules
+
+- Smallest diff wins.
+- Three similar lines beat a premature helper.
+- Less code with the same behavior always wins.
+- Equivalent solutions: shorter one ships.
+- Do not add abstractions for one-time use.
+- Do not create wrappers around existing exports.
+- Do not add defensive branches for states that cannot happen.
+
+## Code style
+
+- Be direct, actionable, and blunt when code is bad.
+- No pleasantries.
+- Use natural human language in errors, descriptions, toasts, and UI copy.
+- No robotic phrasing.
+- No comments unless the user explicitly asks for them.
+- Delete commented-out code.
+- Remove console logging unless it is needed for a real error path.
+- Prefer declarative APIs over manual registration.
+- Prefer early returns, nullish coalescing, optional chaining, destructuring, and object shorthand.
+
+## React and plugin lifecycle
+
+- Return `null` for conditional rendering.
+- Any subscription, timer, listener, patch, or resource created in `start()` must be cleaned up in `stop()`.
+- Prefer APIs that manage cleanup automatically.
+- Use proper error boundaries for components used in patches.
+
+## Settings
+
+- Do not hide settings in a new hub panel unless the user asked for that design.
+- If settings already exist on the plugin, keep them with the plugin.
+- If merging related plugins, expose the combined options in the original plugin’s settings flow, not in a new container unless required by the existing architecture.
+
+## Patch quality
+
+- Be surgical.
+- Match the smallest stable target.
+- Use bounded regexes.
+- Avoid hardcoded minified variable names.
+- Use existing constants and endpoint helpers.
+- Do not reimplement utilities that already exist in the codebase.
+
+## Review expectations
+
+Flag AI-slop patterns:
+
+- unnecessary helpers
+- over-guarding
+- duplicated logic
+- comment-heavy code
+- verbose boilerplate
+- reimplemented utilities
+- dead code
+- broad refactors that increase surface area
+
+If the code is already bad, say so plainly and fix the simplest correct version.
+
+## Acceptance bar
+
+A correct merge:
+
+- preserves plugin behavior
+- keeps the original plugin as the main integration point
+- avoids new architecture unless requested
+- uses fewer files when possible
+- does not introduce extra abstractions
+- keeps settings, patches, and lifecycle handling coherent

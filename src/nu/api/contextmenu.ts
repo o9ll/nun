@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { Filters, getByKeys, getMangled } from "../webpack";
 import Patcher from "../core/patcher";
 import Logger from "../core/logger";
@@ -166,7 +172,7 @@ export class MenuPatcher {
                 else {
                     const layer = res.props.children ? res.props.children : res;
 
-                    if (typeof layer?.type == "function") {
+                    if (typeof layer?.type === "function") {
                         MenuPatcher.patchRecursive(layer, "type", depth);
                     }
                 }
@@ -286,7 +292,6 @@ class ContextMenu {
 
         // This is done to make sure the UI actually displays the on/off correctly
         if (type === "toggle") {
-            // eslint-disable-next-line react-hooks/rules-of-hooks
             const [active, doToggle] = React.useState(props.checked || false);
             const originalAction = props.action;
             props.checked = active;
