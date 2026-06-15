@@ -5,7 +5,7 @@
  */
 
 import { Button } from "@components/Button";
-import { panelClasses } from "../../../philsPluginLibrary";
+import { panelClasses } from "../../../nunPluginLibrary";
 import { classes } from "@utils/misc";
 import React, { JSX } from "react";
 

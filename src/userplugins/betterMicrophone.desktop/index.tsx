@@ -11,7 +11,7 @@ import { MicrophonePatcher } from "../betterMicrophone.desktop/patchers";
 import { applyDiscordNoiseSuppressionMode, settings } from "../betterMicrophone.desktop/settings";
 import { initMicrophoneStore, microphoneStore } from "../betterMicrophone.desktop/stores";
 import { disableStereoScreenshareSDP, enableStereoScreenshareSDP } from "../betterMicrophone.desktop/voicePatches";
-import { addSettingsPanelButton, Emitter, MicrophoneSettingsIcon, removeSettingsPanelButton } from "../philsPluginLibrary";
+import { addSettingsPanelButton, Emitter, MicrophoneSettingsIcon, removeSettingsPanelButton } from "../nunPluginLibrary";
 import definePlugin from "@utils/types";
 import { waitForStore } from "@webpack/common/internal";
 
@@ -24,7 +24,7 @@ export default definePlugin({
     description: "Unified desktop voice setup: stereo 2 channel Opus at 48 kHz with profiled bitrates. Requires VoicePatcher.",
     authors: [{ name: "o9", id: 426687300387471360n }],
     tags: ["Nun"],
-    dependencies: ["PhilsPluginLibrary", "VoicePatcher"],
+    dependencies: ["NunPluginLibrary", "VoicePatcher"],
     requiresRestart: true,
     settings,
     settingsAboutComponent: BetterMicrophoneSettingsAbout,

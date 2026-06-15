@@ -5,8 +5,8 @@
  */
 
 import { Flex } from "@components/Flex";
-import { ContributorAuthorSummary } from "../../../philsPluginLibrary/components/ContributorAuthorSummary";
-import { Author, Contributor } from "../../../philsPluginLibrary/types";
+import { ContributorAuthorSummary } from "../../../nunPluginLibrary/components/ContributorAuthorSummary";
+import { Author, Contributor } from "../../../nunPluginLibrary/types";
 import { ModalSize, RenderModalProps } from "@vencord/discord-types";
 import { Modal } from "@webpack/common";
 import { JSX, ReactNode } from "react";

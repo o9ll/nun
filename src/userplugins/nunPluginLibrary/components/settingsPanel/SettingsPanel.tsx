@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { panelClasses } from "../../../philsPluginLibrary/discordModules";
+import { panelClasses } from "../../../nunPluginLibrary/discordModules";
 import { React } from "@webpack/common";
 
 

@@ -6,7 +6,7 @@
 
 import { applyVoiceProcessingOptions } from "../../betterMicrophone.desktop/settings";
 import { MicrophoneProfile, MicrophoneStore } from "../../betterMicrophone.desktop/stores";
-import { ProfilableStore, types } from "../../philsPluginLibrary";
+import { ProfilableStore, types } from "../../nunPluginLibrary";
 import { Logger } from "@utils/Logger";
 import { lodash } from "@webpack/common";
 

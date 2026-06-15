@@ -100,18 +100,18 @@
 }
 
 .vc-special-title {
-    color: black;
+    color: var(--header-primary);
 }
 
 .vc-special-subtitle {
-    color: black;
+    color: var(--header-secondary);
     font-size: 1.2em;
     font-weight: bold;
     margin-top: 0.5em;
 }
 
 .vc-special-text {
-    color: black;
+    color: var(--text-normal);
     font-size: 1em;
     margin-top: .75em;
     white-space: pre-line;
@@ -129,7 +129,7 @@
 }
 
 .vc-special-hyperlink-text {
-    color: black;
+    color: white;
     font-size: 1em;
     font-weight: bold;
     text-align: center;

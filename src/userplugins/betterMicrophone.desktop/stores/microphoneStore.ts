@@ -5,7 +5,7 @@
  */
 
 import { PluginInfo } from "../../betterMicrophone.desktop/constants";
-import { createPluginStore, ProfilableInitializer, ProfilableStore, profileable, ProfileableProfile } from "../../philsPluginLibrary";
+import { createPluginStore, ProfilableInitializer, ProfilableStore, profileable, ProfileableProfile } from "../../nunPluginLibrary";
 
 
 export interface MicrophoneProfile {

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { createDummyUser, types, UserSummaryItem } from "../../philsPluginLibrary";
+import { createDummyUser, types, UserSummaryItem } from "../../nunPluginLibrary";
 import { PluginAuthor } from "@utils/types";
 import { findByProps } from "@webpack";
 import { useEffect, UserUtils, useState } from "@webpack/common";

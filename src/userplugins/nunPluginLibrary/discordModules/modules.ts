@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import * as types from "../../philsPluginLibrary/types";
+import * as types from "../../nunPluginLibrary/types";
 import { filters, waitFor } from "@webpack";
 
 export let utils: types.Utils;

@@ -530,7 +530,7 @@ export default definePlugin({
             try {
                 if (!hasCrashedOnce && settings.store.autoUpdate) {
                     hasCrashedOnce = true;
-                    maybePromptToUpdate("Discord has crashed! There might be an Equicord update that fixes this. Update now?", true);
+                    maybePromptToUpdate("Discord has crashed! There might be a Nun update that fixes this. Update now?", true);
                 }
             } catch { }
 

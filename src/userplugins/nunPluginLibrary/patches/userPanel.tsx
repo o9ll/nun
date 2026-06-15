@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { SettingsPanel } from "../../philsPluginLibrary/components";
-import { IconComponent, SettingsPanelButton } from "../../philsPluginLibrary/components/settingsPanel/SettingsPanelButton";
-import { SettingsPanelRow } from "../../philsPluginLibrary/components/settingsPanel/SettingsPanelRow";
-import { SettingsPanelTooltipButton } from "../../philsPluginLibrary/components/settingsPanel/SettingsPanelTooltipButton";
+import { SettingsPanel } from "../../nunPluginLibrary/components";
+import { IconComponent, SettingsPanelButton } from "../../nunPluginLibrary/components/settingsPanel/SettingsPanelButton";
+import { SettingsPanelRow } from "../../nunPluginLibrary/components/settingsPanel/SettingsPanelRow";
+import { SettingsPanelTooltipButton } from "../../nunPluginLibrary/components/settingsPanel/SettingsPanelTooltipButton";
 import { React } from "@webpack/common";
 import { JSX } from "react";
 

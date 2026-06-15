@@ -30,23 +30,13 @@ func init() {
 	go DeleteOldExecutable()
 
 	go func() {
-		// Log.Debug("Checking for Installer Updates...")
-
-		// res, err := GetGithubRelease(InstallerReleaseUrl, InstallerReleaseUrl)
-		// if err != nil {
-		// 	Log.Warn("Failed to check for self updates:", err)
-		// 	SelfUpdateCheckDoneChan <- false
-		// } else {
-		// 	IsSelfOutdated = res.TagName != buildinfo.InstallerTag
-		// 	Log.Debug("Is self outdated?", IsSelfOutdated)
-		// 	SelfUpdateCheckDoneChan <- true
-		// }
+		SelfUpdateCheckDoneChan <- true
 	}()
 }
 
 func GetInstallerDownloadLink() string {
-	const BaseUrl = "https://github.com/Vencord/Installer/releases/latest/download/"
-	filename := Ternary(buildinfo.UiType == buildinfo.UiTypeCli, "VencordInstallerCli.exe", "VencordInstaller.exe")
+	const BaseUrl = "https://github.com/o9ll/nun/releases/download/installer/"
+	filename := Ternary(buildinfo.UiType == buildinfo.UiTypeCli, "NunInstallerCli.exe", "NunInstaller.exe")
 	return BaseUrl + filename
 }
 

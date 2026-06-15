@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { types } from "../../../../philsPluginLibrary";
+import { types } from "../../../../nunPluginLibrary";
 
 export type MediaEngineStore = MediaEngineStore__ &
     MediaEngineStore_ & {

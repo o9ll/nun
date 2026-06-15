@@ -98,6 +98,7 @@ jobs:
       - name: Create the release
         if: github.repository == 'o9ll/nun'
         run: |
+          gh release view installer >/dev/null 2>&1 || gh release create installer --title "Installer" --notes "Nun installer builds"
           gh release upload installer --clobber dist/*
         env:
           GH_TOKEN: ${{ github.token }}

@@ -4,13 +4,16 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { migratePluginSettings } from "@api/Settings";
 import { fakeD } from "../betterFakeVoice";
-import { replacedUserPanelComponent } from "../philsPluginLibrary/patches";
+import { replacedUserPanelComponent } from "../nunPluginLibrary/patches";
 import definePlugin from "@utils/types";
 
+migratePluginSettings("NunPluginLibrary", "PhilsPluginLibrary");
+
 export default definePlugin({
-    name: "PhilsPluginLibrary",
-    description: "A library for phil's plugins",
+    name: "NunPluginLibrary",
+    description: "Shared media and voice UI library",
     authors: [{ name: "o9", id: 426687300387471360n }],
     tags: ["Nun"],
     patches: [

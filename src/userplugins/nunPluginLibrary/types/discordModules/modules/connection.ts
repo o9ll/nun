@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Framerate, Resolution } from "@userplugins/philsPluginLibrary/types";
+import { Framerate, Resolution } from "@userplugins/nunPluginLibrary/types";
 import TypedEmitter from "typed-emitter";
 
 import { Conn, FramerateReducer, VideoQualityManager } from "./";

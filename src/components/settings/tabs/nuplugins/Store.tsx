@@ -8,16 +8,16 @@ import "./Store.css";
 import "../plugins/styles.css";
 import { HeadingTertiary } from "@components/Heading";
 import { Margins } from "@components/margins";
-import { React, Select, SettingsRouter, TextInput, useState } from "@webpack/common";
-import PluginStore from "@nu/core/pluginstore";
-import PluginStoreCard from "./StoreCard";
-import Paginator from "@nu/ui/misc/paginator";
+import { debounce } from "@shared/debounce";
+import { useIntersection } from "@utils/react";
 import { classes } from "@utils/misc";
+import PluginStore from "@nu/core/pluginstore";
 import pluginmanager from "@nu/core/pluginmanager";
 import { Paragraph } from "@components/Paragraph";
+import { Select, SettingsRouter, TextInput, useCallback, useEffect, useMemo, useState } from "@webpack/common";
 import { cl } from "../plugins";
 
-const pageSize = 20;
+import PluginStoreCard from "./StoreCard";
 
 enum SortType {
     Downloads = "downloads",
@@ -30,38 +30,62 @@ enum SortType {
 }
 
 export function PluginStorePanel() {
-    const [page, setPage] = useState(0);
     const [sort, setSort] = useState(SortType.Downloads);
     const [search, setSearch] = useState("");
 
-    const searched = search.trim().toLowerCase();
-    let plugins = Object.values(PluginStore.plugins).filter(plugin => (
-        plugin.name.toLowerCase().includes(searched) ||
-        plugin.description.toLowerCase().includes(searched)
-    ));
+    const plugins = useMemo(() => {
+        const searched = search.trim().toLowerCase();
+        let result = Object.values(PluginStore.plugins).filter(plugin => (
+            plugin.name.toLowerCase().includes(searched) ||
+            plugin.description.toLowerCase().includes(searched)
+        ));
 
-    if (sort === SortType.NotInstalled) {
-        plugins = plugins.filter(plugin => !pluginmanager.getPlugin(plugin.file_name));
-    } else {
-        plugins.sort((a, b) => {
-            switch (sort) {
-                case SortType.Downloads:
-                    return b.downloads - a.downloads;
-                case SortType.Author:
-                    return a.author.display_name.localeCompare(b.author.display_name);
-                case SortType.Likes:
-                    return b.likes - a.likes;
-                case SortType.Modified:
-                    return new Date(b.latest_release_date).getTime() - new Date(a.latest_release_date).getTime();
-                case SortType.Name:
-                    return a.name.localeCompare(b.name);
-                case SortType.ReleaseDate:
-                    return new Date(b.initial_release_date).getTime() - new Date(a.initial_release_date).getTime();
-            }
-        });
-    }
+        if (sort === SortType.NotInstalled) {
+            result = result.filter(plugin => !pluginmanager.getPlugin(plugin.file_name));
+        } else {
+            result.sort((a, b) => {
+                switch (sort) {
+                    case SortType.Downloads:
+                        return b.downloads - a.downloads;
+                    case SortType.Author:
+                        return a.author.display_name.localeCompare(b.author.display_name);
+                    case SortType.Likes:
+                        return b.likes - a.likes;
+                    case SortType.Modified:
+                        return new Date(b.latest_release_date).getTime() - new Date(a.latest_release_date).getTime();
+                    case SortType.Name:
+                        return a.name.localeCompare(b.name);
+                    case SortType.ReleaseDate:
+                        return new Date(b.initial_release_date).getTime() - new Date(a.initial_release_date).getTime();
+                }
+            });
+        }
 
-    const wrapper = React.useRef<HTMLDivElement>(null);
+        return result;
+    }, [search, sort]);
+
+    const pluginsToLoad = Math.min(36, plugins.length);
+    const [visibleCount, setVisibleCount] = useState(pluginsToLoad);
+
+    useEffect(() => {
+        setVisibleCount(Math.min(36, plugins.length));
+    }, [search, sort, plugins.length]);
+
+    const loadMore = useCallback(() => {
+        setVisibleCount(v => Math.min(v + pluginsToLoad, plugins.length));
+    }, [plugins.length, pluginsToLoad]);
+
+    const dLoadMore = useMemo(() => debounce(loadMore, 100), [loadMore]);
+
+    const [sentinelRef, isSentinelVisible] = useIntersection();
+
+    useEffect(() => {
+        if (isSentinelVisible && visibleCount < plugins.length) {
+            dLoadMore();
+        }
+    }, [isSentinelVisible, visibleCount, plugins.length, dLoadMore]);
+
+    const visiblePlugins = plugins.slice(0, visibleCount);
 
     return (
         <section className="nu-plugin-store-panel">
@@ -73,10 +97,7 @@ export function PluginStorePanel() {
                 <TextInput
                     value={search}
                     placeholder="Search for a plugin..."
-                    onChange={(query: string) => {
-                        setSearch(query);
-                        setPage(0);
-                    }}
+                    onChange={setSearch}
                 />
                 <Select
                     options={[
@@ -89,17 +110,14 @@ export function PluginStorePanel() {
                         { label: "Name", value: SortType.Name }
                     ]}
                     serialize={String}
-                    select={(type) => {
-                        setSort(type);
-                        setPage(0);
-                    }}
+                    select={setSort}
                     isSelected={v => v === sort}
                     closeOnSelect={true}
                 />
             </div>
 
-            <div className="nu-plugin-store-cards" ref={wrapper}>
-                {plugins.slice(page * pageSize, page * pageSize + pageSize).map(plugin => (
+            <div className="nu-plugin-store-cards">
+                {visiblePlugins.map(plugin => (
                     <PluginStoreCard key={plugin.id} plugin={plugin} />
                 ))}
             </div>
@@ -108,17 +126,9 @@ export function PluginStorePanel() {
                 <Paragraph>No plugins match search</Paragraph>
             )}
 
-            <Paginator
-                className={cl("page-buttons")}
-                currentPage={page}
-                length={plugins.length}
-                pageSize={pageSize}
-                maxVisible={9}
-                onPageChange={(newPage) => {
-                    setPage(newPage);
-                    wrapper.current?.closest('[class*="scrollerBase"]')?.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-            />
+            {visibleCount < plugins.length && (
+                <div ref={sentinelRef} style={{ height: 32 }} />
+            )}
         </section>
     );
 }

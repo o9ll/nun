@@ -7,8 +7,8 @@
 import { PluginInfo } from "../../betterMicrophone.desktop/constants";
 import { logger } from "../../betterMicrophone.desktop/logger";
 import { microphoneStore } from "../../betterMicrophone.desktop/stores";
-import { Emitter, MediaEngineStore, Patcher, types } from "../../philsPluginLibrary";
-import { patchConnectionAudioTransportOptions } from "../../philsPluginLibrary/patches/audio";
+import { Emitter, MediaEngineStore, Patcher, types } from "../../nunPluginLibrary";
+import { patchConnectionAudioTransportOptions } from "../../nunPluginLibrary/patches/audio";
 
 export class MicrophonePatcher extends Patcher {
     private mediaEngineStore: types.MediaEngineStore;

@@ -5,8 +5,8 @@
 import { execSync } from "child_process";
 import { existsSync, readdirSync, renameSync, rmSync, writeFileSync } from "fs";
 import { basename, join } from "path";
-import readline from "readline/promises";
-import { stdin as input, stdout as output } from "process";
+
+import { promptSelect } from "./promptSelect.mjs";
 
 const PACKAGE_JSON = `{
 \t"name": "discord",
@@ -236,21 +236,12 @@ async function promptInstall(installs, action) {
 
     if (candidates.length === 1) return candidates[0];
 
-    console.log(`Select Discord install to ${action}:`);
-    candidates.forEach((install, i) => {
+    const choices = candidates.map(install => {
         const tag = install.isPatched ? " [PATCHED]" : "";
-        console.log(`  ${i + 1}. ${install.branch} - ${install.path}${tag}`);
+        return `${install.branch} - ${install.path}${tag}`;
     });
 
-    const rl = readline.createInterface({ input, output });
-    const answer = await rl.question("> ");
-    rl.close();
-
-    const index = Number.parseInt(answer, 10) - 1;
-    if (!Number.isInteger(index) || index < 0 || index >= candidates.length) {
-        throw new Error("Invalid selection");
-    }
-
+    const index = await promptSelect(`Select ${action}:`, choices);
     return candidates[index];
 }
 

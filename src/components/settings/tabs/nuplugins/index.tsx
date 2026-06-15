@@ -9,7 +9,9 @@ import "../plugins/styles.css";
 import { HeadingTertiary } from "@components/Heading";
 import { SettingsTab, wrapTab } from "../BaseTab";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { React, Select, TextInput, useEffect, useRef, useState } from "@webpack/common";
+import { debounce } from "@shared/debounce";
+import { useIntersection } from "@utils/react";
+import { React, Select, TextInput, useCallback, useEffect, useMemo, useRef, useState } from "@webpack/common";
 import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import { Margins } from "@components/margins";
@@ -74,6 +76,29 @@ function NUPlugins() {
         );
     });
 
+    const pluginsToLoad = Math.min(36, filteredPlugins.length);
+    const [visibleCount, setVisibleCount] = useState(pluginsToLoad);
+
+    useEffect(() => {
+        setVisibleCount(Math.min(36, filteredPlugins.length));
+    }, [searchValue.value, searchValue.status, filteredPlugins.length]);
+
+    const loadMore = useCallback(() => {
+        setVisibleCount(v => Math.min(v + pluginsToLoad, filteredPlugins.length));
+    }, [filteredPlugins.length, pluginsToLoad]);
+
+    const dLoadMore = useMemo(() => debounce(loadMore, 100), [loadMore]);
+
+    const [sentinelRef, isSentinelVisible] = useIntersection();
+
+    useEffect(() => {
+        if (isSentinelVisible && visibleCount < filteredPlugins.length) {
+            dLoadMore();
+        }
+    }, [isSentinelVisible, visibleCount, filteredPlugins.length, dLoadMore]);
+
+    const visiblePlugins = filteredPlugins.slice(0, visibleCount);
+
     const uploadPlugin = () => {
         const input = document.createElement("input");
         input.type = "file";
@@ -102,15 +127,6 @@ function NUPlugins() {
     return (
         <SettingsTab>
             <div ref={tabRef} className={classes(cl("settings"), nuCl("tab"))}>
-                <div className={nuCl("action-buttons")}>
-                    <ActionButton title="Open Plugin Folder" icon={Folder} onClick={() => VencordNative.nu.openPluginFolder()} />
-                    <ActionButton title="Enable All" icon={Check} onClick={() => pluginmanager.enableAll()} />
-                    <ActionButton title="Disable All" icon={X} onClick={() => pluginmanager.disableAll()} />
-                    <ActionButton title="Upload Plugin" icon={FileUp} onClick={uploadPlugin} />
-                </div>
-
-                <PluginStorePanel />
-
                 <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
                     Filters
                 </HeadingTertiary>
@@ -145,8 +161,8 @@ function NUPlugins() {
                     onDragOver={onDragOver}
                     onDrop={onDrop}
                 >
-                    {filteredPlugins.length
-                        ? filteredPlugins.map(plugin => (
+                    {visiblePlugins.length
+                        ? visiblePlugins.map(plugin => (
                             <NUPluginCard key={plugin.id} plugin={plugin} />
                         )) : (
                             <div className={nuCl("no-plugins")}>
@@ -162,6 +178,19 @@ function NUPlugins() {
                         )
                     }
                 </div>
+
+                {visibleCount < filteredPlugins.length && (
+                    <div ref={sentinelRef} style={{ height: 32 }} />
+                )}
+
+                <div className={nuCl("action-buttons")}>
+                    <ActionButton title="Open Plugin Folder" icon={Folder} onClick={() => VencordNative.nu.openPluginFolder()} />
+                    <ActionButton title="Enable All" icon={Check} onClick={() => pluginmanager.enableAll()} />
+                    <ActionButton title="Disable All" icon={X} onClick={() => pluginmanager.disableAll()} />
+                    <ActionButton title="Upload Plugin" icon={FileUp} onClick={uploadPlugin} />
+                </div>
+
+                <PluginStorePanel />
             </div>
         </SettingsTab>
     );

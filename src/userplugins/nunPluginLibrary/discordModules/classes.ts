@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import * as types from "../../philsPluginLibrary/types";
+import * as types from "../../nunPluginLibrary/types";
 import { findCssClassesLazy } from "@webpack";
 
 export const panelClasses = findCssClassesLazy("button", "buttonContents", "buttonColor", "container", "actionButtons", "buttonIcon") as types.PanelClasses;

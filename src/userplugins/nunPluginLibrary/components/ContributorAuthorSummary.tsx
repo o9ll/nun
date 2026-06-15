@@ -5,8 +5,8 @@
  */
 
 import { Flex } from "@components/Flex";
-import { Author, Contributor } from "../../philsPluginLibrary/types";
-import { openURL } from "../../philsPluginLibrary/utils";
+import { Author, Contributor } from "../../nunPluginLibrary/types";
+import { openURL } from "../../nunPluginLibrary/utils";
 import { findByProps } from "@webpack";
 import { Text } from "@webpack/common";
 import React from "react";

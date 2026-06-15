@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { types } from "../../philsPluginLibrary";
+import { types } from "../../nunPluginLibrary";
 import { LazyComponent } from "@utils/react";
 import { findByCode } from "@webpack";
 

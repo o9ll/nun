@@ -18,8 +18,8 @@ import {
     SettingsModalProfilesCard,
     validateNumberInput,
     validateTextInputNumber
-} from "../../philsPluginLibrary";
-import { Styles } from "../../philsPluginLibrary/styles";
+} from "../../nunPluginLibrary";
+import { Styles } from "../../nunPluginLibrary/styles";
 import { SelectOption } from "@vencord/discord-types";
 import { Forms, Select, Slider, TextInput, useEffect, useState } from "@webpack/common";
 

@@ -230,26 +230,26 @@ export default definePlugin({
         const equicordEntries: SettingsLayoutNode[] = [
             buildEntry({
                 key: "equicord_main",
-                title: "Settings",
-                panelTitle: "Main Settings",
+                title: "Nun Settings",
+                panelTitle: "Nun Settings",
                 Component: VencordTab,
                 Icon: MainSettingsIcon
             }),
             buildEntry({
                 key: "equicord_plugins",
-                title: "Nun",
+                title: "Nun Plugins",
                 Component: PluginsTab,
                 Icon: PluginsIcon
             }),
             buildEntry({
                 key: "nu_plugins",
-                title: "BD",
+                title: "Nun BDPlugins",
                 Component: NUPluginsTab,
                 Icon: NULogo
             }),
             buildEntry({
                 key: "equicord_themes",
-                title: "Themes",
+                title: "Nun Themes",
                 Component: ThemesTab,
                 Icon: PaintbrushIcon
             }),
@@ -275,7 +275,7 @@ export default definePlugin({
             //}),
             buildEntry({
                 key: "equicord_backup_restore",
-                title: "Backup",
+                title: "Nun Backup",
                 Component: BackupAndRestoreTab,
                 Icon: BackupRestoreIcon
             }),

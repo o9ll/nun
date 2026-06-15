@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Bitrate, Framerate, Resolution } from "@userplugins/philsPluginLibrary/types";
+import { Bitrate, Framerate, Resolution } from "@userplugins/nunPluginLibrary/types";
 
 import { Connection } from "./";
 

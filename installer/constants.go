@@ -11,8 +11,9 @@ import (
 	"vencordinstaller/buildinfo"
 )
 
-const ReleaseUrl = "https://api.github.com/repos/o9ll/nun/releases/290026220"
-const InstallerReleaseUrl = "https://api.github.com/repos/o9ll/nun/releases/291054553"
+const ReleaseUrl = "https://api.github.com/repos/o9ll/nun/releases/tags/devbuild"
+const ReleaseFallbackUrl = "https://api.github.com/repos/o9ll/nun/releases/latest"
+const InstallerReleaseUrl = "https://api.github.com/repos/o9ll/nun/releases/tags/installer"
 
 var UserAgent = "NunInstaller/" + buildinfo.InstallerGitHash + " (https://github.com/o9ll/nun)"
 
