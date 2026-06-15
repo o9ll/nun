@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { React } from "@webpack/common";
 import { none, GetSettingsContext } from "@nu/ui/contexts";
 import type { ChangeEvent, MouseEvent } from "react";
@@ -71,7 +77,7 @@ export default function Slider({ value: initialValue, min, max, step, onChange, 
                 const markerValue = typeof m === "number" ? m : m.value;
                 const markerLabel = typeof m === "number" ? m : m?.label;
                 const showUnits = units && typeof m === "number";
-                return <div className="slider-marker" style={{ left: percent(markerValue) + "%" }} onClick={() => jumpToValue(markerValue)}>
+                return <div key={markerValue} className="slider-marker" style={{ left: percent(markerValue) + "%" }} onClick={() => jumpToValue(markerValue)}>
                     {markerLabel}{showUnits && units}
                 </div>;
             })}

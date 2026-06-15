@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 type TreeFilter = (o: any) => boolean | any;
 
 /**
@@ -10,7 +16,7 @@ type TreeFilter = (o: any) => boolean | any;
 */
 export default function findInTree(tree: Record<string | number, unknown> | null, searchFilter: TreeFilter | string, { walkable = null, ignore = [] }: { walkable?: string[] | null, ignore?: string[]; } = {}): any | undefined {
     if (typeof searchFilter === "string") {
-        if (tree?.hasOwnProperty(searchFilter)) return tree[searchFilter];
+        if (tree && Object.hasOwn(tree, searchFilter)) return tree[searchFilter];
     }
     else if (searchFilter(tree)) {
         return tree;
@@ -22,15 +28,15 @@ export default function findInTree(tree: Record<string | number, unknown> | null
     if (tree instanceof Array) {
         for (const value of tree) {
             tempReturn = findInTree(value, searchFilter, { walkable, ignore });
-            if (typeof tempReturn != "undefined") return tempReturn;
+            if (typeof tempReturn !== "undefined") return tempReturn;
         }
     }
     else {
         const toWalk = walkable == null ? Object.keys(tree) : walkable;
         for (const key of toWalk) {
-            if (typeof (tree[key]) == "undefined" || ignore.includes(key)) continue;
+            if (typeof (tree[key]) === "undefined" || ignore.includes(key)) continue;
             tempReturn = findInTree(tree[key] as Record<string | number, unknown>, searchFilter, { walkable, ignore });
-            if (typeof tempReturn != "undefined") return tempReturn;
+            if (typeof tempReturn !== "undefined") return tempReturn;
         }
     }
     return tempReturn;

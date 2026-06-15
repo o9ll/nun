@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import {React} from "@webpack/common";
 
 import Drawer from "./drawer";
@@ -77,7 +83,7 @@ export function buildSetting(setting: Setting | CustomSetting | ButtonSetting) {
     if (!children) return null;
     return <Item
         id={setting.id}
-        inline={setting.hasOwnProperty("inline") ? setting.inline : setting.type !== "radio"}
+        inline={"inline" in setting ? setting.inline : setting.type !== "radio"}
         key={setting.id}
         name={setting.name}
         note={setting.note}>

@@ -202,7 +202,7 @@ export default function PluginSettings() {
 
     const hasUserPlugins = useMemo(() => !IS_STANDALONE && Object.values(PluginMeta).some(m => m.userPlugin), []);
 
-    const [searchValue, setSearchValue] = useState({ value: "", tags: [] as PluginTag[], status: hasUserPlugins ? SearchStatus.USER_PLUGINS : SearchStatus.ALL });
+    const [searchValue, setSearchValue] = useState({ value: "", tags: [] as PluginTag[], status: SearchStatus.ALL });
 
     const search = searchValue.value.toLowerCase();
     const onSearch = (query: string) => setSearchValue(prev => ({ ...prev, value: query }));
@@ -340,8 +340,8 @@ export default function PluginSettings() {
                 title: "Restart Required",
                 body: (
                     <>
-                        <p style={{ textAlign: "center" }}>Some plugins require a restart to fully disable.</p>
-                        <p style={{ textAlign: "center" }}>Would you like to restart now?</p>
+                        <p style={{ textAlign: "center" }}>Some plugins need a restart to disable.</p>
+                        <p style={{ textAlign: "center" }}>Restart now?</p>
                     </>
                 ),
                 confirmText: "Restart Now",
@@ -407,7 +407,7 @@ export default function PluginSettings() {
             <ErrorBoundary noop>
                 <TextInput
                     inputClassName={cl("filter-control")}
-                    placeholder="Search for a plugin..."
+                    placeholder="Search..."
                     value={searchValue.value}
                     onChange={onSearch}
                     autoFocus
@@ -418,13 +418,13 @@ export default function PluginSettings() {
                 <div className={classes(Margins.bottom20, Margins.top8, cl("filter-controls"))}>
                     <Select
                         options={[
-                            { label: "All", value: SearchStatus.ALL, ...(!hasUserPlugins && { default: true }) },
+                            { label: "All", value: SearchStatus.ALL, default: true },
                             { label: "Enabled", value: SearchStatus.ENABLED },
                             { label: "Disabled", value: SearchStatus.DISABLED },
                             { label: "Equicord", value: SearchStatus.EQUICORD },
                             { label: "Vencord", value: SearchStatus.VENCORD },
                             { label: "New", value: SearchStatus.NEW },
-                            hasUserPlugins && { label: "💠", value: SearchStatus.USER_PLUGINS, default: true },
+                            hasUserPlugins && { label: "Custom", value: SearchStatus.USER_PLUGINS },
                             { label: "API Plugins", value: SearchStatus.API_PLUGINS },
                         ].filter(isTruthy)}
                         serialize={String}

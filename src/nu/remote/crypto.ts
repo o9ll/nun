@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import type {BinaryLike, BinaryToTextEncoding} from "crypto";
 
 const crypto: () => typeof import("crypto") = (() => {
@@ -6,7 +12,7 @@ const crypto: () => typeof import("crypto") = (() => {
     return () => {
         if (cache) return cache;
 
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
+         
         return cache = require("crypto");
     };
 })();

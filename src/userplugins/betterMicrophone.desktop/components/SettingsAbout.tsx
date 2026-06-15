@@ -1,6 +1,6 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -11,18 +11,18 @@ import { Margins } from "@components/margins";
 export default function BetterMicrophoneSettingsAbout() {
     return (
         <>
-            <Heading className={Margins.bottom8} tag="h5">GoXLR MINI + SM7B + Cloudlifter</Heading>
+            <Heading className={Margins.bottom8} tag="h5">Setup</Heading>
             <Paragraph>
-                Select the <strong>GoXLR SM7B</strong> profile for voice chat. The SM7B is mono, so channels stay at 1.
-                Use <strong>GoXLR SM7B Max</strong> only on boosted servers where 320 kbps is worth the bandwidth.
+                Enable <strong>VoicePatcher</strong> and use the <strong>2Ch 512kbps 48kHz Stereo</strong> profile.
             </Paragraph>
             <Paragraph className={Margins.top8}>
-                In the GoXLR app: set mic type to <strong>Condenser</strong> (48V powers the Cloudlifter), gain around 28 to 35 dB,
-                and keep SM7B rear switches flat. Discord input should be <strong>Chat Mic (TC-Helicon GoXLR Mini)</strong>.
+                In Windows sound settings, set your mic to <strong>2 channel, 24 bit, 48000 Hz</strong>.
             </Paragraph>
             <Paragraph className={Margins.top8}>
-                Disable Krisp, echo cancellation, noise suppression, and auto gain in Discord voice settings.
-                On desktop, pair this plugin with VoicePatcher. StereoMic is for Vesktop or web only.
+                Disable Krisp, echo cancellation, noise suppression, and auto gain in Discord voice settings and in this plugin.
+            </Paragraph>
+            <Paragraph className={Margins.top8}>
+                StereoMic, Micquality, LightcordBitrate, ForceStereo, rzStudioAudio, and VoiceSettings are merged here.
             </Paragraph>
         </>
     );

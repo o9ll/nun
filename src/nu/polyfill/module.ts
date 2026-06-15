@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import Logger from "../core/logger";
 
 import {compileFunction} from "./vm";
@@ -33,14 +39,14 @@ export default class Module {
             const ext = path.extname(file as string);
 
             if (file === "package.json") {
-                // eslint-disable-next-line @typescript-eslint/no-require-imports
+                 
                 const pkg = require(path.resolve(parent, file));
                 if (!Reflect.has(pkg, "main")) continue;
 
                 return path.resolve(parent, pkg.main);
             }
 
-            if (ext.slice(0, -ext.length) == "index" && RequireExtensions[ext as keyof typeof RequireExtensions]) return mod;
+            if (ext.slice(0, -ext.length) === "index" && RequireExtensions[ext as keyof typeof RequireExtensions]) return mod;
         }
     }
 

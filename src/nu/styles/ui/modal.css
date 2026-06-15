@@ -8,7 +8,7 @@
 .nu-backdrop {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, .6);
+    background: rgb(0 0 0 / 60%);
     position: absolute;
 }
 
@@ -43,6 +43,7 @@
 .nu-modal-body {
     padding: 20px 15px;
     padding-top: 0;
+    color: #fff;
 }
 
 .nu-modal .header {
@@ -53,10 +54,6 @@
     font-size: 22px;
     color: #fff;
     font-weight: 600;
-}
-
-.nu-modal-body {
-    color: #fff;
 }
 
 .nu-modal .footer .nu-button {
@@ -113,7 +110,7 @@
 .nu-modal-standard {
     font-size: 13px;
     white-space: pre-wrap;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     width: 490px;
     max-height: min(800px, 60vh);
 }
@@ -146,7 +143,7 @@
 .nu-modal-header {
     border-radius: var(--radius-md) var(--radius-md) 0 0;
     transition: box-shadow 0.1s ease-out;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .nu-modal-footer {
@@ -160,8 +157,8 @@
     z-index: 0;
     border-radius: var(--radius-md) var(--radius-md) 0 0;
     padding-left: 16px;
+
     /* padding-right: 16px; */
-    overflow-x: hidden;
     font-size: 16px;
     line-height: 20px;
     overflow: hidden scroll;
@@ -171,21 +168,14 @@
 
 .nu-modal-backdrop {
     position: fixed;
-    top: 0;
-    right: var(--devtools-sidebar-width, 0);
-    bottom: 0;
-    left: 0;
-    -webkit-transform: translateZ(0);
+    inset: 0 var(--devtools-sidebar-width, 0) 0 0;
     transform: translateZ(0);
     pointer-events: all;
 }
 
 #nu-modal-container {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: var(--devtools-sidebar-width, 0);
-    bottom: 0;
+    inset: 0 var(--devtools-sidebar-width, 0) 0 0;
     background: none !important;
     pointer-events: none;
     z-index: 1002;
@@ -193,25 +183,10 @@
 
 .nu-modal-layer {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.nu-modal-layer {
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    inset: 0;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
+    align-items: center;
     justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
     min-height: 0;
     padding-top: 40px;

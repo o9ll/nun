@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import type { Options, ModuleFilter, WithKeyOptions, ExportedOnlyFilter, BulkQueries, LazyOptions } from "../types/webpack";
 import Logger from "../core/logger";
 import { Filters, getAllModules, getBulk, getBulkKeyed, getById, getLazy, getMangled, getModule, getStore, getWithKey, modules, Stores } from "../webpack";

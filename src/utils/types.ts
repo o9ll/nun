@@ -61,6 +61,7 @@ export const PluginTags = [
     "Fun",
     "Media",
     "Notifications",
+    "Nun",
     "Organisation",
     "Privacy",
     "Reactions",

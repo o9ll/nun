@@ -1,7 +1,7 @@
 /*
- * SPDX-License-Identifier: GPL-3.0
- * Vencord Installer, a cross platform gui/cli app for installing Vencord
- * Copyright (c) 2023 Vendicated and Vencord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 package main
@@ -13,7 +13,6 @@ import (
 	"net/http"
 	"os"
 	"path"
-	"runtime"
 	"time"
 	"vencordinstaller/buildinfo"
 )
@@ -47,27 +46,18 @@ func init() {
 
 func GetInstallerDownloadLink() string {
 	const BaseUrl = "https://github.com/Vencord/Installer/releases/latest/download/"
-	switch runtime.GOOS {
-	case "windows":
-		filename := Ternary(buildinfo.UiType == buildinfo.UiTypeCli, "VencordInstallerCli.exe", "VencordInstaller.exe")
-		return BaseUrl + filename
-	case "darwin":
-		return BaseUrl + "VencordInstaller.MacOS.zip"
-	case "linux":
-		return BaseUrl + "VencordInstallerCli-linux"
-	default:
-		return ""
-	}
+	filename := Ternary(buildinfo.UiType == buildinfo.UiTypeCli, "VencordInstallerCli.exe", "VencordInstaller.exe")
+	return BaseUrl + filename
 }
 
 func CanUpdateSelf() bool {
 	//goland:noinspection GoBoolExpressions
-	return IsSelfOutdated && runtime.GOOS != "darwin"
+	return IsSelfOutdated
 }
 
 func UpdateSelf() error {
 	if !CanUpdateSelf() {
-		return errors.New("Cannot update self. Either no update available or macos")
+		return errors.New("Cannot update self. No update available")
 	}
 
 	url := GetInstallerDownloadLink()
@@ -98,9 +88,6 @@ func UpdateSelf() error {
 		_ = tmp.Close()
 		_ = os.Remove(tmp.Name())
 	}()
-	if err = tmp.Chmod(0o755); err != nil {
-		return fmt.Errorf("Failed to chmod 755", tmp.Name()+":", err)
-	}
 
 	if _, err = io.Copy(tmp, res.Body); err != nil {
 		return err

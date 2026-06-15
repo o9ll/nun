@@ -192,6 +192,18 @@ export const globPlugins = kind => ({
                     i++;
                 }
             }
+
+            for (const dir of ["userplugins/_api/onlineServices", "userplugins/_api/nunServices"]) {
+                const fullDir = `./src/${dir}`;
+                if (!await exists(fullDir)) continue;
+
+                const mod = `p${i}`;
+                const folderName = `src/${dir}`;
+                code += `import ${mod} from "./${dir}";\n`;
+                pluginsCode += `[${mod}.name]:${mod},\n`;
+                metaCode += `[${mod}.name]:${JSON.stringify({ folderName, userPlugin: true })},\n`;
+                i++;
+            }
             code += `export default {${pluginsCode}};export const PluginMeta={${metaCode}};export const ExcludedPlugins={${excludedCode}};`;
             return {
                 contents: code,

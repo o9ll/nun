@@ -1,51 +1,29 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import "./style.css";
 
-import { definePluginSettings } from "@api/Settings";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin from "@utils/types";
 
 import { reportKnownVoiceStatesSoon, reportVoiceStates, stopClient } from "./client";
 import { VoiceIndicator } from "./components";
-
-const settings = definePluginSettings({
-    showInMemberList: {
-        type: OptionType.BOOLEAN,
-        description: "Show the voice indicator in the member and DMs list.",
-        default: true,
-        restartNeeded: true,
-    },
-    showInMessages: {
-        type: OptionType.BOOLEAN,
-        description: "Show the voice indicator next to messages.",
-        default: true,
-        restartNeeded: true,
-    },
-    showInProfile: {
-        type: OptionType.BOOLEAN,
-        description: "Show the voice indicator in user profiles.",
-        default: true,
-        restartNeeded: true,
-    },
-});
+import { settings } from "./settings";
 
 export default definePlugin({
     name: "VoiceIndicators",
-    description: "Shows a crowd-sourced indicator when a user is in a voice channel, pulled from Nun's online services instead of your local client. Click it to see who they are with.",
+    description: "Shows a crowd-sourced indicator when a user is in a voice channel, pulled from online services instead of your local client. Click it to see who they are with.",
     authors: [{ name: "o9", id: 426687300387471360n }],
-    dependencies: ["NunOnlineServicesAPI", "MemberListDecoratorsAPI", "MessageDecorationsAPI", "NicknameIconsAPI"],
+    tags: ["Nun"],
+    dependencies: ["OnlineServicesAPI", "NunServicesAPI", "MemberListDecoratorsAPI", "MessageDecorationsAPI", "NicknameIconsAPI"],
     settings,
 
     flux: {
-        // Discord delivers the initial voice states here; report them once the stores settle.
         READY_SUPPLEMENTAL() {
             reportKnownVoiceStatesSoon();
         },
-        // Forward every live voice change so the crowd-sourced data stays current.
         VOICE_STATE_UPDATES({ voiceStates }) {
             reportVoiceStates(voiceStates);
         },
@@ -65,7 +43,6 @@ export default definePlugin({
     },
 
     patches: [
-        // Friends list rows
         {
             find: "null!=this.peopleListItemRef.current",
             replacement: {

@@ -1,13 +1,17 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+import Logger from "./logger";
+import DiscordModules from "../webpack/modules";
+import { getByKeys } from "../webpack";
+
 /**
  * Patcher that can patch other functions allowing you to run code before, after or
  * instead of the original function. Can also alter arguments and return values.
  */
-
-import Logger from "./logger";
-
-import DiscordModules from "../webpack/modules";
-import { getByKeys } from "../webpack";
-
 
 export interface GenericPatch {
     name: string;
@@ -283,7 +287,7 @@ export default class Patcher {
         const displayName = options.displayName || (module as any).displayName || (module as any).name || (module.constructor as any)?.displayName || module.constructor?.name || "anonymous";
 
         const patchId = `${displayName}.${functionName}`;
-        const patch: Patch<M, K> = (this.patches.find(p => p.module == module && p.functionName == functionName) || this.makePatch(module, functionName, patchId)) as Patch<M, K>;
+        const patch: Patch<M, K> = (this.patches.find(p => p.module === module && p.functionName === functionName) || this.makePatch(module, functionName, patchId)) as Patch<M, K>;
         if (!patch.proxyFunction) this.rePatch<M, K>(patch);
         const child: GenericChildPatch = {
             caller,
@@ -293,7 +297,7 @@ export default class Patcher {
             unpatch: () => {
                 patch.children.splice(patch.children.findIndex(cpatch => cpatch.id === child.id && cpatch.type === type), 1);
                 if (patch.children.length <= 0) {
-                    const patchNum = this.patches.findIndex(p => p.module == module && p.functionName == functionName);
+                    const patchNum = this.patches.findIndex(p => p.module === module && p.functionName === functionName);
                     if (patchNum < 0) return;
                     this.patches[patchNum].revert();
                     this.patches.splice(patchNum, 1);

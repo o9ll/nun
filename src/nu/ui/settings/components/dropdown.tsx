@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { none, GetSettingsContext } from "@nu/ui/contexts";
 import { React } from "@webpack/common";
 import clsx from "clsx";
@@ -66,13 +72,13 @@ export default function Select({ value: initialValue, options, style, onChange, 
     }, [isOpen]);
 
     // ?? options[0] provides a double failsafe
-    const selected = options.find(o => o.value == value) ?? options[0];
+    const selected = options.find(o => o.value === value) ?? options[0];
     return (
         <>
             <button
                 ref={selectRef}
                 type="button"
-                className={clsx("nu-select", isDisabled && "nu-select-disabled", style == "transparent" && "nu-select-transparent")}
+                className={clsx("nu-select", isDisabled && "nu-select-disabled", style === "transparent" && "nu-select-transparent")}
                 disabled={isDisabled}
             >
                 <span className="nu-select-value">{selected.label}</span>
@@ -87,8 +93,9 @@ export default function Select({ value: initialValue, options, style, onChange, 
             >
                 {options.map(opt =>
                     <li
-                        ref={selected.value == opt.value ? selectedRef : null}
-                        className={clsx("nu-select-option", selected.value == opt.value && "selected")}
+                        key={String(opt.value)}
+                        ref={selected.value === opt.value ? selectedRef : null}
+                        className={clsx("nu-select-option", selected.value === opt.value && "selected")}
                         role="option"
                         onClick={() => change(opt.value)}
                     >

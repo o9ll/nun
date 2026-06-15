@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { DATA_DIR } from "@nu/consts";
 import fs from "../polyfill/fs";
 import Remote from "../polyfill/remote";
@@ -57,7 +63,7 @@ export default class WebpackCache {
         fs.writeFileSync(filePath, JSON.stringify(this.data, null, 4));
     }
 
-    // eslint-disable-next-line no-useless-escape
+     
     private static stackPluginRegex = /\/([^\/]+)\.plugin\.js:(\d+):(\d+)/g;
 
     static getIdFromStack(suffix?: string | number) {
@@ -70,7 +76,7 @@ export default class WebpackCache {
 
         // find the earliest plugin to be in the call stack
         for (const match of matches) {
-            if (match[1] != prev) {
+            if (match[1] !== prev) {
                 prev = match[1];
                 plugin = match[1];
             }

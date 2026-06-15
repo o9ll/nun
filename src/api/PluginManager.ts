@@ -439,22 +439,49 @@ export const initPluginManager = onlyOnce(function init() {
         settings[p].enabled = true;
     }
 
-    for (const p of pluginsValues) {
-        if (p.settings) {
-            p.settings.pluginName = p.name;
+    function registerPluginPatches(p: Plugin) {
+        if (!p.patches || !isPluginEnabled(p.name)) return;
+        if (IS_REPORTER && !isReporterTestable(p, ReporterTestable.Patches)) return;
 
-            for (const [key, def] of Object.entries(p.settings.def)) {
-                if (def.onChange)
-                    SettingsStore.addChangeListener(`plugins.${p.name}.${key}`, def.onChange);
-            }
+        for (const patch of p.patches) {
+            addPatch(patch, p.name);
+        }
+    }
+
+    function registerPluginSettings(p: Plugin) {
+        if (!p.settings?.def) return;
+
+        p.settings.pluginName = p.name;
+
+        for (const [key, def] of Object.entries(p.settings.def)) {
+            if (def.onChange)
+                SettingsStore.addChangeListener(`plugins.${p.name}.${key}`, def.onChange);
+        }
+    }
+
+    const settingsPlugin = Plugins.Settings;
+    if (settingsPlugin) {
+        try {
+            registerPluginSettings(settingsPlugin);
+        } catch (e) {
+            logger.error("Failed to register Settings plugin settings\n", e);
+        }
+        registerPluginPatches(settingsPlugin);
+    }
+
+    for (const p of pluginsValues) {
+        if (p === settingsPlugin) continue;
+
+        try {
+            registerPluginSettings(p);
+        } catch (e) {
+            logger.error(`Failed to register settings for ${p.name}\n`, e);
         }
 
-        if (p.patches && isPluginEnabled(p.name)) {
-            if (!IS_REPORTER || isReporterTestable(p, ReporterTestable.Patches)) {
-                for (const patch of p.patches) {
-                    addPatch(patch, p.name);
-                }
-            }
+        try {
+            registerPluginPatches(p);
+        } catch (e) {
+            logger.error(`Failed to register patches for ${p.name}\n`, e);
         }
     }
 });

@@ -78,7 +78,7 @@
   text-overflow: ellipsis;
   font-family: var(--font-primary);
   font-size: 12px;
-  line-height: 1.3333333333333333;
+  line-height: 1.3333;
   font-weight: 400;
 }
 
@@ -159,7 +159,7 @@
   -webkit-box-orient: vertical;
   font-family: var(--font-primary);
   font-size: 14px;
-  line-height: 1.2857142857142858;
+  line-height: 1.2857;
   font-weight: 400;
   user-select: text;
 }
@@ -231,7 +231,7 @@ button.nu-addon-store-card-button {
   flex: 0 0 auto;
   font-family: var(--font-display);
   font-size: 12px;
-  line-height: 1.3333333333333333;
+  line-height: 1.3333;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;

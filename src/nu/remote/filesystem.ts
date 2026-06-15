@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import * as fs from "fs";
 import clone from "../utils/clone";
 import Logger from "../core/logger";
@@ -14,7 +20,7 @@ export function writeFile(path: string, content: string | Uint8Array, options?: 
         content = Buffer.from(content);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+     
     const doWriteFile = options?.originalFs ? require("original-fs").writeFileSync : fs.writeFileSync;
 
     return doWriteFile(path, content, options);

@@ -19,125 +19,118 @@
 import "./checkNodeVersion.js";
 
 import { execFileSync, execSync } from "child_process";
-import { createWriteStream, existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, statSync } from "fs";
 import { dirname, join } from "path";
-import { Readable } from "stream";
-import { finished } from "stream/promises";
 import { fileURLToPath } from "url";
 
-const BASE_URL = "https://github.com/Equicord/Equilotl/releases/latest/download/";
-const INSTALLER_PATH_DARWIN = "Equilotl.app/Contents/MacOS/Equilotl";
-const INSTALLER_APP_DARWIN = "Equilotl.app";
+import { runLocalInstaller } from "./localInstaller.mjs";
 
 const BASE_DIR = join(dirname(fileURLToPath(import.meta.url)), "..");
-const FILE_DIR = join(BASE_DIR, "dist", "Installer");
-const ETAG_FILE = join(FILE_DIR, "etag.txt");
+const INSTALLER_SRC = join(BASE_DIR, "installer");
+const OUT_DIR = join(BASE_DIR, "dist", "Installer");
+const DESKTOP_DIR = join(BASE_DIR, "dist", "desktop");
+const PATCHER = join(DESKTOP_DIR, "patcher.js");
 
-function getFilename() {
-    switch (process.platform) {
-        case "win32":
-            return "EquilotlCli.exe";
-        case "darwin":
-            switch (process.arch) {
-                case "x64":
-                    return "Equilotl-darwin-x64.zip";
-                case "arm64":
-                    return "Equilotl-darwin-arm64.zip";
-                default:
-                    throw new Error("Unsupported macOS architecture: " + process.arch);
-            }
-        case "linux":
-            return "EquilotlCli-linux";
-        default:
-            throw new Error("Unsupported platform: " + process.platform);
+function getInstallerOut() {
+    if (process.platform !== "win32")
+        throw new Error("Installer build is only supported on Windows");
+
+    return join(OUT_DIR, "NunInstallerCli.exe");
+}
+
+function ensureBuild() {
+    if (existsSync(PATCHER)) return;
+
+    console.log("Build output missing, running pnpm build...");
+    execSync("pnpm build", { cwd: BASE_DIR, stdio: "inherit" });
+
+    if (!existsSync(PATCHER))
+        throw new Error("Build finished but patcher.js is still missing at " + PATCHER);
+}
+
+function hasGo() {
+    try {
+        execSync("go version", { stdio: "pipe" });
+        return true;
+    } catch {
+        return false;
     }
 }
 
-async function ensureBinary() {
-    const filename = getFilename();
-    console.log("Downloading " + filename);
+function buildGoInstaller(out) {
+    console.log("Building local Go installer...");
 
-    mkdirSync(FILE_DIR, { recursive: true });
+    mkdirSync(OUT_DIR, { recursive: true });
 
-    const downloadName = join(FILE_DIR, filename);
-    const outputFile = process.platform === "darwin"
-        ? join(FILE_DIR, INSTALLER_PATH_DARWIN)
-        : downloadName;
-    const outputApp = process.platform === "darwin"
-        ? join(FILE_DIR, INSTALLER_APP_DARWIN)
-        : null;
+    const gitHash = execSync("git rev-parse --short HEAD", { cwd: BASE_DIR, encoding: "utf-8" }).trim();
+    const ldflags = [
+        "-s", "-w",
+        `-X 'vencordinstaller/buildinfo.InstallerGitHash=${gitHash}'`,
+        "-X 'vencordinstaller/buildinfo.InstallerTag=dev'"
+    ].join(" ");
 
-    const etag = existsSync(outputFile) && existsSync(ETAG_FILE)
-        ? readFileSync(ETAG_FILE, "utf-8")
-        : null;
+    const env = { ...process.env, CGO_ENABLED: "0", GOOS: "windows", GOARCH: process.arch === "arm64" ? "arm64" : "386" };
+    const args = ["build", "-v", "-tags", "static cli", "-ldflags", ldflags, "-o", out, "."];
 
-    const res = await fetch(BASE_URL + filename, {
-        headers: {
-            "User-Agent": "Equicord (https://github.com/Equicord/Equicord)",
-            "If-None-Match": etag
-        }
-    });
-
-    if (res.status === 304) {
-        console.log("Up to date, not redownloading!");
-        return outputFile;
-    }
-    if (!res.ok)
-        throw new Error(`Failed to download installer: ${res.status} ${res.statusText}`);
-
-    writeFileSync(ETAG_FILE, res.headers.get("etag"));
-
-    if (process.platform === "darwin") {
-        console.log("Saving zip...");
-        const zip = new Uint8Array(await res.arrayBuffer());
-        writeFileSync(downloadName, zip);
-
-        console.log("Unzipping app bundle...");
-        execSync(`ditto -x -k '${downloadName}' '${FILE_DIR}'`);
-
-        console.log("Clearing quarantine from installer app (this is required to run it)");
-        console.log("xattr might error, that's okay");
-
-        const logAndRun = cmd => {
-            console.log("Running", cmd);
-            try {
-                execSync(cmd);
-            } catch { }
-        };
-        logAndRun(`sudo xattr -dr com.apple.quarantine '${outputApp}'`);
-    } else {
-        // WHY DOES NODE FETCH RETURN A WEB STREAM OH MY GOD
-        const body = Readable.fromWeb(res.body);
-        await finished(body.pipe(createWriteStream(outputFile, {
-            mode: 0o755,
-            autoClose: true
-        })));
-    }
-
-    console.log("Finished downloading!");
-
-    return outputFile;
+    execFileSync("go", args, { cwd: INSTALLER_SRC, stdio: "inherit", env });
 }
 
+function isStaleInstaller(out) {
+    try {
+        const installerMtime = statSync(out).mtimeMs;
+        const srcMtime = Math.max(
+            ...["cli.go", "patcher.go", "find_discord_windows.go", "github_downloader.go", "constants.go"]
+                .map(f => statSync(join(INSTALLER_SRC, f)).mtimeMs)
+        );
+        return srcMtime > installerMtime;
+    } catch {
+        return false;
+    }
+}
 
+function getGoInstaller() {
+    const out = getInstallerOut();
+    if (!existsSync(out) && hasGo())
+        buildGoInstaller(out);
+    else if (existsSync(out) && isStaleInstaller(out) && hasGo())
+        buildGoInstaller(out);
 
-const installerBin = await ensureBinary();
+    return existsSync(out) ? out : null;
+}
 
-console.log("Now running Installer...");
+ensureBuild();
 
 const argStart = process.argv.indexOf("--");
 const args = argStart === -1 ? [] : process.argv.slice(argStart + 1);
 
-try {
-    execFileSync(installerBin, args, {
-        stdio: "inherit",
-        env: {
-            ...process.env,
-            EQUICORD_USER_DATA_DIR: BASE_DIR,
-            EQUICORD_DIRECTORY: join(BASE_DIR, "dist/desktop"),
-            EQUICORD_DEV_INSTALL: "1"
-        }
-    });
-} catch {
-    console.error("Something went wrong. Please check the logs above.");
+const goInstaller = getGoInstaller();
+
+if (goInstaller) {
+    console.log("Running local Go installer...");
+    try {
+        execFileSync(goInstaller, args, {
+            stdio: "inherit",
+            env: {
+                ...process.env,
+                EQUICORD_USER_DATA_DIR: BASE_DIR,
+                EQUICORD_DIRECTORY: DESKTOP_DIR,
+                EQUICORD_DEV_INSTALL: "1",
+                VENCORD_USER_DATA_DIR: BASE_DIR,
+                VENCORD_DIRECTORY: DESKTOP_DIR,
+                VENCORD_DEV_INSTALL: "1"
+            }
+        });
+    } catch {
+        console.error("Something went wrong. Check the logs above.");
+        process.exit(1);
+    }
+} else {
+    console.log("Using built-in local installer...");
+    try {
+        await runLocalInstaller({ args, desktopDir: DESKTOP_DIR });
+        console.log("Success!");
+    } catch (e) {
+        console.error(e?.message ?? e);
+        process.exit(1);
+    }
 }

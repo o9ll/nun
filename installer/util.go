@@ -1,7 +1,7 @@
 /*
- * SPDX-License-Identifier: GPL-3.0
- * Vencord Installer, a cross platform gui/cli app for installing Vencord
- * Copyright (c) 2023 Vendicated and Vencord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 package main
@@ -9,7 +9,6 @@ package main
 import (
 	"errors"
 	"os"
-	"runtime"
 	"strings"
 	"syscall"
 )
@@ -85,11 +84,6 @@ func Ptr[T any](v T) *T {
 }
 
 func CheckIfErrIsCauseItsBusyRn(err error) error {
-	if runtime.GOOS != "windows" {
-		return err
-	}
-
-	// bruhhhh
 	if linkError, ok := err.(*os.LinkError); ok {
 		if errno, ok := linkError.Err.(syscall.Errno); ok && errno == 32 /* ERROR_SHARING_VIOLATION */ {
 			return errors.New(

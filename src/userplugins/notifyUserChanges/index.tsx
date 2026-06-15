@@ -1,13 +1,13 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2024 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { showNotification } from "@api/Notifications";
-import { definePluginSettings, Settings } from "@api/Settings";
-import definePlugin, { OptionType } from "@utils/types";
+import { Settings } from "@api/Settings";
+import definePlugin from "@utils/types";
 import type { Channel, User } from "@vencord/discord-types";
 import { filters, findStoreLazy, mapMangledModuleLazy } from "@webpack";
 import { Menu, PresenceStore, React, SelectedChannelStore, Tooltip, UserStore } from "@webpack/common";
@@ -15,6 +15,22 @@ import { CSSProperties } from "react";
 
 import { NotificationsOffIcon } from "./components/NotificationsOffIcon";
 import { NotificationsOnIcon } from "./components/NotificationsOnIcon";
+import {
+    friendNotificationsContextMenu,
+    friendNotificationsFlux,
+    startFriendNotifications,
+    stopFriendNotifications
+} from "./friendNotifications";
+import { migrateNotifyUserChangesSettings } from "./migration";
+import { settings } from "./settings";
+import stalker, { stalkerContextMenu } from "./stalker";
+import {
+    startSurveillance,
+    stopSurveillance,
+    surveillanceContextMenu,
+    surveillanceFlux,
+    surveillanceToolboxActions
+} from "./surveillance";
 
 interface PresenceUpdate {
     user: {
@@ -30,7 +46,6 @@ interface PresenceUpdate {
     };
     guildId?: string;
     status: string;
-    broadcast?: any; // what's this?
     activities: Array<{
         session_id: string;
         created_at: number;
@@ -45,15 +60,6 @@ interface VoiceState {
     userId: string;
     channelId?: string;
     oldChannelId?: string;
-    deaf: boolean;
-    mute: boolean;
-    selfDeaf: boolean;
-    selfMute: boolean;
-    selfStream: boolean;
-    selfVideo: boolean;
-    sessionId: string;
-    suppress: boolean;
-    requestToSpeakTimestamp: string | null;
 }
 
 function shouldBeNative() {
@@ -73,8 +79,8 @@ const StatusUtils = mapMangledModuleLazy(".concat(.5625*", {
 
 function Icon(path: string, opts?: { viewBox?: string; width?: number; height?: number; }) {
     return ({ color, tooltip, small }: { color: string; tooltip: string; small: boolean; }) => (
-        <Tooltip text={tooltip} >
-            {(tooltipProps: any) => (
+        <Tooltip text={tooltip}>
+            {((tooltipProps) => (
                 <svg
                     {...tooltipProps}
                     height={(opts?.height ?? 20) - (small ? 3 : 0)}
@@ -84,7 +90,7 @@ function Icon(path: string, opts?: { viewBox?: string; width?: number; height?: 
                 >
                     <path d={path} />
                 </svg>
-            )}
+            ))}
         </Tooltip>
     );
 }
@@ -95,43 +101,42 @@ const Icons = {
     mobile: Icon("M 187 0 L 813 0 C 916.277 0 1000 83.723 1000 187 L 1000 1313 C 1000 1416.277 916.277 1500 813 1500 L 187 1500 C 83.723 1500 0 1416.277 0 1313 L 0 187 C 0 83.723 83.723 0 187 0 Z M 125 1000 L 875 1000 L 875 250 L 125 250 Z M 500 1125 C 430.964 1125 375 1180.964 375 1250 C 375 1319.036 430.964 1375 500 1375 C 569.036 1375 625 1319.036 625 1250 C 625 1180.964 569.036 1125 500 1125 Z", { viewBox: "0 0 1000 1500", height: 17, width: 17 }),
     console: Icon("M14.8 2.7 9 3.1V47h3.3c1.7 0 6.2.3 10 .7l6.7.6V2l-4.2.2c-2.4.1-6.9.3-10 .5zm1.8 6.4c1 1.7-1.3 3.6-2.7 2.2C12.7 10.1 13.5 8 15 8c.5 0 1.2.5 1.6 1.1zM16 33c0 6-.4 10-1 10s-1-4-1-10 .4-10 1-10 1 4 1 10zm15-8v23.3l3.8-.7c2-.3 4.7-.6 6-.6H43V3h-2.2c-1.3 0-4-.3-6-.6L31 1.7V25z", { viewBox: "0 0 50 50" }),
 };
+
 type Platform = keyof typeof Icons;
 
-const PlatformIcon = ({ platform, status, small }: { platform: Platform, status: string; small: boolean; }) => {
+const PlatformIcon = ({ platform, status, small }: { platform: Platform; status: string; small: boolean; }) => {
     const tooltip = platform[0].toUpperCase() + platform.slice(1);
-    const Icon = Icons[platform] ?? Icons.desktop;
-
-    return <Icon color={StatusUtils.useStatusFillColor(status)} tooltip={tooltip} small={small} />;
+    const PlatformSvg = Icons[platform] ?? Icons.desktop;
+    return <PlatformSvg color={StatusUtils.useStatusFillColor(status)} tooltip={tooltip} small={small} />;
 };
 
 interface Sessions {
     [key: string]: {
-        active: boolean,
+        active: boolean;
         activities: {
-            created_at: string,
-            id: string,
-            name: string,
-            session_id: string,
-            state: string,
-            type: number,
-        }[],
+            created_at: string;
+            id: string;
+            name: string;
+            session_id: string;
+            state: string;
+            type: number;
+        }[];
         clientInfo: {
-            client: string,
-            os: string,
-            version: number,
-        },
+            client: string;
+            os: string;
+            version: number;
+        };
         hiddenActivities: {
-            created_at: string,
-            id: string,
-            name: string,
-            session_id: string,
-            state: string,
-            type: number,
-        }[],
-        lastModified?: unknown,
-        sessionId: string,
-        status: string
-    }
+            created_at: string;
+            id: string;
+            name: string;
+            session_id: string;
+            state: string;
+            type: number;
+        }[];
+        sessionId: string;
+        status: string;
+    };
 }
 
 interface PlatformIndicatorProps {
@@ -161,7 +166,7 @@ const PlatformIndicator = ({ user, wantMargin = true, wantTopMargin = false, sma
             if (curr.clientInfo.client !== "unknown")
                 acc[curr.clientInfo.client] = curr.status;
             return acc;
-        }, {});
+        }, {} as Record<string, string>);
 
         const { clientStatuses } = PresenceStore.getState();
         clientStatuses[UserStore.getCurrentUser().id] = ownStatus;
@@ -170,11 +175,11 @@ const PlatformIndicator = ({ user, wantMargin = true, wantTopMargin = false, sma
     const status = PresenceStore.getState()?.clientStatuses?.[user.id] as Record<Platform, string>;
     if (!status) return null;
 
-    const icons = Object.entries(status).map(([platform, status]) => (
+    const icons = Object.entries(status).map(([platform, platformStatus]) => (
         <PlatformIcon
             key={platform}
             platform={platform as Platform}
-            status={status}
+            status={platformStatus}
             small={small}
         />
     ));
@@ -196,67 +201,36 @@ const PlatformIndicator = ({ user, wantMargin = true, wantTopMargin = false, sma
                 gap: 2,
                 ...style
             }}
-
         >
             {icons}
         </span>
     );
 };
 
-export const settings = definePluginSettings({
-    notifyStatus: {
-        type: OptionType.BOOLEAN,
-        description: "Notify on status changes",
-        restartNeeded: false,
-        default: true,
-    },
-    notifyVoice: {
-        type: OptionType.BOOLEAN,
-        description: "Notify on voice channel changes",
-        restartNeeded: false,
-        default: false,
-    },
-    persistNotifications: {
-        type: OptionType.BOOLEAN,
-        description: "Persist notifications",
-        restartNeeded: false,
-        default: false,
-    },
-    userIds: {
-        type: OptionType.STRING,
-        description: "User IDs (comma separated)",
-        restartNeeded: false,
-        default: "",
-    }
-});
-
 function getUserIdList() {
-    try {
-        return settings.store.userIds.split(",").filter(Boolean);
-    } catch (e) {
-        settings.store.userIds = "";
-        return [];
-    }
+    return settings.store.userIds.split(",").filter(Boolean);
 }
 
-// show rich body with user avatar
-const getRichBody = (user: User, text: string | React.ReactNode) => <div
-    style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "10px" }}>
-    <div style={{ position: "relative" }}>
-        <img src={user.getAvatarURL(void 0, 80, true)}
-            style={{ width: "80px", height: "80px", borderRadius: "15%" }} alt={`${user.username}'s avatar`} />
-        <PlatformIndicator user={user} style={{ position: "absolute", top: "-8px", right: "-10px" }} />
+const getRichBody = (user: User, text: string | React.ReactNode) => (
+    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "10px" }}>
+        <div style={{ position: "relative" }}>
+            <img
+                src={user.getAvatarURL(void 0, 80, true)}
+                style={{ width: "80px", height: "80px", borderRadius: "15%" }}
+                alt={`${user.username}'s avatar`}
+            />
+            <PlatformIndicator user={user} style={{ position: "absolute", top: "-8px", right: "-10px" }} />
+        </div>
+        <span>{text}</span>
     </div>
-    <span>{text}</span>
-</div>;
+);
 
 function triggerVoiceNotification(userId: string, userChannelId: string | null) {
     const user = UserStore.getUser(userId);
     const myChanId = SelectedChannelStore.getVoiceChannelId();
-
     const name = user.username;
-
     const title = shouldBeNative() ? `User ${name} changed voice status` : "User voice status change";
+
     if (userChannelId) {
         if (userChannelId !== myChanId) {
             showNotification({
@@ -292,88 +266,115 @@ interface UserContextProps {
     user: User;
 }
 
-const UserContext: NavContextMenuPatchCallback = (children, { user }: UserContextProps) => {
+const notifyContextMenu: NavContextMenuPatchCallback = (children, { user }: UserContextProps) => {
     if (!user || user.id === UserStore.getCurrentUser().id) return;
     const isNotifyOn = getUserIdList().includes(user.id);
-    const label = isNotifyOn ? "Don't notify on changes" : "Notify on changes";
-    const icon = isNotifyOn ? NotificationsOffIcon : NotificationsOnIcon;
 
     children.splice(-1, 0, (
         <Menu.MenuGroup>
             <Menu.MenuItem
                 id="toggle-notify-user"
-                label={label}
+                label={isNotifyOn ? "Don't notify on changes" : "Notify on changes"}
                 action={() => toggleUserNotify(user.id)}
-                icon={icon}
+                icon={isNotifyOn ? NotificationsOffIcon : NotificationsOnIcon}
             />
         </Menu.MenuGroup>
     ));
 };
 
+const userContextMenu: NavContextMenuPatchCallback = (children, props) => {
+    notifyContextMenu(children, props as UserContextProps);
+    friendNotificationsContextMenu(children, props as { user: User });
+    stalkerContextMenu(children, props);
+    surveillanceContextMenu(children, props);
+};
+
 const lastStatuses = new Map<string, string>();
 
-export default definePlugin({
-    name: "NotifyUserChanges",
-    description: "Adds a notify option in the user context menu to get notified when a user changes voice channels or online status",
-    authors: [{ name: "o9", id: 426687300387471360n }],
-
-    settings,
-
-    contextMenus: {
-        "user-context": UserContext
-    },
-
-    flux: {
-        VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
-            if (!settings.store.notifyVoice || !settings.store.userIds) {
-                return;
-            }
-            for (const { userId, channelId, oldChannelId } of voiceStates) {
-                if (channelId !== oldChannelId) {
-                    const isFollowed = getUserIdList().includes(userId);
-                    if (!isFollowed) {
-                        continue;
-                    }
-
-                    if (channelId) {
-                        // move or join new channel
-                        triggerVoiceNotification(userId, channelId);
-                    } else if (oldChannelId) {
-                        // leave
-                        triggerVoiceNotification(userId, null);
-                    }
-                }
-            }
-        },
-        PRESENCE_UPDATES({ updates }: { updates: PresenceUpdate[]; }) {
-            if (!settings.store.notifyStatus || !settings.store.userIds) {
-                return;
-            }
-            for (const { user: { id: userId, username }, status, clientStatus } of updates) {
-                const isFollowed = getUserIdList().includes(userId);
-                if (!isFollowed) {
-                    continue;
-                }
-
-                if (!clientStatus) {
-                    continue;
-                }
-                // this is also triggered for multiple guilds and when only the activities change, so we have to check if the status actually changed
-                if (lastStatuses.has(userId) && lastStatuses.get(userId) !== status) {
-                    const user = UserStore.getUser(userId);
-                    // @ts-ignore
-                    const name = user.globalName || username;
-
-                    showNotification({
-                        title: shouldBeNative() ? `${name} changed status` : "User status change",
-                        body: `They are now ${status}`,
-                        noPersist: !settings.store.persistNotifications,
-                        richBody: getRichBody(user, `${name}'s status is now ${status}`),
-                    });
-                }
-                lastStatuses.set(userId, status);
+const notifyFlux = {
+    VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
+        if (!settings.store.notifyVoice || !settings.store.userIds) return;
+        for (const { userId, channelId, oldChannelId } of voiceStates) {
+            if (channelId !== oldChannelId && getUserIdList().includes(userId)) {
+                triggerVoiceNotification(userId, channelId ?? null);
             }
         }
     },
+    PRESENCE_UPDATES({ updates }: { updates: PresenceUpdate[]; }) {
+        if (!settings.store.notifyStatus || !settings.store.userIds) return;
+        for (const { user: { id: userId, username }, status } of updates) {
+            if (!getUserIdList().includes(userId)) continue;
+            if (lastStatuses.has(userId) && lastStatuses.get(userId) !== status) {
+                const user = UserStore.getUser(userId);
+                const name = user.globalName || username;
+                showNotification({
+                    title: shouldBeNative() ? `${name} changed status` : "User status change",
+                    body: `They are now ${status}`,
+                    noPersist: !settings.store.persistNotifications,
+                    richBody: getRichBody(user, `${name}'s status is now ${status}`),
+                });
+            }
+            lastStatuses.set(userId, status);
+        }
+    },
+};
 
+function mergeFluxHandlers(...handlerGroups: Array<Record<string, (...args: unknown[]) => void>>) {
+    const merged: Record<string, (...args: unknown[]) => void> = {};
+    const events = new Set(handlerGroups.flatMap(group => Object.keys(group)));
+
+    for (const event of events) {
+        const handlers = handlerGroups.map(group => group[event]).filter(Boolean);
+        if (handlers.length === 1) {
+            merged[event] = handlers[0]!;
+        } else {
+            merged[event] = function (this: unknown, ...args: unknown[]) {
+                for (const handler of handlers) handler.apply(this, args);
+            };
+        }
+    }
+
+    return merged;
+}
+
+const {
+    flux: stalkerFlux,
+    start: startStalker,
+    stop: stopStalker,
+    patches: stalkerPatches,
+    ...stalkerFields
+} = stalker;
+
+migrateNotifyUserChangesSettings();
+
+export { settings };
+
+export default definePlugin({
+    name: "NotifyUserChanges",
+    description: "Notify on friend status, activity, voice, and message changes. Track user history, surveillance dashboard, and per-user notification settings.",
+    authors: [{ name: "o9", id: 426687300387471360n }],
+    tags: ["Nun"],
+    settings,
+    patches: stalkerPatches,
+    ...stalkerFields,
+    contextMenus: {
+        "user-context": userContextMenu,
+    },
+    toolboxActions: surveillanceToolboxActions,
+    flux: mergeFluxHandlers(
+        notifyFlux as Record<string, (...args: unknown[]) => void>,
+        friendNotificationsFlux as Record<string, (...args: unknown[]) => void>,
+        stalkerFlux as Record<string, (...args: unknown[]) => void>,
+        surveillanceFlux as Record<string, (...args: unknown[]) => void>
+    ),
+    async start() {
+        await startStalker.call(this);
+        startSurveillance();
+        await startFriendNotifications();
+    },
+    async stop() {
+        await stopStalker.call(this);
+        stopSurveillance();
+        stopFriendNotifications();
+    },
 });

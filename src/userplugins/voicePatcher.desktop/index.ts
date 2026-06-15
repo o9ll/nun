@@ -1,6 +1,6 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -58,8 +58,10 @@ export function applyAndLogPatches(disabledPatches: string, customPatches: strin
 
 export default definePlugin({
     name: "VoicePatcher",
-    description: "Patches discord_voice.node in memory for stereo and high bitrate unlocks. Base layer for GoXLR desktop voice setups.",
+    description: "Patches discord_voice.node in memory for stereo and high bitrate unlocks. Base layer for desktop voice setups.",
     authors: [{ name: "o9", id: 426687300387471360n }],
+    tags: ["Nun"],
+    enabledByDefault: true,
     settings,
     settingsAboutComponent: VoicePatcherSettingsAbout,
     start() {

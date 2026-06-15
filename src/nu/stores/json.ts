@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import fs from "../polyfill/fs";
 import Remote from "@nu/polyfill/remote";
 import Store from "./base";
@@ -98,10 +104,8 @@ export default new class JsonStore extends Store {
     }
 
     public useData<T>(pluginName: string, key: string): T {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         const [state, setState] = React.useState(() => this.getData<T>(pluginName, key));
 
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         React.useInsertionEffect(() => {
             const listener = () => setState(() => this.getData<T>(pluginName, key));
 

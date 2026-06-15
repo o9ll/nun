@@ -11,7 +11,6 @@
     margin: -0.2em 0;
     border-radius: 4px;
     font-size: 85%;
-    border: 1px solid var(--background-base-lowest);
     line-height: 1.125rem;
     white-space: pre-wrap;
     background: var(--background-base-lower);
@@ -108,7 +107,7 @@
 }
 
 .nu-changelog-modal .nu-modal-content a {
-    color: hsl(200, calc(var(--saturation-factor, 1) * 100%), 49.4%);
+    color: hsl(200deg calc(var(--saturation-factor, 1) * 100%) 49.4%);
     transition: 0.05s;
     text-decoration: none;
 }
@@ -120,34 +119,31 @@
 .theme-dark .nu-changelog-modal .nu-modal-content ol,
 .theme-dark .nu-changelog-modal .nu-modal-content p,
 .theme-dark .nu-changelog-modal .nu-modal-content ul li {
-    color: hsl(210, calc(var(--saturation-factor, 1) * 9.3%), 78.8%);
+    color: hsl(210deg calc(var(--saturation-factor, 1) * 9.3%) 78.8%);
 }
 
 .theme-dark .nu-changelog-modal .nu-modal-content ul li::before {
-    background-color: hsl(216, calc(var(--saturation-factor, 1) * 9.8%), 90%);
+    background-color: hsl(216deg calc(var(--saturation-factor, 1) * 9.8%) 90%);
 }
 
 .theme-light .nu-changelog-modal .nu-modal-content ol,
 .theme-light .nu-changelog-modal .nu-modal-content p,
 .theme-light .nu-changelog-modal .nu-modal-content ul li {
-    color: hsl(223, calc(var(--saturation-factor, 1) * 5.8%), 52.9%);
+    color: hsl(223deg calc(var(--saturation-factor, 1) * 5.8%) 52.9%);
 }
 
 .theme-light .nu-changelog-modal .nu-modal-content ul li::before {
-    background-color: hsl(223, calc(var(--saturation-factor, 1) * 5.8%), 52.9%);
-}
-
-.nu-changelog-title {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    text-transform: uppercase;
+    background-color: hsl(223deg calc(var(--saturation-factor, 1) * 5.8%) 52.9%);
 }
 
 .nu-changelog-title {
     display: flex;
     align-items: center;
     margin-top: 40px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
 }
 
 .nu-changelog-title.nu-changelog-first {
@@ -171,11 +167,11 @@
 }
 
 .nu-changelog-fixed {
-    color: hsl(359, calc(var(--saturation-factor, 1)*87.3%), 59.8%);
+    color: hsl(359deg calc(var(--saturation-factor, 1)*87.3%) 59.8%);
 }
 
 .nu-changelog-fixed::after {
-    background-color: hsl(359, calc(var(--saturation-factor, 1)*87.3%), 59.8%);
+    background-color: hsl(359deg calc(var(--saturation-factor, 1)*87.3%) 59.8%);
 }
 
 .nu-changelog-progress {
@@ -187,19 +183,19 @@
 }
 
 .nu-changelog-improved {
-    color: hsl(235, calc(var(--saturation-factor, 1)*85.6%), 64.7%);
+    color: hsl(235deg calc(var(--saturation-factor, 1)*85.6%) 64.7%);
 }
 
 .nu-changelog-improved::after {
-    background-color: hsl(235, calc(var(--saturation-factor, 1)*85.6%), 64.7%);
+    background-color: hsl(235deg calc(var(--saturation-factor, 1)*85.6%) 64.7%);
 }
 
 .theme-dark .nu-changelog-improved {
-    color: hsl(235, calc(var(--saturation-factor, 1)*86.1%), 77.5%);
+    color: hsl(235deg calc(var(--saturation-factor, 1)*86.1%) 77.5%);
 }
 
 .theme-dark .nu-changelog-improved::after {
-    background-color: hsl(235, calc(var(--saturation-factor, 1)*86.1%), 77.5%);
+    background-color: hsl(235deg calc(var(--saturation-factor, 1)*86.1%) 77.5%);
 }
 
 /* .theme-dark .nu-changelog-modal iframe,

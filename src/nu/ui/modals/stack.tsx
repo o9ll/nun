@@ -1,6 +1,11 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { React } from "@webpack/common";
 import Events from "../../core/emitter";
-
 import Backdrop from "./backdrop";
 import { getWithKey } from "../../webpack";
 import type { ReactNode } from "react";

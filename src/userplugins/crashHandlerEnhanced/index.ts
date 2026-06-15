@@ -1,31 +1,17 @@
 /*
- * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2026 Vendicated and contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import { Logger } from "@utils/Logger";
-import { closeAllModals } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { maybePromptToUpdate } from "@utils/updater";
 import { filters, findBulk, proxyLazyWebpack } from "@webpack";
-import { DraftType, ExpressionPickerStore, FluxDispatcher, NavigationRouter, SelectedChannelStore, SelectedGuildStore, UserStore } from "@webpack/common";
+import { closeAllModals, DraftType, ExpressionPickerStore, FluxDispatcher, NavigationRouter, SelectedChannelStore, SelectedGuildStore, UserStore } from "@webpack/common";
 
-// ==================== INTERFACES ====================
 interface CrashReport {
     id: string;
     timestamp: number;
@@ -60,10 +46,8 @@ interface PerformanceMetrics {
     heapSize?: number;
 }
 
-// ==================== LOGGER ====================
 const CrashHandlerLogger = new Logger("CrashHandlerEnhanced");
 
-// ==================== WEBPACK ====================
 const { ModalStack, DraftManager } = proxyLazyWebpack(() => {
     const [ModalStack, DraftManager] = findBulk(
         filters.byProps("pushLazy", "popAll"),
@@ -76,9 +60,7 @@ const { ModalStack, DraftManager } = proxyLazyWebpack(() => {
     };
 });
 
-// ==================== SETTINGS ====================
 const settings = definePluginSettings({
-    // ============ BASIC RECOVERY ============
     attemptToPreventCrashes: {
         type: OptionType.BOOLEAN,
         description: "Attempt to prevent Discord crashes and auto-recover",
@@ -92,7 +74,7 @@ const settings = definePluginSettings({
     maxRecoveryAttempts: {
         type: OptionType.SLIDER,
         description: "Maximum recovery attempts before giving up",
-        default: 3,
+        default: 2,
         markers: [1, 2, 3, 4, 5, 10]
     },
     recoveryDelay: {
@@ -101,8 +83,6 @@ const settings = definePluginSettings({
         default: 1,
         markers: [1, 100, 500, 1000, 2000, 5000]
     },
-
-    // ============ ADVANCED RECOVERY ============
     aggressiveRecovery: {
         type: OptionType.BOOLEAN,
         description: "Use aggressive recovery (clears more state, higher success rate)",
@@ -126,48 +106,49 @@ const settings = definePluginSettings({
     forceGarbageCollection: {
         type: OptionType.BOOLEAN,
         description: "Force garbage collection after recovery",
-        default: true
+        default: false
     },
-
-    // ============ CRASH DETECTION ============
     enablePreventiveMeasures: {
         type: OptionType.BOOLEAN,
         description: "Enable preventive measures (monitor memory, performance)",
-        default: true
+        default: false
     },
     memoryThreshold: {
         type: OptionType.SLIDER,
         description: "Memory warning threshold (MB)",
-        default: 1000,
+        default: 3000,
         markers: [500, 750, 1000, 1500, 2000, 3000]
     },
     detectMemoryLeaks: {
         type: OptionType.BOOLEAN,
         description: "Detect and warn about potential memory leaks",
-        default: true
+        default: false
+    },
+    enableMemoryUsageCheck: {
+        type: OptionType.BOOLEAN,
+        description: "Check memory usage and show warning notifications",
+        default: false
     },
     monitorPerformance: {
         type: OptionType.BOOLEAN,
         description: "Monitor Discord performance metrics",
-        default: true
+        default: false
     },
     performanceCheckInterval: {
         type: OptionType.SLIDER,
         description: "Performance check interval (seconds)",
-        default: 30,
+        default: 300,
         markers: [10, 30, 60, 120, 300]
     },
-
-    // ============ NOTIFICATIONS ============
     showCrashNotifications: {
         type: OptionType.BOOLEAN,
         description: "Show notifications when crashes occur",
-        default: true
+        default: false
     },
     showRecoveryNotifications: {
         type: OptionType.BOOLEAN,
         description: "Show notifications when recovery is successful",
-        default: true
+        default: false
     },
     showDetailedError: {
         type: OptionType.BOOLEAN,
@@ -182,20 +163,18 @@ const settings = definePluginSettings({
     notificationDuration: {
         type: OptionType.SLIDER,
         description: "Notification display duration (seconds)",
-        default: 5,
+        default: 30,
         markers: [3, 5, 10, 15, 30]
     },
-
-    // ============ CRASH LOGGING ============
     enableCrashLogging: {
         type: OptionType.BOOLEAN,
         description: "Log all crashes with detailed information",
-        default: true
+        default: false
     },
     logToConsole: {
         type: OptionType.BOOLEAN,
         description: "Log crash details to console",
-        default: true
+        default: false
     },
     logToFile: {
         type: OptionType.BOOLEAN,
@@ -205,25 +184,23 @@ const settings = definePluginSettings({
     maxLogEntries: {
         type: OptionType.SLIDER,
         description: "Maximum crash logs to keep",
-        default: 50,
+        default: 10,
         markers: [10, 25, 50, 100, 250, 500]
     },
     includeStackTrace: {
         type: OptionType.BOOLEAN,
         description: "Include full stack trace in logs",
-        default: true
+        default: false
     },
     includeSystemInfo: {
         type: OptionType.BOOLEAN,
         description: "Include system/browser info in logs",
-        default: true
+        default: false
     },
-
-    // ============ STATISTICS ============
     enableStatistics: {
         type: OptionType.BOOLEAN,
         description: "Track crash statistics and patterns",
-        default: true
+        default: false
     },
     showStatsDashboard: {
         type: OptionType.BOOLEAN,
@@ -233,10 +210,8 @@ const settings = definePluginSettings({
     trackCrashPatterns: {
         type: OptionType.BOOLEAN,
         description: "Analyze and track crash patterns",
-        default: true
+        default: false
     },
-
-    // ============ AUTO-ACTIONS ============
     autoRestart: {
         type: OptionType.BOOLEAN,
         description: "Auto-restart Discord after fatal crashes",
@@ -245,7 +220,7 @@ const settings = definePluginSettings({
     autoUpdate: {
         type: OptionType.BOOLEAN,
         description: "Auto-prompt for updates after crashes",
-        default: true
+        default: false
     },
     autoBackup: {
         type: OptionType.BOOLEAN,
@@ -257,8 +232,6 @@ const settings = definePluginSettings({
         description: "Auto-report crashes (anonymous)",
         default: false
     },
-
-    // ============ HIDDEN STORAGE ============
     crashLogs: {
         type: OptionType.STRING,
         description: "Crash logs storage (JSON) - managed automatically",
@@ -279,7 +252,6 @@ const settings = definePluginSettings({
     }
 });
 
-// ==================== STATE ====================
 let hasCrashedOnce = false;
 let isRecovering = false;
 let shouldAttemptRecover = true;
@@ -289,7 +261,6 @@ let lastCrashTime = 0;
 let performanceMonitorInterval: NodeJS.Timeout | null = null;
 let sessionStartTime = Date.now();
 
-// ==================== UTILITY FUNCTIONS ====================
 function generateCrashId(): string {
     return `crash_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }
@@ -366,11 +337,9 @@ function updateCrashStatistics(crashReport: CrashReport): void {
 
         stats.lastCrashTime = crashReport.timestamp;
 
-        // Track crash types
         const errorType = crashReport.error.split(":")[0] || "Unknown";
         stats.crashesByType[errorType] = (stats.crashesByType[errorType] || 0) + 1;
 
-        // Track crash frequency (last 10 crashes)
         stats.crashFrequency = stats.crashFrequency || [];
         stats.crashFrequency.push(crashReport.timestamp);
         if (stats.crashFrequency.length > 10) {
@@ -404,22 +373,17 @@ function logCrash(errorState: any, recoveryAttempted: boolean, recoverySuccessfu
             sessionDuration: Date.now() - sessionStartTime
         };
 
-        // Save to logs
         const logs = getCrashLogs();
         logs.push(crashReport);
         saveCrashLogs(logs);
 
-        // Update statistics
         updateCrashStatistics(crashReport);
 
-        // Console logging
         if (settings.store.logToConsole) {
             CrashHandlerLogger.error("Crash Report:", crashReport);
         }
 
-        // File logging (if supported)
         if (settings.store.logToFile) {
-            // File system access would go here
             CrashHandlerLogger.info("Log to file not yet implemented");
         }
     } catch (err) {
@@ -428,7 +392,7 @@ function logCrash(errorState: any, recoveryAttempted: boolean, recoverySuccessfu
 }
 
 function checkMemoryUsage(): void {
-    if (!settings.store.enablePreventiveMeasures || !settings.store.detectMemoryLeaks) return;
+    if (!settings.store.enablePreventiveMeasures || !settings.store.enableMemoryUsageCheck) return;
 
     const memory = getMemoryUsage();
     if (!memory) return;
@@ -438,18 +402,15 @@ function checkMemoryUsage(): void {
     if (memory.usedMB > threshold) {
         CrashHandlerLogger.warn(`High memory usage detected: ${memory.usedMB}MB (threshold: ${threshold}MB)`);
 
-        if (settings.store.showCrashNotifications) {
-            try {
-                showNotification({
-                    color: "#ff9800",
-                    title: "High Memory Usage Warning",
-                    body: `Discord is using ${memory.usedMB}MB of memory. Consider restarting to prevent crashes.`,
-                    noPersist: false
-                });
-            } catch { }
-        }
+        try {
+            showNotification({
+                color: "#ff9800",
+                title: "High Memory Usage Warning",
+                body: `Discord is using ${memory.usedMB}MB of memory. Consider restarting to prevent crashes.`,
+                noPersist: false
+            });
+        } catch { }
 
-        // Force garbage collection if enabled
         if (settings.store.forceGarbageCollection && typeof (window as any).gc === "function") {
             try {
                 (window as any).gc();
@@ -467,7 +428,6 @@ function startPerformanceMonitoring(): void {
     performanceMonitorInterval = setInterval(() => {
         checkMemoryUsage();
 
-        // Additional performance checks could go here
         const memory = getMemoryUsage();
         if (memory && settings.store.logToConsole) {
             CrashHandlerLogger.debug(`Memory: ${memory.usedMB}/${memory.limitMB}MB`);
@@ -489,6 +449,7 @@ export default definePlugin({
     name: "CrashHandlerEnhanced",
     description: "Advanced crash handling with detailed logging, statistics, preventive measures, and intelligent recovery",
     authors: [{ name: "o9", id: 426687300387471360n }],
+    tags: ["Nun"],
     enabledByDefault: true,
 
     settings,
@@ -527,10 +488,8 @@ export default definePlugin({
         const timeSinceLastCrash = now - lastCrashTime;
         lastCrashTime = now;
 
-        // Log crash immediately
         logCrash(errorState, false, false);
 
-        // Already recovering
         if (isRecovering) {
             CrashHandlerLogger.warn("Already recovering from previous crash");
             return;
@@ -538,12 +497,10 @@ export default definePlugin({
 
         isRecovering = true;
 
-        // Delay before recovery
         setTimeout(() => {
             try {
-                // Check if we should attempt recovery
                 const maxAttempts = settings.store.maxRecoveryAttempts;
-                const crashTooFast = timeSinceLastCrash < 1000; // Less than 1 second
+                const crashTooFast = timeSinceLastCrash < 1000;
 
                 if (!shouldAttemptRecover || (crashTooFast && recoveryAttempts >= maxAttempts)) {
                     try {
@@ -562,17 +519,15 @@ export default definePlugin({
                 shouldAttemptRecover = false;
                 recoveryAttempts++;
 
-                // Reset after 1 second
                 setTimeout(() => {
                     shouldAttemptRecover = true;
                     if (timeSinceLastCrash > 5000) {
-                        recoveryAttempts = 0; // Reset if crashes are spaced out
+                        recoveryAttempts = 0;
                     }
                 }, 1000);
             } catch { }
 
             try {
-                // Check for updates on first crash
                 if (!hasCrashedOnce && settings.store.autoUpdate) {
                     hasCrashedOnce = true;
                     maybePromptToUpdate("Discord has crashed! There might be an Equicord update that fixes this. Update now?", true);
@@ -608,7 +563,6 @@ export default definePlugin({
             }
         } catch { }
 
-        // Clear drafts
         try {
             const channelId = SelectedChannelStore.getChannelId();
             for (const key in DraftType) {
@@ -620,7 +574,6 @@ export default definePlugin({
             CrashHandlerLogger.debug("Failed to clear drafts:", err);
         }
 
-        // Close expression picker
         try {
             ExpressionPickerStore.closeExpressionPicker();
             CrashHandlerLogger.debug("Closed expression picker");
@@ -628,7 +581,6 @@ export default definePlugin({
             CrashHandlerLogger.debug("Failed to close expression picker:", err);
         }
 
-        // Close context menus
         try {
             FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" });
             CrashHandlerLogger.debug("Closed context menus");
@@ -636,7 +588,6 @@ export default definePlugin({
             CrashHandlerLogger.debug("Failed to close context menus:", err);
         }
 
-        // Close modals
         try {
             ModalStack.popAll();
             closeAllModals();
@@ -645,7 +596,6 @@ export default definePlugin({
             CrashHandlerLogger.debug("Failed to close modals:", err);
         }
 
-        // Close user profiles
         try {
             FluxDispatcher.dispatch({ type: "USER_PROFILE_MODAL_CLOSE" });
             CrashHandlerLogger.debug("Closed user profiles");
@@ -653,7 +603,6 @@ export default definePlugin({
             CrashHandlerLogger.debug("Failed to close user profiles:", err);
         }
 
-        // Pop all layers
         try {
             FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
             CrashHandlerLogger.debug("Popped all layers");
@@ -661,7 +610,6 @@ export default definePlugin({
             CrashHandlerLogger.debug("Failed to pop layers:", err);
         }
 
-        // Close DevTools
         try {
             FluxDispatcher.dispatch({
                 type: "DEV_TOOLS_SETTINGS_UPDATE",
@@ -672,10 +620,8 @@ export default definePlugin({
             CrashHandlerLogger.debug("Failed to close DevTools:", err);
         }
 
-        // Aggressive recovery
         if (settings.store.aggressiveRecovery) {
             try {
-                // Clear more state
                 FluxDispatcher.dispatch({ type: "CHANNEL_SELECT", channelId: null });
                 FluxDispatcher.dispatch({ type: "VOICE_CHANNEL_SELECT", channelId: null });
                 CrashHandlerLogger.debug("Performed aggressive recovery");
@@ -684,7 +630,6 @@ export default definePlugin({
             }
         }
 
-        // Force garbage collection
         if (settings.store.forceGarbageCollection && typeof (window as any).gc === "function") {
             try {
                 (window as any).gc();
@@ -692,7 +637,6 @@ export default definePlugin({
             } catch { }
         }
 
-        // Navigate to home
         if (settings.store.attemptToNavigateToHome) {
             try {
                 NavigationRouter.transitionToGuild("@me");
@@ -702,7 +646,6 @@ export default definePlugin({
             }
         }
 
-        // Set recovering to false before updating state
         setImmediate(() => isRecovering = false);
 
         try {
@@ -711,7 +654,6 @@ export default definePlugin({
             const recoveryTime = Date.now() - recoveryStartTime;
             CrashHandlerLogger.info(`Recovery successful in ${recoveryTime}ms`);
 
-            // Log successful recovery
             logCrash(errorState, true, true);
 
             if (settings.store.showRecoveryNotifications) {

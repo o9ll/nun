@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 function cloneArray(array: any[]): any[] {
     const clone = [];
     for (let a = 0; a < array.length; a++) {

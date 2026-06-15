@@ -1,65 +1,209 @@
 /*
- * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-import BetterMicrophoneSettingsAbout from "@userplugins/betterMicrophone.desktop/components/SettingsAbout";
-import { PluginInfo } from "@userplugins/betterMicrophone.desktop/constants";
-import { openMicrophoneSettingsModal } from "@userplugins/betterMicrophone.desktop/modals";
-import { MicrophonePatcher } from "@userplugins/betterMicrophone.desktop/patchers";
-import { initMicrophoneStore } from "@userplugins/betterMicrophone.desktop/stores";
-import { addSettingsPanelButton, Emitter, MicrophoneSettingsIcon, removeSettingsPanelButton } from "@userplugins/philsPluginLibrary";
-import definePlugin, { PluginNative } from "@utils/types";
+import BetterMicrophoneSettingsAbout from "../betterMicrophone.desktop/components/SettingsAbout";
+import { PluginInfo } from "../betterMicrophone.desktop/constants";
+import { openMicrophoneSettingsModal } from "../betterMicrophone.desktop/modals";
+import { MicrophonePatcher } from "../betterMicrophone.desktop/patchers";
+import { applyDiscordNoiseSuppressionMode, settings } from "../betterMicrophone.desktop/settings";
+import { initMicrophoneStore, microphoneStore } from "../betterMicrophone.desktop/stores";
+import { disableStereoScreenshareSDP, enableStereoScreenshareSDP } from "../betterMicrophone.desktop/voicePatches";
+import { addSettingsPanelButton, Emitter, MicrophoneSettingsIcon, removeSettingsPanelButton } from "../philsPluginLibrary";
+import definePlugin from "@utils/types";
+import { waitForStore } from "@webpack/common/internal";
 
-export const Native = VencordNative.pluginHelpers.BetterMicrophone as PluginNative<typeof import("./native")>;
+export { settings } from "../betterMicrophone.desktop/settings";
+
+let liveVoiceConnection: { voiceBitrate?: number; setVoiceBitRate?(bitrate: number): void; } | null = null;
 
 export default definePlugin({
     name: "BetterMicrophone",
-    description: "Customize mic transport for GoXLR and other interfaces. Includes GoXLR SM7B profiles tuned for mono voice at 48 kHz.",
+    description: "Unified desktop voice setup: stereo 2 channel Opus at 48 kHz with profiled bitrates. Requires VoicePatcher.",
     authors: [{ name: "o9", id: 426687300387471360n }],
-    dependencies: ["PhilsPluginLibrary"],
+    tags: ["Nun"],
+    dependencies: ["PhilsPluginLibrary", "VoicePatcher"],
     requiresRestart: true,
+    settings,
     settingsAboutComponent: BetterMicrophoneSettingsAbout,
 
-    start(): void {
+    patches: [
+        {
+            find: "...this.getAttenuationOptions()",
+            replacement: [
+                {
+                    match: /freq:48e3,pacsize:960,channels:1,rate:64e3/,
+                    replace: "freq:48e3,pacsize:960,channels:2,params:{stereo:\"1\"},rate:64e3"
+                },
+                {
+                    match: /fec:!0/,
+                    replace: "fec:$self.isFecEnabled()"
+                }
+            ]
+        },
+        {
+            find: "){this.setVoiceBitRate(",
+            replacement: {
+                match: /setVoiceBitRate\(([A-Za-z_$][\w$]*)\)\{/,
+                replace: "setVoiceBitRate($1){$1=$self.getVoiceBitrate(this,$1);"
+            }
+        },
+        {
+            find: "mediaBitrate:",
+            replacement: {
+                match: /(?<=mediaBitrate:)\d+/,
+                replace: "$self.getMediaBitrate()",
+            },
+            noWarn: true,
+        },
+        {
+            find: "pttReleaseDelay",
+            replacement: {
+                match: /(?<=pttReleaseDelay.{0,200})maxValue:2000/,
+                replace: "maxValue:$self.settings.store.pttDelayMax",
+            },
+            noWarn: true,
+        },
+        {
+            find: "voiceBitrate:",
+            replacement: {
+                match: /voiceBitrate:\i/,
+                replace: "voiceBitrate:$self.getMediaBitrate()"
+            }
+        },
+        {
+            find: "noiseSuppression:",
+            replacement: {
+                match: /noiseSuppression:!?\d/,
+                replace: "noiseSuppression:$self.getNoiseSuppression()"
+            }
+        },
+        {
+            find: "noiseCancellation:",
+            replacement: {
+                match: /noiseCancellation:!?\d/,
+                replace: "noiseCancellation:$self.getNoiseCancellation()"
+            }
+        },
+        {
+            find: "echoCancellation:",
+            replacement: {
+                match: /echoCancellation:!?\d/,
+                replace: "echoCancellation:$self.getEchoCancellation()"
+            }
+        },
+        {
+            find: "autoGainControl:",
+            replacement: {
+                match: /autoGainControl:!?\d/,
+                replace: "autoGainControl:$self.getAutoGainControl()"
+            }
+        },
+        {
+            find: "x-google-max-bitrate",
+            replacement: {
+                match: /"x-google-max-bitrate=".concat\(\i\)/,
+                replace: '"x-google-max-bitrate=".concat($self.getMediaBitrate())'
+            }
+        },
+        {
+            find: "b=AS:",
+            replacement: {
+                match: /b=AS:\d+/,
+                replace: "b=AS:$self.getMediaBitrate()"
+            }
+        },
+        {
+            find: "priority:",
+            replacement: {
+                match: /priority:"low"/,
+                replace: 'priority:$self.getAudioPriority()'
+            }
+        },
+        {
+            find: "googHighStartBitrate",
+            replacement: {
+                match: /googHighStartBitrate:\i/,
+                replace: "googHighStartBitrate:$self.getPrioritizeAudioQuality()"
+            }
+        }
+    ],
+
+    getProfileBitrateKbps() {
+        if (!microphoneStore) return settings.store.prioritizeAudioQuality ? 512 : 320;
+        const { currentProfile } = microphoneStore.get();
+        if (currentProfile.voiceBitrateEnabled && currentProfile.voiceBitrate) return currentProfile.voiceBitrate;
+        return settings.store.prioritizeAudioQuality ? 512 : 320;
+    },
+
+    getMediaBitrate() {
+        return this.getProfileBitrateKbps() * 1000;
+    },
+
+    getVoiceBitrate(conn: { voiceBitrate?: number; setVoiceBitRate?(bitrate: number): void; }, orgBitrate: number) {
+        liveVoiceConnection = conn;
+        return this.getMediaBitrate();
+    },
+
+    applyLiveBitrate() {
+        if (!liveVoiceConnection?.setVoiceBitRate) return;
+        try {
+            liveVoiceConnection.voiceBitrate = undefined;
+            liveVoiceConnection.setVoiceBitRate(this.getMediaBitrate());
+        } catch { }
+    },
+
+    isFecEnabled() {
+        if (!microphoneStore) return false;
+        const { currentProfile } = microphoneStore.get();
+        return currentProfile.fecEnabled ? !!currentProfile.fec : false;
+    },
+
+    getNoiseSuppression() {
+        return false;
+    },
+
+    getNoiseCancellation() {
+        return settings.store.enableKrispNoiseSuppression;
+    },
+
+    getEchoCancellation() {
+        return settings.store.enableEchoCancellation;
+    },
+
+    getAutoGainControl() {
+        return settings.store.enableAutoGainControl;
+    },
+
+    getPrioritizeAudioQuality() {
+        return settings.store.prioritizeAudioQuality;
+    },
+
+    getAudioPriority() {
+        return settings.store.prioritizeAudioQuality ? "high" : "low";
+    },
+
+    start() {
         initMicrophoneStore();
         this.microphonePatcher = new MicrophonePatcher().patch();
+        enableStereoScreenshareSDP();
+        waitForStore("MediaEngineStore", store => applyDiscordNoiseSuppressionMode(store));
         addSettingsPanelButton({
             name: PluginInfo.PLUGIN_NAME,
             icon: MicrophoneSettingsIcon,
             tooltipText: "Mic",
             onClick: openMicrophoneSettingsModal
         });
-        try {
-            const nativeModules = globalThis.DiscordNative?.nativeModules;
-            if (!nativeModules?.requireModule) throw new Error("DiscordNative.nativeModules is unavailable");
-            nativeModules.requireModule("discord_voice");
-            Native.applyPatches().then(result => {
-                if (result.error) { console.error("[BetterMicrophone]", result.error); return; }
-                console.log(`[BetterMicrophone] ${result.module_base} | patches: ok:${result.ok} failed:${result.failed} skipped:${result.skipped}`);
-            }).catch(e => console.error("[BetterMicrophone]", e));
-        } catch (e) {
-            console.error("[BetterMicrophone]", e);
-        }
     },
 
-    stop(): void {
+    stop() {
         this.microphonePatcher?.unpatch();
+        disableStereoScreenshareSDP();
         Emitter.removeAllListeners(PluginInfo.PLUGIN_NAME);
         removeSettingsPanelButton(PluginInfo.PLUGIN_NAME);
+        liveVoiceConnection = null;
     },
 
     toolboxActions: {

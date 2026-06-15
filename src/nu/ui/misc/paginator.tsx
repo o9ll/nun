@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import clsx from "clsx";
 import { React } from "@webpack/common";
 import Button from "../base/button";
@@ -61,9 +67,9 @@ export default function Paginator({ className, currentPage, length, pageSize, on
     }, [currentPage, max, maxVisible]);
 
     return (
-        <div className={clsx("paginator", className)}>
+        <div className={clsx("nu-paginator", className)}>
             <Button
-                className="paginator-back"
+                className="nu-paginator-back"
                 color={Button.Colors.TRANSPARENT}
                 look={Button.Looks.BLANK}
                 disabled={currentPage === 0}
@@ -71,14 +77,14 @@ export default function Paginator({ className, currentPage, length, pageSize, on
             >
                 Back
             </Button>
-            <div className="paginator-bubbles">
+            <div className="nu-paginator-bubbles">
                 {visiblePages.map((value, key) => {
                     const ellipsis = value === "...";
 
                     return (
                         <div
                             key={key}
-                            className="paginator-bubble"
+                            className="nu-paginator-bubble"
                             onClick={ellipsis ? () => { } : () => onPageChange(value as number)}
                             data-selected={currentPage === value}
                             data-ellipsis={ellipsis}
@@ -87,7 +93,7 @@ export default function Paginator({ className, currentPage, length, pageSize, on
                 })}
             </div>
             <Button
-                className="paginator-next"
+                className="nu-paginator-next"
                 color={Button.Colors.TRANSPARENT}
                 look={Button.Looks.BLANK}
                 disabled={currentPage === (max - 1)}

@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import NodePatcher from "../core/nodepatcher";
 import { React } from "@webpack/common";
 import type ReactType from "react";

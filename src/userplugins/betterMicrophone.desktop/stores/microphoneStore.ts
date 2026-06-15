@@ -1,23 +1,11 @@
 /*
- * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-import { PluginInfo } from "@userplugins/betterMicrophone.desktop/constants";
-import { createPluginStore, ProfilableInitializer, ProfilableStore, profileable, ProfileableProfile } from "@userplugins/philsPluginLibrary";
+import { PluginInfo } from "../../betterMicrophone.desktop/constants";
+import { createPluginStore, ProfilableInitializer, ProfilableStore, profileable, ProfileableProfile } from "../../philsPluginLibrary";
 
 
 export interface MicrophoneProfile {
@@ -26,11 +14,13 @@ export interface MicrophoneProfile {
     channels?: number,
     rate?: number,
     voiceBitrate?: number;
+    fec?: boolean;
     freqEnabled?: boolean,
     pacsizeEnabled?: boolean;
     channelsEnabled?: boolean;
     rateEnabled?: boolean;
     voiceBitrateEnabled?: boolean;
+    fecEnabled?: boolean;
 }
 
 export interface MicrophoneStore {
@@ -49,37 +39,44 @@ export interface MicrophoneStore {
 }
 
 export const defaultMicrophoneProfiles = {
-    goXlrSm7b: {
-        name: "GoXLR SM7B",
-        channels: 1,
+    studio: {
+        name: "2Ch 512kbps 48kHz Stereo",
+        channels: 2,
         channelsEnabled: true,
-        voiceBitrate: 160,
+        voiceBitrate: 512,
         voiceBitrateEnabled: true,
         freq: 48000,
         freqEnabled: true,
+        pacsize: 960,
+        pacsizeEnabled: true,
+        fec: false,
+        fecEnabled: true,
     },
-    goXlrSm7bMax: {
-        name: "GoXLR SM7B Max",
-        channels: 1,
+    normalx: {
+        name: "2Ch 320kbps 48kHz",
+        channels: 2,
         channelsEnabled: true,
         voiceBitrate: 320,
         voiceBitrateEnabled: true,
         freq: 48000,
         freqEnabled: true,
+        pacsize: 960,
+        pacsizeEnabled: true,
+        fec: false,
+        fecEnabled: true,
     },
-    normal: {
-        name: "Normal",
+    highx: {
+        name: "2Ch 512kbps 48kHz",
         channels: 2,
         channelsEnabled: true,
-        voiceBitrate: 96,
-        voiceBitrateEnabled: true
-    },
-    high: {
-        name: "High",
-        channels: 2,
-        channelsEnabled: true,
-        voiceBitrate: 320,
-        voiceBitrateEnabled: true
+        voiceBitrate: 512,
+        voiceBitrateEnabled: true,
+        freq: 48000,
+        freqEnabled: true,
+        pacsize: 960,
+        pacsizeEnabled: true,
+        fec: false,
+        fecEnabled: true,
     },
 } as const satisfies Record<string, MicrophoneProfile & ProfileableProfile>;
 
@@ -106,7 +103,7 @@ export const initMicrophoneStore = () =>
         "MicrophoneStore",
         profileable(
             microphoneStoreDefault,
-            defaultMicrophoneProfiles.goXlrSm7b,
+            defaultMicrophoneProfiles.studio,
             Object.values(defaultMicrophoneProfiles)
         )
     );

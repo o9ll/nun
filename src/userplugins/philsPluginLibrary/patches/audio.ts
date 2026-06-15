@@ -1,23 +1,12 @@
 /*
- * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-import { MicrophoneProfile, MicrophoneStore } from "@userplugins/betterMicrophone.desktop/stores";
-import { ProfilableStore, types } from "@userplugins/philsPluginLibrary";
+import { applyVoiceProcessingOptions } from "../../betterMicrophone.desktop/settings";
+import { MicrophoneProfile, MicrophoneStore } from "../../betterMicrophone.desktop/stores";
+import { ProfilableStore, types } from "../../philsPluginLibrary";
 import { Logger } from "@utils/Logger";
 import { lodash } from "@webpack/common";
 
@@ -28,21 +17,38 @@ export function getDefaultAudioTransportationOptions(connection: types.Connectio
     };
 }
 
+const STEREO_DECODER = {
+    channels: 2,
+    freq: 48000,
+    bitrate: 512,
+    params: { stereo: "1" },
+    type: 120,
+    name: "opus",
+} as const;
+
+export function getStereoAudioDecoder() {
+    return STEREO_DECODER;
+}
+
 export function getReplaceableAudioTransportationOptions(
     connection: types.Connection,
     get: ProfilableStore<MicrophoneStore, MicrophoneProfile>["get"]
 ) {
     const { currentProfile } = get();
     const { channels, channelsEnabled, freq, freqEnabled, pacsize, pacsizeEnabled, rate, rateEnabled, voiceBitrate, voiceBitrateEnabled } = currentProfile;
+    const channelCount = channelsEnabled && channels ? channels : 1;
+    const encoder = {
+        ...connection.getCodecOptions("opus").audioEncoder,
+        ...(rateEnabled && rate ? { rate } : {}),
+        ...(pacsizeEnabled && pacsize ? { pacsize } : pacsizeEnabled === false ? {} : { pacsize: 960 }),
+        ...(freqEnabled && freq ? { freq } : freqEnabled === false ? {} : { freq: 48000 }),
+        channels: channelCount,
+        ...(channelCount >= 2 ? { params: { stereo: "1" } } : {}),
+    };
     return {
         ...(voiceBitrateEnabled && voiceBitrate ? { encodingVoiceBitRate: voiceBitrate * 1000 } : {}),
-        audioEncoder: {
-            ...connection.getCodecOptions("opus").audioEncoder,
-            ...(rateEnabled && rate ? { rate } : {}),
-            ...(pacsizeEnabled && pacsize ? { pacsize } : {}),
-            ...(freqEnabled && freq ? { freq } : {}),
-            ...(channelsEnabled && channels ? { channels } : { channels: 1 })
-        }
+        audioEncoder: encoder,
+        ...(channelCount >= 2 ? { audioDecoders: [getStereoAudioDecoder()] } : {}),
     };
 }
 
@@ -58,6 +64,8 @@ export function patchConnectionAudioTransportOptions(
         if (replaceable.encodingVoiceBitRate !== undefined) options.encodingVoiceBitRate = replaceable.encodingVoiceBitRate;
         if (!options.audioEncoder) options.audioEncoder = {};
         Object.assign(options.audioEncoder, replaceable.audioEncoder);
+        if (replaceable.audioDecoders) options.audioDecoders = replaceable.audioDecoders;
+        applyVoiceProcessingOptions(options);
         return Reflect.apply(oldSetTransportOptions, this, [options]);
     };
 
@@ -66,6 +74,7 @@ export function patchConnectionAudioTransportOptions(
             { ...getDefaultAudioTransportationOptions(connection) },
             getReplaceableAudioTransportationOptions(connection, get)
         );
+        applyVoiceProcessingOptions(transportOptions);
         logger?.info("Overridden Transport Options", transportOptions);
         oldSetTransportOptions(transportOptions);
     };

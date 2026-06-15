@@ -1,6 +1,6 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -12,10 +12,6 @@ export interface RouteContext {
     pathname: string;
 }
 
-/**
- * Tracks the currently viewed location: selected guild, selected channel and the
- * raw pathname. Re-renders on guild/channel switches and on history navigation.
- */
 export function useRouteContext(): RouteContext {
     const guildId = useStateFromStores([SelectedGuildStore], () => SelectedGuildStore.getGuildId() || null);
     const channelId = useStateFromStores([SelectedChannelStore], () => SelectedChannelStore.getChannelId() || null);

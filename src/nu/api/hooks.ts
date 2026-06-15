@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import JsonStore from "../stores/json";
 import {useForceUpdate, useStateFromStores} from "../ui/hooks";
 
@@ -23,7 +29,6 @@ class Hooks<CN extends string | undefined = undefined, Bounded extends IsTruthy<
     public useData<T>(...args: UseDataArgs<Bounded>) {
         const callerName = this.#callerName || args.shift();
 
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         return JsonStore.useData<T>(callerName!, args[0]);
     }
 }

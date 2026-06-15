@@ -159,11 +159,11 @@ async function runUpdateCheck() {
         if (notifiedForUpdatesThisSession) return;
         notifiedForUpdatesThisSession = true;
 
-        showNotice(
-            "A new version of Equicord is available!",
-            "View Update",
-            () => openSettingsTabModal(UpdaterTab!)
-        );
+        //showNotice(
+        //    "A new version of Equicord is available!",
+        //    "View Update",
+        //    () => openSettingsTabModal(UpdaterTab!)
+        //);
     } catch (err) {
         UpdateLogger.error("Failed to check for updates", err);
     }
@@ -209,12 +209,12 @@ async function init() {
     initTrayIpc();
 
     if (!IS_DEV && !IS_WEB && !IS_UPDATER_DISABLED) {
-        runUpdateCheck();
+        //runUpdateCheck();
 
         // this tends to get really annoying, so only do this if the user has auto-update without notification enabled
-        if (Settings.autoUpdate && !Settings.autoUpdateNotification) {
-            setInterval(runUpdateCheck, 1000 * 60 * 30); // 30 minutes
-        }
+        //if (Settings.autoUpdate && !Settings.autoUpdateNotification) {
+        //    setInterval(runUpdateCheck, 1000 * 60 * 30); // 30 minutes
+        //}
     }
 
     if (IS_DEV) {

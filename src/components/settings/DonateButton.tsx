@@ -16,29 +16,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Button } from "@components/Button";
+import { Button, type ButtonProps } from "@components/Button";
 import { Heart } from "@components/Heart";
 import { OpenExternalIcon } from "@components/Icons";
 import { openInviteModal } from "@utils/discord";
-import { ButtonProps } from "@vencord/discord-types";
 import { showToast } from "@webpack/common";
 
 export function DonateButton({
     equicord = false,
     className,
+    variant = "none",
     ...props
 }: Partial<ButtonProps> & { equicord?: boolean; }) {
-    const link = equicord ? "https://github.com/sponsors/thororen1234" : "https://github.com/sponsors/Vendicated";
+    const link = equicord ? "https://github.com/sponsors/o9ll" : "https://github.com/sponsors/Vendicated";
     return (
         <Button
             {...props}
-            variant="none"
+            variant={variant}
             size="medium"
             type="button"
             onClick={() => VencordNative.native.openExternal(link)}
-            className={className || "vc-donate-button"}
+            className={className ?? (variant === "none" ? "vc-donate-button" : undefined)}
         >
-            <Heart />
+            <Heart style={{ marginRight: "0.5em" }} />
             Donate
         </Button>
     );
@@ -46,12 +46,13 @@ export function DonateButton({
 
 export function InviteButton({
     className,
+    variant = "none",
     ...props
 }: Partial<ButtonProps>) {
     return (
         <Button
             {...props}
-            variant="none"
+            variant={variant}
             size="medium"
             type="button"
             onClick={async e => {
@@ -60,7 +61,7 @@ export function InviteButton({
                     showToast("Invalid or expired invite"),
                 );
             }}
-            className={className || "vc-donate-button"}
+            className={className ?? (variant === "none" ? "vc-donate-button" : undefined)}
         >
             Invite
             <OpenExternalIcon className="vc-invite-link" />

@@ -1,14 +1,17 @@
-import { React } from "@webpack/common";
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
+import { React } from "@webpack/common";
 import Root from "./root";
 import Header from "./header";
 import Footer from "./footer";
 import Content from "./content";
-
 import Flex from "../base/flex";
 import Text from "../base/text";
 import CloseButton from "./close";
-
 import SimpleMarkdownExt from "../../structs/markdown";
 import type { ReactNode } from "react";
 
@@ -75,10 +78,10 @@ export default function ChangelogModal({ transitionState, footer, title, subtitl
         for (let c = 0; c < (changes?.length ?? 0); c++) {
             const entry = changes![c];
             const type = "nu-changelog-" + entry.type;
-            const margin = c == 0 ? " nu-changelog-first" : "";
+            const margin = c === 0 ? " nu-changelog-first" : "";
             items.push(<h1 className={`nu-changelog-title ${type}${margin}`}>{entry.title}</h1>);
             if (entry.blurb) items.push(<p>{SimpleMarkdownExt.parseToReact(entry.blurb)}</p>);
-            const list = <ul>{entry.items.map(i => <li>{SimpleMarkdownExt.parseToReact(i)}</li>)}</ul>;
+            const list = <ul>{entry.items.map((i, index) => <li key={index}>{SimpleMarkdownExt.parseToReact(i)}</li>)}</ul>;
             items.push(list);
         }
         return items;

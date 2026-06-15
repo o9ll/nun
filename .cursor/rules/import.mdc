@@ -1,0 +1,313 @@
+---
+description: Import resolution and dependency integrity rules for Nun
+alwaysApply: true
+---
+
+# Import Resolution Rules
+
+Repository: Nun (fork of Equicord)
+Platform: Windows 11
+Package Manager: Follow existing repository configuration
+Language: TypeScript / React / Electron ecosystem
+
+## Primary Objective
+
+When fixing import errors:
+
+1. Never suppress errors.
+2. Never use temporary workarounds.
+3. Never introduce aliases unless they already exist in project configuration.
+4. Never use `any`, `@ts-ignore`, `@ts-expect-error`, or similar bypasses.
+5. Always determine the actual root cause before modifying code.
+6. Preserve compatibility with upstream Equicord architecture whenever possible.
+
+---
+
+# Required Investigation Process
+
+Before changing imports:
+
+1. Read:
+   - tsconfig.json
+   - tsconfig.*.json
+   - package.json
+   - vite.config.*
+   - esbuild configuration
+   - webpack configuration if present
+   - eslint configuration
+
+2. Determine:
+   - Existing path aliases
+   - Module resolution mode
+   - Project references
+   - Workspace structure
+   - Monorepo boundaries
+   - Build target requirements
+
+3. Verify:
+   - File actually exists
+   - Export actually exists
+   - Correct export type is used
+   - Correct package is installed
+
+Never guess.
+
+---
+
+# Import Resolution Priority
+
+Resolve imports in this order:
+
+## 1. Existing Local Relative Imports
+
+Prefer:
+
+```ts
+import { Foo } from "./Foo";
+import { Bar } from "../utils/Bar";
+```
+
+over creating new aliases.
+
+## 2. Existing Repository Aliases
+
+Use only aliases already defined in:
+
+```json
+compilerOptions.paths
+```
+
+or existing bundler configuration.
+
+Do not invent aliases.
+
+## 3. Existing Workspace Packages
+
+If repository uses workspace packages:
+
+```ts
+import { Something } from "@repo/package";
+```
+
+verify package actually exists.
+
+## 4. External Dependencies
+
+Only import from packages already listed in package.json.
+
+Never introduce new dependencies solely to fix an import.
+
+---
+
+# Export Verification Rules
+
+Before modifying an import:
+
+Verify whether target uses:
+
+```ts
+export default Foo;
+```
+
+or
+
+```ts
+export const Foo = ...
+```
+
+Match import style exactly.
+
+Correct:
+
+```ts
+import Foo from "./Foo";
+```
+
+for:
+
+```ts
+export default Foo;
+```
+
+Correct:
+
+```ts
+import { Foo } from "./Foo";
+```
+
+for:
+
+```ts
+export const Foo = ...
+```
+
+Never convert exports unless necessary.
+
+---
+
+# Type Imports
+
+Use type-only imports when possible.
+
+Prefer:
+
+```ts
+import type { User } from "./types";
+```
+
+instead of:
+
+```ts
+import { User } from "./types";
+```
+
+when only used as a type.
+
+---
+
+# File Extension Rules
+
+Follow existing repository conventions.
+
+Do not add extensions unless repository explicitly requires them.
+
+Preferred:
+
+```ts
+import { Foo } from "./Foo";
+```
+
+Avoid:
+
+```ts
+import { Foo } from "./Foo.ts";
+```
+
+unless project configuration requires it.
+
+---
+
+# Path Correction Rules
+
+When a path is invalid:
+
+1. Search repository for actual source file.
+2. Use nearest valid relative path.
+3. Preserve existing folder architecture.
+4. Do not move files solely to satisfy imports.
+
+---
+
+# Dependency Rules
+
+When package import fails:
+
+Verify:
+
+1. Package exists in package.json.
+2. Package exists in lockfile.
+3. Package is actually installed.
+4. Version satisfies code usage.
+
+If package is missing:
+
+* Add only if required by project architecture.
+* Prefer existing internal implementations.
+* Avoid duplicate libraries.
+
+---
+
+# Equicord Compatibility Rules
+
+Since Nun is forked from Equicord:
+
+1. Search upstream Equicord implementation before modifying architecture.
+2. Prefer upstream import structure.
+3. Preserve upstream module boundaries.
+4. Do not replace upstream patterns with personal preferences.
+5. Keep future upstream merges straightforward.
+
+---
+
+# Forbidden Fixes
+
+Never do any of the following:
+
+```ts
+// Forbidden
+// @ts-ignore
+
+// Forbidden
+// @ts-expect-error
+
+// Forbidden
+const x: any = value;
+
+// Forbidden
+require("module");
+
+// Forbidden
+import * as Everything from "...";
+```
+
+unless repository already requires that pattern.
+
+Also forbidden:
+
+* Creating fake declaration files.
+* Creating empty modules.
+* Disabling TypeScript checks.
+* Disabling ESLint rules.
+* Editing generated files.
+* Editing lockfiles manually.
+* Adding unused dependencies.
+
+---
+
+# Validation Checklist
+
+After every import fix:
+
+1. Run type checking.
+2. Run linting.
+3. Run build.
+4. Verify zero new errors introduced.
+5. Verify no circular dependency created.
+6. Verify tree-shaking behavior remains intact.
+7. Verify runtime import path is valid.
+8. Verify Windows path compatibility.
+
+---
+
+# Circular Dependency Prevention
+
+Before finalizing:
+
+Check whether change introduces:
+
+```text
+A -> B -> A
+```
+
+or deeper dependency cycles.
+
+Prefer extracting shared code into existing utility modules rather than creating cycles.
+
+---
+
+# Final Decision Rule
+
+Never choose the quickest fix.
+
+Choose the fix that:
+
+1. Matches repository architecture.
+2. Matches upstream Equicord patterns.
+3. Preserves type safety.
+4. Preserves build integrity.
+5. Minimizes future merge conflicts.
+6. Produces the smallest correct change.
+
+Root-cause fix only. No workarounds. No assumptions. No suppression.
+
+The repository is a fork of Equicord, so keeping import structure aligned with upstream reduces future merge conflicts and maintenance burden.

@@ -1,7 +1,7 @@
 /*
- * SPDX-License-Identifier: GPL-3.0
- * Vencord Installer, a cross platform gui/cli app for installing Vencord
- * Copyright (c) 2023 Vendicated and Vencord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 package main
@@ -23,21 +23,9 @@ var (
 	DiscordYellow = color.RGBA{R: 0xfe, G: 0xe7, B: 0x5c, A: 0xff}
 )
 
-var LinuxDiscordNames = []string{
-	"Discord",
-	"DiscordPTB",
-	"DiscordCanary",
-	"DiscordDevelopment",
-	"discord",
-	"discordptb",
-	"discordcanary",
-	"discorddevelopment",
-	"discord-ptb",
-	"discord-canary",
-	"discord-development",
-	// Flatpak
-	"com.discordapp.Discord",
-	"com.discordapp.DiscordPTB",
-	"com.discordapp.DiscordCanary",
-	"com.discordapp.DiscordDevelopment",
+var ForkInstallNames = []string{
+	"Vencord",
+	"Equicord",
+	"BetterVencord",
+	"Lightcord",
 }

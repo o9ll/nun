@@ -1,25 +1,13 @@
 /*
- * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-import { SettingsPanel } from "@userplugins/philsPluginLibrary/components";
-import { IconComponent, SettingsPanelButton } from "@userplugins/philsPluginLibrary/components/settingsPanel/SettingsPanelButton";
-import { SettingsPanelRow } from "@userplugins/philsPluginLibrary/components/settingsPanel/SettingsPanelRow";
-import { SettingsPanelTooltipButton } from "@userplugins/philsPluginLibrary/components/settingsPanel/SettingsPanelTooltipButton";
+import { SettingsPanel } from "../../philsPluginLibrary/components";
+import { IconComponent, SettingsPanelButton } from "../../philsPluginLibrary/components/settingsPanel/SettingsPanelButton";
+import { SettingsPanelRow } from "../../philsPluginLibrary/components/settingsPanel/SettingsPanelRow";
+import { SettingsPanelTooltipButton } from "../../philsPluginLibrary/components/settingsPanel/SettingsPanelTooltipButton";
 import { React } from "@webpack/common";
 import { JSX } from "react";
 
@@ -28,6 +16,8 @@ export interface PanelButton {
     tooltipText?: string,
     icon?: IconComponent;
     onClick?: () => void;
+    /** Right-click: e.g. quick toggles without opening full plugin settings */
+    onContextMenu?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const settingsPanelButtonsSubscriptions = new Set<React.DispatchWithoutAction>();
@@ -61,18 +51,20 @@ export const ButtonsSettingsPanel = () => {
             const splicedButtons =
                 settingsPanelButtonsClone
                     .splice(0, 3)
-                    .map(({ icon, tooltipText, onClick }, index) =>
+                    .map(({ icon, tooltipText, onClick, onContextMenu }, index) =>
                         tooltipText
                             ? <SettingsPanelTooltipButton
                                 key={`tooltip-button-${index}`} // Add a unique key here
                                 tooltipProps={{ text: tooltipText }}
                                 icon={icon}
                                 onClick={onClick}
+                                onContextMenu={onContextMenu}
                             />
                             : <SettingsPanelButton
                                 key={`button-${index}`} // Add a unique key here
                                 icon={icon}
                                 onClick={onClick}
+                                onContextMenu={onContextMenu}
                             />
                     );
 

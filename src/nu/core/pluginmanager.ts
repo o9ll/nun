@@ -1,3 +1,9 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { NU_PLUGINS_DIR } from "@nu/consts";
 import AddonManager from "./addonmanager";
 import Remote from "../polyfill/remote";

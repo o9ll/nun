@@ -5,25 +5,21 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { BackupRestoreIcon, CloudIcon, LogIcon, MainSettingsIcon, PaintbrushIcon, PatchHelperIcon, PluginsIcon, UpdaterIcon } from "@components/Icons";
-import {
-    BackupAndRestoreTab,
-    ChangelogTab,
-    CloudTab,
-    PatchHelperTab,
-    PluginsTab,
-    ThemesTab,
-    UpdaterTab,
-    VencordTab,
-    NUPluginsTab
-} from "@components/settings";
+// import { BackupRestoreIcon, CloudIcon, LogIcon, MainSettingsIcon, PaintbrushIcon, PatchHelperIcon, PluginsIcon, UpdaterIcon } from "@components/Icons";
+import { BackupRestoreIcon, MainSettingsIcon, PaintbrushIcon, PluginsIcon } from "@components/Icons";
+import BackupAndRestoreTab from "@components/settings/tabs/sync/BackupAndRestoreTab";
+import NUPluginsTab from "@components/settings/tabs/nuplugins";
+import PluginsTab from "@components/settings/tabs/plugins";
+import ThemesTab from "@components/ThemeSettings/ThemesTab";
+import VencordTab from "@components/settings/tabs/vencord";
+import { NULogo } from "@nu/ui/icons";
 import { gitHashShort } from "@shared/vencordUserAgent";
 import { Devs } from "@utils/constants";
 import { isTruthy } from "@utils/guards";
+import { Logger } from "@utils/Logger";
 import definePlugin, { IconProps, OptionType } from "@utils/types";
 import { waitFor } from "@webpack";
 import { React } from "@webpack/common";
-import { NULogo } from "@nu/ui/icons";
 import type { ComponentType, PropsWithChildren, ReactNode } from "react";
 
 const enum LayoutType {
@@ -55,7 +51,9 @@ let LayoutTypes = {
     CATEGORY: 5,
     CUSTOM: 19,
 };
-waitFor(["SECTION", "SIDEBAR_ITEM", "PANEL", "CUSTOM"], v => LayoutTypes = v);
+waitFor(["SECTION", "SIDEBAR_ITEM", "PANEL", "CATEGORY", "CUSTOM"], v => LayoutTypes = v);
+
+const logger = new Logger("Settings", "#a6d189");
 
 const enum SectionType {
     HEADER = "HEADER",
@@ -81,6 +79,8 @@ interface SettingsLayoutNode {
     buildLayout?(): SettingsLayoutNode[];
     icon?(): ReactNode;
     render?(): ReactNode;
+    Component?: ComponentType;
+    useSearchTerms?(): string[];
     StronglyDiscouragedCustomComponent?(): ReactNode;
 }
 
@@ -117,6 +117,13 @@ const settings = definePluginSettings({
     }
 });
 
+const settingsSectionMap: [string, string][] = [
+    ["VencordSettings", "equicord_main_panel"],
+    ["VencordPlugins", "equicord_plugins_panel"],
+    ["VencordThemes", "equicord_themes_panel"],
+    ["VencordBackupAndRestore", "equicord_backup_restore_panel"],
+];
+
 export default definePlugin({
     name: "Settings",
     description: "Adds Settings UI and debug info",
@@ -124,6 +131,7 @@ export default definePlugin({
     required: true,
 
     settings,
+    settingsSectionMap,
 
     patches: [
         {
@@ -152,8 +160,26 @@ export default definePlugin({
                 match: /(\i)\.buildLayout\(\)(?=\.map)/,
                 replace: "$self.buildLayout($1)"
             }
+        },
+        {
+            find: ".buildLayout().every",
+            replacement: {
+                match: /(\i)\.buildLayout\(\)(?=\.every)/,
+                replace: "$self.buildLayout($1)"
+            }
+        },
+        {
+            find: "getWebUserSettingFromSection",
+            replacement: {
+                match: /new Map\(\[(?=\[.{0,10}\.ACCOUNT,.{0,10}\.ACCOUNT_PANEL)/,
+                replace: "new Map([...$self.getSettingsSectionMappings(),"
+            }
         }
     ],
+
+    getSettingsSectionMappings() {
+        return settingsSectionMap;
+    },
 
     buildEntry(options: EntryOptions): SettingsLayoutNode {
         const { key, title, panelTitle = title, Component, Icon } = options;
@@ -177,6 +203,7 @@ export default definePlugin({
         return ({
             key,
             type: LayoutTypes.SIDEBAR_ITEM,
+            legacySearchKey: title.toUpperCase(),
             useTitle: () => title,
             icon: () => <Icon width={20} height={20} />,
             buildLayout: () => [panel]
@@ -184,6 +211,15 @@ export default definePlugin({
     },
 
     buildLayout(originalLayoutBuilder: SettingsLayoutBuilder) {
+        try {
+            return this.buildNunLayout(originalLayoutBuilder);
+        } catch (e) {
+            logger.error("Failed to inject Nun settings section\n", e);
+            return originalLayoutBuilder.buildLayout();
+        }
+    },
+
+    buildNunLayout(originalLayoutBuilder: SettingsLayoutBuilder) {
         const layout = originalLayoutBuilder.buildLayout();
         if (originalLayoutBuilder.key !== "$Root") return layout;
         if (!Array.isArray(layout)) return layout;
@@ -195,19 +231,19 @@ export default definePlugin({
             buildEntry({
                 key: "equicord_main",
                 title: "Settings",
-                panelTitle: "Settings",
+                panelTitle: "Main Settings",
                 Component: VencordTab,
                 Icon: MainSettingsIcon
             }),
             buildEntry({
                 key: "equicord_plugins",
-                title: "Plugins",
+                title: "Nun",
                 Component: PluginsTab,
                 Icon: PluginsIcon
             }),
             buildEntry({
                 key: "nu_plugins",
-                title: "NU Plugins",
+                title: "BD",
                 Component: NUPluginsTab,
                 Icon: NULogo
             }),
@@ -217,45 +253,45 @@ export default definePlugin({
                 Component: ThemesTab,
                 Icon: PaintbrushIcon
             }),
-            !IS_UPDATER_DISABLED && UpdaterTab && buildEntry({
-                key: "equicord_updater",
-                title: "Updater",
-                panelTitle: "Updater",
-                Component: UpdaterTab,
-                Icon: UpdaterIcon
-            }),
-            buildEntry({
-                key: "equicord_changelog",
-                title: "Change",
-                Component: ChangelogTab,
-                Icon: LogIcon,
-            }),
-            buildEntry({
-                key: "equicord_cloud",
-                title: "Cloud",
-                panelTitle: "Cloud",
-                Component: CloudTab,
-                Icon: CloudIcon
-            }),
+            //!IS_UPDATER_DISABLED && UpdaterTab && buildEntry({
+            //    key: "equicord_updater",
+            //    title: "Updater",
+            //    panelTitle: "Updater",
+            //    Component: UpdaterTab,
+            //    Icon: UpdaterIcon
+            //}),
+            //buildEntry({
+            //    key: "equicord_changelog",
+            //    title: "Change",
+            //    Component: ChangelogTab,
+            //    Icon: LogIcon,
+            //}),
+            //buildEntry({
+            //    key: "equicord_cloud",
+            //    title: "Cloud",
+            //    panelTitle: "Cloud",
+            //    Component: CloudTab,
+            //    Icon: CloudIcon
+            //}),
             buildEntry({
                 key: "equicord_backup_restore",
                 title: "Backup",
                 Component: BackupAndRestoreTab,
                 Icon: BackupRestoreIcon
             }),
-            !IS_STANDALONE && PatchHelperTab && buildEntry({
-                key: "equicord_patch_helper",
-                title: "Patch",
-                Component: PatchHelperTab,
-                Icon: PatchHelperIcon
-            }),
+            //!IS_STANDALONE && PatchHelperTab && buildEntry({
+            //    key: "equicord_patch_helper",
+            //    title: "Patch",
+            //    Component: PatchHelperTab,
+            //    Icon: PatchHelperIcon
+            //}),
             ...this.customEntries.map(buildEntry)
         ].filter(isTruthy);
 
         const equicordSection: SettingsLayoutNode = {
             key: "equicord_section",
             type: LayoutTypes.SECTION,
-            useTitle: () => "💠",
+            useTitle: () => "Nun",
             buildLayout: () => equicordEntries
         };
 

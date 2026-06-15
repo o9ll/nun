@@ -19,43 +19,62 @@ sh -c "$(curl -sS https://raw.githubusercontent.com/o9ll/nun/refs/heads/main/mis
 
 [Git](https://git-scm.com/download) and [Node.JS LTS](https://nodejs.dev/en/) are required.
 
-Install `pnpm`:
+## Setup
 
-```shell
-npm i -g pnpm
-```
-
-Clone:
-
-```shell
+```sh
+npm install -g pnpm
 git clone https://github.com/o9ll/nun
 cd nun
-```
-
-Install dependencies:
-
-```shell
 pnpm install --frozen-lockfile
-```
+````
 
-Build:
+## Build
 
-```shell
+```sh
 pnpm build
-```
-
-Inject into your desktop client:
-
-```shell
-pnpm inject
-```
-
-Build for web:
-
-```shell
 pnpm buildWeb
+```
+
+## Inject
+
+```sh
+pnpm inject -branch canary
+```
+
+### Flags
+
+* `-branch stable`
+* `-branch ptb`
+* `-branch canary`
+* `-install-openasar`
+
+```shell
+# Install pnpm
+npm install -g pnpm
+
+# Clone the repository
+git clone https://github.com/o9ll/nun
+cd nun
+
+# Install dependencies
+pnpm install --frozen-lockfile
+
+# Build
+pnpm build
+
+# Build web assets
+pnpm buildWeb
+
+# Inject
+pnpm inject
+
+# Available flags:
+# -branch stable
+# -branch ptb
+# -branch canary
+# -install-openasar
 ```
 
 ## Credits
 
-Thank you to [Vendicated](https://github.com/Vendicated) for creating [Vencord](https://github.com/Vendicated/Vencord) & [Suncord](https://github.com/verticalsync/Suncord) by [verticalsync](https://github.com/verticalsync) for helping when needed.
+Thank you to [Vendicated](https://github.com/Vendicated) for creating [Vencord](https://github.com/Vendicated/Vencord).

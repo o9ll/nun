@@ -5,7 +5,7 @@
 }
 
 .nu-reload:hover {
-  fill: #ffffff;
+  fill: #fff;
 }
 
 .nu-reload-header {
@@ -29,8 +29,7 @@
 .nu-addon-list.nu-grid-view {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 10px;
-  row-gap: 10px;
+  gap: 10px;
 }
 
 .nu-addon-list .nu-addon-card {
@@ -120,15 +119,15 @@
 
 .nu-description-wrap {
   flex: 1;
-  padding: 8px 16px 0 16px;
+  padding: 8px 16px 0;
 }
 
 .nu-description-wrap .banner {
   padding: 5px;
   border: 2px solid gray;
   background: #26191e;
-  color: #ffffff;
-  font-weight: 700px;
+  color: #fff;
+  font-weight: 700;
   border-radius: 5px;
   font-size: 16px;
   display: flex;
@@ -141,7 +140,7 @@
 }
 
 .banner .nu-icon {
-  fill: #ffffff;
+  fill: #fff;
   margin-right: 5px;
   height: 16px !important;
 }
@@ -152,7 +151,7 @@
 }
 
 .nu-addon-list .nu-description {
-  word-break: break-word;
+  overflow-wrap: anywhere;
   margin-bottom: 5px;
   padding: 5px 0;
   overflow-y: auto;
@@ -187,7 +186,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px 16px 16px;
+  padding: 8px 16px 16px;
   overflow: hidden;
 }
 
@@ -255,7 +254,7 @@
 
 .nu-addon-modal-settings {
   /* padding: 16px; */
-  padding: 0 16px 16px 16px;
+  padding: 0 16px 16px;
 }
 
 .nu-addon-modal-footer .nu-button {
@@ -263,11 +262,11 @@
 }
 
 .nu-addon-modal-footer .nu-button:hover {
-  background-color: rgb(56, 117, 206);
+  background-color: rgb(56 117 206);
 }
 
 .nu-addon-modal-footer .nu-button:active {
-  background-color: rgb(50, 104, 183);
+  background-color: rgb(50 104 183);
 }
 
 .nu-addon-views {
@@ -285,7 +284,7 @@
 }
 
 .nu-addon-controls .nu-button.selected svg {
-  color: #ffffff;
+  color: #fff;
 }
 
 .nu-addon-controls .nu-button:hover {
@@ -305,7 +304,7 @@
 }
 
 .nu-controls-basic .nu-button:active svg {
-  color: #ffffff;
+  color: #fff;
 }
 
 .nu-controls-basic .nu-button:active {

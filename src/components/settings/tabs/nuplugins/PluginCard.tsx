@@ -1,9 +1,14 @@
+/*
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { AddonCard } from "@components/settings/AddonCard";
-import type { NUPlugin } from "@nu/core/pluginmanager";
+import pluginmanager, { type NUPlugin } from "@nu/core/pluginmanager";
 import { cl } from "../plugins";
 import { CogWheel, DeleteIcon, InfoIcon } from "@components/Icons";
 import { openPluginModal } from "./PluginModal";
-import pluginmanager from "@nu/core/pluginmanager";
 import Modals from "@nu/ui/modals";
 import { useSettings } from "@api/Settings";
 

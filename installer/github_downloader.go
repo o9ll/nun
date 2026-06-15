@@ -1,7 +1,7 @@
 /*
- * SPDX-License-Identifier: GPL-3.0
- * Vencord Installer, a cross platform gui/cli app for installing Vencord
- * Copyright (c) 2023 Vendicated and Vencord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 package main
@@ -85,7 +85,7 @@ func GetGithubRelease(url, fallbackUrl string) (*GithubRelease, error) {
 func InitGithubDownloader() {
 	GithubDoneChan = make(chan bool, 1)
 
-	IsDevInstall = os.Getenv("VENCORD_DEV_INSTALL") == "1"
+	IsDevInstall = os.Getenv("VENCORD_DEV_INSTALL") == "1" || os.Getenv("EQUICORD_DEV_INSTALL") == "1"
 	Log.Debug("Is Dev Install: ", IsDevInstall)
 	if IsDevInstall {
 		GithubDoneChan <- true
@@ -124,10 +124,14 @@ func InitGithubDownloader() {
 	scanner := bufio.NewScanner(f)
 	if scanner.Scan() {
 		line := scanner.Text()
-		if strings.HasPrefix(line, "// Vencord ") {
-			InstalledHash = line[11:]
-			Log.Debug("Existing hash is", InstalledHash)
-		} else {
+		for _, prefix := range []string{"// Vencord ", "// Equicord ", "// Nun "} {
+			if strings.HasPrefix(line, prefix) {
+				InstalledHash = line[len(prefix):]
+				Log.Debug("Existing hash is", InstalledHash)
+				break
+			}
+		}
+		if InstalledHash == "None" {
 			Log.Debug("Didn't find hash")
 		}
 	}

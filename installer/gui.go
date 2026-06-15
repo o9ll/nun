@@ -1,9 +1,9 @@
 //go:build !cli
 
 /*
- * SPDX-License-Identifier: GPL-3.0
- * Vencord Installer, a cross platform gui/cli app for installing Vencord
- * Copyright (c) 2023 Vendicated and Vencord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 package main
@@ -21,7 +21,6 @@ import (
 	_ "image/png"
 	"os"
 	path "path/filepath"
-	"runtime"
 	"strconv"
 	"strings"
 )
@@ -169,16 +168,7 @@ func handleOpenAsarConfirmed() {
 
 func handleErr(di *DiscordInstall, err error, action string) {
 	if errors.Is(err, os.ErrPermission) {
-		switch runtime.GOOS {
-		case "windows":
-			err = errors.New("Permission denied. Make sure your Discord is fully closed (from the tray)!")
-		case "darwin":
-			// FIXME: This text is not selectable which is a bit mehhh
-			command := "sudo chown -R \"${USER}:wheel\" " + di.path
-			err = errors.New("Permission denied. Please grant the installer Full Disk Access in the system settings (privacy & security page).\n\nIf that also doesn't work, try running the following command in your terminal:\n" + command)
-		default:
-			err = errors.New("Permission denied. Maybe try running me as Administrator/Root?")
-		}
+		err = errors.New("Permission denied. Make sure your Discord is fully closed (from the tray)!")
 	}
 
 	ShowModal("Failed to "+action+" this Install", err.Error())
@@ -372,19 +362,12 @@ func UpdateModal() g.Widget {
 								"Would you like to update now?\n\n"+
 									"Once you press Update Now, the new installer will automatically be downloaded.\n"+
 									"The installer will temporarily seem unresponsive. Just wait!\n"+
-									"Once the update is done, the Installer will automatically reopen.\n\n"+
-									"On MacOs, Auto updates are not supported, so it will instead open in browser.",
+									"Once the update is done, the Installer will automatically reopen.",
 							),
 						),
 						g.Row(
 							g.Button("Update Now").
 								OnClick(func() {
-									if runtime.GOOS == "darwin" {
-										g.CloseCurrentPopup()
-										g.OpenURL(GetInstallerDownloadLink())
-										return
-									}
-
 									err := UpdateSelf()
 									g.CloseCurrentPopup()
 
@@ -451,11 +434,7 @@ func renderInstaller() g.Widget {
 		),
 
 		&CondWidget{len(discords) == 0, func() g.Widget {
-			s := "No Discord installs found. You first need to install Discord."
-			if runtime.GOOS == "linux" {
-				s += " snap is not supported."
-			}
-			return g.Label(s)
+			return g.Label("No Discord installs found. You first need to install Discord.")
 		}, nil},
 
 		g.Style().SetFontSize(20).To(
@@ -587,7 +566,7 @@ func renderInstaller() g.Widget {
 			"To install OpenAsar, press Accept and click 'Install OpenAsar' again.", true),
 		InfoModal("#openasar-patched", "Successfully Installed OpenAsar", "If Discord is still open, fully close it first. Then start it again and verify OpenAsar installed successfully!"),
 		InfoModal("#openasar-unpatched", "Successfully Uninstalled OpenAsar", "If Discord is still open, fully close it first. Then start it again and it should be back to stock!"),
-		InfoModal("#invalid-custom-location", "Invalid Location", "The specified location is not a valid Discord install.\nMake sure you select the base folder.\n\nHint: Discord snap is not supported. use flatpak or .deb"),
+		InfoModal("#invalid-custom-location", "Invalid Location", "The specified location is not a valid Discord install.\nMake sure you select the base folder."),
 		InfoModal("#modal"+strconv.Itoa(modalId), modalTitle, modalMessage),
 
 		UpdateModal(),

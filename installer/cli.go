@@ -1,9 +1,9 @@
 //go:build cli
 
 /*
- * SPDX-License-Identifier: GPL-3.0
- * Vencord Installer, a cross platform gui/cli app for installing Vencord
- * Copyright (c) 2023 Vendicated and Vencord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 package main
@@ -15,7 +15,6 @@ import (
 	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
 	"os"
-	"runtime"
 	"strings"
 	"vencordinstaller/buildinfo"
 )
@@ -146,12 +145,17 @@ func main() {
 	} else if uninstall {
 		errSilent = PromptDiscord("unpatch", *locationFlag, *branchFlag).unpatch()
 	} else if update {
-		Log.Info("Downloading latest Vencord files...")
-		err := installLatestBuilds()
-		Log.Info("Done!")
-		if err == nil {
-			errSilent = PromptDiscord("repair", *locationFlag, *branchFlag).patch()
+		if IsDevInstall {
+			Log.Info("Using local build files...")
+		} else {
+			Log.Info("Downloading latest Vencord files...")
+			err := installLatestBuilds()
+			Log.Info("Done!")
+			if err != nil {
+				exitFailure()
+			}
 		}
+		errSilent = PromptDiscord("repair", *locationFlag, *branchFlag).patch()
 	} else if installOpenAsar {
 		discord := PromptDiscord("patch", *locationFlag, *branchFlag)
 		if !discord.IsOpenAsar() {
@@ -180,7 +184,7 @@ func main() {
 }
 
 func exit(status int) {
-	if runtime.GOOS == "windows" && IsDoubleClickRun() && interactive {
+	if IsDoubleClickRun() && interactive {
 		fmt.Print("Press Enter to exit")
 		var b byte
 		_, _ = fmt.Scanf("%v", &b)
@@ -216,7 +220,7 @@ func PromptDiscord(action, dir, branch string) *DiscordInstall {
 				}
 			}
 		}
-		die("No Discord install found. Try manually specifying it with the --dir flag. Hint: snap is not supported")
+		die("No Discord install found. Try manually specifying it with the --dir flag.")
 	}
 
 	if branch != "" {
@@ -233,7 +237,7 @@ func PromptDiscord(action, dir, branch string) *DiscordInstall {
 		if discord := ParseDiscord(dir, branch); discord != nil {
 			return discord
 		} else {
-			die(dir + " is not a valid Discord install. Hint: snap is not supported")
+			die(dir + " is not a valid Discord install.")
 		}
 	}
 

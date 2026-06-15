@@ -1,10 +1,8 @@
 /*
- * Vencord, a Discord client mod
- * Copyright (c) 2026 Vendicated and contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
-export const WS_URL = "ws://127.0.0.1:8787";
 
 // How long to wait before flushing batched user queries into one bulk request.
 export const BATCH_INTERVAL_MS = 100;

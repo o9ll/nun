@@ -13,7 +13,6 @@
 }
 
 .nu-scroller-thin::-webkit-scrollbar-track {
-    border-color: var(--scrollbar-thin-track);
     background-color: var(--scrollbar-thin-track);
     border: 2px solid var(--scrollbar-thin-track);
 }

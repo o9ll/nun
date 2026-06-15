@@ -1,7 +1,9 @@
+//go:build windows
+
 /*
- * SPDX-License-Identifier: GPL-3.0
- * Vencord Installer, a cross platform gui/cli app for installing Vencord
- * Copyright (c) 2023 Vendicated and Vencord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 o9
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 package main
@@ -59,12 +61,10 @@ func ParseDiscord(p, branch string) *DiscordInstall {
 	}
 
 	return &DiscordInstall{
-		path:             p,
-		branch:           branch,
-		appPath:          appPath,
-		isPatched:        isPatched,
-		isFlatpak:        false,
-		isSystemElectron: false,
+		path:      p,
+		branch:    branch,
+		appPath:   appPath,
+		isPatched: isPatched,
 	}
 }
 
@@ -84,14 +84,28 @@ func FindDiscords() []any {
 			discords = append(discords, discord)
 		}
 	}
+
+	for _, dirname := range ForkInstallNames {
+		p := path.Join(appData, dirname)
+		if discord := ParseDiscord(p, ""); discord != nil {
+			Log.Debug("Found fork install at ", p)
+			discords = append(discords, discord)
+		}
+	}
 	return discords
+}
+
+func getProcessName(di *DiscordInstall) string {
+	base := path.Base(di.path)
+	base = strings.TrimSuffix(base, ".app")
+	return base
 }
 
 func PreparePatch(di *DiscordInstall) {
 	killLock.Lock()
 	defer killLock.Unlock()
-	
-	name := windowsNames[di.branch]
+
+	name := getProcessName(di)
 	Log.Debug("Trying to kill", name)
 	pid := findProcessIdByName(name + ".exe")
 	if pid == 0 {
@@ -105,8 +119,7 @@ func PreparePatch(di *DiscordInstall) {
 		return
 	}
 
-	err = proc.Kill()
-	if err != nil {
+	if err = proc.Kill(); err != nil {
 		Log.Warn("Failed to kill", name+":", err)
 	} else {
 		Log.Debug("Waiting for", name, "to exit")
