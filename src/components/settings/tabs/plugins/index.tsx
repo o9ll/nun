@@ -424,8 +424,8 @@ export default function PluginSettings() {
                             { label: "Equicord", value: SearchStatus.EQUICORD },
                             { label: "Vencord", value: SearchStatus.VENCORD },
                             { label: "New", value: SearchStatus.NEW },
-                            hasUserPlugins && { label: "Custom", value: SearchStatus.USER_PLUGINS },
-                            { label: "API Plugins", value: SearchStatus.API_PLUGINS },
+                            hasUserPlugins && { label: "Nun", value: SearchStatus.USER_PLUGINS },
+                            { label: "API", value: SearchStatus.API_PLUGINS },
                         ].filter(isTruthy)}
                         serialize={String}
                         select={status => setSearchValue(prev => ({ ...prev, status }))}

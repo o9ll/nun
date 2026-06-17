@@ -14,12 +14,12 @@ export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins }) {
         <div className="vc-plugin-stats vc-stockplugins-stats-card">
             <div className="vc-plugin-stats-card-container">
                 <div className="vc-plugin-stats-card-section">
-                    <BaseText size="md" weight="semibold">Enabled Plugins</BaseText>
+                    <BaseText size="md" weight="semibold">Enabled</BaseText>
                     <BaseText size="xl" weight="bold">{enabledStockPlugins}</BaseText>
                 </div>
                 <div className="vc-plugin-stats-card-divider"></div>
                 <div className="vc-plugin-stats-card-section">
-                    <BaseText size="md" weight="semibold">Total Plugins</BaseText>
+                    <BaseText size="md" weight="semibold">Total</BaseText>
                     <BaseText size="xl" weight="bold">{totalStockPlugins}</BaseText>
                 </div>
             </div>
@@ -33,7 +33,7 @@ export function UserPluginsCard({ totalUserPlugins, enabledUserPlugins }) {
             <div className="vc-plugin-stats vc-stockplugins-stats-card">
                 <div className="vc-plugin-stats-card-container ">
                     <div className="vc-plugin-stats-card-section">
-                        <BaseText size="md" weight="semibold">Total Custom</BaseText>
+                        <BaseText size="md" weight="semibold">Total NunPlugins</BaseText>
                         <Tooltip
                             text={
                                 <img
@@ -59,12 +59,12 @@ export function UserPluginsCard({ totalUserPlugins, enabledUserPlugins }) {
             <div className="vc-plugin-stats vc-stockplugins-stats-card">
                 <div className="vc-plugin-stats-card-container">
                     <div className="vc-plugin-stats-card-section">
-                        <BaseText size="md" weight="semibold">Enabled Custom</BaseText>
+                        <BaseText size="md" weight="semibold">Enabled NunPlugins</BaseText>
                         <BaseText size="xl" weight="bold">{enabledUserPlugins}</BaseText>
                     </div>
                     <div className="vc-plugin-stats-card-divider"></div>
                     <div className="vc-plugin-stats-card-section">
-                        <BaseText size="md" weight="semibold">Total Custom</BaseText>
+                        <BaseText size="md" weight="semibold">Total NunPlugins</BaseText>
                         <BaseText size="xl" weight="bold">{totalUserPlugins}</BaseText>
                     </div>
                 </div>

@@ -94,7 +94,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
             condition: isModifiedPlugin,
             src: "https://equicord.org/assets/icons/equicord/modified.png",
             alt: "Modified",
-            title: "Modified Vencord Plugin"
+            title: "Modified Plugin"
         },
         {
             condition: isEquicordPlugin,
@@ -112,7 +112,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
             condition: isUserPlugin,
             src: "https://o9ll.com/assets/icons/favicon.png",
             alt: "User",
-            title: "User Plugin"
+            title: "Nun Plugin"
         }
     ];
 

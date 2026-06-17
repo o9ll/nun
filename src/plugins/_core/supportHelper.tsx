@@ -251,7 +251,7 @@ function generatePluginList() {
 
         if (enabledUserPlugins.length) {
             fileContent.push(
-                `Enabled User Plugins (${enabledUserPlugins.length}):`,
+                `Enabled Nun Plugins (${enabledUserPlugins.length}):`,
                 ...enabledUserPlugins.map(p => `  - ${p}`),
                 ""
             );
