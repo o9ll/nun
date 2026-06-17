@@ -36,4 +36,5 @@ ExtensionCache/
 # wakatime related stuff
 .wakatime-project
 
-userexclude
+userexclude/
+src/userexclude

@@ -1,5 +1,10 @@
 name: Build DevBuild
 on:
+    workflow_run:
+        workflows: ["Upstream Sync"]
+        branches: [main]
+        types:
+            - completed
     push:
         branches:
             - main
@@ -21,7 +26,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - uses: pnpm/action-setup@v3 # Install pnpm using packageManager key in package.json
+            - uses: pnpm/action-setup@v3
 
             - name: Use Node.js 20
               uses: actions/setup-node@v4
@@ -50,22 +55,8 @@ jobs:
             - name: Upload DevBuild as release
               if: github.repository == 'o9ll/nun'
               run: |
-                  gh release view devbuild >/dev/null 2>&1 || gh release create devbuild --prerelease --title "DevBuild" --notes "Automated dev builds"
-                  gh release upload devbuild --clobber \
-                    dist/desktop/patcher.js \
-                    dist/desktop/preload.js \
-                    dist/desktop/renderer.js \
-                    dist/desktop/renderer.css \
-                    dist/plugins.json \
-                    dist/plugin-readmes.json
+                  gh release upload devbuild --clobber dist/*
                   gh release edit devbuild --title "DevBuild $RELEASE_TAG"
-                  if gh release view latest >/dev/null 2>&1; then
-                    gh release upload latest --clobber \
-                      dist/desktop/patcher.js \
-                      dist/desktop/preload.js \
-                      dist/desktop/renderer.js \
-                      dist/desktop/renderer.css
-                  fi
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   RELEASE_TAG: ${{ env.release_tag }}
