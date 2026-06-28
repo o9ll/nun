@@ -450,7 +450,7 @@ export default definePlugin({
     description: "Advanced crash handling with detailed logging, statistics, preventive measures, and intelligent recovery",
     authors: [{ name: "o9", id: 426687300387471360n }],
     tags: ["Nun"],
-    enabledByDefault: true,
+    enabledByDefault: false,
 
     settings,
 

@@ -246,6 +246,14 @@ async function promptInstall(installs, action) {
 }
 
 function pickByBranch(installs, branch) {
+    if (branch === "auto") {
+        for (const b of ["stable", "canary", "ptb"]) {
+            const match = installs.find(i => i.branch === b);
+            if (match) return match;
+        }
+        throw new Error("No Discord install found");
+    }
+
     const match = installs.find(i => i.branch === branch);
     if (!match) throw new Error(`Discord ${branch} not found`);
     return match;

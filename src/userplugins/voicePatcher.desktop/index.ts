@@ -61,7 +61,7 @@ export default definePlugin({
     description: "Patches discord_voice.node in memory for stereo and high bitrate unlocks. Base layer for desktop voice setups.",
     authors: [{ name: "o9", id: 426687300387471360n }],
     tags: ["Nun"],
-    enabledByDefault: true,
+    enabledByDefault: false,
     settings,
     settingsAboutComponent: VoicePatcherSettingsAbout,
     start() {
