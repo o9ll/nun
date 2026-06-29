@@ -56,7 +56,7 @@ export function AddonCard({ disabled, isNew, sourceBadge, tooltip, name, infoBut
         >
             <div className={cl("header")}>
                 <div className={cl("name-author")}>
-                    <BaseText size="md" weight="bold" className={cl("name")}>
+                    <BaseText size="sm" weight="bold" className={cl("name")}>
                         <div ref={titleContainerRef} className={cl("title-container")}>
                             <div
                                 ref={titleRef}

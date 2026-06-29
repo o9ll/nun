@@ -18,8 +18,8 @@ export default definePlugin({
     name: "EmbeddedURLs",
     description: "Turns plain social links into embeddable URLs so posts and videos are fully viewable in Discord instead of forcing users to open the external site.",
     authors: [{ name: "o9", id: 426687300387471360n }],
-
     tags: ["Nun"],
+
     replaceUrl(originalUrl: string): string {
         let newUrl: URL;
         try {

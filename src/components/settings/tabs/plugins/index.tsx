@@ -302,7 +302,7 @@ export default function PluginSettings() {
                         onRestartNeeded={handleRestartNeeded}
                         disabled={false}
                         plugin={p}
-                        isNew={newPluginsSet?.has(p.name)}
+                        isNew={newPluginsSet?.has(p.name) && !PluginMeta[p.name]?.userPlugin}
                         key={p.name}
                     />
                 );
