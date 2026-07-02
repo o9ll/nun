@@ -200,7 +200,7 @@ const settings = definePluginSettings({
         restartNeeded: true,
         options: [
             {
-                label: "OpenCord",
+                label: "Nun",
                 value: "equicord",
                 default: true
             },

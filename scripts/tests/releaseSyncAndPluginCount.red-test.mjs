@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /*
- * OpenCord, a Discord client mod
- * Copyright (c) 2026 OpenCord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 Nun contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 /*
- * RED validation checks for OpenCord release asset naming, plugin-sync schedule,
+ * RED validation checks for Nun release asset naming, plugin-sync schedule,
  * and README plugin-count wording.
  *
  * These checks are intentionally static: they read source/configuration files
@@ -14,9 +14,9 @@
  * Expected state after the requested fixes:
  *   - README.md refers to "plugin source folders" instead of implying all source
  *     folders are user-visible injected plugins.
- *   - README.md, misc/install.sh, and scripts/runInstaller.mjs use OpenCord-branded
+ *   - README.md, misc/install.sh, and scripts/runInstaller.mjs use Nun-branded
  *     installer asset names while keeping Equilotl credit.
- *   - .github/workflows/build.yml publishes OpenCord-branded installer artifacts.
+ *   - .github/workflows/build.yml publishes Nun-branded installer artifacts.
  *   - .github/workflows/plugin-sync.yml runs daily at 06:00 UTC.
  */
 
@@ -79,15 +79,15 @@ function extractWorkflowJob(yaml, jobName) {
     return lines.slice(startIndex, endIndex === -1 ? undefined : endIndex).join("\n");
 }
 
-const opencordInstallerAssets = {
-    windowsGui: "OpenCordInstaller.exe",
-    windowsCli: "OpenCordInstallerCli.exe",
-    linuxGui: "OpenCord-x11",
-    linuxCli: "OpenCordCli-linux",
-    darwinX64Zip: "OpenCord-darwin-x64.zip",
-    darwinArm64Zip: "OpenCord-darwin-arm64.zip",
-    darwinX64Cli: "OpenCordCli-darwin-x64",
-    darwinArm64Cli: "OpenCordCli-darwin-arm64",
+const nunInstallerAssets = {
+    windowsGui: "NunInstaller.exe",
+    windowsCli: "NunInstallerCli.exe",
+    linuxGui: "Nun-x11",
+    linuxCli: "NunCli-linux",
+    darwinX64Zip: "Nun-darwin-x64.zip",
+    darwinArm64Zip: "Nun-darwin-arm64.zip",
+    darwinX64Cli: "NunCli-darwin-x64",
+    darwinArm64Cli: "NunCli-darwin-arm64",
 };
 
 function hasReleaseLink(fileContents, assetName) {
@@ -129,62 +129,62 @@ check("README feature table calls plugin folders 'source folders'", () => {
 // Release asset naming in README
 // ---------------------------------------------------------------------------
 
-check("README Windows GUI installer link is OpenCord-branded", () => {
+check("README Windows GUI installer link is Nun-branded", () => {
     if (/Equilotl\.exe/i.test(readme)) {
         return fail("README still links to legacy Equilotl.exe installer");
     }
-    if (!readme.includes(`releases/latest/download/${opencordInstallerAssets.windowsGui}`)) {
-        return fail(`README does not link to ${opencordInstallerAssets.windowsGui}`);
+    if (!readme.includes(`releases/latest/download/${nunInstallerAssets.windowsGui}`)) {
+        return fail(`README does not link to ${nunInstallerAssets.windowsGui}`);
     }
     return pass();
 });
 
-check("README Windows CLI installer link is OpenCord-branded", () => {
+check("README Windows CLI installer link is Nun-branded", () => {
     if (/EquilotlCli\.exe/i.test(readme)) {
         return fail("README still links to legacy EquilotlCli.exe installer");
     }
-    if (!readme.includes(`releases/latest/download/${opencordInstallerAssets.windowsCli}`)) {
-        return fail(`README does not link to ${opencordInstallerAssets.windowsCli}`);
+    if (!readme.includes(`releases/latest/download/${nunInstallerAssets.windowsCli}`)) {
+        return fail(`README does not link to ${nunInstallerAssets.windowsCli}`);
     }
     return pass();
 });
 
-check("README macOS x64 installer link is OpenCord-branded", () => {
+check("README macOS x64 installer link is Nun-branded", () => {
     if (/Equilotl-darwin-x64\.zip/i.test(readme)) {
         return fail("README still links to legacy Equilotl-darwin-x64.zip installer");
     }
-    if (!readme.includes(`releases/latest/download/${opencordInstallerAssets.darwinX64Zip}`)) {
-        return fail(`README does not link to ${opencordInstallerAssets.darwinX64Zip}`);
+    if (!readme.includes(`releases/latest/download/${nunInstallerAssets.darwinX64Zip}`)) {
+        return fail(`README does not link to ${nunInstallerAssets.darwinX64Zip}`);
     }
     return pass();
 });
 
-check("README macOS arm64 installer link is OpenCord-branded", () => {
+check("README macOS arm64 installer link is Nun-branded", () => {
     if (/Equilotl-darwin-arm64\.zip/i.test(readme)) {
         return fail("README still links to legacy Equilotl-darwin-arm64.zip installer");
     }
-    if (!readme.includes(`releases/latest/download/${opencordInstallerAssets.darwinArm64Zip}`)) {
-        return fail(`README does not link to ${opencordInstallerAssets.darwinArm64Zip}`);
+    if (!readme.includes(`releases/latest/download/${nunInstallerAssets.darwinArm64Zip}`)) {
+        return fail(`README does not link to ${nunInstallerAssets.darwinArm64Zip}`);
     }
     return pass();
 });
 
-check("README Linux GUI installer link is OpenCord-branded", () => {
+check("README Linux GUI installer link is Nun-branded", () => {
     if (/Equilotl-x11/i.test(readme)) {
         return fail("README still links to legacy Equilotl-x11 installer");
     }
-    if (!readme.includes(`releases/latest/download/${opencordInstallerAssets.linuxGui}`)) {
-        return fail(`README does not link to ${opencordInstallerAssets.linuxGui}`);
+    if (!readme.includes(`releases/latest/download/${nunInstallerAssets.linuxGui}`)) {
+        return fail(`README does not link to ${nunInstallerAssets.linuxGui}`);
     }
     return pass();
 });
 
-check("README Linux CLI installer link is OpenCord-branded", () => {
+check("README Linux CLI installer link is Nun-branded", () => {
     if (/EquilotlCli-linux/i.test(readme)) {
         return fail("README still links to legacy EquilotlCli-linux installer");
     }
-    if (!readme.includes(`releases/latest/download/${opencordInstallerAssets.linuxCli}`)) {
-        return fail(`README does not link to ${opencordInstallerAssets.linuxCli}`);
+    if (!readme.includes(`releases/latest/download/${nunInstallerAssets.linuxCli}`)) {
+        return fail(`README does not link to ${nunInstallerAssets.linuxCli}`);
     }
     return pass();
 });
@@ -209,26 +209,26 @@ check("README retains Equilotl installer credit", () => {
 // Local installer scripts
 // ---------------------------------------------------------------------------
 
-check("misc/install.sh uses OpenCord-branded installer asset name", () => {
+check("misc/install.sh uses Nun-branded installer asset name", () => {
     if (/Equilotl/i.test(installSh)) {
         return fail("install.sh still references legacy Equilotl names");
     }
-    if (!installSh.includes(opencordInstallerAssets.linuxCli)) {
-        return fail(`install.sh does not reference ${opencordInstallerAssets.linuxCli}`);
+    if (!installSh.includes(nunInstallerAssets.linuxCli)) {
+        return fail(`install.sh does not reference ${nunInstallerAssets.linuxCli}`);
     }
     return pass();
 });
 
-check("scripts/runInstaller.mjs uses OpenCord-branded installer asset names", () => {
+check("scripts/runInstaller.mjs uses Nun-branded installer asset names", () => {
     if (/Equilotl/i.test(runInstaller)) {
         return fail("scripts/runInstaller.mjs still references legacy Equilotl names");
     }
 
     for (const [label, assetName] of Object.entries({
-        "Windows CLI": opencordInstallerAssets.windowsCli,
-        "Linux CLI": opencordInstallerAssets.linuxCli,
-        "macOS x64 zip": opencordInstallerAssets.darwinX64Zip,
-        "macOS arm64 zip": opencordInstallerAssets.darwinArm64Zip,
+        "Windows CLI": nunInstallerAssets.windowsCli,
+        "Linux CLI": nunInstallerAssets.linuxCli,
+        "macOS x64 zip": nunInstallerAssets.darwinX64Zip,
+        "macOS arm64 zip": nunInstallerAssets.darwinArm64Zip,
     })) {
         if (!runInstaller.includes(assetName)) {
             return fail(`scripts/runInstaller.mjs does not reference ${label} asset ${assetName}`);
@@ -238,53 +238,53 @@ check("scripts/runInstaller.mjs uses OpenCord-branded installer asset names", ()
     return pass();
 });
 
-check("scripts/runInstaller.mjs extracts an OpenCord-branded macOS app bundle", () => {
+check("scripts/runInstaller.mjs extracts an Nun-branded macOS app bundle", () => {
     if (/Equilotl\.app/i.test(runInstaller)) {
         return fail("scripts/runInstaller.mjs still extracts legacy Equilotl.app bundle");
     }
-    if (!runInstaller.includes("OpenCordInstaller.app")) {
-        return fail("scripts/runInstaller.mjs must reference OpenCordInstaller.app for macOS");
+    if (!runInstaller.includes("NunInstaller.app")) {
+        return fail("scripts/runInstaller.mjs must reference NunInstaller.app for macOS");
     }
     return pass();
 });
 
-check("misc/install.sh passes OpenCord-branded environment variables to the installer", () => {
-    if (/OPENCORD_USER_DATA_DIR/.test(installSh) && /OPENCORD_DIRECTORY/.test(installSh) && /OPENCORD_DEV_INSTALL/.test(installSh)) {
+check("misc/install.sh passes Nun-branded environment variables to the installer", () => {
+    if (/NUN_USER_DATA_DIR/.test(installSh) && /NUN_DIRECTORY/.test(installSh) && /NUN_DEV_INSTALL/.test(installSh)) {
         return pass();
     }
-    return fail("install.sh must set OPENCORD_USER_DATA_DIR, OPENCORD_DIRECTORY, and OPENCORD_DEV_INSTALL for the patched OpenCord installer");
+    return fail("install.sh must set NUN_USER_DATA_DIR, NUN_DIRECTORY, and NUN_DEV_INSTALL for the patched Nun installer");
 });
 
 check("scripts/patchEquilotlBranding.mjs renames installer environment variables", () => {
-    if (/"EQUICORD_USER_DATA_DIR":\s*"OPENCORD_USER_DATA_DIR"/.test(patchBranding)
-        && /"EQUICORD_DIRECTORY":\s*"OPENCORD_DIRECTORY"/.test(patchBranding)
-        && /"EQUICORD_DEV_INSTALL":\s*"OPENCORD_DEV_INSTALL"/.test(patchBranding)) {
+    if (/"EQUICORD_USER_DATA_DIR":\s*"NUN_USER_DATA_DIR"/.test(patchBranding)
+        && /"EQUICORD_DIRECTORY":\s*"NUN_DIRECTORY"/.test(patchBranding)
+        && /"EQUICORD_DEV_INSTALL":\s*"NUN_DEV_INSTALL"/.test(patchBranding)) {
         return pass();
     }
-    return fail("patch script does not remap EQUICORD_* installer environment variables to OPENCORD_*");
+    return fail("patch script does not remap EQUICORD_* installer environment variables to NUN_*");
 });
 
-check("scripts/patchEquilotlBranding.mjs renames on-disk Equicord paths to OpenCord", () => {
-    if (/"equicord\.asar":\s*"opencord\.asar"/.test(patchBranding)
-        && /'appdir\.New\("Equicord"\)':\s*'appdir\.New\("OpenCord"\)'/.test(patchBranding)
-        && /"EquicordData":\s*"OpenCordData"/.test(patchBranding)) {
+check("scripts/patchEquilotlBranding.mjs renames on-disk Equicord paths to Nun", () => {
+    if (/"equicord\.asar":\s*"nun\.asar"/.test(patchBranding)
+        && /'appdir\.New\("Equicord"\)':\s*'appdir\.New\("Nun"\)'/.test(patchBranding)
+        && /"EquicordData":\s*"NunData"/.test(patchBranding)) {
         return pass();
     }
-    return fail("patch script does not rebrand Equicord on-disk paths (asar, appdir, data dir) to OpenCord");
+    return fail("patch script does not rebrand Equicord on-disk paths (asar, appdir, data dir) to Nun");
 });
 
 check("scripts/patchEquilotlBranding.mjs updates the asar version-detection regex", () => {
-    if (patchBranding.includes('`// OpenCord (\\\\w+)`')) {
+    if (patchBranding.includes('`// Nun (\\\\w+)`')) {
         return pass();
     }
-    return fail("patch script does not update the asar header regex from Equicord to OpenCord");
+    return fail("patch script does not update the asar header regex from Equicord to Nun");
 });
 
 check("scripts/patchEquilotlBranding.mjs preserves upstream Equicord credit", () => {
-    // A generic Equicord -> OpenCord replacement would wipe the upstream copyright
+    // A generic Equicord -> Nun replacement would wipe the upstream copyright
     // notices and user-facing credit that the task requires us to keep.
-    if (/["']Equicord["']\s*:\s*["']OpenCord["']/.test(patchBranding)) {
-        return fail("patch script has a generic Equicord -> OpenCord replacement that would remove upstream credit");
+    if (/["']Equicord["']\s*:\s*["']Nun["']/.test(patchBranding)) {
+        return fail("patch script has a generic Equicord -> Nun replacement that would remove upstream credit");
     }
     return pass();
 });
@@ -303,7 +303,7 @@ check("CI release workflow publishes a latest.json installer fallback", () => {
 // CI release asset naming
 // ---------------------------------------------------------------------------
 
-check("CI Windows build outputs OpenCord-branded installer executables", () => {
+check("CI Windows build outputs Nun-branded installer executables", () => {
     const windowsJob = extractWorkflowJob(buildYml, "InstallerWindows");
     if (!windowsJob) {
         return fail("could not locate InstallerWindows job");
@@ -312,14 +312,14 @@ check("CI Windows build outputs OpenCord-branded installer executables", () => {
     if (/Equilotl\.exe/i.test(windowsJob) || /EquilotlCli\.exe/i.test(windowsJob)) {
         return fail("Windows job still produces Equilotl.exe / EquilotlCli.exe");
     }
-    if (!windowsJob.includes(opencordInstallerAssets.windowsGui) || !windowsJob.includes(opencordInstallerAssets.windowsCli)) {
-        return fail(`Windows job must build ${opencordInstallerAssets.windowsGui} and ${opencordInstallerAssets.windowsCli}`);
+    if (!windowsJob.includes(nunInstallerAssets.windowsGui) || !windowsJob.includes(nunInstallerAssets.windowsCli)) {
+        return fail(`Windows job must build ${nunInstallerAssets.windowsGui} and ${nunInstallerAssets.windowsCli}`);
     }
 
     return pass();
 });
 
-check("CI Linux build outputs OpenCord-branded installer binaries", () => {
+check("CI Linux build outputs Nun-branded installer binaries", () => {
     const linuxJob = extractWorkflowJob(buildYml, "InstallerLinux");
     if (!linuxJob) {
         return fail("could not locate InstallerLinux job");
@@ -328,14 +328,14 @@ check("CI Linux build outputs OpenCord-branded installer binaries", () => {
     if (/Equilotl-x11/i.test(linuxJob) || /EquilotlCli-linux/i.test(linuxJob)) {
         return fail("Linux job still produces Equilotl-x11 / EquilotlCli-linux");
     }
-    if (!linuxJob.includes(opencordInstallerAssets.linuxGui) || !linuxJob.includes(opencordInstallerAssets.linuxCli)) {
-        return fail(`Linux job must build ${opencordInstallerAssets.linuxGui} and ${opencordInstallerAssets.linuxCli}`);
+    if (!linuxJob.includes(nunInstallerAssets.linuxGui) || !linuxJob.includes(nunInstallerAssets.linuxCli)) {
+        return fail(`Linux job must build ${nunInstallerAssets.linuxGui} and ${nunInstallerAssets.linuxCli}`);
     }
 
     return pass();
 });
 
-check("CI macOS build outputs OpenCord-branded installer archives and CLI binaries", () => {
+check("CI macOS build outputs Nun-branded installer archives and CLI binaries", () => {
     const macJob = extractWorkflowJob(buildYml, "InstallerMac");
     if (!macJob) {
         return fail("could not locate InstallerMac job");
@@ -350,10 +350,10 @@ check("CI macOS build outputs OpenCord-branded installer archives and CLI binari
     }
 
     for (const assetName of [
-        opencordInstallerAssets.darwinX64Zip,
-        opencordInstallerAssets.darwinArm64Zip,
-        opencordInstallerAssets.darwinX64Cli,
-        opencordInstallerAssets.darwinArm64Cli,
+        nunInstallerAssets.darwinX64Zip,
+        nunInstallerAssets.darwinArm64Zip,
+        nunInstallerAssets.darwinX64Cli,
+        nunInstallerAssets.darwinArm64Cli,
     ]) {
         if (!macJob.includes(assetName)) {
             return fail(`macOS job must build ${assetName}`);

@@ -63,14 +63,14 @@ if (!IS_VANILLA && !IS_EXTENSION) {
         };
 
         protocol.handle("vencord", handleProtocol("vencord"));
-        protocol.handle("opencord", handleProtocol("opencord"));
+        protocol.handle("nun", handleProtocol("nun"));
         protocol.handle("equicord", handleProtocol("equicord"));
 
         try {
             if (RendererSettings.store.enableReactDevtools)
                 installExt("fmkadmapgofadopljbjfkapdkoienihi")
-                    .then(() => console.info("[OpenCord] Installed React Developer Tools"))
-                    .catch(err => console.error("[OpenCord] Failed to install React Developer Tools", err));
+                    .then(() => console.info("[Nun] Installed React Developer Tools"))
+                    .catch(err => console.error("[Nun] Failed to install React Developer Tools", err));
         } catch { }
 
         initCsp();

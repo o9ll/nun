@@ -13,7 +13,7 @@ export const settings = definePluginSettings({
     format: {
         component: ({ setValue }) => FormatSetting(setValue),
         type: OptionType.COMPONENT,
-        default: "{equicordIcon} OpenCord {equicordVersion} ({equicordHash})",
+        default: "{equicordIcon} Nun {equicordVersion} ({equicordHash})",
         restartNeeded: true
     }
 });
@@ -33,11 +33,11 @@ export const settingVariables = [
     "{buildNumber} - Discord build number (e.g. 123456)",
     "{buildHash} - Discord build hash (e.g. 123456789)",
     "",
-    "OpenCord Variables:",
-    "{equicordIcon} - OpenCord icon (legacy variable name)",
-    "{equicordVersion} - Version of OpenCord (legacy variable name, e.g. 1.0.0)",
-    "{equicordHash} - OpenCord build hash (legacy variable name, e.g. 123456789)",
-    "{equicordPlatform} - Platform OpenCord is running on (legacy variable name, e.g. Dev Build)",
+    "Nun Variables:",
+    "{equicordIcon} - Nun icon (legacy variable name)",
+    "{equicordVersion} - Version of Nun (legacy variable name, e.g. 1.0.0)",
+    "{equicordHash} - Nun build hash (legacy variable name, e.g. 123456789)",
+    "{equicordPlatform} - Platform Nun is running on (legacy variable name, e.g. Dev Build)",
     "",
     "Equibop Specific Variables:",
     "{equibopHash} - Equibop build hash (e.g. 123456789)",

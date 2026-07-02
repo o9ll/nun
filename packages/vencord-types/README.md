@@ -1,11 +1,11 @@
-# OpenCord Types
+# Nun Types
 
-Typings for OpenCord's api, published to npm
+Typings for Nun's api, published to npm
 
 ```sh
-npm i @opencord/types
+npm i @nun/types
 
-yarn add @opencord/types
+yarn add @nun/types
 
-pnpm add @opencord/types
+pnpm add @nun/types
 ```

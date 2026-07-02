@@ -1,12 +1,12 @@
 {
     "manifest_version": 2,
     "minimum_chrome_version": "91",
-    "name": "OpenCord Web",
+    "name": "Nun Web",
     "description": "The other cutest Discord mod now in your browser",
-    "author": "OpenCord",
-    "homepage_url": "https://github.com/OpenCord/OpenCord",
+    "author": "Nun",
+    "homepage_url": "https://github.com/o9ll/nun",
     "icons": {
-        "128": "opencord-symbol-dark.svg"
+        "128": "nun-symbol-dark.svg"
     },
     "permissions": [
         "webRequest",
@@ -32,7 +32,7 @@
                 "*://*.discord.com/*"
             ],
             "js": [
-                "dist/OpenCord.js"
+                "dist/Nun.js"
             ],
             "all_frames": true,
             "world": "MAIN"
@@ -44,8 +44,8 @@
         ]
     },
     "web_accessible_resources": [
-        "dist/OpenCord.js",
-        "dist/OpenCord.css"
+        "dist/Nun.js",
+        "dist/Nun.css"
     ],
     "browser_specific_settings": {
         "gecko": {

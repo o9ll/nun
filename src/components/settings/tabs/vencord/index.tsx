@@ -155,7 +155,7 @@ function Switches() {
     });
 }
 
-function OpenCordSettings() {
+function NunSettings() {
     const donateImage = useMemo(() =>
         Math.random() > 0.5 ? DEFAULT_DONATE_IMAGE : SHIGGY_DONATE_IMAGE,
         []
@@ -171,10 +171,10 @@ function OpenCordSettings() {
                     subtitle="Thank you for donating!"
                     description={
                         isEquicordDonor(user?.id) && isVencordDonor(user?.id)
-                            ? "All Vencord users can see your Vencord donor badge, and OpenCord users can see your OpenCord donor badge. To change your Vencord donor badge, contact @vending.machine. For your OpenCord donor badge, make a ticket in OpenCord's server."
+                            ? "All Vencord users can see your Vencord donor badge, and Nun users can see your Nun donor badge. To change your Vencord donor badge, contact @vending.machine. For your Nun donor badge, make a ticket in Nun's server."
                             : isVencordDonor(user?.id)
                                 ? "All Vencord users can see your badge! You can manage your perks by messaging @vending.machine."
-                                : "All OpenCord users can see your badge! You can manage your perks by making a ticket in OpenCord's server."
+                                : "All Nun users can see your badge! You can manage your perks by making a ticket in Nun's server."
                     }
                     cardImage={VENNIE_DONATOR_IMAGE}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
@@ -185,7 +185,7 @@ function OpenCordSettings() {
             ) : (
                 <SpecialCard
                     title="Support the Project"
-                    description="Please consider supporting the development of OpenCord by donating!"
+                    description="Please consider supporting the development of Nun by donating!"
                     cardImage={donateImage}
                     backgroundImage={DONOR_BACKGROUND_IMAGE}
                     backgroundColor="#c3a3ce"
@@ -197,7 +197,7 @@ function OpenCordSettings() {
                 <SpecialCard
                     title="Contributions"
                     subtitle="Thank you for contributing!"
-                    description="Since you've contributed to OpenCord you now have a cool new badge!"
+                    description="Since you've contributed to Nun you now have a cool new badge!"
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
                     backgroundColor="#EDCC87"
@@ -260,7 +260,7 @@ function OpenCordSettings() {
 
             <Heading className={Margins.top20}>Client Settings</Heading>
             <Paragraph className={Margins.bottom16}>
-                Configure how OpenCord behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.
+                Configure how Nun behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.
             </Paragraph>
             <Notice.Info className={Margins.bottom20} style={{ width: "100%" }}>
                 You can customize where this settings section appears in Discord's settings menu by configuring the{" "}
@@ -283,7 +283,7 @@ function OpenCordSettings() {
     );
 }
 
-export default wrapTab(OpenCordSettings, "OpenCord Settings");
+export default wrapTab(NunSettings, "Nun Settings");
 
 export function isEquicordDonor(userId: string): boolean {
     const donorBadges = BadgeAPI.getEquicordDonorBadges(userId);

@@ -17,7 +17,7 @@ import equicordplusIcon from "file://../../../../../assets/branding/equicordplus
 import esharqIcon from "file://../../../../../assets/branding/esharq-icon.png?base64";
 import illegalcordIcon from "file://../../../../../assets/branding/illegalcord-icon.png?base64";
 import mallcordIcon from "file://../../../../../assets/branding/mallcord-icon.png?base64";
-import opencordSymbol from "file://../../../../../assets/branding/opencord-symbol-dark.svg?base64";
+import nunSymbol from "file://../../../../../assets/branding/nun-symbol-dark.svg?base64";
 import testcordIcon from "file://../../../../../assets/branding/testcord-icon.png?base64";
 
 import { PluginMeta } from "~plugins";
@@ -26,7 +26,7 @@ import { openPluginModal } from "./PluginModal";
 
 const logger = new Logger("PluginCard");
 const cl = classNameFactory("vc-plugins-");
-const OPENCORD_SYMBOL_URL = "data:image/" + "svg+xml;base64," + opencordSymbol;
+const NUN_SYMBOL_URL = "data:image/" + "svg+xml;base64," + nunSymbol;
 const ILLEGALCORD_ICON_URL = "data:image/png;base64," + illegalcordIcon;
 const TESTCORD_ICON_URL = "data:image/png;base64," + testcordIcon;
 const ESHARQ_ICON_URL = "data:image/png;base64," + esharqIcon;
@@ -46,7 +46,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
     const settings = Settings.plugins[plugin.name];
     const pluginMeta = PluginMeta[plugin.name];
     const { folderName } = pluginMeta;
-    const isOpenCordPlugin = folderName.startsWith("src/opencordplugins/") ?? false;
+    const isNunPlugin = folderName.startsWith("src/nunplugins/") ?? false;
     const isEquicordPlugin = folderName.startsWith("src/equicordplugins/") ?? false;
     const isVencordPlugin = folderName.startsWith("src/plugins/") ?? false;
     const isIllegalcordPlugin = folderName.startsWith("src/illegalcordplugins/") ?? false;
@@ -117,10 +117,10 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
             title: "Modified Vencord Plugin"
         },
         {
-            condition: isOpenCordPlugin,
-            src: OPENCORD_SYMBOL_URL,
-            alt: "OpenCord",
-            title: "OpenCord Plugin"
+            condition: isNunPlugin,
+            src: NUN_SYMBOL_URL,
+            alt: "Nun",
+            title: "Nun Plugin"
         },
         {
             condition: isEquicordPlugin,

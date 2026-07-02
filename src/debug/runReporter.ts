@@ -28,7 +28,7 @@ async function runReporter() {
                 match: /"Could not find app-mount"/,
                 replace: "(Vencord.Webpack._initReporter(),$&)"
             }
-        }, "OpenCord Reporter");
+        }, "Nun Reporter");
 
         // @ts-expect-error
         Vencord.Webpack._initReporter = function () {
@@ -131,7 +131,7 @@ async function runReporter() {
 }
 
 // Imported in webpack for reporterData, wrap to avoid running reporter
-// Run after the OpenCord object has been created.
-// We need to add extra properties to it, and it is only created after all of OpenCord code has ran
+// Run after the Nun object has been created.
+// We need to add extra properties to it, and it is only created after all of Nun code has ran
 if (IS_REPORTER)
     setTimeout(runReporter, 0);

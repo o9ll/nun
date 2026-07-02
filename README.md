@@ -1,21 +1,21 @@
 <div align="center">
 
-<img alt="OpenCord symbol" src="./assets/branding/opencord-symbol-dark.svg" width="96" height="96">
+<img alt="Nun symbol" src="./assets/branding/nun-symbol-dark.svg" width="96" height="96">
 
-# OpenCord
+# Nun
 
-OpenCord is an open source Discord client mod forked from [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://github.com/Vendicated/Vencord), focused on a massive cross-community plugin catalog with 1137 plugin source folders. The desktop settings list currently shows about 795 visible plugins after build filters.
+Nun is an open source Discord client mod forked from [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://github.com/Vendicated/Vencord), focused on a massive cross-community plugin catalog with 1137 plugin source folders. The desktop settings list currently shows about 795 visible plugins after build filters.
 
-<p><a href="https://github.com/MasuRii/OpenCord/stargazers"><img alt="Stars" src="https://img.shields.io/badge/Stars-1-181717?style=flat&logo=github&logoColor=white"></a>&nbsp;&nbsp;<a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-GPL--3.0--or--later-blue?style=flat"></a>&nbsp;&nbsp;<a href="package.json"><img alt="Version" src="https://img.shields.io/badge/Version-1.14.15.2-blue?style=flat"></a>&nbsp;&nbsp;<a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-6.0.2-3178C6?style=flat&logo=typescript&logoColor=white"></a>&nbsp;&nbsp;<a href="https://pnpm.io/"><img alt="pnpm" src="https://img.shields.io/badge/pnpm-11.8.0-F69220?style=flat&logo=pnpm&logoColor=white"></a>&nbsp;&nbsp;<a href="https://equicord.org/discord"><img alt="Discord" src="https://img.shields.io/discord/1173279886065029291.svg?color=5865F2&label=Discord&logo=discord&logoColor=white"></a></p>
+<p><a href="https://github.com/o9ll/nun/stargazers"><img alt="Stars" src="https://img.shields.io/badge/Stars-1-181717?style=flat&logo=github&logoColor=white"></a>&nbsp;&nbsp;<a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-GPL--3.0--or--later-blue?style=flat"></a>&nbsp;&nbsp;<a href="package.json"><img alt="Version" src="https://img.shields.io/badge/Version-1.14.15.2-blue?style=flat"></a>&nbsp;&nbsp;<a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-6.0.2-3178C6?style=flat&logo=typescript&logoColor=white"></a>&nbsp;&nbsp;<a href="https://pnpm.io/"><img alt="pnpm" src="https://img.shields.io/badge/pnpm-11.8.0-F69220?style=flat&logo=pnpm&logoColor=white"></a>&nbsp;&nbsp;<a href="https://equicord.org/discord"><img alt="Discord" src="https://img.shields.io/discord/1173279886065029291.svg?color=5865F2&label=Discord&logo=discord&logoColor=white"></a></p>
 
 <strong>Plugin collections</strong><br>
-<p><a href="https://github.com/Vendicated/Vencord"><img alt="Vencord logo" src="https://github.com/Vendicated.png?size=20" height="20"></a>&nbsp;<a href="https://github.com/Vendicated/Vencord"><img alt="Vencord plugins" src="https://img.shields.io/badge/Vencord-164-5865F2?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/Equicord/Equicord"><img alt="Equicord logo" src="https://github.com/Equicord.png?size=20" height="20"></a>&nbsp;<a href="https://github.com/Equicord/Equicord"><img alt="Equicord plugins" src="https://img.shields.io/badge/Equicord-200-768AD4?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/TestcordDev/TestCord"><img alt="TestCord logo" src="assets/branding/testcord-icon.png" height="20"></a>&nbsp;<a href="https://github.com/TestcordDev/TestCord"><img alt="TestCord plugins" src="https://img.shields.io/badge/TestCord-403-111827?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/ImHisako/Illegalcord"><img alt="Illegalcord logo" src="assets/branding/illegalcord-icon.png" height="20"></a>&nbsp;<a href="https://github.com/ImHisako/Illegalcord"><img alt="Illegalcord plugins" src="https://img.shields.io/badge/Illegalcord-65-8B5CF6?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/MallCord/MallCord"><img alt="MallCord logo" src="assets/branding/mallcord-icon.png" height="20"></a>&nbsp;<a href="https://github.com/MallCord/MallCord"><img alt="MallCord plugins" src="https://img.shields.io/badge/MallCord-267-10B981?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/Chaython/EquicordPlus"><img alt="Equicord+ logo" src="assets/branding/equicordplus-icon.png" height="20"></a>&nbsp;<a href="https://github.com/Chaython/EquicordPlus"><img alt="Equicord+ plugins" src="https://img.shields.io/badge/Equicord%2B-17-F59E0B?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/LOSTSTR/Esharq"><img alt="Esharq logo" src="assets/branding/esharq-icon.png" height="20"></a>&nbsp;<a href="https://github.com/LOSTSTR/Esharq"><img alt="Esharq plugins" src="https://img.shields.io/badge/Esharq-18-EF4444?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/MasuRii/OpenCord"><img alt="OpenCord logo" src="assets/branding/opencord-symbol-dark.svg" height="20"></a>&nbsp;<a href="https://github.com/MasuRii/OpenCord"><img alt="OpenCord plugins" src="https://img.shields.io/badge/OpenCord-3-0F172A?style=flat"></a></p>
+<p><a href="https://github.com/Vendicated/Vencord"><img alt="Vencord logo" src="https://github.com/Vendicated.png?size=20" height="20"></a>&nbsp;<a href="https://github.com/Vendicated/Vencord"><img alt="Vencord plugins" src="https://img.shields.io/badge/Vencord-164-5865F2?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/Equicord/Equicord"><img alt="Equicord logo" src="https://github.com/Equicord.png?size=20" height="20"></a>&nbsp;<a href="https://github.com/Equicord/Equicord"><img alt="Equicord plugins" src="https://img.shields.io/badge/Equicord-200-768AD4?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/TestcordDev/TestCord"><img alt="TestCord logo" src="assets/branding/testcord-icon.png" height="20"></a>&nbsp;<a href="https://github.com/TestcordDev/TestCord"><img alt="TestCord plugins" src="https://img.shields.io/badge/TestCord-403-111827?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/ImHisako/Illegalcord"><img alt="Illegalcord logo" src="assets/branding/illegalcord-icon.png" height="20"></a>&nbsp;<a href="https://github.com/ImHisako/Illegalcord"><img alt="Illegalcord plugins" src="https://img.shields.io/badge/Illegalcord-65-8B5CF6?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/MallCord/MallCord"><img alt="MallCord logo" src="assets/branding/mallcord-icon.png" height="20"></a>&nbsp;<a href="https://github.com/MallCord/MallCord"><img alt="MallCord plugins" src="https://img.shields.io/badge/MallCord-267-10B981?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/Chaython/EquicordPlus"><img alt="Equicord+ logo" src="assets/branding/equicordplus-icon.png" height="20"></a>&nbsp;<a href="https://github.com/Chaython/EquicordPlus"><img alt="Equicord+ plugins" src="https://img.shields.io/badge/Equicord%2B-17-F59E0B?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/LOSTSTR/Esharq"><img alt="Esharq logo" src="assets/branding/esharq-icon.png" height="20"></a>&nbsp;<a href="https://github.com/LOSTSTR/Esharq"><img alt="Esharq plugins" src="https://img.shields.io/badge/Esharq-18-EF4444?style=flat"></a>&nbsp;&nbsp;<a href="https://github.com/o9ll/nun"><img alt="Nun logo" src="assets/branding/nun-symbol-dark.svg" height="20"></a>&nbsp;<a href="https://github.com/o9ll/nun"><img alt="Nun plugins" src="https://img.shields.io/badge/Nun-3-0F172A?style=flat"></a></p>
 
-[Quick Start](#quick-start) · [Features](#features) · [Plugin Collections](#plugin-collections) · [Installing](#installing--uninstalling) · [Dev Build](#installing-opencord-dev-build) · [Contributing](#contributing)
+[Quick Start](#quick-start) · [Features](#features) · [Plugin Collections](#plugin-collections) · [Installing](#installing--uninstalling) · [Dev Build](#installing-nun-dev-build) · [Contributing](#contributing)
 
 </div>
 
-> OpenCord gives Discord power users a larger plugin library while preserving the Vencord and Equicord development model: TypeScript plugins, reusable Discord components, and source-first customization.
+> Nun gives Discord power users a larger plugin library while preserving the Vencord and Equicord development model: TypeScript plugins, reusable Discord components, and source-first customization.
 
 ---
 
@@ -23,7 +23,7 @@ OpenCord is an open source Discord client mod forked from [Equicord](https://git
 
 | Feature | Description |
 |---|---|
-| 1137 plugin source folders | Combines Vencord, Equicord, TestCord, Illegalcord, MallCord, Equicord+, Esharq, and OpenCord plugins. |
+| 1137 plugin source folders | Combines Vencord, Equicord, TestCord, Illegalcord, MallCord, Equicord+, Esharq, and Nun plugins. |
 | About 795 visible plugins | Approximates the desktop in-app settings list; it can be lower because source folders include duplicate names, API/core helpers, and platform or dev-targeted entries filtered out at build time. |
 | Cross-platform builds | Supports desktop injection and browser extension builds for Windows, macOS, Linux, and web. |
 | Fast setup | Use the installer for normal usage or build from source with pnpm. |
@@ -41,8 +41,8 @@ OpenCord is an open source Discord client mod forked from [Equicord](https://git
 Download and run the GUI installer:
 
 ```powershell
-Invoke-WebRequest -Uri "https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCordInstaller.exe" -OutFile "OpenCordInstaller.exe"
-Start-Process "OpenCordInstaller.exe"
+Invoke-WebRequest -Uri "https://github.com/o9ll/nun/releases/latest/download/NunInstaller.exe" -OutFile "NunInstaller.exe"
+Start-Process "NunInstaller.exe"
 ```
 
 </details>
@@ -50,10 +50,10 @@ Start-Process "OpenCordInstaller.exe"
 <details>
 <summary>macOS</summary>
 
-Download the ZIP for your Mac, extract it, then open `OpenCordInstaller.app`.
+Download the ZIP for your Mac, extract it, then open `NunInstaller.app`.
 
-- [X64 GUI](https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCord-darwin-x64.zip)
-- [ARM64 GUI](https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCord-darwin-arm64.zip)
+- [X64 GUI](https://github.com/o9ll/nun/releases/latest/download/Nun-darwin-x64.zip)
+- [ARM64 GUI](https://github.com/o9ll/nun/releases/latest/download/Nun-darwin-arm64.zip)
 
 </details>
 
@@ -63,13 +63,13 @@ Download the ZIP for your Mac, extract it, then open `OpenCordInstaller.app`.
 Run the installer script:
 
 ```shell
-bash -c "$(curl -sS https://github.com/MasuRii/OpenCord/releases/latest/download/install.sh)"
+bash -c "$(curl -sS https://github.com/o9ll/nun/releases/latest/download/install.sh)"
 ```
 
 </details>
 
 > [!NOTE]
-> OpenCord is a client modification. Read the [disclaimer](#disclaimer) before installing it on an account you cannot risk.
+> Nun is a client modification. Read the [disclaimer](#disclaimer) before installing it on an account you cannot risk.
 
 ---
 
@@ -84,7 +84,7 @@ bash -c "$(curl -sS https://github.com/MasuRii/OpenCord/releases/latest/download
 | MallCord | 267 | [MallCord/MallCord](https://github.com/MallCord/MallCord) |
 | Equicord+ | 17 | [Chaython/EquicordPlus](https://github.com/Chaython/EquicordPlus) |
 | Esharq | 18 | [LOSTSTR/Esharq](https://github.com/LOSTSTR/Esharq) |
-| OpenCord | 3 | [MasuRii/OpenCord](https://github.com/MasuRii/OpenCord) |
+| Nun | 3 | [o9ll/nun](https://github.com/o9ll/nun) |
 
 <details>
 <summary><strong>Where plugin folders live</strong></summary>
@@ -97,7 +97,7 @@ src/illegalcordplugins/      Illegalcord plugins
 src/mallcordplugins/         MallCord plugins
 src/equicordplusplugins/     Equicord+ plugins
 src/esharqplugins/           Esharq plugins
-src/opencordplugins/         OpenCord plugins
+src/nunplugins/         Nun plugins
 ```
 
 </details>
@@ -107,39 +107,39 @@ src/opencordplugins/         OpenCord plugins
 ## Installing / Uninstalling
 
 > [!NOTE]
-> OpenCord currently uses Equilotl as its desktop installer backend, but these downloads are mirrored through OpenCord releases.
+> Nun currently uses Equilotl as its desktop installer backend, but these downloads are mirrored through Nun releases.
 
 <details open>
 <summary><strong>Windows</strong></summary>
 
-- [GUI Installer](https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCordInstaller.exe)
-- [CLI Installer](https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCordInstallerCli.exe)
+- [GUI Installer](https://github.com/o9ll/nun/releases/latest/download/NunInstaller.exe)
+- [CLI Installer](https://github.com/o9ll/nun/releases/latest/download/NunInstallerCli.exe)
 
 </details>
 
 <details>
 <summary><strong>macOS</strong></summary>
 
-- [X64 GUI](https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCord-darwin-x64.zip)
-- [ARM64 GUI](https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCord-darwin-arm64.zip)
+- [X64 GUI](https://github.com/o9ll/nun/releases/latest/download/Nun-darwin-x64.zip)
+- [ARM64 GUI](https://github.com/o9ll/nun/releases/latest/download/Nun-darwin-arm64.zip)
 
 </details>
 
 <details>
 <summary><strong>Linux</strong></summary>
 
-- [GUI Installer](https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCord-x11)
-- [CLI Installer](https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCordCli-linux)
-- [Install script](https://github.com/MasuRii/OpenCord/releases/latest/download/install.sh)
+- [GUI Installer](https://github.com/o9ll/nun/releases/latest/download/Nun-x11)
+- [CLI Installer](https://github.com/o9ll/nun/releases/latest/download/NunCli-linux)
+- [Install script](https://github.com/o9ll/nun/releases/latest/download/install.sh)
 
 </details>
 
 ---
 
-## Installing OpenCord Dev Build
+## Installing Nun Dev Build
 
 > [!NOTE]
-> These steps are for building OpenCord from source. Most users should use the [Quick Start](#quick-start) installer.
+> These steps are for building Nun from source. Most users should use the [Quick Start](#quick-start) installer.
 
 ### Dependencies
 
@@ -158,8 +158,8 @@ npm i -g pnpm
 ### Build from source
 
 ```shell
-git clone https://github.com/MasuRii/OpenCord
-cd OpenCord
+git clone https://github.com/o9ll/nun
+cd Nun
 pnpm install --frozen-lockfile
 pnpm build
 pnpm inject
@@ -174,7 +174,7 @@ pnpm buildWeb
 After building the web extension, locate the ZIP file in `dist` and follow your browser's custom extension installation guide. Firefox extension ZIPs require Firefox Developer Edition.
 
 > [!WARNING]
-> Do not run inject/build commands from an admin or root terminal. It can damage your Discord/OpenCord installation and force a reinstall.
+> Do not run inject/build commands from an admin or root terminal. It can damage your Discord/Nun installation and force a reinstall.
 
 ---
 
@@ -212,11 +212,11 @@ Thank you to [Vendicated](https://github.com/Vendicated) for creating [Vencord](
 
 ## Star History
 
-<a href="https://star-history.com/#MasuRii/OpenCord&Timeline">
+<a href="https://star-history.com/#o9ll/nun&Timeline">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=MasuRii/OpenCord&type=Timeline&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=MasuRii/OpenCord&type=Timeline" />
-    <img alt="OpenCord star history chart" src="https://api.star-history.com/svg?repos=MasuRii/OpenCord&type=Timeline" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline" />
+    <img alt="Nun star history chart" src="https://api.star-history.com/svg?repos=o9ll/nun&type=Timeline" />
   </picture>
 </a>
 
@@ -232,15 +232,15 @@ Distributed under the [GPL-3.0-or-later](LICENSE) license.
 
 Discord is a trademark of Discord Inc., mentioned here solely for descriptive purposes. This project is not affiliated with or endorsed by Discord Inc.
 
-Vencord and Equicord are not connected to OpenCord. All donation links go to their respective projects.
+Vencord and Equicord are not connected to Nun. All donation links go to their respective projects.
 
 <details>
-<summary>Using OpenCord violates Discord's terms of service</summary>
+<summary>Using Nun violates Discord's terms of service</summary>
 
 Client modifications are against Discord's Terms of Service.
 
 Discord is generally indifferent toward client mods, and there are no known cases of users being banned only for using them. You should still avoid plugins that implement abusive behavior.
 
-If your account is essential to you and losing it would be a disaster, do not use any client mod. Also avoid posting screenshots with OpenCord in places where client mods could get you banned.
+If your account is essential to you and losing it would be a disaster, do not use any client mod. Also avoid posting screenshots with Nun in places where client mods could get you banned.
 
 </details>

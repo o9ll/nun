@@ -18,21 +18,21 @@
 
 export const REACT_GLOBAL = "Vencord.Webpack.Common.React";
 
-// OpenCord
+// Nun
 export const SUPPORT_CHANNEL_ID = "1297590739911573585";
 export const GUILD_ID = "1173279886065029291";
 export const DONOR_ROLE_ID = "1173316879083896912";
 export const CONTRIB_ROLE_ID = "1222677964760682556";
-export const OPENCORD_TEAM = "1173520023239786538";
-export const OPENCORD_HELPERS = "1326406112144265257";
+export const NUN_TEAM = "1173520023239786538";
+export const NUN_HELPERS = "1326406112144265257";
 export const VENCORD_CONTRIB_ROLE_ID = "1173343399470964856";
 export const OPENBOT_USER_ID = "1243063117852835941";
 export const KNOWN_ISSUES_CHANNEL_ID = "1466558228379992266";
 
-/** @deprecated Use {@link OPENCORD_TEAM}. */
-export const EQUICORD_TEAM = OPENCORD_TEAM;
-/** @deprecated Use {@link OPENCORD_HELPERS}. */
-export const EQUICORD_HELPERS = OPENCORD_HELPERS;
+/** @deprecated Use {@link NUN_TEAM}. */
+export const EQUICORD_TEAM = NUN_TEAM;
+/** @deprecated Use {@link NUN_HELPERS}. */
+export const EQUICORD_HELPERS = NUN_HELPERS;
 /** @deprecated Use {@link OPENBOT_USER_ID}. */
 export const EQUIBOT_USER_ID = OPENBOT_USER_ID;
 
@@ -873,9 +873,9 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "llytz",
         id: 1271128098301022240n
     },
-    MasuRii: {
-        name: "masurii",
-        id: 397885875184467968n
+    o9: {
+        name: "o9",
+        id: 426687300387471360n
     },
     Leko: {
         name: "Leko",
@@ -1746,9 +1746,9 @@ export const EquicordDevs = Object.freeze({
         name: "creations",
         id: 209830981060788225n
     },
-    MasuRii: {
-        name: "masurii",
-        id: 397885875184467968n
+    o9: {
+        name: "o9",
+        id: 426687300387471360n
     },
     Leko: {
         name: "Leko",
@@ -2120,10 +2120,10 @@ export const EquicordDevs = Object.freeze({
     },
 } satisfies Record<string, Dev>);
 
-export const OpenCordDevs = Object.freeze({
-    MasuRii: {
-        name: "MasuRii",
-        id: 397885875184467968n
+export const NunDevs = Object.freeze({
+    o9: {
+        name: "o9",
+        id: 426687300387471360n
     },
 } satisfies Record<string, Dev>);
 
@@ -2407,9 +2407,9 @@ export const EquicordDevsById = /* #__PURE__*/ (() =>
     ))
 )() as Record<string, Dev>;
 
-export const OpenCordDevsById = /* #__PURE__*/ (() =>
+export const NunDevsById = /* #__PURE__*/ (() =>
     Object.freeze(Object.fromEntries(
-        Object.entries(OpenCordDevs)
+        Object.entries(NunDevs)
             .filter(d => d[1].id !== 0n)
             .map(([_, v]) => [v.id, v] as const)
     ))

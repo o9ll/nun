@@ -19,7 +19,7 @@
 import { User } from "@vencord/discord-types";
 import { ChannelStore, GuildMemberStore, IconUtils } from "@webpack/common";
 
-import { EquicordDevsById, EquicordPlusDevsById, EsharqDevsById, GUILD_ID, IllegalcordDevsById, KNOWN_ISSUES_CHANNEL_ID, MallCordDevsById, OPENCORD_HELPERS, OpenCordDevsById, SUPPORT_CHANNEL_ID, TestCordDevsById, VencordDevsById } from "./constants";
+import { EquicordDevsById, EquicordPlusDevsById, EsharqDevsById, GUILD_ID, IllegalcordDevsById, KNOWN_ISSUES_CHANNEL_ID, MallCordDevsById, NUN_HELPERS, NunDevsById, SUPPORT_CHANNEL_ID, TestCordDevsById, VencordDevsById } from "./constants";
 
 /**
  * Calls .join(" ") on the arguments
@@ -78,7 +78,7 @@ export function identity<T>(value: T): T {
     return value;
 }
 
-const SourceDevsById = [VencordDevsById, EquicordDevsById, OpenCordDevsById, IllegalcordDevsById, TestCordDevsById, EsharqDevsById, EquicordPlusDevsById, MallCordDevsById];
+const SourceDevsById = [VencordDevsById, EquicordDevsById, NunDevsById, IllegalcordDevsById, TestCordDevsById, EsharqDevsById, EquicordPlusDevsById, MallCordDevsById];
 
 export const isPluginDev = (id: string) => Object.hasOwn(VencordDevsById, id);
 export const shouldShowContributorBadge = (id: string) => isPluginDev(id) && VencordDevsById[id].badge !== false;
@@ -90,13 +90,13 @@ export const isMallCordPluginDev = (id: string) => Object.hasOwn(MallCordDevsByI
 
 /**
  * Whether a channel belongs to the MallCord support guild.
- * MallCord's support guild is not part of OpenCord, so this is always false here.
+ * MallCord's support guild is not part of Nun, so this is always false here.
  */
 export const isMallCordGuild = (_channelId: string) => false;
 
 /**
  * Whether a user is MallCord support staff.
- * MallCord's support roster is not part of OpenCord, so this is always false here.
+ * MallCord's support roster is not part of Nun, so this is always false here.
  */
 export const isMallCordSupport = (_userId: string) => false;
 
@@ -122,7 +122,7 @@ export function tryOrElse<T>(func: () => T, fallback: T): T {
     }
 }
 
-export function isOpenCordGuild(id: string | null | undefined, isGuildId: boolean = false): boolean {
+export function isNunGuild(id: string | null | undefined, isGuildId: boolean = false): boolean {
     if (!id) return false;
     if (isGuildId) return id === GUILD_ID;
     const channel = ChannelStore.getChannel(id);
@@ -130,8 +130,8 @@ export function isOpenCordGuild(id: string | null | undefined, isGuildId: boolea
     return channel.guild_id === GUILD_ID;
 }
 
-/** @deprecated Use {@link isOpenCordGuild}. */
-export const isEquicordGuild = isOpenCordGuild;
+/** @deprecated Use {@link isNunGuild}. */
+export const isEquicordGuild = isNunGuild;
 
 export function isSupportChannel(channelId: string | null | undefined): boolean {
     if (!channelId) return false;
@@ -143,16 +143,16 @@ export function isKnownIssuesCategory(channelId: string | null | undefined): boo
     return channelId === KNOWN_ISSUES_CHANNEL_ID;
 }
 
-export function isOpenCordSupport(userId: string | null | undefined): boolean {
+export function isNunSupport(userId: string | null | undefined): boolean {
     if (!userId) return false;
 
     const member = GuildMemberStore.getMember(GUILD_ID, userId);
     if (!member) return false;
-    return member.roles.includes(OPENCORD_HELPERS) || false;
+    return member.roles.includes(NUN_HELPERS) || false;
 }
 
-/** @deprecated Use {@link isOpenCordSupport}. */
-export const isEquicordSupport = isOpenCordSupport;
+/** @deprecated Use {@link isNunSupport}. */
+export const isEquicordSupport = isNunSupport;
 
 export function removeFromArray<T>(arr: T[], predicate: (e: T) => boolean) {
     const idx = arr.findIndex(predicate);

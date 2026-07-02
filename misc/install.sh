@@ -3,19 +3,19 @@
 # Guard against accidental execution on Windows/MSYS/Cygwin
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]] || \
    [[ "$(uname -s)" =~ ^(CYGWIN|MINGW|MSYS|Windows_NT) ]]; then
-    echo "This installer is for Linux. Windows users should download OpenCordInstaller.exe or OpenCordInstallerCli.exe from https://github.com/MasuRii/OpenCord/releases/latest/download/"
+    echo "This installer is for Linux. Windows users should download NunInstaller.exe or NunInstallerCli.exe from https://github.com/o9ll/nun/releases/latest/download/"
     exit 1
 fi
 
 # Configuration
-INSTALLER_PATH="$HOME/.opencord-installer"
-GITHUB_URL="https://github.com/MasuRii/OpenCord/releases/latest/download/OpenCordCli-linux"
-OPENCORD_ASAR_URL="https://github.com/MasuRii/OpenCord/releases/latest/download/desktop.asar"
-OPENCORD_DATA_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/OpenCord"
-OPENCORD_ASAR_PATH="$OPENCORD_DATA_DIR/opencord.asar"
+INSTALLER_PATH="$HOME/.nun-installer"
+GITHUB_URL="https://github.com/o9ll/nun/releases/latest/download/NunCli-linux"
+NUN_ASAR_URL="https://github.com/o9ll/nun/releases/latest/download/desktop.asar"
+NUN_DATA_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/Nun"
+NUN_ASAR_PATH="$NUN_DATA_DIR/nun.asar"
 PRIVILEGE_CMDS=("sudo" "doas")
 DEBUG=false
-LOG_FILE="$(dirname "$(realpath "$0")")/opencordinstalldebug.log"
+LOG_FILE="$(dirname "$(realpath "$0")")/nuninstalldebug.log"
 
 # Colors for output
 RED='\033[0;31m'
@@ -87,12 +87,12 @@ check_for_updates() {
     fi
 }
 
-# Download OpenCord build
-install_opencord_build() {
-    echo -e "${YELLOW}Downloading latest OpenCord build...${NC}"
-    mkdir -p "$OPENCORD_DATA_DIR" || error "Failed to create OpenCord data directory"
-    if ! curl -sSL "$OPENCORD_ASAR_URL" --output "$OPENCORD_ASAR_PATH"; then
-        error "Failed to download OpenCord build from GitHub"
+# Download Nun build
+install_nun_build() {
+    echo -e "${YELLOW}Downloading latest Nun build...${NC}"
+    mkdir -p "$NUN_DATA_DIR" || error "Failed to create Nun data directory"
+    if ! curl -sSL "$NUN_ASAR_URL" --output "$NUN_ASAR_PATH"; then
+        error "Failed to download Nun build from GitHub"
     fi
 }
 
@@ -119,18 +119,18 @@ main() {
     debug_log "Starting installation process"
     check_root
     check_for_updates
-    install_opencord_build
+    install_nun_build
 
     local priv_cmd
     priv_cmd=$(find_privilege_cmd)
     debug_log "Using privilege command: $priv_cmd"
 
     echo -e "${YELLOW}Running installer with $priv_cmd...${NC}"
-    debug_log "Executing installer: $priv_cmd env OPENCORD_USER_DATA_DIR=$OPENCORD_DATA_DIR OPENCORD_DIRECTORY=$OPENCORD_ASAR_PATH OPENCORD_DEV_INSTALL=1 $INSTALLER_PATH --install"
+    debug_log "Executing installer: $priv_cmd env NUN_USER_DATA_DIR=$NUN_DATA_DIR NUN_DIRECTORY=$NUN_ASAR_PATH NUN_DEV_INSTALL=1 $INSTALLER_PATH --install"
     if ! "$priv_cmd" env \
-        OPENCORD_USER_DATA_DIR="$OPENCORD_DATA_DIR" \
-        OPENCORD_DIRECTORY="$OPENCORD_ASAR_PATH" \
-        OPENCORD_DEV_INSTALL=1 \
+        NUN_USER_DATA_DIR="$NUN_DATA_DIR" \
+        NUN_DIRECTORY="$NUN_ASAR_PATH" \
+        NUN_DEV_INSTALL=1 \
         "$INSTALLER_PATH" --install; then
         debug_log "Installer failed"
         error "Installer failed to run"
@@ -140,7 +140,7 @@ main() {
     echo -e "\n${GREEN}Installation completed successfully!${NC}"
     echo -e "\nCredits:"
     echo "Original script forked from Vencord"
-    echo "Modified by PhoenixAceVFX for OpenCord Updater"
+    echo "Modified by PhoenixAceVFX for Nun Updater"
     echo "Rewrite by PhoenixAceVFX"
 }
 

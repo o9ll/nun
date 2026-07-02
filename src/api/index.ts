@@ -171,12 +171,12 @@ export const AudioPlayer = $AudioPlayer;
 export const UserArea = $UserArea;
 
 /**
- * Just used to identify if user is on OpenCord as Vencord doesn't have this.
+ * Just used to identify if user is on Nun as Vencord doesn't have this.
  */
-export const isOpenCord = true;
+export const isNun = true;
 
-/** @deprecated Use {@link isOpenCord}. */
-export const isEquicord = isOpenCord;
+/** @deprecated Use {@link isNun}. */
+export const isEquicord = isNun;
 
 /**
  * An API allowing you to add other collections where discords game collection is.

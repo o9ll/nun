@@ -101,7 +101,7 @@ const enum SearchStatus {
     ALL,
     ENABLED,
     DISABLED,
-    OPENCORD,
+    NUN,
     EQUICORD,
     VENCORD,
     ILLEGALCORD,
@@ -120,7 +120,7 @@ export const ExcludedReasons: Record<"web" | "discordDesktop" | "vesktop" | "equ
     vesktop: "Vesktop/Equibop apps",
     equibop: "Vesktop/Equibop apps",
     web: "Vesktop/Equibop apps & Discord web",
-    dev: "Developer version of OpenCord"
+    dev: "Developer version of Nun"
 };
 
 function ExcludedPluginsList({ search }: { search: string; }) {
@@ -223,8 +223,8 @@ export default function PluginSettings() {
             case SearchStatus.ENABLED:
                 if (!isPluginEnabled(plugin.name)) return false;
                 break;
-            case SearchStatus.OPENCORD:
-                if (!PluginMeta[plugin.name].folderName.startsWith("src/opencordplugins/")) return false;
+            case SearchStatus.NUN:
+                if (!PluginMeta[plugin.name].folderName.startsWith("src/nunplugins/")) return false;
                 break;
             case SearchStatus.EQUICORD:
                 if (!PluginMeta[plugin.name].folderName.startsWith("src/equicordplugins/")) return false;
@@ -304,7 +304,7 @@ export default function PluginSettings() {
 
             if (isRequired) {
                 const tooltipText = p.required || !depMap[p.name]
-                    ? "This plugin is required for OpenCord to function."
+                    ? "This plugin is required for Nun to function."
                     : <PluginDependencyList deps={depMap[p.name]?.filter(d => settings.plugins[d].enabled)} />;
 
                 requiredPlugins.push(
@@ -445,7 +445,7 @@ export default function PluginSettings() {
                             { label: "Show All", value: SearchStatus.ALL, default: true },
                             { label: "Show Enabled", value: SearchStatus.ENABLED },
                             { label: "Show Disabled", value: SearchStatus.DISABLED },
-                            { label: "Show OpenCord", value: SearchStatus.OPENCORD },
+                            { label: "Show Nun", value: SearchStatus.NUN },
                             { label: "Show Equicord", value: SearchStatus.EQUICORD },
                             { label: "Show Vencord", value: SearchStatus.VENCORD },
                             { label: "Show Illegalcord", value: SearchStatus.ILLEGALCORD },

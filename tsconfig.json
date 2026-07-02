@@ -62,8 +62,8 @@
             "@equicordplugins/*": [
                 "./src/equicordplugins/*"
             ],
-            "@opencordplugins/*": [
-                "./src/opencordplugins/*"
+            "@nunplugins/*": [
+                "./src/nunplugins/*"
             ],
             "@illegalcordplugins/*": [
                 "./src/illegalcordplugins/*"
@@ -81,7 +81,7 @@
                 "./src/mallcordplugins/*"
             ],
             // Cross-collection aliases: upstream plugins use these paths which
-            // differ from OpenCord's collection-scoped layout. Map them so
+            // differ from Nun's collection-scoped layout. Map them so
             // synced upstream code compiles without manual import rewrites.
             "@utils/esharqI18n": [
                 "./src/esharqplugins/_esharqI18n"

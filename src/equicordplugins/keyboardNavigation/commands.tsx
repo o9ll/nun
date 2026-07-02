@@ -26,16 +26,16 @@ export interface ButtonAction {
 }
 
 export const actions: ButtonAction[] = [
-    { id: "openEquicordSettings", label: "OpenCord tab", callback: async () => await SettingsRouter.openUserSettings("equicord_main_panel"), registrar: "OpenCord" },
-    { id: "openPluginSettings", label: "Open Plugin tab", callback: () => SettingsRouter.openUserSettings("equicord_plugins_panel"), registrar: "OpenCord" },
-    { id: "openThemesSettings", label: "Open Themes tab", callback: () => SettingsRouter.openUserSettings("equicord_themes_panel"), registrar: "OpenCord" },
-    { id: "openUpdaterSettings", label: "Open Updater tab", callback: () => SettingsRouter.openUserSettings("equicord_updater_panel"), registrar: "OpenCord" },
-    { id: "openEquicordCloudSettings", label: "Open Cloud tab", callback: () => SettingsRouter.openUserSettings("equicord_cloud_panel"), registrar: "OpenCord" },
-    { id: "openBackupSettings", label: "Open Backup & Restore tab", callback: () => SettingsRouter.openUserSettings("equicord_backup_restore_panel"), registrar: "OpenCord" },
-    { id: "restartClient", label: "Restart Client", callback: () => relaunch(), registrar: "OpenCord" },
-    { id: "openQuickCSSFile", label: "Open Quick CSS File", callback: () => VencordNative.quickCss.openEditor(), registrar: "OpenCord" },
-    { id: "openSettingsFolder", label: "Open Settings Folder", callback: async () => showItemInFolder(await VencordNative.settings.getSettingsDir()), registrar: "OpenCord" },
-    { id: "openInGithub", label: "Open in Github", callback: async () => VencordNative.native.openExternal(await getRepo()), registrar: "OpenCord" },
+    { id: "openEquicordSettings", label: "Nun tab", callback: async () => await SettingsRouter.openUserSettings("equicord_main_panel"), registrar: "Nun" },
+    { id: "openPluginSettings", label: "Open Plugin tab", callback: () => SettingsRouter.openUserSettings("equicord_plugins_panel"), registrar: "Nun" },
+    { id: "openThemesSettings", label: "Open Themes tab", callback: () => SettingsRouter.openUserSettings("equicord_themes_panel"), registrar: "Nun" },
+    { id: "openUpdaterSettings", label: "Open Updater tab", callback: () => SettingsRouter.openUserSettings("equicord_updater_panel"), registrar: "Nun" },
+    { id: "openEquicordCloudSettings", label: "Open Cloud tab", callback: () => SettingsRouter.openUserSettings("equicord_cloud_panel"), registrar: "Nun" },
+    { id: "openBackupSettings", label: "Open Backup & Restore tab", callback: () => SettingsRouter.openUserSettings("equicord_backup_restore_panel"), registrar: "Nun" },
+    { id: "restartClient", label: "Restart Client", callback: () => relaunch(), registrar: "Nun" },
+    { id: "openQuickCSSFile", label: "Open Quick CSS File", callback: () => VencordNative.quickCss.openEditor(), registrar: "Nun" },
+    { id: "openSettingsFolder", label: "Open Settings Folder", callback: async () => showItemInFolder(await VencordNative.settings.getSettingsDir()), registrar: "Nun" },
+    { id: "openInGithub", label: "Open in Github", callback: async () => VencordNative.native.openExternal(await getRepo()), registrar: "Nun" },
 
     {
         id: "openInBrowser", label: "Open in Browser", callback: async () => {
@@ -55,7 +55,7 @@ export const actions: ButtonAction[] = [
                     }
                 });
             }
-        }, registrar: "OpenCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -80,7 +80,7 @@ export const actions: ButtonAction[] = [
             if (choice && enabled) {
                 return togglePlugin(choice, enabled.id === "enable");
             }
-        }, registrar: "OpenCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -111,7 +111,7 @@ export const actions: ButtonAction[] = [
                     }
                 });
             }
-        }, registrar: "OpenCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -126,7 +126,7 @@ export const actions: ButtonAction[] = [
                     position: Toasts.Position.BOTTOM
                 }
             });
-        }, registrar: "OpenCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -135,7 +135,7 @@ export const actions: ButtonAction[] = [
 
             if (isOutdated) {
                 setTimeout(() => showNotification({
-                    title: "An OpenCord update is available!",
+                    title: "An Nun update is available!",
                     body: "Click here to view the update",
                     permanent: true,
                     noPersist: true,
@@ -153,7 +153,7 @@ export const actions: ButtonAction[] = [
                     }
                 });
             }
-        }, registrar: "OpenCord"
+        }, registrar: "Nun"
     },
 
     {
@@ -173,7 +173,7 @@ export const actions: ButtonAction[] = [
             if (choice) {
                 NavigationRouter.transitionToGuild(choice.id);
             }
-        }, registrar: "OpenCord"
+        }, registrar: "Nun"
     }
 ];
 

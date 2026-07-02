@@ -98,7 +98,7 @@ interface SettingsLayoutBuilder {
 const settings = definePluginSettings({
     settingsLocation: {
         type: OptionType.SELECT,
-        description: "Where to put the OpenCord settings section",
+        description: "Where to put the Nun settings section",
         options: [
             { label: "At the very top", value: "top" },
             { label: "Above the Nitro section", value: "aboveNitro", default: true },
@@ -189,11 +189,11 @@ export default definePlugin({
 
         const { buildEntry } = this;
 
-        const openCordEntries: SettingsLayoutNode[] = [
+        const nUnEntries: SettingsLayoutNode[] = [
             buildEntry({
                 key: "equicord_main",
-                title: "OpenCord",
-                panelTitle: "OpenCord Settings",
+                title: "Nun",
+                panelTitle: "Nun Settings",
                 Component: VencordTab,
                 Icon: MainSettingsIcon
             }),
@@ -212,7 +212,7 @@ export default definePlugin({
             !IS_UPDATER_DISABLED && UpdaterTab && buildEntry({
                 key: "equicord_updater",
                 title: "Updater",
-                panelTitle: "OpenCord Updater",
+                panelTitle: "Nun Updater",
                 Component: UpdaterTab,
                 Icon: UpdaterIcon
             }),
@@ -225,7 +225,7 @@ export default definePlugin({
             buildEntry({
                 key: "equicord_cloud",
                 title: "Cloud",
-                panelTitle: "OpenCord Cloud",
+                panelTitle: "Nun Cloud",
                 Component: CloudTab,
                 Icon: CloudIcon
             }),
@@ -244,11 +244,11 @@ export default definePlugin({
             ...this.customEntries.map(buildEntry)
         ].filter(isTruthy);
 
-        const openCordSection: SettingsLayoutNode = {
+        const nUnSection: SettingsLayoutNode = {
             key: "equicord_section",
             type: LayoutTypes.SECTION,
-            useTitle: () => "OpenCord Settings",
-            buildLayout: () => openCordEntries
+            useTitle: () => "Nun Settings",
+            buildLayout: () => nUnEntries
         };
 
         const { settingsLocation } = settings.store;
@@ -271,7 +271,7 @@ export default definePlugin({
             idx += 1;
         }
 
-        layout.splice(idx, 0, openCordSection);
+        layout.splice(idx, 0, nUnSection);
 
         return layout;
     },
@@ -313,7 +313,7 @@ export default definePlugin({
     getInfoRows() {
         const { electronVersion, chromiumVersion, getVersionInfo } = this;
 
-        const rows = [`OpenCord ${gitHashShort}${getVersionInfo()}`];
+        const rows = [`Nun ${gitHashShort}${getVersionInfo()}`];
 
         if (electronVersion) rows.push(`Electron ${electronVersion}`);
         if (chromiumVersion) rows.push(`Chromium ${chromiumVersion}`);

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
- * OpenCord, a Discord client mod
- * Copyright (c) 2026 OpenCord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 Nun contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 /*
@@ -355,7 +355,7 @@ check("README Quick Start is platform-specific before mentioning bash install.sh
 
     // Accept explicit Windows instructions, either as sub-heading or details block.
     const hasWindowsSubsection = /#{2,4}\s*Windows|<summary>\s*Windows\s*<\/summary>/i.test(section);
-    const hasWindowsExe = /OpenCordInstaller.*\.exe/i.test(section);
+    const hasWindowsExe = /NunInstaller.*\.exe/i.test(section);
 
     if (!hasWindowsSubsection || !hasWindowsExe) {
         return fail(
@@ -381,7 +381,7 @@ check("README Quick Start does not present bash install.sh as the default for Wi
         return pass();
     }
 
-    const hasWindowsExeBlock = /```[a-z]*[\s\S]*?OpenCordInstaller.*\.exe[\s\S]*?```/.test(section);
+    const hasWindowsExeBlock = /```[a-z]*[\s\S]*?NunInstaller.*\.exe[\s\S]*?```/.test(section);
     const hasWindowsNote = /Windows users?\s+(should|must|can).*\.exe/i.test(section);
 
     if (!hasWindowsExeBlock && !hasWindowsNote) {
@@ -413,9 +413,9 @@ check("misc/install.sh Windows guard points to the Windows installer", () => {
         return fail("could not locate a Windows guard region in misc/install.sh");
     }
 
-    if (!/OpenCordInstaller.*\.exe/i.test(guardRegion) && !/releases\/latest\/download\/OpenCordInstaller/i.test(guardRegion)) {
+    if (!/NunInstaller.*\.exe/i.test(guardRegion) && !/releases\/latest\/download\/NunInstaller/i.test(guardRegion)) {
         return fail(
-            "The Windows guard in misc/install.sh must tell users to download OpenCordInstaller.exe / OpenCordInstallerCli.exe."
+            "The Windows guard in misc/install.sh must tell users to download NunInstaller.exe / NunInstallerCli.exe."
         );
     }
 

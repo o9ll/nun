@@ -1,6 +1,6 @@
 /*
- * OpenCord, a Discord client mod
- * Copyright (c) 2026 OpenCord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 Nun contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 

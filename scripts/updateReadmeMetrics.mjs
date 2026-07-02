@@ -1,6 +1,6 @@
 /*
- * OpenCord, a Discord client mod
- * Copyright (c) 2026 OpenCord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 Nun contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -67,11 +67,11 @@ const collections = [
         color: "EF4444"
     },
     {
-        name: "OpenCord",
-        dir: "src/opencordplugins",
-        source: "[MasuRii/OpenCord](https://github.com/MasuRii/OpenCord)",
-        url: "https://github.com/MasuRii/OpenCord",
-        logo: "assets/branding/opencord-symbol-dark.svg",
+        name: "Nun",
+        dir: "src/nunplugins",
+        source: "[o9ll/nun](https://github.com/o9ll/nun)",
+        url: "https://github.com/o9ll/nun",
+        logo: "assets/branding/nun-symbol-dark.svg",
         color: "0F172A"
     }
 ];
@@ -83,7 +83,7 @@ function countPluginDirs(dir) {
 const visiblePluginDirs = [
     "plugins/_api", "plugins/_core", "plugins",
     "equicordplugins/_api", "equicordplugins/_core", "equicordplugins",
-    "opencordplugins/_api", "opencordplugins/_core", "opencordplugins",
+    "nunplugins/_api", "nunplugins/_core", "nunplugins",
     "illegalcordplugins/_api", "illegalcordplugins/_core", "illegalcordplugins",
     "testcordplugins/_api", "testcordplugins/_core", "testcordplugins",
     "esharqplugins/_api", "esharqplugins/_core", "esharqplugins",
@@ -214,12 +214,12 @@ async function getStarCount(fallback) {
     const token = process.env.GITHUB_TOKEN;
     if (!token) return fallback;
 
-    const repo = process.env.GITHUB_REPOSITORY ?? "MasuRii/OpenCord";
+    const repo = process.env.GITHUB_REPOSITORY ?? "o9ll/nun";
     const res = await fetch(`https://api.github.com/repos/${repo}`, {
         headers: {
             "Accept": "application/vnd.github+json",
             "Authorization": `Bearer ${token}`,
-            "User-Agent": "OpenCord README metrics"
+            "User-Agent": "Nun README metrics"
         }
     });
 
@@ -254,7 +254,7 @@ const starCount = await getStarCount(getCurrentStaticStars(readme));
 const license = packageJson.license;
 const version = packageJson.version;
 
-const mainBadgeRow = `<p><a href="https://github.com/MasuRii/OpenCord/stargazers"><img alt="Stars" src="https://img.shields.io/badge/Stars-${badgeValue(starCount)}-181717?style=flat&logo=github&logoColor=white"></a>&nbsp;&nbsp;<a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-${badgeValue(license)}-blue?style=flat"></a>&nbsp;&nbsp;<a href="package.json"><img alt="Version" src="https://img.shields.io/badge/Version-${badgeValue(version)}-blue?style=flat"></a>&nbsp;&nbsp;<a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-${typeScriptVersion}-3178C6?style=flat&logo=typescript&logoColor=white"></a>&nbsp;&nbsp;<a href="https://pnpm.io/"><img alt="pnpm" src="https://img.shields.io/badge/${packageManagerVersion}-F69220?style=flat&logo=pnpm&logoColor=white"></a>&nbsp;&nbsp;<a href="https://equicord.org/discord"><img alt="Discord" src="https://img.shields.io/discord/1173279886065029291.svg?color=5865F2&label=Discord&logo=discord&logoColor=white"></a></p>`;
+const mainBadgeRow = `<p><a href="https://github.com/o9ll/nun/stargazers"><img alt="Stars" src="https://img.shields.io/badge/Stars-${badgeValue(starCount)}-181717?style=flat&logo=github&logoColor=white"></a>&nbsp;&nbsp;<a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-${badgeValue(license)}-blue?style=flat"></a>&nbsp;&nbsp;<a href="package.json"><img alt="Version" src="https://img.shields.io/badge/Version-${badgeValue(version)}-blue?style=flat"></a>&nbsp;&nbsp;<a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-${typeScriptVersion}-3178C6?style=flat&logo=typescript&logoColor=white"></a>&nbsp;&nbsp;<a href="https://pnpm.io/"><img alt="pnpm" src="https://img.shields.io/badge/${packageManagerVersion}-F69220?style=flat&logo=pnpm&logoColor=white"></a>&nbsp;&nbsp;<a href="https://equicord.org/discord"><img alt="Discord" src="https://img.shields.io/discord/1173279886065029291.svg?color=5865F2&label=Discord&logo=discord&logoColor=white"></a></p>`;
 
 const pluginBadgeRow = `<strong>Plugin collections</strong><br>\n<p>${metrics.map(collection => {
     const label = encodeURIComponent(collection.name).replace(/%20/g, "%20");
@@ -265,13 +265,13 @@ const collectionRows = metrics.map(collection => `| ${collection.name} | ${colle
 
 readme = replaceOne(
     readme,
-    /OpenCord is an open source Discord client mod forked from \[Equicord\]\(https:\/\/github\.com\/Equicord\/Equicord\) and \[Vencord\]\(https:\/\/github\.com\/Vendicated\/Vencord\), focused on a massive cross-community plugin catalog with \d+\+? plugin source folders\.(?: The desktop settings list currently shows about \d+\+? visible plugins after build filters\.)?/,
-    `OpenCord is an open source Discord client mod forked from [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://github.com/Vendicated/Vencord), focused on a massive cross-community plugin catalog with ${totalPlugins} plugin source folders. The desktop settings list currently shows about ${visiblePlugins} visible plugins after build filters.`,
+    /Nun is an open source Discord client mod forked from \[Equicord\]\(https:\/\/github\.com\/Equicord\/Equicord\) and \[Vencord\]\(https:\/\/github\.com\/Vendicated\/Vencord\), focused on a massive cross-community plugin catalog with \d+\+? plugin source folders\.(?: The desktop settings list currently shows about \d+\+? visible plugins after build filters\.)?/,
+    `Nun is an open source Discord client mod forked from [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://github.com/Vendicated/Vencord), focused on a massive cross-community plugin catalog with ${totalPlugins} plugin source folders. The desktop settings list currently shows about ${visiblePlugins} visible plugins after build filters.`,
     "README tagline plugin totals"
 );
 readme = replaceOne(
     readme,
-    /<p><a href="https:\/\/github\.com\/MasuRii\/OpenCord\/stargazers"><img alt="Stars".*?<\/p>/,
+    /<p><a href="https:\/\/github\.com\/o9ll\/Nun\/stargazers"><img alt="Stars".*?<\/p>/,
     mainBadgeRow,
     "main badge row"
 );
@@ -283,13 +283,13 @@ readme = replaceOne(
 );
 readme = replaceOne(
     readme,
-    /\| \d+\+? plugin source folders \| Combines Vencord, Equicord, TestCord, Illegalcord, MallCord, Equicord\+, Esharq, and OpenCord plugins\. \|(?:\n\| About \d+\+? visible plugins \| [^\n]+ \|)?/,
-    `| ${totalPlugins} plugin source folders | Combines Vencord, Equicord, TestCord, Illegalcord, MallCord, Equicord+, Esharq, and OpenCord plugins. |\n| About ${visiblePlugins} visible plugins | Approximates the desktop in-app settings list; it can be lower because source folders include duplicate names, API/core helpers, and platform or dev-targeted entries filtered out at build time. |`,
+    /\| \d+\+? plugin source folders \| Combines Vencord, Equicord, TestCord, Illegalcord, MallCord, Equicord\+, Esharq, and Nun plugins\. \|(?:\n\| About \d+\+? visible plugins \| [^\n]+ \|)?/,
+    `| ${totalPlugins} plugin source folders | Combines Vencord, Equicord, TestCord, Illegalcord, MallCord, Equicord+, Esharq, and Nun plugins. |\n| About ${visiblePlugins} visible plugins | Approximates the desktop in-app settings list; it can be lower because source folders include duplicate names, API/core helpers, and platform or dev-targeted entries filtered out at build time. |`,
     "features visible plugin totals"
 );
 readme = replaceOne(
     readme,
-    /\| Vencord \| \d+ \| \[Vendicated\/Vencord\]\(https:\/\/github\.com\/Vendicated\/Vencord\) \|\n\| Equicord \| \d+ \| \[Equicord\/Equicord\]\(https:\/\/github\.com\/Equicord\/Equicord\) \|\n\| TestCord \| \d+ \| \[TestcordDev\/TestCord\]\(https:\/\/github\.com\/TestcordDev\/TestCord\) \|\n\| Illegalcord \| \d+ \| \[ImHisako\/Illegalcord\]\(https:\/\/github\.com\/ImHisako\/Illegalcord\) \|\n\| MallCord \| \d+ \| \[MallCord\/MallCord\]\(https:\/\/github\.com\/MallCord\/MallCord\) \|\n\| Equicord\+ \| \d+ \| \[Chaython\/EquicordPlus\]\(https:\/\/github\.com\/Chaython\/EquicordPlus\) \|\n\| Esharq \| \d+ \| \[LOSTSTR\/Esharq\]\(https:\/\/github\.com\/LOSTSTR\/Esharq\) \|\n\| OpenCord \| \d+ \| \[MasuRii\/OpenCord\]\(https:\/\/github\.com\/MasuRii\/OpenCord\) \|/,
+    /\| Vencord \| \d+ \| \[Vendicated\/Vencord\]\(https:\/\/github\.com\/Vendicated\/Vencord\) \|\n\| Equicord \| \d+ \| \[Equicord\/Equicord\]\(https:\/\/github\.com\/Equicord\/Equicord\) \|\n\| TestCord \| \d+ \| \[TestcordDev\/TestCord\]\(https:\/\/github\.com\/TestcordDev\/TestCord\) \|\n\| Illegalcord \| \d+ \| \[ImHisako\/Illegalcord\]\(https:\/\/github\.com\/ImHisako\/Illegalcord\) \|\n\| MallCord \| \d+ \| \[MallCord\/MallCord\]\(https:\/\/github\.com\/MallCord\/MallCord\) \|\n\| Equicord\+ \| \d+ \| \[Chaython\/EquicordPlus\]\(https:\/\/github\.com\/Chaython\/EquicordPlus\) \|\n\| Esharq \| \d+ \| \[LOSTSTR\/Esharq\]\(https:\/\/github\.com\/LOSTSTR\/Esharq\) \|\n\| Nun \| \d+ \| \[o9ll\/Nun\]\(https:\/\/github\.com\/o9ll\/Nun\) \|/,
     collectionRows,
     "plugin collection table"
 );

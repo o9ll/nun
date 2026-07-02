@@ -30,11 +30,11 @@ export interface UpdateSession {
 
 export type ChangelogHistory = UpdateSession[];
 
-const CHANGELOG_HISTORY_KEY = "OpenCordChangelog_History";
-const LAST_SEEN_HASH_KEY = "OpenCordChangelog_LastSeenHash";
-const KNOWN_PLUGINS_KEY = "OpenCordChangelog_KnownPlugins";
-const KNOWN_SETTINGS_KEY = "OpenCordChangelog_KnownSettings";
-const LAST_REPO_CHECK_KEY = "OpenCordChangelog_LastRepoCheck";
+const CHANGELOG_HISTORY_KEY = "NunChangelog_History";
+const LAST_SEEN_HASH_KEY = "NunChangelog_LastSeenHash";
+const KNOWN_PLUGINS_KEY = "NunChangelog_KnownPlugins";
+const KNOWN_SETTINGS_KEY = "NunChangelog_KnownSettings";
+const LAST_REPO_CHECK_KEY = "NunChangelog_LastRepoCheck";
 const LEGACY_CHANGELOG_HISTORY_KEY = "EquicordChangelog_History";
 const LEGACY_LAST_SEEN_HASH_KEY = "EquicordChangelog_LastSeenHash";
 const LEGACY_KNOWN_PLUGINS_KEY = "EquicordChangelog_KnownPlugins";

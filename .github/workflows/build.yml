@@ -27,13 +27,13 @@ jobs:
                   repository: Equicord/Equilotl
                   path: Equilotl
 
-            - name: Checkout OpenCord
+            - name: Checkout Nun
               uses: actions/checkout@v6
               with:
-                  path: OpenCord
+                  path: Nun
 
             - name: Patch installer source and resources
-              run: node OpenCord/scripts/patchEquilotlBranding.mjs Equilotl OpenCord/assets/branding
+              run: node Nun/scripts/patchEquilotlBranding.mjs Equilotl Nun/assets/branding
 
             - name: Install Go
               uses: actions/setup-go@v6
@@ -52,17 +52,17 @@ jobs:
                   go get -v
                   go mod vendor
                   git apply patches/wayland.patch
-                  CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -v -tags static -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=opencord'" -o OpenCord-x11
-                  CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -v -tags "cli" -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=opencord'" -o OpenCordCli-linux
-                  chmod +x OpenCord-x11 OpenCordCli-linux
+                  CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -v -tags static -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=nun'" -o Nun-x11
+                  CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -v -tags "cli" -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=nun'" -o NunCli-linux
+                  chmod +x Nun-x11 NunCli-linux
 
             - name: Upload Linux installer artifacts
               uses: actions/upload-artifact@v7
               with:
-                  name: opencord-installers-linux
+                  name: nun-installers-linux
                   path: |
-                      Equilotl/OpenCord-x11
-                      Equilotl/OpenCordCli-linux
+                      Equilotl/Nun-x11
+                      Equilotl/NunCli-linux
 
     InstallerWindows:
         name: Build Windows installer
@@ -76,13 +76,13 @@ jobs:
                   repository: Equicord/Equilotl
                   path: Equilotl
 
-            - name: Checkout OpenCord
+            - name: Checkout Nun
               uses: actions/checkout@v6
               with:
-                  path: OpenCord
+                  path: Nun
 
             - name: Patch installer source and resources
-              run: node OpenCord/scripts/patchEquilotlBranding.mjs Equilotl OpenCord/assets/branding
+              run: node Nun/scripts/patchEquilotlBranding.mjs Equilotl Nun/assets/branding
 
             - name: Install Go
               uses: actions/setup-go@v6
@@ -103,16 +103,16 @@ jobs:
                   go get -v
                   go install github.com/tc-hib/go-winres@latest
                   go-winres make --product-version "git-tag"
-                  CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags "static gui" -ldflags "-s -w -H=windowsgui -extldflags=-static -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=opencord'" -o OpenCordInstaller.exe
-                  CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags "cli" -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=opencord'" -o OpenCordInstallerCli.exe
+                  CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags "static gui" -ldflags "-s -w -H=windowsgui -extldflags=-static -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=nun'" -o NunInstaller.exe
+                  CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags "cli" -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=nun'" -o NunInstallerCli.exe
 
             - name: Upload Windows installer artifacts
               uses: actions/upload-artifact@v7
               with:
-                  name: opencord-installers-windows
+                  name: nun-installers-windows
                   path: |
-                      Equilotl/OpenCordInstaller.exe
-                      Equilotl/OpenCordInstallerCli.exe
+                      Equilotl/NunInstaller.exe
+                      Equilotl/NunInstallerCli.exe
 
     InstallerMac:
         name: Build macOS installer
@@ -123,12 +123,12 @@ jobs:
                 include:
                     - arch: amd64
                       runner: macos-15-intel
-                      gui_name: OpenCord-darwin-x64.zip
-                      cli_name: OpenCordCli-darwin-x64
+                      gui_name: Nun-darwin-x64.zip
+                      cli_name: NunCli-darwin-x64
                     - arch: arm64
                       runner: macos-latest
-                      gui_name: OpenCord-darwin-arm64.zip
-                      cli_name: OpenCordCli-darwin-arm64
+                      gui_name: Nun-darwin-arm64.zip
+                      cli_name: NunCli-darwin-arm64
 
         steps:
             - name: Checkout Equilotl
@@ -137,13 +137,13 @@ jobs:
                   repository: Equicord/Equilotl
                   path: Equilotl
 
-            - name: Checkout OpenCord
+            - name: Checkout Nun
               uses: actions/checkout@v6
               with:
-                  path: OpenCord
+                  path: Nun
 
             - name: Patch installer source and resources
-              run: node OpenCord/scripts/patchEquilotlBranding.mjs Equilotl OpenCord/assets/branding
+              run: node Nun/scripts/patchEquilotlBranding.mjs Equilotl Nun/assets/branding
 
             - name: Install Go
               uses: actions/setup-go@v6
@@ -158,24 +158,24 @@ jobs:
               working-directory: Equilotl
               run: |
                   go get -v
-                  CGO_CFLAGS="-mmacosx-version-min=10.15" CGO_LDFLAGS="-mmacosx-version-min=10.15" CGO_ENABLED=1 GOOS=darwin GOARCH=${{ matrix.arch }} go build -v -tags "static gui" -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=opencord'" -o OpenCordInstaller
-                  CGO_CFLAGS="-mmacosx-version-min=10.15" CGO_LDFLAGS="-mmacosx-version-min=10.15" CGO_ENABLED=1 GOOS=darwin GOARCH=${{ matrix.arch }} go build -v -tags "cli" -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=opencord'" -o ${{ matrix.cli_name }}
-                  mkdir -p OpenCordInstaller.app/Contents/MacOS OpenCordInstaller.app/Contents/Resources
-                  cp macos/Info.plist OpenCordInstaller.app/Contents/Info.plist
-                  mv OpenCordInstaller OpenCordInstaller.app/Contents/MacOS/OpenCordInstaller
-                  cp macos/icon.icns OpenCordInstaller.app/Contents/Resources/icon.icns
-                  zip -r ${{ matrix.gui_name }} OpenCordInstaller.app
+                  CGO_CFLAGS="-mmacosx-version-min=10.15" CGO_LDFLAGS="-mmacosx-version-min=10.15" CGO_ENABLED=1 GOOS=darwin GOARCH=${{ matrix.arch }} go build -v -tags "static gui" -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=nun'" -o NunInstaller
+                  CGO_CFLAGS="-mmacosx-version-min=10.15" CGO_LDFLAGS="-mmacosx-version-min=10.15" CGO_ENABLED=1 GOOS=darwin GOARCH=${{ matrix.arch }} go build -v -tags "cli" -ldflags "-s -w -X 'equilotl/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'equilotl/buildinfo.InstallerTag=nun'" -o ${{ matrix.cli_name }}
+                  mkdir -p NunInstaller.app/Contents/MacOS NunInstaller.app/Contents/Resources
+                  cp macos/Info.plist NunInstaller.app/Contents/Info.plist
+                  mv NunInstaller NunInstaller.app/Contents/MacOS/NunInstaller
+                  cp macos/icon.icns NunInstaller.app/Contents/Resources/icon.icns
+                  zip -r ${{ matrix.gui_name }} NunInstaller.app
 
             - name: Upload macOS installer artifacts
               uses: actions/upload-artifact@v7
               with:
-                  name: opencord-installers-macos-${{ matrix.arch }}
+                  name: nun-installers-macos-${{ matrix.arch }}
                   path: |
                       Equilotl/${{ matrix.gui_name }}
                       Equilotl/${{ matrix.cli_name }}
 
     Build:
-        name: Build OpenCord
+        name: Build Nun
         runs-on: ubuntu-latest
         needs: [InstallerLinux, InstallerWindows, InstallerMac]
         if: github.ref_type == 'tag' || github.actor != 'github-actions[bot]'
@@ -248,7 +248,7 @@ jobs:
             - name: Download installer artifacts
               uses: actions/download-artifact@v8
               with:
-                  pattern: opencord-installers-*
+                  pattern: nun-installers-*
                   path: dist/installer-assets
                   merge-multiple: true
 
@@ -258,7 +258,7 @@ jobs:
                   mkdir release
 
                   cp browser/browser.* release
-                  cp OpenCord.user.{js,js.LEGAL.txt} release
+                  cp Nun.user.{js,js.LEGAL.txt} release
                   cp ../misc/install.sh release/install.sh
                   cp installer-assets/* release
 

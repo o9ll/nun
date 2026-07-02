@@ -22,23 +22,23 @@ import { join } from "path";
 
 const suffix = IS_DEV ? "dev" : "";
 
-const getOpenCordDataDir = () => process.env.DISCORD_USER_DATA_DIR
-    ? join(process.env.DISCORD_USER_DATA_DIR, "..", "OpenCordData", suffix)
-    : join(app.getPath("userData"), "..", "OpenCord", suffix);
+const getNunDataDir = () => process.env.DISCORD_USER_DATA_DIR
+    ? join(process.env.DISCORD_USER_DATA_DIR, "..", "NunData", suffix)
+    : join(app.getPath("userData"), "..", "Nun", suffix);
 
 const getLegacyEquicordDataDir = () => process.env.DISCORD_USER_DATA_DIR
     ? join(process.env.DISCORD_USER_DATA_DIR, "..", "EquicordData", suffix)
     : join(app.getPath("userData"), "..", "Equicord", suffix);
 
 const resolveDataDir = () => {
-    if (process.env.OPENCORD_USER_DATA_DIR) return process.env.OPENCORD_USER_DATA_DIR;
+    if (process.env.NUN_USER_DATA_DIR) return process.env.NUN_USER_DATA_DIR;
     if (process.env.EQUICORD_USER_DATA_DIR) return process.env.EQUICORD_USER_DATA_DIR;
 
-    const openCordDir = getOpenCordDataDir();
+    const nUnDir = getNunDataDir();
     const legacyEquicordDir = getLegacyEquicordDataDir();
-    return existsSync(legacyEquicordDir) && !existsSync(openCordDir)
+    return existsSync(legacyEquicordDir) && !existsSync(nUnDir)
         ? legacyEquicordDir
-        : openCordDir;
+        : nUnDir;
 };
 
 export const DATA_DIR = resolveDataDir();
@@ -83,7 +83,7 @@ if (IS_DEV) {
                 app.relaunch();
                 app.exit(0);
             } catch (err) {
-                console.error("[OpenCord] Failed to copy prod data:", err);
+                console.error("[Nun] Failed to copy prod data:", err);
             }
         }, 5000);
     }

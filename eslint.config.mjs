@@ -77,7 +77,7 @@ export default defineConfig(
             "simple-header/header": [
                 "error",
                 {
-                    "files": [`${import.meta.dirname}/scripts/header-new.txt`, `${import.meta.dirname}/scripts/header-old.txt`, `${import.meta.dirname}/scripts/header-opencord.txt`],
+                    "files": [`${import.meta.dirname}/scripts/header-new.txt`, `${import.meta.dirname}/scripts/header-old.txt`, `${import.meta.dirname}/scripts/header-nun.txt`],
                     "templates": { "author": [".*", "Vendicated and contributors"] }
                 }
             ],

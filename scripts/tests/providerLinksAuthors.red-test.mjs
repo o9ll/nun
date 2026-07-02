@@ -167,13 +167,13 @@ check("PluginModal does not send every non-Vencord website link to equicord.org"
     return pass();
 });
 
-check("PluginModal source links use provider upstream URLs instead of the OpenCord remote plus local folder", () => {
-    const usesLocalOpenCordSource = /github\.com\/\$\{gitRemote\}\/tree\/main\/\$\{pluginMeta\.folderName\}/.test(pluginModal)
+check("PluginModal source links use provider upstream URLs instead of the Nun remote plus local folder", () => {
+    const usesLocalNunSource = /github\.com\/\$\{gitRemote\}\/tree\/main\/\$\{pluginMeta\.folderName\}/.test(pluginModal)
         || (/gitRemote/.test(pluginModal) && /pluginMeta\.folderName/.test(pluginModal) && /Source Code/.test(pluginModal));
 
-    if (usesLocalOpenCordSource) {
+    if (usesLocalNunSource) {
         return fail([
-            "PluginModal still builds Source Code links from gitRemote + pluginMeta.folderName, which points external providers at OpenCord local mirror paths.",
+            "PluginModal still builds Source Code links from gitRemote + pluginMeta.folderName, which points external providers at Nun local mirror paths.",
             "Expected source links for synced providers to point at their upstream repositories:",
             ...providerFixtures.map(fixture => `  - ${fixture.pluginName}: ${fixture.expectedSourceUrl}`),
         ].join("\n"));

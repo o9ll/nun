@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
- * OpenCord, a Discord client mod
- * Copyright (c) 2026 OpenCord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 Nun contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -40,72 +40,72 @@ function walkGoFiles(dir) {
 
 // Keep upstream URL remaps as the baseline transformation.
 const urlReplacements = {
-    "https://api.github.com/repos/Equicord/Equicord/releases/latest": "https://api.github.com/repos/MasuRii/OpenCord/releases/latest",
-    "https://equicord.org/releases/equicord": "https://github.com/MasuRii/OpenCord/releases/latest/download/latest.json",
-    "https://api.github.com/repos/Equicord/Equilotl/releases/latest": "https://api.github.com/repos/MasuRii/OpenCord/releases/latest",
-    "https://equicord.org/releases/equilotl": "https://github.com/MasuRii/OpenCord/releases/latest/download/latest.json",
-    "https://github.com/Equicord/Equilotl/releases/latest/download/": "https://github.com/MasuRii/OpenCord/releases/latest/download/",
-    "https://github.com/Equicord/Equilotl": "https://github.com/MasuRii/OpenCord"
+    "https://api.github.com/repos/Equicord/Equicord/releases/latest": "https://api.github.com/repos/o9ll/nun/releases/latest",
+    "https://equicord.org/releases/equicord": "https://github.com/o9ll/nun/releases/latest/download/latest.json",
+    "https://api.github.com/repos/Equicord/Equilotl/releases/latest": "https://api.github.com/repos/o9ll/nun/releases/latest",
+    "https://equicord.org/releases/equilotl": "https://github.com/o9ll/nun/releases/latest/download/latest.json",
+    "https://github.com/Equicord/Equilotl/releases/latest/download/": "https://github.com/o9ll/nun/releases/latest/download/",
+    "https://github.com/Equicord/Equilotl": "https://github.com/o9ll/nun"
 };
 
 const productNameReplacements = {
     // Installer asset names.
-    "Equilotl.exe": "OpenCordInstaller.exe",
-    "EquilotlCli.exe": "OpenCordInstallerCli.exe",
-    "Equilotl-x11": "OpenCord-x11",
-    "EquilotlCli-linux": "OpenCordCli-linux",
-    "Equilotl-darwin-x64.zip": "OpenCord-darwin-x64.zip",
-    "Equilotl-darwin-arm64.zip": "OpenCord-darwin-arm64.zip",
-    "EquilotlCli-darwin-x64": "OpenCordCli-darwin-x64",
-    "EquilotlCli-darwin-arm64": "OpenCordCli-darwin-arm64",
-    "Equilotl.app": "OpenCordInstaller.app",
-    "EquilotlUpdate": "OpenCordInstallerUpdate",
+    "Equilotl.exe": "NunInstaller.exe",
+    "EquilotlCli.exe": "NunInstallerCli.exe",
+    "Equilotl-x11": "Nun-x11",
+    "EquilotlCli-linux": "NunCli-linux",
+    "Equilotl-darwin-x64.zip": "Nun-darwin-x64.zip",
+    "Equilotl-darwin-arm64.zip": "Nun-darwin-arm64.zip",
+    "EquilotlCli-darwin-x64": "NunCli-darwin-x64",
+    "EquilotlCli-darwin-arm64": "NunCli-darwin-arm64",
+    "Equilotl.app": "NunInstaller.app",
+    "EquilotlUpdate": "NunInstallerUpdate",
     // Visible installer product text.
-    "\"Equilotl/\"": "\"OpenCordInstaller/\"",
-    "\"Equilotl\"": "\"OpenCordInstaller\"",
-    "Equilotl Version": "OpenCordInstaller Version",
-    "Equilotl Cli": "OpenCordInstaller Cli",
-    "Update Equilotl": "Update OpenCordInstaller",
-    "Equilotl was run": "OpenCordInstaller was run",
-    "Equilotl must not be run": "OpenCordInstaller must not be run"
+    "\"Equilotl/\"": "\"NunInstaller/\"",
+    "\"Equilotl\"": "\"NunInstaller\"",
+    "Equilotl Version": "NunInstaller Version",
+    "Equilotl Cli": "NunInstaller Cli",
+    "Update Equilotl": "Update NunInstaller",
+    "Equilotl was run": "NunInstaller was run",
+    "Equilotl must not be run": "NunInstaller must not be run"
 };
 
 const installedModReplacements = {
     // User-facing references to the mod being installed.
-    "Install Equicord": "Install OpenCord",
-    "Repair Equicord": "Repair OpenCord",
-    "Uninstall Equicord": "Uninstall OpenCord",
-    "Downloading latest Equicord files": "Downloading latest OpenCord files",
-    "Otherwise, Equicord will likely not work": "Otherwise, OpenCord will likely not work",
-    "Failed to install the latest Equicord builds from GitHub": "Failed to install the latest OpenCord builds from GitHub",
-    "**Github** and **equicord.org** are the only official places to get Equicord": "**Github** is the only official place to get OpenCord",
-    "Reinstall & Update Equicord": "Reinstall & Update OpenCord",
-    "verify Equicord installed successfully": "verify OpenCord installed successfully",
-    "otherwise Equicord will likely not work": "otherwise OpenCord will likely not work",
-    "Equicord is in no way affiliated with OpenAsar": "OpenCord is in no way affiliated with OpenAsar",
-    "Equicord will be downloaded to": "OpenCord will be downloaded to",
-    "Local Equicord Version": "Local OpenCord Version",
-    "Not updating Equicord due to being in DevMode": "Not updating OpenCord due to being in DevMode",
-    "Latest Equicord Version": "Latest OpenCord Version"
+    "Install Equicord": "Install Nun",
+    "Repair Equicord": "Repair Nun",
+    "Uninstall Equicord": "Uninstall Nun",
+    "Downloading latest Equicord files": "Downloading latest Nun files",
+    "Otherwise, Equicord will likely not work": "Otherwise, Nun will likely not work",
+    "Failed to install the latest Equicord builds from GitHub": "Failed to install the latest Nun builds from GitHub",
+    "**Github** and **equicord.org** are the only official places to get Equicord": "**Github** is the only official place to get Nun",
+    "Reinstall & Update Equicord": "Reinstall & Update Nun",
+    "verify Equicord installed successfully": "verify Nun installed successfully",
+    "otherwise Equicord will likely not work": "otherwise Nun will likely not work",
+    "Equicord is in no way affiliated with OpenAsar": "Nun is in no way affiliated with OpenAsar",
+    "Equicord will be downloaded to": "Nun will be downloaded to",
+    "Local Equicord Version": "Local Nun Version",
+    "Not updating Equicord due to being in DevMode": "Not updating Nun due to being in DevMode",
+    "Latest Equicord Version": "Latest Nun Version"
 };
 
 const systemReplacements = {
     // Environment variables and on-disk paths the installer uses.
-    "EQUICORD_USER_DATA_DIR": "OPENCORD_USER_DATA_DIR",
-    "EQUICORD_DIRECTORY": "OPENCORD_DIRECTORY",
-    "EQUICORD_DEV_INSTALL": "OPENCORD_DEV_INSTALL",
-    "EquicordData": "OpenCordData",
-    'appdir.New("Equicord")': 'appdir.New("OpenCord")',
-    "equicord.asar": "opencord.asar",
-    '`// Equicord (\\w+)`': '`// OpenCord (\\w+)`',
-    "Found existing Equicord Install": "Found existing OpenCord Install",
-    "non-Equicord app.asar": "non-OpenCord app.asar",
-    "Using DISCORD_USER_DATA_DIR/../EquicordData": "Using DISCORD_USER_DATA_DIR/../OpenCordData",
+    "EQUICORD_USER_DATA_DIR": "NUN_USER_DATA_DIR",
+    "EQUICORD_DIRECTORY": "NUN_DIRECTORY",
+    "EQUICORD_DEV_INSTALL": "NUN_DEV_INSTALL",
+    "EquicordData": "NunData",
+    'appdir.New("Equicord")': 'appdir.New("Nun")',
+    "equicord.asar": "nun.asar",
+    '`// Equicord (\\w+)`': '`// Nun (\\w+)`',
+    "Found existing Equicord Install": "Found existing Nun Install",
+    "non-Equicord app.asar": "non-Nun app.asar",
+    "Using DISCORD_USER_DATA_DIR/../EquicordData": "Using DISCORD_USER_DATA_DIR/../NunData",
     // Internal identifiers that surface in logs/errors pointing to the mod path.
-    "EquicordDirectory": "OpenCordDirectory",
-    "EquicordFile": "OpenCordFile",
-    "equicordAsarPath": "openCordAsarPath",
-    "isEquicordLoaderAppAsar": "isOpenCordLoaderAppAsar"
+    "EquicordDirectory": "NunDirectory",
+    "EquicordFile": "NunFile",
+    "equicordAsarPath": "nUnAsarPath",
+    "isEquicordLoaderAppAsar": "isNunLoaderAppAsar"
 };
 
 const goReplacements = {
@@ -129,9 +129,9 @@ for (const path of walkGoFiles(equilotlDir)) {
 }
 
 if (assetsDir) {
-    const pngPath = join(assetsDir, "opencord-symbol-dark-256.png");
-    const icoPath = join(assetsDir, "opencord-symbol-dark.ico");
-    const icnsPath = join(assetsDir, "opencord-symbol-dark.icns");
+    const pngPath = join(assetsDir, "nun-symbol-dark-256.png");
+    const icoPath = join(assetsDir, "nun-symbol-dark.ico");
+    const icnsPath = join(assetsDir, "nun-symbol-dark.icns");
 
     try {
         copyFileSync(pngPath, join(equilotlDir, "winres", "icon.png"));
@@ -150,9 +150,9 @@ if (assetsDir) {
 
     try {
         let winres = read("winres/winres.json");
-        winres = winres.replace("An Installer for the Equicord Discord Mod", "An Installer for the OpenCord Discord Mod");
-        winres = winres.replace("\"CompanyName\": \"Equicord\"", "\"CompanyName\": \"OpenCord\"");
-        winres = winres.replace(/Equilotl/g, "OpenCordInstaller");
+        winres = winres.replace("An Installer for the Equicord Discord Mod", "An Installer for the Nun Discord Mod");
+        winres = winres.replace("\"CompanyName\": \"Equicord\"", "\"CompanyName\": \"Nun\"");
+        winres = winres.replace(/Equilotl/g, "NunInstaller");
         write("winres/winres.json", winres);
         console.log("Patched Windows resource manifest metadata");
     } catch (err) {
@@ -161,8 +161,8 @@ if (assetsDir) {
 
     try {
         let plist = read("macos/Info.plist");
-        plist = plist.replace("<string>Equilotl</string>", "<string>OpenCordInstaller</string>");
-        plist = plist.replace("<string>org.equicord.equilotl</string>", "<string>org.opencord.opencordinstaller</string>");
+        plist = plist.replace("<string>Equilotl</string>", "<string>NunInstaller</string>");
+        plist = plist.replace("<string>org.equicord.equilotl</string>", "<string>org.nun.nuninstaller</string>");
         write("macos/Info.plist", plist);
         console.log("Patched macOS app bundle metadata");
     } catch (err) {

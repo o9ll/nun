@@ -175,11 +175,11 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
     const pluginMeta = PluginMeta[plugin.name];
     const isVencordPlugin = pluginMeta.folderName.startsWith("src/plugins/") ?? false;
     const isEquicordPlugin = pluginMeta.folderName.startsWith("src/equicordplugins/") ?? false;
-    const isOpenCordPlugin = pluginMeta.folderName.startsWith("src/opencordplugins/") ?? false;
+    const isNunPlugin = pluginMeta.folderName.startsWith("src/nunplugins/") ?? false;
 
     const websiteHref = isVencordPlugin
         ? `https://vencord.dev/plugins/${plugin.name}`
-        : isEquicordPlugin || isOpenCordPlugin
+        : isEquicordPlugin || isNunPlugin
             ? `https://equicord.org/plugins/${encodeURIComponent(plugin.name)}`
             : null;
 

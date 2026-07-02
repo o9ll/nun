@@ -27,33 +27,33 @@ const agents = agentGuidanceDocs["AGENTS.md"];
 const constants = readFileSync(join(root, "src", "utils", "constants.ts"), "utf8");
 const vencordPluginRoot = join(root, "src", "plugins");
 const equicordPluginRoot = join(root, "src", "equicordplugins");
-const opencordPluginRoot = join(root, "src", "opencordplugins");
-const canonicalOpenCordDarkSymbol = "assets/branding/opencord-symbol-dark.svg";
-const canonicalOpenCordLightSymbol = "assets/branding/opencord-symbol-light.svg";
-const browserOpenCordDarkSymbol = "browser/opencord-symbol-dark.svg";
-const canonicalOpenCordSymbolMarker = "opencord-symbol-dark.svg";
-const legacyOpenCordSymbolMarker = "opencord-symbol.svg";
-const legacyOpenCordSymbolArtifacts = [
-    "assets/branding/opencord-symbol.svg",
-    "assets/branding/opencord-symbol-candidate-01-open-orbit.svg",
-    "assets/branding/opencord-symbol-candidate-02-unlocked-chat.svg",
-    "assets/branding/opencord-symbol-candidate-03-chat-gate.svg",
-    "assets/branding/opencord-symbol-candidate-04-open-node.svg",
-    "assets/branding/opencord-symbol-candidate-05-open-bubble.svg",
-    "assets/branding/opencord-symbol-candidates.md",
-    "assets/branding/v2/opencord-symbol-candidates-v2.md",
-    "assets/branding/v2/opencord-symbol-candidate-v2-01-halo-arc.svg",
-    "assets/branding/v2/opencord-symbol-candidate-v2-02-open-beacon.svg",
-    "assets/branding/v2/opencord-symbol-candidate-v2-03-prism-core.svg",
-    "assets/branding/v2/opencord-symbol-candidate-v2-04-breach.svg",
-    "assets/branding/v2/opencord-symbol-candidate-v2-05-dual-helix.svg",
-    "assets/branding/v3/opencord-symbol-candidates-v3.md",
-    "assets/branding/v3/opencord-symbol-candidate-v3-01-open-core.svg",
-    "assets/branding/v3/opencord-symbol-candidate-v3-02-open-gate.svg",
-    "assets/branding/v3/opencord-symbol-candidate-v3-03-open-path.svg",
-    "assets/branding/v3/opencord-symbol-candidate-v3-04-open-sign.svg",
-    "assets/branding/v3/opencord-symbol-candidate-v3-05-open-arc.svg",
-    "browser/opencord-symbol.svg",
+const nunPluginRoot = join(root, "src", "nunplugins");
+const canonicalNunDarkSymbol = "assets/branding/nun-symbol-dark.svg";
+const canonicalNunLightSymbol = "assets/branding/nun-symbol-light.svg";
+const browserNunDarkSymbol = "browser/nun-symbol-dark.svg";
+const canonicalNunSymbolMarker = "nun-symbol-dark.svg";
+const legacyNunSymbolMarker = "nun-symbol.svg";
+const legacyNunSymbolArtifacts = [
+    "assets/branding/nun-symbol.svg",
+    "assets/branding/nun-symbol-candidate-01-open-orbit.svg",
+    "assets/branding/nun-symbol-candidate-02-unlocked-chat.svg",
+    "assets/branding/nun-symbol-candidate-03-chat-gate.svg",
+    "assets/branding/nun-symbol-candidate-04-open-node.svg",
+    "assets/branding/nun-symbol-candidate-05-open-bubble.svg",
+    "assets/branding/nun-symbol-candidates.md",
+    "assets/branding/v2/nun-symbol-candidates-v2.md",
+    "assets/branding/v2/nun-symbol-candidate-v2-01-halo-arc.svg",
+    "assets/branding/v2/nun-symbol-candidate-v2-02-open-beacon.svg",
+    "assets/branding/v2/nun-symbol-candidate-v2-03-prism-core.svg",
+    "assets/branding/v2/nun-symbol-candidate-v2-04-breach.svg",
+    "assets/branding/v2/nun-symbol-candidate-v2-05-dual-helix.svg",
+    "assets/branding/v3/nun-symbol-candidates-v3.md",
+    "assets/branding/v3/nun-symbol-candidate-v3-01-open-core.svg",
+    "assets/branding/v3/nun-symbol-candidate-v3-02-open-gate.svg",
+    "assets/branding/v3/nun-symbol-candidate-v3-03-open-path.svg",
+    "assets/branding/v3/nun-symbol-candidate-v3-04-open-sign.svg",
+    "assets/branding/v3/nun-symbol-candidate-v3-05-open-arc.svg",
+    "browser/nun-symbol.svg",
 ];
 
 const failures = [];
@@ -117,11 +117,11 @@ function expectNoLegacyVariableMismatch(label, contents) {
     const mismatches = contents
         .split(/\r?\n/)
         .map(line => line.trim())
-        .filter(line => /^"\{equicord(?:Icon|Version|Hash|Platform)\} - .*OpenCord.*",?$/.test(line))
+        .filter(line => /^"\{equicord(?:Icon|Version|Hash|Platform)\} - .*Nun.*",?$/.test(line))
         .filter(line => !/legacy variable name/i.test(line));
 
     if (mismatches.length) {
-        failures.push(`${label}: expected legacy {equicord*} variable descriptions not to describe OpenCord without legacy context (${mismatches.join("; ")})`);
+        failures.push(`${label}: expected legacy {equicord*} variable descriptions not to describe Nun without legacy context (${mismatches.join("; ")})`);
     }
 }
 
@@ -149,26 +149,26 @@ function readSourceTree(path) {
     return contents;
 }
 
-expectEqual("package.json name", packageJson.name, "opencord");
-expectEqual("package.json author", packageJson.author, "OpenCord");
-expectEqual("package.json homepage", packageJson.homepage, "https://github.com/OpenCord/OpenCord#readme");
-expectEqual("package.json bugs.url", packageJson.bugs?.url, "https://github.com/OpenCord/OpenCord/issues");
-expectEqual("package.json repository.url", packageJson.repository?.url, "git+https://github.com/OpenCord/OpenCord.git");
-expectIncludes("README primary heading", readme, "# [](https://github.com/OpenCord/OpenCord) OpenCord");
-expectIncludes("README product description", readme, "OpenCord is a fork of [Vencord](https://github.com/Vendicated/Vencord)");
+expectEqual("package.json name", packageJson.name, "nun");
+expectEqual("package.json author", packageJson.author, "Nun");
+expectEqual("package.json homepage", packageJson.homepage, "https://github.com/o9ll/nun#readme");
+expectEqual("package.json bugs.url", packageJson.bugs?.url, "https://github.com/o9ll/nun/issues");
+expectEqual("package.json repository.url", packageJson.repository?.url, "git+https://github.com/o9ll/nun.git");
+expectIncludes("README primary heading", readme, "# [](https://github.com/o9ll/nun) Nun");
+expectIncludes("README product description", readme, "Nun is a fork of [Vencord](https://github.com/Vendicated/Vencord)");
 expectIncludes("README credits Equicord upstream acknowledgement", readmeCredits, "[Equicord](https://github.com/Equicord/Equicord)");
-expectIncludes("README disclaimer dual upstream credit", readmeDisclaimer, "Vencord and Equicord are not connected to OpenCord");
+expectIncludes("README disclaimer dual upstream credit", readmeDisclaimer, "Vencord and Equicord are not connected to Nun");
 expectIncludes("about acknowledgements Equicord upstream project", aboutAcknowledgements, "<a href=\"https://github.com/Equicord/Equicord\" target=\"_blank\">Equicord</a>");
 expectIncludes("about Suncord historical Equicord merge wording", aboutAcknowledgements, "merged into Equicord");
-expectIncludes("supportHelper OpenCord team Discord role provenance", trustedRolesBlock, "OPENCORD_TEAM, // Equicord Team (Discord role)");
+expectIncludes("supportHelper Nun team Discord role provenance", trustedRolesBlock, "NUN_TEAM, // Equicord Team (Discord role)");
 expectIncludes("supportHelper donor Discord role provenance", trustedRolesBlock, "DONOR_ROLE_ID, // Equicord Donor (Discord role)");
 expectIncludes("supportHelper contributor Discord role provenance", trustedRolesBlock, "CONTRIB_ROLE_ID, // Equicord Contributor (Discord role)");
-expectNoLegacyVariableMismatch("discordDevBanner OpenCord description for legacy Equicord variables", discordDevBannerConsts);
+expectNoLegacyVariableMismatch("discordDevBanner Nun description for legacy Equicord variables", discordDevBannerConsts);
 
 expectPluginTree("src/plugins Vencord-origin plugin tree", vencordPluginRoot);
 expectPluginTree("src/equicordplugins Equicord-origin plugin tree", equicordPluginRoot);
-expectPluginTree("src/opencordplugins OpenCord-origin plugin tree", opencordPluginRoot);
-expectPathExists("aiTranslate.desktop OpenCord namespace", "src/opencordplugins/aiTranslate.desktop");
+expectPluginTree("src/nunplugins Nun-origin plugin tree", nunPluginRoot);
+expectPathExists("aiTranslate.desktop Nun namespace", "src/nunplugins/aiTranslate.desktop");
 expectPathNotExists("aiTranslate.desktop legacy Equicord namespace", "src/equicordplugins/aiTranslate.desktop");
 
 const pluginSources = readSourceTree(vencordPluginRoot);
@@ -181,27 +181,27 @@ expectIncludes("Vencord contributor constants", constants, "export const Devs");
 expectIncludes("Equicord contributor constants", constants, "export const EquicordDevs");
 expectIncludes("Vencord contributor lookup", constants, "export const VencordDevsById");
 expectIncludes("Equicord contributor lookup", constants, "export const EquicordDevsById");
-expectNotIncludes("legacy plugin author attribution", allPluginSources, "OpenCordDevs");
+expectNotIncludes("legacy plugin author attribution", allPluginSources, "NunDevs");
 expectIncludes("new source Vencord header rule", agents, "* Vencord, a Discord client mod");
 expectIncludes("new source Vendicated copyright rule", agents, "Vendicated and contributors");
 expectIncludes("new source SPDX rule", agents, "SPDX-License-Identifier: GPL-3.0-or-later");
 expectIncludes("new source upstream attribution rule", agents, "upstream attribution is kept across the whole tree");
 
-// Agent guidance docs must use current OpenCord product wording while keeping
+// Agent guidance docs must use current Nun product wording while keeping
 // Vencord SPDX attribution and real Equicord contributor identifiers intact.
-expectAgentGuidanceIncludes("OpenCord heading", "# OpenCord Rules");
-expectAgentGuidanceIncludes("OpenCord-only SPDX guidance", "even on new OpenCord-only files");
-expectAgentGuidanceIncludes("OpenCord fork attribution", "OpenCord is a Vencord fork");
-expectAgentGuidanceIncludes("preserved SPDX naming warning", "Don't change it to \"OpenCord\" or \"Equicord\".");
-expectAgentGuidanceIncludes("OpenCord plugin path option", "`src/opencordplugins/<name>/index.tsx`");
-expectAgentGuidanceIncludes("OpenCord modified plugin wording", "`isModified?: true` marks an upstream Vencord plugin OpenCord modified.");
-expectAgentGuidanceIncludes("OpenCord bundle wording", "They only exist in OpenCord's bundle.");
-expectAgentGuidanceIncludes("OpenCord version constant description", "| `VERSION` | OpenCord version string |");
+expectAgentGuidanceIncludes("Nun heading", "# Nun Rules");
+expectAgentGuidanceIncludes("Nun-only SPDX guidance", "even on new Nun-only files");
+expectAgentGuidanceIncludes("Nun fork attribution", "Nun is a Vencord fork");
+expectAgentGuidanceIncludes("preserved SPDX naming warning", "Don't change it to \"Nun\" or \"Equicord\".");
+expectAgentGuidanceIncludes("Nun plugin path option", "`src/nunplugins/<name>/index.tsx`");
+expectAgentGuidanceIncludes("Nun modified plugin wording", "`isModified?: true` marks an upstream Vencord plugin Nun modified.");
+expectAgentGuidanceIncludes("Nun bundle wording", "They only exist in Nun's bundle.");
+expectAgentGuidanceIncludes("Nun version constant description", "| `VERSION` | Nun version string |");
 expectAgentGuidanceNotIncludes("legacy Equicord heading", "# Equicord Rules");
 expectAgentGuidanceNotIncludes("legacy Equicord-only SPDX guidance", "even on new Equicord-only files");
 expectAgentGuidanceNotIncludes("legacy Equicord fork attribution", "Equicord is a Vencord fork");
 expectAgentGuidanceNotIncludes("legacy SPDX naming warning", "Don't change it to \"Equicord\".");
-expectAgentGuidanceNotIncludes("missing OpenCord plugin path sentence", "`src/plugins/<name>/index.tsx` or `src/equicordplugins/<name>/index.tsx`. Single-file plugins still get a folder.");
+expectAgentGuidanceNotIncludes("missing Nun plugin path sentence", "`src/plugins/<name>/index.tsx` or `src/equicordplugins/<name>/index.tsx`. Single-file plugins still get a folder.");
 expectAgentGuidanceNotIncludes("legacy modified plugin wording", "`isModified?: true` marks an upstream Vencord plugin Equicord modified.");
 expectAgentGuidanceNotIncludes("legacy bundle wording", "They only exist in Equicord's bundle.");
 expectAgentGuidanceNotIncludes("legacy version constant description", "| `VERSION` | Equicord version string |");
@@ -234,8 +234,8 @@ expectFileNotIncludes("src/plugins/xsOverlay/index.tsx", "notification source ap
 // scoped to the confirmed files/strings so intentional attribution, plugin
 // provenance, route ids, and compatibility aliases remain allowed.
 expectFileNotIncludes("scripts/generateReport.ts", "reporter parser legacy console tag", "firstArg === \"[Equicord]\"");
-expectFileIncludes("src/components/settings/tabs/plugins/index.tsx", "OpenCord plugin filter label", "label: \"Show OpenCord\"");
-expectFileIncludes("src/components/settings/tabs/plugins/index.tsx", "OpenCord plugin filter origin detection", "src/opencordplugins/");
+expectFileIncludes("src/components/settings/tabs/plugins/index.tsx", "Nun plugin filter label", "label: \"Show Nun\"");
+expectFileIncludes("src/components/settings/tabs/plugins/index.tsx", "Nun plugin filter origin detection", "src/nunplugins/");
 expectFileIncludes("src/components/settings/tabs/plugins/index.tsx", "Equicord plugin filter label", "label: \"Show Equicord\"");
 expectFileNotIncludes("src/debug/runReporter.ts", "Equicord object comment", "the Equicord object");
 expectFileNotIncludes("src/debug/runReporter.ts", "Equicord code comment", "of Equicord code");
@@ -260,45 +260,45 @@ expectFileNotIncludes("src/equicordplugins/userpluginInstaller.dev/index.tsx", "
 expectFileNotIncludes("src/plugins/_api/badges/modals.tsx", "donor modal copy", "development of Equicord");
 expectFileNotIncludes("src/plugins/platformIndicators/index.tsx", "platform indicator label", "label: \"Equicord\"");
 
-// OpenCord-owned plugin namespace guards. These checks stay scoped to plugin
+// Nun-owned plugin namespace guards. These checks stay scoped to plugin
 // discovery and source badges so contributor attribution remains unaffected.
-expectFileIncludes("scripts/build/common.mjs", "OpenCord plugin API scanning", "\"opencordplugins/_api\"");
-expectFileIncludes("scripts/build/common.mjs", "OpenCord plugin core scanning", "\"opencordplugins/_core\"");
-expectFileIncludes("scripts/build/common.mjs", "OpenCord plugin scanning", "\"opencordplugins\"");
-expectFileIncludes("scripts/build/build.mjs", "OpenCord native plugin scanning", "\"opencordplugins\"");
-expectFileIncludes("src/components/settings/tabs/plugins/PluginCard.tsx", "OpenCord plugin origin detection", "src/opencordplugins/");
-expectFileIncludes("src/components/settings/tabs/plugins/PluginCard.tsx", "OpenCord plugin badge alt text", "alt: \"OpenCord\"");
+expectFileIncludes("scripts/build/common.mjs", "Nun plugin API scanning", "\"nunplugins/_api\"");
+expectFileIncludes("scripts/build/common.mjs", "Nun plugin core scanning", "\"nunplugins/_core\"");
+expectFileIncludes("scripts/build/common.mjs", "Nun plugin scanning", "\"nunplugins\"");
+expectFileIncludes("scripts/build/build.mjs", "Nun native plugin scanning", "\"nunplugins\"");
+expectFileIncludes("src/components/settings/tabs/plugins/PluginCard.tsx", "Nun plugin origin detection", "src/nunplugins/");
+expectFileIncludes("src/components/settings/tabs/plugins/PluginCard.tsx", "Nun plugin badge alt text", "alt: \"Nun\"");
 
 // Canonical logo replacement guards. These are intentionally narrow: they only
 // verify the user-provided symbol split, reject known prior logo attempts, and
 // require current logo consumers to use the dark SVG as the default asset.
-expectPathExists("canonical OpenCord dark SVG symbol", canonicalOpenCordDarkSymbol);
-expectPathExists("canonical OpenCord light SVG symbol", canonicalOpenCordLightSymbol);
-expectPathExists("browser extension dark SVG symbol", browserOpenCordDarkSymbol);
-expectSvgSymbolSplit("canonical OpenCord dark SVG symbol", canonicalOpenCordDarkSymbol, "dark-letter", "light-letter");
-expectSvgSymbolSplit("canonical OpenCord light SVG symbol", canonicalOpenCordLightSymbol, "light-letter", "dark-letter");
-for (const legacyOpenCordSymbolArtifact of legacyOpenCordSymbolArtifacts) {
-    expectPathNotExists("legacy OpenCord symbol artifact", legacyOpenCordSymbolArtifact);
+expectPathExists("canonical Nun dark SVG symbol", canonicalNunDarkSymbol);
+expectPathExists("canonical Nun light SVG symbol", canonicalNunLightSymbol);
+expectPathExists("browser extension dark SVG symbol", browserNunDarkSymbol);
+expectSvgSymbolSplit("canonical Nun dark SVG symbol", canonicalNunDarkSymbol, "dark-letter", "light-letter");
+expectSvgSymbolSplit("canonical Nun light SVG symbol", canonicalNunLightSymbol, "light-letter", "dark-letter");
+for (const legacyNunSymbolArtifact of legacyNunSymbolArtifacts) {
+    expectPathNotExists("legacy Nun symbol artifact", legacyNunSymbolArtifact);
 }
-expectFileIncludes("src/components/settings/tabs/plugins/PluginCard.tsx", "OpenCord plugin badge canonical dark symbol", canonicalOpenCordSymbolMarker);
-expectFileNotIncludes("src/components/settings/tabs/plugins/PluginCard.tsx", "OpenCord plugin badge legacy symbol", legacyOpenCordSymbolMarker);
-expectFileIncludes("src/components/settings/tabs/sync/CloudTab.tsx", "settings cloud canonical dark symbol", canonicalOpenCordSymbolMarker);
-expectFileNotIncludes("src/components/settings/tabs/sync/CloudTab.tsx", "settings cloud legacy symbol", legacyOpenCordSymbolMarker);
-expectFileIncludes("src/main/about.html", "about page canonical dark symbol", canonicalOpenCordSymbolMarker);
-expectFileNotIncludes("src/main/about.html", "about page legacy symbol", legacyOpenCordSymbolMarker);
-expectFileIncludes("browser/userscript.meta.js", "userscript icon canonical dark symbol", canonicalOpenCordSymbolMarker);
-expectFileNotIncludes("browser/userscript.meta.js", "userscript icon legacy symbol", legacyOpenCordSymbolMarker);
-expectFileIncludes("browser/manifest.json", "primary extension icon canonical dark symbol", canonicalOpenCordSymbolMarker);
-expectFileNotIncludes("browser/manifest.json", "primary extension icon legacy symbol", legacyOpenCordSymbolMarker);
-expectFileIncludes("browser/manifestv2.json", "primary extension icon canonical dark symbol", canonicalOpenCordSymbolMarker);
-expectFileNotIncludes("browser/manifestv2.json", "primary extension icon legacy symbol", legacyOpenCordSymbolMarker);
-expectFileIncludes("scripts/build/buildWeb.mjs", "chromium/firefox extension packaged dark symbol", canonicalOpenCordSymbolMarker);
-expectFileNotIncludes("scripts/build/buildWeb.mjs", "chromium/firefox extension packaged legacy symbol", legacyOpenCordSymbolMarker);
+expectFileIncludes("src/components/settings/tabs/plugins/PluginCard.tsx", "Nun plugin badge canonical dark symbol", canonicalNunSymbolMarker);
+expectFileNotIncludes("src/components/settings/tabs/plugins/PluginCard.tsx", "Nun plugin badge legacy symbol", legacyNunSymbolMarker);
+expectFileIncludes("src/components/settings/tabs/sync/CloudTab.tsx", "settings cloud canonical dark symbol", canonicalNunSymbolMarker);
+expectFileNotIncludes("src/components/settings/tabs/sync/CloudTab.tsx", "settings cloud legacy symbol", legacyNunSymbolMarker);
+expectFileIncludes("src/main/about.html", "about page canonical dark symbol", canonicalNunSymbolMarker);
+expectFileNotIncludes("src/main/about.html", "about page legacy symbol", legacyNunSymbolMarker);
+expectFileIncludes("browser/userscript.meta.js", "userscript icon canonical dark symbol", canonicalNunSymbolMarker);
+expectFileNotIncludes("browser/userscript.meta.js", "userscript icon legacy symbol", legacyNunSymbolMarker);
+expectFileIncludes("browser/manifest.json", "primary extension icon canonical dark symbol", canonicalNunSymbolMarker);
+expectFileNotIncludes("browser/manifest.json", "primary extension icon legacy symbol", legacyNunSymbolMarker);
+expectFileIncludes("browser/manifestv2.json", "primary extension icon canonical dark symbol", canonicalNunSymbolMarker);
+expectFileNotIncludes("browser/manifestv2.json", "primary extension icon legacy symbol", legacyNunSymbolMarker);
+expectFileIncludes("scripts/build/buildWeb.mjs", "chromium/firefox extension packaged dark symbol", canonicalNunSymbolMarker);
+expectFileNotIncludes("scripts/build/buildWeb.mjs", "chromium/firefox extension packaged legacy symbol", legacyNunSymbolMarker);
 
 if (failures.length) {
-    console.error("OpenCord branding validation failed:");
+    console.error("Nun branding validation failed:");
     for (const failure of failures) console.error(`- ${failure}`);
     process.exit(1);
 }
 
-console.log("OpenCord branding validation passed.");
+console.log("Nun branding validation passed.");

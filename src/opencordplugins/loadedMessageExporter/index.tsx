@@ -1,13 +1,13 @@
 /*
- * OpenCord, a Discord client mod
- * Copyright (c) 2026 OpenCord contributors
+ * Nun, a Discord client mod
+ * Copyright (c) 2026 Nun contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
 import type { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
-import { OpenCordDevs } from "@utils/constants";
+import { NunDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { saveFile } from "@utils/web";
 import type { Channel, Message, MessageAttachment } from "@vencord/discord-types";
@@ -140,7 +140,7 @@ const ChannelContextMenuPatch: NavContextMenuPatchCallback = (children, props: {
 export default definePlugin({
     name: "LoadedMessageExporter",
     description: "Export only messages already loaded in Discord without scraping channel history.",
-    authors: [OpenCordDevs.MasuRii],
+    authors: [NunDevs.o9],
     tags: ["Chat", "Utility"],
     settings,
     contextMenus: {

@@ -90,7 +90,7 @@ export function EquicordDonorModal() {
                     >
                         <Flex justifyContent="center" alignItems="center" gap="0.5em">
                             <Heart />
-                            OpenCord Donor
+                            Nun Donor
                         </Flex>
                     </Heading>
                 }
@@ -112,10 +112,10 @@ export function EquicordDonorModal() {
                     </Flex>
                     <div style={{ padding: "1em" }}>
                         <Paragraph>
-                            This Badge is a special perk for OpenCord (Not Vencord) Donors
+                            This Badge is a special perk for Nun (Not Vencord) Donors
                         </Paragraph>
                         <Paragraph className={Margins.top20}>
-                            Please consider supporting the development of OpenCord by becoming a donor. It would mean a lot! :3
+                            Please consider supporting the development of Nun by becoming a donor. It would mean a lot! :3
                         </Paragraph>
                     </div>
                 </div>
@@ -146,7 +146,7 @@ export function EquicordTranslatorModal() {
                         }}
                     >
                         <Flex justifyContent="center" alignItems="center" gap="0.5em">
-                            OpenCord Translator
+                            Nun Translator
                         </Flex>
                     </Heading>
                 }
@@ -162,7 +162,7 @@ export function EquicordTranslatorModal() {
                     </Flex>
                     <div className="vc-translate-modal-paragraph">
                         <Paragraph>
-                            Awarded to contributors who expand OpenCord’s language support by translating content for the community.
+                            Awarded to contributors who expand Nun’s language support by translating content for the community.
                         </Paragraph>
                     </div>
                 </div>

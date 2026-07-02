@@ -123,8 +123,8 @@ window.VencordNative = {
     settings: {
         get: () => {
             try {
-                const openCord = localStorage.getItem("OpenCordSettings");
-                if (openCord != null) return JSON.parse(openCord);
+                const nUn = localStorage.getItem("NunSettings");
+                if (nUn != null) return JSON.parse(nUn);
                 const equicord = localStorage.getItem("EquicordSettings");
                 return JSON.parse(equicord || "{}");
             } catch (e) {
@@ -133,7 +133,7 @@ window.VencordNative = {
             }
         },
         set: async (s: Settings) => {
-            localStorage.setItem("OpenCordSettings", JSON.stringify(s));
+            localStorage.setItem("NunSettings", JSON.stringify(s));
             localStorage.removeItem("EquicordSettings");
         },
         getSettingsDir: async () => "LocalStorage",

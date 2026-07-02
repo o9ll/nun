@@ -30,11 +30,11 @@ import { openSettingsTabModal, UpdaterTab } from "@components/settings";
 import { platformName } from "@equicordplugins/equicordHelper/utils";
 import customIdle from "@plugins/customIdle";
 import { gitHash, gitHashShort } from "@shared/vencordUserAgent";
-import { CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, GUILD_ID, OPENCORD_TEAM, SUPPORT_CHANNEL_ID, SUPPORT_CHANNEL_IDS, VC_CONTRIB_ROLE_ID, VC_DONOR_ROLE_ID, VC_GUILD_ID, VC_REGULAR_ROLE_ID, VENCORD_CONTRIB_ROLE_ID } from "@utils/constants";
+import { CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, GUILD_ID, NUN_TEAM, SUPPORT_CHANNEL_ID, SUPPORT_CHANNEL_IDS, VC_CONTRIB_ROLE_ID, VC_DONOR_ROLE_ID, VC_GUILD_ID, VC_REGULAR_ROLE_ID, VENCORD_CONTRIB_ROLE_ID } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { isAnyPluginDev, isKnownIssuesCategory, isOpenCordGuild, isOpenCordSupport, isSupportChannel, tryOrElse } from "@utils/misc";
+import { isAnyPluginDev, isKnownIssuesCategory, isNunGuild, isNunSupport, isSupportChannel, tryOrElse } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
@@ -55,7 +55,7 @@ const TrustedRolesIds = [
     VC_CONTRIB_ROLE_ID, // Vencord Contributor
     VC_REGULAR_ROLE_ID, // Vencord Regular
     VC_DONOR_ROLE_ID, // Vencord Donor
-    OPENCORD_TEAM, // Equicord Team (Discord role)
+    NUN_TEAM, // Equicord Team (Discord role)
     DONOR_ROLE_ID, // Equicord Donor (Discord role)
     CONTRIB_ROLE_ID, // Equicord Contributor (Discord role)
     VENCORD_CONTRIB_ROLE_ID, // Vencord Contributor
@@ -145,7 +145,7 @@ async function generateDebugInfoMessage() {
         : platformName();
 
     const info = {
-        OpenCord:
+        Nun:
             `v${VERSION} • [${gitHashShort}](<https://github.com/Equicord/Equicord/commit/${gitHash}>)` +
             `${IS_EQUIBOP ? "" : SettingsPlugin.getVersionInfo()} - ${Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
         Client: `${RELEASE_CHANNEL} ~ ${clientString}`,
@@ -171,7 +171,7 @@ async function generateDebugInfoMessage() {
     const commonIssues = {
         "Activity Sharing Disabled": tryOrElse(() => !ShowCurrentGame.getSetting(), false),
         "Link Embeds Disabled": tryOrElse(() => !ShowEmbeds.getSetting(), false),
-        "OpenCord DevBuild": !IS_STANDALONE,
+        "Nun DevBuild": !IS_STANDALONE,
         "Equibop DevBuild": IS_EQUIBOP && tryOrElse(() => VesktopNative.app.isDevBuild?.(), false),
         "Platform Spoofed": spoofInfo?.spoofed ?? false,
         "Has UserPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
@@ -300,7 +300,7 @@ function DevBuildConfirmModal(props: RenderModalProps) {
             }}
         >
             <div>
-                <Paragraph>You are using a custom build of OpenCord, which we do not provide support for!</Paragraph>
+                <Paragraph>You are using a custom build of Nun, which we do not provide support for!</Paragraph>
 
                 <Paragraph className={Margins.top8}>
                     We only provide support for <Link href="https://equicord.org/download">official builds</Link>.
@@ -332,24 +332,24 @@ export default definePlugin({
 
     commands: [
         {
-            name: "opencord-debug",
-            description: "Send OpenCord debug info",
+            name: "nun-debug",
+            description: "Send Nun debug info",
             // @ts-ignore
-            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isOpenCordGuild(ctx?.guild?.id, true),
+            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isNunGuild(ctx?.guild?.id, true),
             execute: async () => ({ content: await generateDebugInfoMessage() })
         },
         {
             name: "equicord-debug",
-            description: "Send OpenCord debug info (legacy alias)",
+            description: "Send Nun debug info (legacy alias)",
             // @ts-ignore
-            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isOpenCordGuild(ctx?.guild?.id, true),
+            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isNunGuild(ctx?.guild?.id, true),
             execute: async () => ({ content: await generateDebugInfoMessage() })
         },
         {
-            name: "opencord-plugins",
-            description: "Send OpenCord plugin list",
+            name: "nun-plugins",
+            description: "Send Nun plugin list",
             // @ts-ignore
-            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isOpenCordGuild(ctx?.guild?.id, true),
+            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isNunGuild(ctx?.guild?.id, true),
             execute: async () => {
                 const channelId = SelectedChannelStore.getChannelId();
                 const pluginList = generatePluginList();
@@ -370,9 +370,9 @@ export default definePlugin({
         },
         {
             name: "equicord-plugins",
-            description: "Send OpenCord plugin list (legacy alias)",
+            description: "Send Nun plugin list (legacy alias)",
             // @ts-ignore
-            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isOpenCordGuild(ctx?.guild?.id, true),
+            predicate: ctx => isAnyPluginDev(UserStore.getCurrentUser()?.id) || isNunGuild(ctx?.guild?.id, true),
             execute: async () => {
                 const channelId = SelectedChannelStore.getChannelId();
                 const pluginList = generatePluginList();
@@ -416,7 +416,7 @@ export default definePlugin({
                             onCancel={() => openSettingsTabModal(UpdaterTab!)}
                         >
                             <div>
-                                <Paragraph>You are using an outdated version of OpenCord! Chances are, your issue is already fixed.</Paragraph>
+                                <Paragraph>You are using an outdated version of Nun! Chances are, your issue is already fixed.</Paragraph>
                                 <Paragraph className={Margins.top8}>
                                     Please first update before asking for support!
                                 </Paragraph>
@@ -442,9 +442,9 @@ export default definePlugin({
                         variant="primary"
                     >
                         <div>
-                            <Paragraph>You are using an externally updated OpenCord version, which we do not provide support for!</Paragraph>
+                            <Paragraph>You are using an externally updated Nun version, which we do not provide support for!</Paragraph>
                             <Paragraph className={Margins.top8}>
-                                Please either switch to an <Link href="https://equicord.org/download">officially supported version of OpenCord</Link>, or
+                                Please either switch to an <Link href="https://equicord.org/download">officially supported version of Nun</Link>, or
                                 contact your package maintainer for support instead.
                             </Paragraph>
                         </div>
@@ -463,11 +463,11 @@ export default definePlugin({
     renderMessageAccessory(props) {
         const buttons = [] as JSX.Element[];
 
-        const openCordSupport = isOpenCordSupport(props.message.author.id);
+        const nUnSupport = isNunSupport(props.message.author.id);
 
         const shouldAddUpdateButton =
             !IS_UPDATER_DISABLED
-            && ((isSupportChannel(props.channel.id) && openCordSupport))
+            && ((isSupportChannel(props.channel.id) && nUnSupport))
             && props.message.content?.toLowerCase().includes("update");
 
         if (shouldAddUpdateButton) {
@@ -492,15 +492,15 @@ export default definePlugin({
             );
         }
 
-        if (openCordSupport && isSupportChannel(props.channel.id) && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel)) {
-            if (["/opencord-debug", "/opencord-plugins", "/equicord-debug", "/equicord-plugins"].some(command => props.message.content.includes(command))) {
+        if (nUnSupport && isSupportChannel(props.channel.id) && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel)) {
+            if (["/nun-debug", "/nun-plugins", "/equicord-debug", "/equicord-plugins"].some(command => props.message.content.includes(command))) {
                 buttons.push(
                     <Button
                         key="vc-dbg"
                         variant="secondary"
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
-                        Run /opencord-debug
+                        Run /nun-debug
                     </Button>,
                     <Button
                         key="vc-plg-list"
@@ -520,13 +520,13 @@ export default definePlugin({
                             }
                         }}
                     >
-                        Run /opencord-plugins
+                        Run /nun-plugins
                     </Button>
                 );
             }
         }
 
-        if (openCordSupport || (isSupportChannel(props.channel.id) || isKnownIssuesCategory(props.channel.parent_id))) {
+        if (nUnSupport || (isSupportChannel(props.channel.id) || isKnownIssuesCategory(props.channel.parent_id))) {
             const match = CodeBlockRe.exec(props.message.content || props.message.embeds[0]?.rawDescription || "");
             if (match) {
                 buttons.push(

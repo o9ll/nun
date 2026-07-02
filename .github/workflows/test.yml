@@ -35,10 +35,10 @@ jobs:
             - name: Build web (must pass)
               run: pnpm buildWeb
 
-            # Type-checking is advisory. OpenCord type-checks ~900 upstream
+            # Type-checking is advisory. Nun type-checks ~900 upstream
             # plugin folders it does not own; upstream type systems differ from
-            # OpenCord's stricter types, so tsc failures here are upstream
-            # type bugs, not OpenCord build breakage. The build above already
+            # Nun's stricter types, so tsc failures here are upstream
+            # type bugs, not Nun build breakage. The build above already
             # succeeded, proving the code compiles and runs.
             - name: Type-check (advisory)
               continue-on-error: true

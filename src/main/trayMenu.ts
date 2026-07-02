@@ -91,21 +91,21 @@ function openAboutWindow() {
     });
 }
 
-function createOpenCordMenuItems(): MenuItemConstructorOptions[] {
+function createNunMenuItems(): MenuItemConstructorOptions[] {
     return [
         {
-            label: "OpenCord",
+            label: "Nun",
             submenu: [
                 {
-                    label: "About OpenCord",
+                    label: "About Nun",
                     click: () => openAboutWindow()
                 },
                 {
-                    label: cachedUpdateAvailable ? "Update OpenCord" : "Check for Updates",
+                    label: cachedUpdateAvailable ? "Update Nun" : "Check for Updates",
                     click: () => sendToRenderer(IpcEvents.TRAY_CHECK_UPDATES)
                 },
                 {
-                    label: "Repair OpenCord",
+                    label: "Repair Nun",
                     click: () => sendToRenderer(IpcEvents.TRAY_REPAIR)
                 },
                 { type: "separator" },
@@ -127,11 +127,11 @@ export function patchTrayMenu(): void {
     const originalBuildFromTemplate = Menu.buildFromTemplate;
 
     Menu.buildFromTemplate = function (template: MenuItemConstructorOptions[]) {
-        const alreadyPatched = template.some(item => item.label === "OpenCord" || item.label === "Equicord");
+        const alreadyPatched = template.some(item => item.label === "Nun" || item.label === "Equicord");
         if (isTrayMenu(template) && !alreadyPatched) {
             const insertIndex = findInsertIndex(template);
-            const openCordItems = createOpenCordMenuItems();
-            template.splice(insertIndex, 0, ...openCordItems);
+            const nUnItems = createNunMenuItems();
+            template.splice(insertIndex, 0, ...nUnItems);
         }
 
         return originalBuildFromTemplate.call(this, template);

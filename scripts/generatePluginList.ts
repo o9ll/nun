@@ -35,7 +35,7 @@ import { getEntryPoint, isPluginFile, parseDevs, parseEquicordDevs, parseEquicor
     const args = process.argv.slice(2);
 
     const equicordFlag = args.includes("--equicord");
-    const opencordFlag = args.includes("--opencord");
+    const nunFlag = args.includes("--nun");
     const vencordFlag = args.includes("--vencord");
     const illegalcordFlag = args.includes("--illegalcord");
     const testCordFlag = args.includes("--testcord");
@@ -47,8 +47,8 @@ import { getEntryPoint, isPluginFile, parseDevs, parseEquicordDevs, parseEquicor
 
     if (equicordFlag) {
         dirs = ["src/equicordplugins/_core", "src/equicordplugins"];
-    } else if (opencordFlag) {
-        dirs = ["src/opencordplugins/_core", "src/opencordplugins"];
+    } else if (nunFlag) {
+        dirs = ["src/nunplugins/_core", "src/nunplugins"];
     } else if (vencordFlag) {
         dirs = ["src/plugins", "src/plugins/_core"];
     } else if (illegalcordFlag) {
@@ -65,7 +65,7 @@ import { getEntryPoint, isPluginFile, parseDevs, parseEquicordDevs, parseEquicor
         dirs = [
             "src/plugins", "src/plugins/_core",
             "src/equicordplugins/_core", "src/equicordplugins",
-            "src/opencordplugins/_core", "src/opencordplugins",
+            "src/nunplugins/_core", "src/nunplugins",
             "src/illegalcordplugins/_core", "src/illegalcordplugins",
             "src/testcordplugins/_core", "src/testcordplugins",
             "src/esharqplugins/_core", "src/esharqplugins",

@@ -105,7 +105,7 @@ const buildConfigs = [
             IS_USERSCRIPT: "true",
             window: "unsafeWindow",
         },
-        outfile: "dist/OpenCord.user.js",
+        outfile: "dist/Nun.user.js",
         banner: {
             js: readFileSync("browser/userscript.meta.js", "utf-8").replace("%version%", `${VERSION}.${new Date().getTime()}`)
         },
@@ -155,8 +155,8 @@ async function loadDir(dir, basePath = "") {
  */
 async function buildExtension(target, files) {
     const entries = {
-        "dist/OpenCord.js": await readFile("dist/browser/extension.js"),
-        "dist/OpenCord.css": await readFile("dist/browser/extension.css"),
+        "dist/Nun.js": await readFile("dist/browser/extension.js"),
+        "dist/Nun.css": await readFile("dist/browser/extension.css"),
         ...await loadDir("dist/browser/vendor/monaco", "dist/browser/"),
         ...Object.fromEntries(await Promise.all(files.map(async f => {
             let content = await readFile(join("browser", f));
@@ -184,17 +184,17 @@ async function buildExtension(target, files) {
     console.info("Unpacked Extension written to dist/browser/" + target);
 }
 
-const appendCssRuntime = readFile("dist/OpenCord.user.css", "utf-8").then(content => {
+const appendCssRuntime = readFile("dist/Nun.user.css", "utf-8").then(content => {
     const cssRuntime = `unsafeWindow._vcUserScriptRendererCss=\`${content.replaceAll("`", "\\`")}\``;
 
-    return appendFile("dist/OpenCord.user.js", cssRuntime);
+    return appendFile("dist/Nun.user.js", cssRuntime);
 });
 
 if (!process.argv.includes("--skip-extension")) {
     await Promise.all([
         appendCssRuntime,
-        buildExtension("chromium-unpacked", ["modifyResponseHeaders.json", "content.js", "manifest.json", "icon.png", "opencord-symbol-dark.svg"]),
-        buildExtension("firefox-unpacked", ["background.js", "content.js", "manifestv2.json", "icon.png", "opencord-symbol-dark.svg"]),
+        buildExtension("chromium-unpacked", ["modifyResponseHeaders.json", "content.js", "manifest.json", "icon.png", "nun-symbol-dark.svg"]),
+        buildExtension("firefox-unpacked", ["background.js", "content.js", "manifestv2.json", "icon.png", "nun-symbol-dark.svg"]),
     ]);
 
     Zip.zip("dist/browser/chromium-unpacked", (_err, zip) => {
