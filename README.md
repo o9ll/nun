@@ -6,8 +6,8 @@ Nun is a modified version of [Equicord](https://equicord.org/) which is capable 
 
 Windows
 
-- [GUI](https://github.com/o9ll/nun/releases/latest/download/Nun.exe)
-- [CLI](https://github.com/o9ll/nun/releases/latest/download/NunCli.exe)
+- [GUI](https://github.com/o9ll/nun/releases/download/installer/NunInstaller.exe)
+- [CLI](https://github.com/o9ll/nun/releases/download/installer/NunInstallerCli.exe)
 
 ```shell
 sh -c "$(curl -sS https://raw.githubusercontent.com/o9ll/nun/refs/heads/main/misc/install.sh)"
