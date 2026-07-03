@@ -1,0 +1,88 @@
+name: Sync upstream
+
+on:
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+        FILE: src/utils/constants.ts
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Setup git config
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream remote and fetch
+        run: |
+          git remote add upstream https://github.com/Equicord/Equicord.git
+          git fetch upstream
+
+      - name: Check if upstream is ahead
+        id: check_upstream
+        run: |
+          upstream_commit=$(git rev-parse upstream/main)
+          merge_base=$(git merge-base upstream/main origin/main)
+
+          echo "Upstream: $upstream_commit"
+          echo "Merge base: $merge_base"
+
+          if [ "$merge_base" != "$upstream_commit" ]; then
+            echo "Upstream has commits not in local. Merge needed."
+            echo "MERGE_NEEDED=true" >> $GITHUB_OUTPUT
+          else
+            echo "Upstream is fully merged into local. No merge needed."
+            echo "MERGE_NEEDED=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Register custom merge driver
+        run: |
+          git config merge.theirs.driver true
+
+      - name: Merge upstream changes
+        if: steps.check_upstream.outputs.MERGE_NEEDED == 'true'
+        run: |
+          git merge upstream/main --no-edit
+
+      - name: Reinstate custom Dev entry
+        if: steps.check_upstream.outputs.MERGE_NEEDED == 'true'
+        run: |
+          # Remove any previous copy of custom dev entries
+          sed -i '/^\s*bryan:\s*{/,/^\s*},/d' "$FILE"
+
+          # Find the line BEFORE the line containing "satisfies Record<string, Dev>"
+          RAW_END=$(grep -n "satisfies Record" "$FILE" | cut -d: -f1)
+          LAST_LINE=$((RAW_END - 1))
+
+          # Ensure the previous final entry ends with a comma
+          sed -i "${LAST_LINE}s/}$/},/" "$FILE"
+
+          # Reinstate custom dev entry
+          sed -i "${RAW_END}i\\
+              bryan: {\\
+                  name: \"bryan.__\",\\
+                  id: 384865971455918084n\\
+              }," "$FILE"
+
+      - name: Commit custom Dev entry
+        if: steps.check_upstream.outputs.MERGE_NEEDED == 'true'
+        run: |
+          git add "$FILE"
+          git commit -m "Reinsert custom Dev entry" || true
+
+      - name: Set up authenticated push
+        if: steps.check_upstream.outputs.MERGE_NEEDED == 'true'
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+      - name: Push changes
+        if: steps.check_upstream.outputs.MERGE_NEEDED == 'true'
+        run: |
+          git push origin main

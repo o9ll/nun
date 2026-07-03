@@ -1,0 +1,73 @@
+name: Build Custom Nun Installer
+
+on:
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: windows-latest
+
+        steps:
+        - uses: actions/checkout@v4
+
+        - uses: pnpm/action-setup@v3
+
+        - name: Use Node.js 20
+          uses: actions/setup-node@v4
+          with:
+              node-version: 20
+              cache: "pnpm"
+
+        - name: Install dependencies
+          run: pnpm install --frozen-lockfile
+
+        - name: Build Nun
+          run: pnpm build
+
+        - name: Zip dist folder
+          run: Compress-Archive -Path dist\* -DestinationPath dist.zip
+          shell: pwsh
+
+        - name: Create dist/Installer folder
+          run: New-Item -ItemType Directory -Force -Path "dist/Installer"
+          shell: pwsh
+
+        - name: Download NunInstallerCli.exe
+          run: |
+            mkdir -p dist/Installer
+            curl -L -o dist/Installer/NunInstallerCli.exe https://github.com/Equicord/Equilotl/releases/latest/download/EquilotlCli.exe
+          shell: bash
+
+        - name: Install NSIS
+          run: choco install nsis -y
+          shell: pwsh
+
+        - name: Compile NSIS Installer
+          run: |
+            & "C:\Program Files (x86)\NSIS\makensis.exe" installer.nsi
+          shell: pwsh
+
+        - name: Upload artifacts to Release
+          uses: softprops/action-gh-release@v2
+          with:
+              tag_name: custom-build-${{ github.run_number }}
+              name: Custom Nun Build
+              files: |
+                NunCustomInstaller.exe
+                dist.zip
+
+        - name: Delete previous releases
+          shell: pwsh
+          env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            $latestTag = "custom-build-${{ github.run_number }}"
+
+            $releases = gh api repos/${{ github.repository }}/releases | ConvertFrom-Json
+
+            foreach ($release in $releases) {
+              if ($release.tag_name -ne $latestTag) {
+                Write-Host "Deleting old release: $($release.tag_name)"
+                gh release delete $release.tag_name --yes
+              }
+            }
