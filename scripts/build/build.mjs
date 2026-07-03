@@ -77,7 +77,7 @@ const globNativesPlugin = {
         });
 
         build.onLoad({ filter, namespace: "import-natives" }, async () => {
-            const pluginDirs = ["plugins", "equicordplugins", "userplugins"];
+            const pluginDirs = ["plugins", "nunplugins", "equicordplugins", "userplugins"];
             let code = "";
             let natives = "\n";
             let i = 0;
@@ -136,7 +136,8 @@ const buildConfigs = ([
             ...defines,
             IS_DISCORD_DESKTOP: "true",
             IS_VESKTOP: "false",
-            IS_EQUIBOP: "false"
+            IS_EQUIBOP: "false",
+            IS_NESKTOP: "false"
         }
     },
     {
@@ -156,7 +157,8 @@ const buildConfigs = ([
             ...defines,
             IS_DISCORD_DESKTOP: "true",
             IS_VESKTOP: "false",
-            IS_EQUIBOP: "false"
+            IS_EQUIBOP: "false",
+            IS_NESKTOP: "false"
         }
     },
     {
@@ -169,7 +171,8 @@ const buildConfigs = ([
             ...defines,
             IS_DISCORD_DESKTOP: "true",
             IS_VESKTOP: "false",
-            IS_EQUIBOP: "false"
+            IS_EQUIBOP: "false",
+            IS_NESKTOP: "false"
         }
     },
 
@@ -177,7 +180,7 @@ const buildConfigs = ([
     {
         ...nodeCommonOpts,
         entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/main/index.ts")],
-        outfile: "dist/equibop/main.js",
+        outfile: "dist/nesktop/main.js",
         footer: { js: "//# sourceURL=file:///VencordDesktopMain\n" + sourceMapFooter("main") },
         sourcemap,
         plugins: [
@@ -188,40 +191,43 @@ const buildConfigs = ([
             ...defines,
             IS_DISCORD_DESKTOP: "false",
             IS_VESKTOP: "false",
-            IS_EQUIBOP: "true"
+            IS_EQUIBOP: "false",
+            IS_NESKTOP: "true"
         }
     },
     {
         ...commonOpts,
         entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/Vencord.ts")],
-        outfile: "dist/equibop/renderer.js",
+        outfile: "dist/nesktop/renderer.js",
         format: "iife",
         target: ["esnext"],
         footer: { js: "//# sourceURL=file:///VencordDesktopRenderer\n" + sourceMapFooter("renderer") },
         globalName: "Vencord",
         sourcemap,
         plugins: [
-            globPlugins("equibop"),
+            globPlugins("nesktop"),
             ...commonRendererPlugins
         ],
         define: {
             ...defines,
             IS_DISCORD_DESKTOP: "false",
             IS_VESKTOP: "false",
-            IS_EQUIBOP: "true"
+            IS_EQUIBOP: "false",
+            IS_NESKTOP: "true"
         }
     },
     {
         ...nodeCommonOpts,
         entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/preload.ts")],
-        outfile: "dist/equibop/preload.js",
+        outfile: "dist/nesktop/preload.js",
         footer: { js: "//# sourceURL=file:///VencordPreload\n" + sourceMapFooter("preload") },
         sourcemap,
         define: {
             ...defines,
             IS_DISCORD_DESKTOP: "false",
             IS_VESKTOP: "false",
-            IS_EQUIBOP: "true"
+            IS_EQUIBOP: "false",
+            IS_NESKTOP: "true"
         }
     }
 ]);
@@ -230,16 +236,16 @@ await buildOrWatchAll(buildConfigs);
 
 await Promise.all([
     writeFile("dist/desktop/package.json", JSON.stringify({
-        name: "equicord",
+        name: "nun",
         main: "patcher.js"
     })),
-    writeFile("dist/equibop/package.json", JSON.stringify({
-        name: "equicord",
+    writeFile("dist/nesktop/package.json", JSON.stringify({
+        name: "nun",
         main: "main.js"
     }))
 ]);
 
 await Promise.all([
     createPackage("dist/desktop", "dist/desktop.asar"),
-    createPackage("dist/equibop", "dist/equibop.asar"),
+    createPackage("dist/nesktop", "dist/nesktop.asar"),
 ]);

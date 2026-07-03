@@ -39,3 +39,5 @@ ExtensionCache/
 userexclude/
 src/userexclude
 docs/
+submodules
+VencordLargeUpload
